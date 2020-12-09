@@ -15,7 +15,6 @@
     ],
     "eqeqeq": 0,
     "no-var": 2,
-    "no-console": 2,
     "no-alert": 2,
     "no-debugger": 2,
     "space-before-function-paren": [

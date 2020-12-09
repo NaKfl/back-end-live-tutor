@@ -1,5 +1,5 @@
-const student = require('./student.route')
+const student = require('./student.route');
 
 module.exports = {
-  student
-}
+  student,
+};
