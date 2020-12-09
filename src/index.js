@@ -1,15 +1,15 @@
-require('dotenv/config')
-const express = require('express')
-const cors = require('cors')
-const routes = require('./routes')
+import 'dotenv/config'
+import express from 'express'
+import cors from 'cors'
+import routes from './routes'
+import db from './config/database'
 
-//Database
-const db = require('./config/database')
-// Test DB
+//Test DB
 db.authenticate()
   .then(() => console.log('Database connected...'))
   .catch((err) => console.log('Error: ' + err))
 
+//Express
 const app = express()
 //Application-level-middleware
 app.use(express.json())

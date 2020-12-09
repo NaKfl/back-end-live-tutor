@@ -1,7 +1,7 @@
-const {Router} = require('express')
+import {Router} from 'express'
+import Gig from '../models/gig'
+
 const router = Router()
-const db = require('../config/database')
-const Gig = require('../models/gig')
 
 router.get('/', async (req, res) => {
   try {
@@ -34,4 +34,4 @@ router.delete('/:gigId', (req, res) => {
   return res.send('Delete gig')
 })
 
-module.exports = router
+export default router

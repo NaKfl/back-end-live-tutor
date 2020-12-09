@@ -1,5 +1,5 @@
-const gigs = require('./gigs')
+import gigs from './gigs'
 
-module.exports = {
+export default {
   gigs
 }

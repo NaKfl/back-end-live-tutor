@@ -1,5 +1,5 @@
-const Sequelize = require('sequelize')
-const db = require('../config/database')
+import Sequelize from 'sequelize'
+import db from 'config/database'
 
 const Gig = db.define('gig', {
   title: {
@@ -25,4 +25,4 @@ const Gig = db.define('gig', {
   }
 })
 
-module.exports = Gig
+export default Gig
