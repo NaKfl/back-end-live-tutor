@@ -2,12 +2,15 @@ import 'dotenv/config'
 import express from 'express'
 import cors from 'cors'
 import routes from 'routes'
-import db from 'config/database'
+import { sequelize } from './database/models'
+
+//Database
+// const db = require('./config/database')
 
 //Test DB
-db.authenticate()
-  .then(() => console.log('Database connected...'))
-  .catch((err) => console.log('Error: ' + err))
+// db.authenticate()
+//   .then(() => console.log('Database connected...'))
+//   .catch((err) => console.log('Error: ' + err))
 
 //Express
 const app = express()
@@ -23,9 +26,15 @@ app.use((req, res, next) => {
 })
 
 //Route
-app.use('/gigs', routes.gigs)
+app.use('/api', routes.student)
 
 const PORT = process.env.PORT || 5000
-app.listen(PORT, () => {
-  console.log(`Server is starting on port ${PORT}`)
-})
+const useApp = async (port) => {
+  await sequelize.authenticate().then(() => {
+    console.log('Connected database')
+    app.listen(port, () => {
+      console.log(`Server is starting on port ${port}`)
+    })
+  })
+}
+useApp(PORT)
