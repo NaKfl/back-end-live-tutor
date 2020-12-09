@@ -1,16 +1,16 @@
 import {Router} from 'express'
-import Gig from '../models/gig'
+import Gig from 'models/gig'
 
 const router = Router()
 
 router.get('/', async (req, res) => {
   try {
     const Gigs = await Gig.findAll()
-    console.log(Gigs)
-    res.sendStatus(200)
+    res.status(200)
+    res.send(Gigs)
   } catch (err) {
-    console.log(err)
-    res.sendStatus(400)
+    res.status(500)
+    res.send(err)
   }
 })
 

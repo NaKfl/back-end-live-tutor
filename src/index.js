@@ -1,8 +1,8 @@
 import 'dotenv/config'
 import express from 'express'
 import cors from 'cors'
-import routes from './routes'
-import db from './config/database'
+import routes from 'routes'
+import db from 'config/database'
 
 //Test DB
 db.authenticate()
