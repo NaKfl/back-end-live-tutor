@@ -1,5 +1,5 @@
-import gigs from './gigs'
+const student = require('./student.route');
 
-export default {
-  gigs
-}
+module.exports = {
+  student,
+};
