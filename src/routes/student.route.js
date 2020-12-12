@@ -1,4 +1,6 @@
-const router = require('express').Router();
+import express from 'express';
+const router = express.Router();
+
 const {
   getAllStudents,
   login,
@@ -10,4 +12,5 @@ router.get('/', getAllStudents);
 router.post('/login', login);
 router.post('/register', register);
 // router.post('/logout',logOut)
-module.exports = router;
+
+export default router;
