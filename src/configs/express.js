@@ -5,6 +5,11 @@ import helmet from 'helmet';
 import cors from 'cors';
 import { logs } from 'configs/vars';
 import routes from 'routes';
+import {
+  errorConverter,
+  errorHandler,
+  notFoundHandler,
+} from 'middlewares/error';
 
 const app = express();
 
@@ -16,6 +21,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(helmet());
 
 app.use(cors());
+app.options('*', cors());
 
 // Function-level-middleware
 app.use((req, res, next) => {
@@ -24,5 +30,11 @@ app.use((req, res, next) => {
 });
 
 app.use('/', routes);
+
+app.use(notFoundHandler);
+
+app.use(errorConverter);
+
+app.use(errorHandler);
 
 export default app;

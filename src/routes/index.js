@@ -1,15 +1,14 @@
 import express from 'express';
-import studentRoutes from 'routes/student.route';
+import authRoutes from './auth.route';
 
 const router = express.Router();
 
-// For test does server work :))
 router.get('/status', (req, res) =>
   res.json({
     message: 'OK',
   }),
 );
 
-router.use('/student', studentRoutes);
+router.use('/auth', authRoutes);
 
 export default router;
