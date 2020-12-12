@@ -1,40 +1,14 @@
-import 'dotenv/config';
-import express from 'express';
-import cors from 'cors';
-import routes from 'routes';
-import {sequelize} from './database/models';
+import http from 'http';
+import app from 'configs/express';
+import connectDatabase from 'configs/sequelize';
+import { port, env } from './configs/vars';
 
-//Database
-// const db = require('./config/database')
+connectDatabase();
 
-//Test DB
-// db.authenticate()
-//   .then(() => console.log('Database connected...'))
-//   .catch((err) => console.log('Error: ' + err))
+const server = http.createServer(app);
 
-//Express
-const app = express();
-//Application-level-middleware
-app.use(express.json());
-app.use(express.urlencoded({extended: true}));
-app.use(cors());
+server.listen(port, () =>
+  console.log(`server started on port ${port} (${env})`),
+);
 
-// Function-level-middleware
-app.use((req, res, next) => {
-  //Handle logic
-  next();
-});
-
-//Route
-app.use('/api', routes.student);
-
-const PORT = process.env.PORT || 5000;
-const useApp = async (port) => {
-  await sequelize.authenticate().then(() => {
-    console.log('Connected database');
-    app.listen(port, () => {
-      console.log(`Server is starting on port ${port}`);
-    });
-  });
-};
-useApp(PORT);
+export default server;
