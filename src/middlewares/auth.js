@@ -1,6 +1,7 @@
 import passport from 'passport';
 import httpStatus from 'http-status';
 import ApiError from 'utils/ApiError';
+import { userService } from 'services';
 
 const verifyCallback = (req, resolve, reject, requiredRoles) => async (
   err,
@@ -14,12 +15,9 @@ const verifyCallback = (req, resolve, reject, requiredRoles) => async (
   req.user = user;
 
   if (requiredRoles.length) {
-    // TODO: Query để lấy roles của user
-    // const userRoles=...
-    const isAuthorized = requiredRoles.every((requiredRole) => {
-      // TODO: Nếu mà thỏa hết thì isAuthorized = true
-      // return userRoles.includes(requiredRole),
-      return true;
+    const userRoles = await userService.getRolesFromId(user.id);
+    const isAuthorized = requiredRoles.some((requiredRole) => {
+      return userRoles.includes(requiredRole);
     });
     if (!isAuthorized && req.params.userId !== user.id) {
       return reject(new ApiError(httpStatus.FORBIDDEN, 'Forbidden'));

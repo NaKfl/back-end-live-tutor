@@ -1,6 +1,9 @@
 import ApiError from 'utils/ApiError';
 import httpStatus from 'http-status';
 import { User } from 'database/models';
+import { Role } from 'database/models';
+import { UserRole } from 'database/models';
+import { ROLES } from 'utils/constants';
 
 const userService = {};
 
@@ -16,9 +19,23 @@ userService.createUser = async (userBody) => {
   if (await User.isEmailTaken(userBody.email)) {
     throw new ApiError(httpStatus.BAD_REQUEST, 'Email already taken');
   }
-  // TODO: Thêm role mặc định là student
   const user = await User.create(userBody);
+  const roleId = await Role.findRoleIdByName(ROLES.STUDENT);
+  await UserRole.create({ userId: user.id, roleId });
   return user;
+};
+
+userService.getRolesFromId = async (id) => {
+  const user = await User.findOne({
+    include: {
+      model: Role,
+    },
+    where: {
+      id,
+    },
+  });
+  const roles = user.Roles.map((role) => role.name);
+  return roles;
 };
 
 export default userService;

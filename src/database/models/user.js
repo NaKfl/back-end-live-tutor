@@ -6,9 +6,16 @@ const { Model, Op } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
-    // static associate(models) {}
+    static associate(models) {
+      this.belongsToMany(models.Role, {
+        through: 'UserRoles',
+        foreignKey: {
+          name: 'userId',
+        },
+      });
+    }
   }
-
+  
   User.init(
     {
       id: {
@@ -39,7 +46,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   });
 
-  User.isEmailTaken = async function (email, excludeUserId) {
+  User.isEmailTaken = async function (email, excludeUserId = null) {
     const user = await this.findOne({
       where: {
         [Op.and]: [
