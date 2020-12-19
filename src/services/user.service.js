@@ -1,8 +1,6 @@
-import ApiError from 'utils/ApiError';
+import { Role, User, UserRole } from 'database/models';
 import httpStatus from 'http-status';
-import { User } from 'database/models';
-import { Role } from 'database/models';
-import { UserRole } from 'database/models';
+import ApiError from 'utils/ApiError';
 import { ROLES } from 'utils/constants';
 
 const userService = {};

@@ -1,5 +1,9 @@
 'use strict';
 
+const fakeData = require('./fakeData');
+
+const { tutors, students, defaultPassword } = fakeData;
+
 module.exports = {
   up: async (queryInterface) => {
     await queryInterface.bulkInsert(
@@ -8,8 +12,7 @@ module.exports = {
         {
           id: '18e8afec-887c-418e-b419-d997b8e9cf6f',
           email: 'student@gmail.com',
-          password:
-            '$2a$12$VvWghIAnvkFgVG1hZ6OGyeaDtEPKGxZYmEu9PExiuke2WCDS5Fywe',
+          password: defaultPassword,
           name: 'Im Student',
           isDeleted: false,
           createdAt: new Date(),
@@ -18,8 +21,7 @@ module.exports = {
         {
           id: '4e85658f-48c7-4128-b0c7-1862d663a0d3',
           email: 'tutor@gmail.com',
-          password:
-            '$2a$12$VvWghIAnvkFgVG1hZ6OGyeaDtEPKGxZYmEu9PExiuke2WCDS5Fywe',
+          password: defaultPassword,
           name: 'Im Tutor',
           isDeleted: false,
           createdAt: new Date(),
@@ -28,13 +30,14 @@ module.exports = {
         {
           id: '6f807670-2175-46b9-87f5-23925f30405e',
           email: 'admin@gmail.com',
-          password:
-            '$2a$12$VvWghIAnvkFgVG1hZ6OGyeaDtEPKGxZYmEu9PExiuke2WCDS5Fywe',
+          password: defaultPassword,
           name: 'Im Admin',
           isDeleted: false,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
+        ...tutors,
+        ...students,
       ],
       {},
     );

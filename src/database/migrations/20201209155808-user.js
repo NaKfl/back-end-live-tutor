@@ -26,9 +26,6 @@ module.exports = {
       phone: {
         type: Sequelize.STRING,
       },
-      gender: {
-        type: Sequelize.STRING,
-      },
       isDeleted: {
         allowNull: false,
         type: Sequelize.BOOLEAN,
