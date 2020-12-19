@@ -41,7 +41,7 @@ module.exports = {
     'import/no-duplicates': 2,
   },
   parserOptions: {
-    ecmaVersion: 2017,
+    ecmaVersion: 2021,
     sourceType: 'module',
     allowImportExportEverywhere: true,
   },
