@@ -21,6 +21,7 @@ const tutors = [...Array(50)].map(() => ({
   country: faker.address.country(),
   phone: faker.phone.phoneNumber(),
   isDeleted: false,
+  isActivated: false,
   createdAt: new Date(),
   updatedAt: new Date(),
 }));
@@ -35,6 +36,7 @@ const students = [...Array(50)].map(() => ({
   country: faker.address.country(),
   phone: faker.phone.phoneNumber(),
   isDeleted: false,
+  isActivated: false,
   createdAt: new Date(),
   updatedAt: new Date(),
 }));
@@ -59,6 +61,34 @@ const studentRoles = students
     updatedAt: new Date(),
   }));
 
+const tutorInfo = tutors
+  .map((tutor) => tutor.id)
+  .map((id) => ({
+    id: faker.random.uuid(),
+    userId: id,
+    video: faker.internet.url(),
+    bio: faker.lorem.sentence(),
+    languages: [
+      ...Array(
+        faker.random.number({
+          min: 1,
+          max: 4,
+        }),
+      ),
+    ].map(() => faker.lorem.word()),
+    specialties: [
+      ...Array(
+        faker.random.number({
+          min: 1,
+          max: 5,
+        }),
+      ),
+    ].map(() => faker.lorem.word()),
+    resume: faker.lorem.paragraph(),
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  }));
+
 module.exports = {
   tutors,
   students,
@@ -66,6 +96,7 @@ module.exports = {
   roleIds,
   tutorRoles,
   studentRoles,
+  tutorInfo,
   up: () => Promise.resolve(),
   down: () => Promise.resolve(),
 };
