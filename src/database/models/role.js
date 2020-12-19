@@ -4,9 +4,15 @@ const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
   class Role extends Model {
-    // static associate(models) {}
+    static associate(models) {
+      this.belongsToMany(models.User, {
+        through: 'UserRoles',
+        foreignKey: {
+          name: 'roleId',
+        },
+      });
+    }
   }
-
   Role.init(
     {
       id: {
@@ -24,5 +30,13 @@ module.exports = (sequelize, DataTypes) => {
     },
   );
 
+  Role.findRoleIdByName = async function (name) {
+    const role = await this.findOne({
+      where: {
+        name,
+      },
+    });
+    return role.id;
+  };
   return Role;
 };
