@@ -3,6 +3,8 @@ import morgan from 'morgan';
 import bodyParser from 'body-parser';
 import helmet from 'helmet';
 import cors from 'cors';
+import passport from 'passport';
+import { jwtStrategy } from 'configs/passport';
 import { logs } from 'configs/vars';
 import routes from 'routes';
 import {
@@ -22,6 +24,9 @@ app.use(helmet());
 
 app.use(cors());
 app.options('*', cors());
+
+app.use(passport.initialize());
+passport.use('jwt', jwtStrategy);
 
 // Function-level-middleware
 app.use((req, res, next) => {

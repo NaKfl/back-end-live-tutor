@@ -1,5 +1,5 @@
-import studentService from './student.service';
+import userService from './user.service';
 import tokenService from './token.service';
 import authService from './auth.service';
 
-export { studentService, tokenService, authService };
+export { userService, tokenService, authService };

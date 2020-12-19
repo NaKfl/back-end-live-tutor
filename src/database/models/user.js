@@ -1,19 +1,23 @@
 'use strict';
+
 import bcrypt from 'bcryptjs';
+import { pick } from 'utils/common';
 const { Model, Op } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
-  class student extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
-    }
+  class User extends Model {
+    // static associate(models) {}
   }
-  student.init(
+
+  User.init(
     {
+      id: {
+        allowNull: false,
+        primaryKey: true,
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+        autoIncrement: false,
+      },
       email: DataTypes.STRING,
       password: DataTypes.STRING,
       avatar: DataTypes.STRING,
@@ -25,17 +29,17 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: 'student',
+      modelName: 'User',
     },
   );
 
-  student.addHook('beforeSave', async function (user) {
+  User.addHook('beforeSave', async function (user) {
     if (user.changed('password')) {
       user.password = await bcrypt.hash(user.password, 12);
     }
   });
 
-  student.isEmailTaken = async function (email, excludeUserId) {
+  User.isEmailTaken = async function (email, excludeUserId) {
     const user = await this.findOne({
       where: {
         [Op.and]: [
@@ -50,12 +54,11 @@ module.exports = (sequelize, DataTypes) => {
     });
     return !!user;
   };
-  student.prototype.isPasswordMatch = async function (password) {
+  User.prototype.isPasswordMatch = async function (password) {
     return bcrypt.compare(password, this.password);
   };
 
-  student.prototype.transform = function () {
-    const transformed = {};
+  User.prototype.transform = function () {
     const fields = [
       'id',
       'email',
@@ -65,11 +68,8 @@ module.exports = (sequelize, DataTypes) => {
       'gender',
       'phone',
     ];
-    fields.forEach((field) => {
-      transformed[field] = this[field];
-    });
-    return transformed;
+    return pick(this, fields);
   };
 
-  return student;
+  return User;
 };
