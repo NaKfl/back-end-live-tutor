@@ -13,9 +13,13 @@ module.exports = (sequelize, DataTypes) => {
           name: 'userId',
         },
       });
+
+      this.hasOne(models.Tutor, {
+        foreignKey: 'userId',
+      });
     }
   }
-  
+
   User.init(
     {
       id: {
@@ -31,11 +35,11 @@ module.exports = (sequelize, DataTypes) => {
       name: DataTypes.STRING,
       country: DataTypes.STRING,
       phone: DataTypes.STRING,
-      gender: DataTypes.STRING,
-      isDeleted: { type: DataTypes.BOOLEAN, defaultValue: false },
+      isActivated: { type: DataTypes.BOOLEAN, defaultValue: false },
     },
     {
       sequelize,
+      paranoid: true,
       modelName: 'User',
     },
   );
@@ -66,15 +70,7 @@ module.exports = (sequelize, DataTypes) => {
   };
 
   User.prototype.transform = function () {
-    const fields = [
-      'id',
-      'email',
-      'name',
-      'avatar',
-      'country',
-      'gender',
-      'phone',
-    ];
+    const fields = ['id', 'email', 'name', 'avatar', 'country', 'phone'];
     return pick(this, fields);
   };
 
