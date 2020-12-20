@@ -15,9 +15,7 @@ module.exports = (sequelize, DataTypes) => {
       });
 
       this.hasOne(models.Tutor, {
-        foreignKey: {
-          name: 'userId',
-        },
+        foreignKey: 'userId',
       });
     }
   }
@@ -37,11 +35,11 @@ module.exports = (sequelize, DataTypes) => {
       name: DataTypes.STRING,
       country: DataTypes.STRING,
       phone: DataTypes.STRING,
-      isDeleted: { type: DataTypes.BOOLEAN, defaultValue: false },
       isActivated: { type: DataTypes.BOOLEAN, defaultValue: false },
     },
     {
       sequelize,
+      paranoid: true,
       modelName: 'User',
     },
   );

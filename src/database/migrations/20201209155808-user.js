@@ -26,10 +26,6 @@ module.exports = {
       phone: {
         type: Sequelize.STRING,
       },
-      isDeleted: {
-        allowNull: false,
-        type: Sequelize.BOOLEAN,
-      },
       isActivated: {
         allowNull: false,
         type: Sequelize.BOOLEAN,
@@ -40,6 +36,9 @@ module.exports = {
       },
       updatedAt: {
         allowNull: false,
+        type: Sequelize.DATE,
+      },
+      deletedAt: {
         type: Sequelize.DATE,
       },
     });
