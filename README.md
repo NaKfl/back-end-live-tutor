@@ -1,7 +1,18 @@
-# LIVE TUTOR API
+## LIVE TUTOR API
 
-# Checkout this repo
+### Before you run
 
-# Run npm install
+- Install node.js
+- Install postgre
+- Install npx
 
-# Run yarn start
+### How to run
+
+- Checkout this repo
+- run `npm install`
+- run `copy .env.example .env` and config your environment
+- run `npx sequelize db:migrate` to migrate database
+- run `npx sequelize db:seed:all` to seed data
+- run `npm start`
+
+### Happy hacking !
