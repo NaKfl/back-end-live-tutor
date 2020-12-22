@@ -13,6 +13,25 @@ userService.getUserByEmail = async (email) => {
   });
 };
 
+userService.getUserById = async (id) => {
+  return await User.findOne({
+    attributes: {
+      exclude: ['password'],
+    },
+    where: {
+      id,
+    },
+  });
+};
+
+userService.updateUserById = async (fields, id) => {
+  return await User.update(fields, {
+    where: {
+      id,
+    },
+  });
+};
+
 userService.createUser = async (userBody) => {
   if (await User.isEmailTaken(userBody.email)) {
     throw new ApiError(httpStatus.BAD_REQUEST, 'Email already taken');
