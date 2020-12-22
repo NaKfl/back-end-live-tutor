@@ -6,9 +6,9 @@ import validate from 'middlewares/validate';
 
 const router = express.Router();
 
-router.get('/', auth(), userController.getInfo);
+router.get('/info', auth(), userController.getInfo);
 router.put(
-  '/',
+  '/info',
   auth(),
   validate(userValidation.updateInfo),
   userController.updateInfo,
