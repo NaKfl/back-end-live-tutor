@@ -26,6 +26,12 @@ module.exports = {
       phone: {
         type: Sequelize.STRING,
       },
+      language: {
+        type: Sequelize.STRING,
+      },
+      birthday: {
+        type: Sequelize.STRING,
+      },
       isActivated: {
         allowNull: false,
         type: Sequelize.BOOLEAN,
