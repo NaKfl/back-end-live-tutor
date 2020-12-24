@@ -35,6 +35,8 @@ module.exports = (sequelize, DataTypes) => {
       name: DataTypes.STRING,
       country: DataTypes.STRING,
       phone: DataTypes.STRING,
+      language: DataTypes.STRING,
+      birthday: DataTypes.STRING,
       isActivated: { type: DataTypes.BOOLEAN, defaultValue: false },
     },
     {
