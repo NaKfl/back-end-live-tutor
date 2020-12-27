@@ -4,6 +4,7 @@
 Dockerfile
 
 .DS_Store
+README.md
 
 .env
 .env.*
