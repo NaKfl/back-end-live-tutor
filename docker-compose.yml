@@ -1,0 +1,29 @@
+version: '3'
+services:
+  server:
+    build: .
+    depends_on:
+      - database
+    environment:
+      NODE_ENV: development
+      DEV_DATABASE_URL: postgres://postgres:password@database:5432/live-tutor
+      DATABASE_DIALECT: postgres
+      PORT: 6969
+      JWT_SECRET: anhem1nha
+      JWT_EXPIRATION_MINUTES: 30
+      JWT_REFRESH_EXPIRATION_DAYS: 30
+    command: bash -c "npx sequelize db:migrate && npx sequelize db:seed:all && npm start"
+    ports:
+      - 6969:6969
+    volumes:
+      - .:/server/
+      - /server/node_modules
+
+  database:
+    image: postgres:13.1
+    ports:
+      - 2345:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: live-tutor
