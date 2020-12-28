@@ -2,7 +2,6 @@
 .gitignore
 
 Dockerfile
-
 .DS_Store
 README.md
 
@@ -10,5 +9,4 @@ README.md
 .env.*
 
 build/
-
 node_modules/

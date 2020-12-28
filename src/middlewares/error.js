@@ -1,18 +1,14 @@
 import httpStatus from 'http-status';
 import ApiError from 'utils/ApiError';
-import { env } from 'configs/vars';
 
 export const errorHandler = (err, req, res) => {
   let { statusCode, message } = err;
-  if (env === 'production') {
-    statusCode = httpStatus.INTERNAL_SERVER_ERROR;
-    message = httpStatus[httpStatus.INTERNAL_SERVER_ERROR];
-  }
+
   res.locals.errorMessage = err.message;
 
   const response = {
-    statusCode,
-    message,
+    statusCode: statusCode ?? httpStatus.INTERNAL_SERVER_ERROR,
+    message: message ?? httpStatus[httpStatus.INTERNAL_SERVER_ERROR],
   };
 
   return res.status(statusCode).json(response);
