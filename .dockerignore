@@ -2,12 +2,11 @@
 .gitignore
 
 Dockerfile
-
 .DS_Store
+README.md
 
 .env
 .env.*
 
 build/
-
 node_modules/
