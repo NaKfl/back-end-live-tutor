@@ -1,4 +1,5 @@
-version: '3'
+version: '3.8'
+
 services:
   server:
     build: .
@@ -6,7 +7,7 @@ services:
       - database
     environment:
       NODE_ENV: development
-      DEV_DATABASE_URL: postgres://postgres:password@database:5432/live-tutor
+      DATABASE_URL: postgres://postgres:password@database:5432/live-tutor
       DATABASE_DIALECT: postgres
       PORT: 6969
       JWT_SECRET: anhem1nha
@@ -17,12 +18,9 @@ services:
       - 6969:6969
     volumes:
       - .:/server/
-      - /server/node_modules
 
   database:
-    image: postgres:13.1
-    ports:
-      - 2345:5432
+    image: postgres:13-alpine
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
