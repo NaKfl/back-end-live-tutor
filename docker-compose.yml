@@ -1,4 +1,5 @@
 version: '3.8'
+
 services:
   server:
     build: .
@@ -25,3 +26,4 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
       POSTGRES_DB: live-tutor
+      
