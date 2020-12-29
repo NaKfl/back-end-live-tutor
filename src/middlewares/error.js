@@ -26,7 +26,7 @@ export const errorConverter = (err, req, res, next) => {
 };
 
 export const notFoundHandler = (req, res, next) => {
-  const err = new ApiError(httpStatus.NOT_FOUND, 'Not found');
+  const err = new ApiError(httpStatus.NOT_FOUND, 'Not found !');
 
   return errorHandler(err, req, res);
 };
