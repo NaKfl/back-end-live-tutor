@@ -2,8 +2,7 @@ FROM node:15
 
 WORKDIR /server
 
-COPY ./package.json .
-COPY ./package-lock.json .
+COPY package.json package-lock.json ./
 
 RUN npm install
 
