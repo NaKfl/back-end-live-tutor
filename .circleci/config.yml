@@ -1,0 +1,37 @@
+version: 2.1
+orbs:
+  node: circleci/node@3.0.0
+  docker: circleci/docker@1.5.0
+
+jobs:
+  build-and-push:
+    environment:
+      DOCKER_IMAGE: nakfl/back-end-live-tutor
+      DOCKER_TAG: latest
+    executor: docker/docker
+    steps:
+      - setup_remote_docker
+      - checkout
+      - docker/check
+      - docker/build:
+          image: $DOCKER_IMAGE
+          tag: $DOCKER_TAG
+      - docker/push:
+          digest-path: /tmp/digest.txt
+          image: $DOCKER_IMAGE
+          tag: $DOCKER_TAG
+      - run:
+          command: |
+            echo "Digest is: $(</tmp/digest.txt)"
+
+workflows:
+  test-and-build-and-deploy:
+    jobs:
+      - node/test
+      - build-and-push:
+          requires:
+            - node/test
+          filters:
+            branches:
+              only:
+                - dev
