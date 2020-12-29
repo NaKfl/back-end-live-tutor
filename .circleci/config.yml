@@ -29,7 +29,7 @@ jobs:
       - add_ssh_keys:
           fingerprints:
             - $SSH_KEY_FINGERPRINT
-      - run: ssh -oStrictHostKeyChecking=no $DEPLOYED_USER@$DEPLOYED_SERVER './deploy.sh'
+      - run: ssh -oStrictHostKeyChecking=no -v $DEPLOYED_USER@$DEPLOYED_SERVER './deploy.sh'
 
 workflows:
   test-and-build-and-deploy:
