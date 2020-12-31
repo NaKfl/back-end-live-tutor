@@ -1,11 +1,10 @@
-FROM node:15
+FROM node:14
 
 WORKDIR /server
 
-COPY package.json package-lock.json ./
+COPY package*.json ./
 
 RUN npm install
-RUN npm install -g sequelize
 
 COPY . .
 

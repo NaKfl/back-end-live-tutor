@@ -13,14 +13,12 @@ services:
       JWT_SECRET: anhem1nha
       JWT_EXPIRATION_MINUTES: 30
       JWT_REFRESH_EXPIRATION_DAYS: 30
-    command: bash -c "npx sequelize db:migrate && npx sequelize db:seed:all && npm start"
+    command: sh -c "./wait-for-it.sh database:5432 && npm run migrate && npm run migrate:seed && npm start"
     ports:
       - 6969:6969
-    volumes:
-      - .:/server/
 
   database:
-    image: postgres:13-alpine
+    image: postgres:13
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
