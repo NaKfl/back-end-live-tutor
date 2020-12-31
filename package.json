@@ -10,7 +10,9 @@
     "test": "jest",
     "lint": "eslint ./src/ --ignore-path .gitignore",
     "lint:fix": "npm lint --fix",
-    "prettify": "prettier --write"
+    "prettify": "prettier --write",
+    "migrate": "sequelize db:migrate:undo:all && sequelize db:migrate",
+    "migrate:seed": "sequelize db:seed:undo:all && sequelize db:seed:all"
   },
   "keywords": [],
   "author": "",
