@@ -15,4 +15,9 @@ userValidation.updateInfo = {
   }),
 };
 
+userValidation.manageFavoriteTutor = {
+  body: Joi.object({
+    tutorId: Joi.string().required(),
+  }),
+};
 export default userValidation;
