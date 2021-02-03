@@ -10,7 +10,7 @@
 
 - Checkout this repo
 - run `npm install`
-- run `copy .env.example .env` and config your environment
+- run `cp .env.example .env` and config your environment
 - run `npx sequelize db:migrate` to migrate database
 - run `npx sequelize db:seed:all` to seed data
 - run `npm start`
