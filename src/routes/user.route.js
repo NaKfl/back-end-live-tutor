@@ -14,4 +14,13 @@ router.put(
   userController.updateInfo,
 );
 
+router.get('/favoriteTutor', auth(), userController.getAllFavoriteTutor);
+
+router.post(
+  '/manageFavoriteTutor',
+  auth(),
+  validate(userValidation.manageFavoriteTutor),
+  userController.manageFavoriteTutor,
+);
+
 export default router;
