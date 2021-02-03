@@ -93,6 +93,26 @@ const tutorInfo = tutors
     updatedAt: new Date(),
   }));
 
+const favoriteTutors = [...Array(200)].map(() => ({
+  id: faker.random.uuid(),
+  firstId:
+    students[
+      faker.random.number({
+        min: 0,
+        max: 49,
+      })
+    ].id,
+  secondId:
+    tutors[
+      faker.random.number({
+        min: 0,
+        max: 49,
+      })
+    ].id,
+  createdAt: new Date(),
+  updatedAt: new Date(),
+}));
+
 module.exports = {
   tutors,
   students,
@@ -101,6 +121,7 @@ module.exports = {
   tutorRoles,
   studentRoles,
   tutorInfo,
+  favoriteTutors,
   up: () => Promise.resolve(),
   down: () => Promise.resolve(),
 };
