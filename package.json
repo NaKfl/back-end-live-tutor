@@ -12,7 +12,8 @@
     "lint:fix": "npm lint --fix",
     "prettify": "prettier --write",
     "migrate": "sequelize db:migrate:undo:all && sequelize db:migrate",
-    "migrate:seed": "sequelize db:seed:undo:all && sequelize db:seed:all"
+    "migrate:seed": "sequelize db:seed:undo:all && sequelize db:seed:all",
+    "migrate:all": "npm run migrate && npm run migrate:seed"
   },
   "keywords": [],
   "author": "",
@@ -41,6 +42,7 @@
     "supertest": "^6.0.1"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
@@ -54,6 +56,7 @@
     "moment": "^2.29.1",
     "morgan": "^1.10.0",
     "passport": "^0.4.1",
+    "passport-http-bearer": "^1.0.1",
     "passport-jwt": "^4.0.0",
     "pg": "^8.5.1",
     "sequelize": "^6.3.5",
