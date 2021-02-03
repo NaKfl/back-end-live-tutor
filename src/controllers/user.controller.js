@@ -19,7 +19,7 @@ userController.updateInfo = catchAsync(async (req, res) => {
 userController.getAllFavoriteTutor = catchAsync(async (req, res) => {
   const { user } = req;
   const list = await favoriteService.getListFavoriteTutorById(user.id);
-  res.json({ favoriteList: list });
+  res.send(list);
 });
 
 userController.manageFavoriteTutor = catchAsync(async (req, res) => {
