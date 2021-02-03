@@ -1,6 +1,8 @@
 import { Role, User, UserRole } from 'database/models';
 import httpStatus from 'http-status';
 import ApiError from 'utils/ApiError';
+import { Op } from 'sequelize';
+import { v4 as uuidv4 } from 'uuid';
 import { ROLES } from 'utils/constants';
 
 const userService = {};
@@ -53,6 +55,37 @@ userService.getRolesFromId = async (id) => {
   });
   const roles = user.Roles.map((role) => role.name);
   return roles;
+};
+
+userService.oAuthLogin = async ({ service, id, email, name, avatar }) => {
+  const user = await User.findOne({
+    attributes: {
+      exclude: ['password'],
+    },
+    where: {
+      [Op.or]: {
+        email,
+        [Op.or]: {
+          facebook: id,
+          google: id,
+        },
+      },
+    },
+  });
+  if (user) {
+    user[service] = id;
+    if (!user.name) user.name = name;
+    if (!user.avatar) user.avatar = avatar;
+    return user.save();
+  }
+  const password = uuidv4();
+  return User.create({
+    [service]: id,
+    email,
+    password,
+    name,
+    avatar,
+  });
 };
 
 export default userService;

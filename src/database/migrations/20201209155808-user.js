@@ -11,6 +11,12 @@ module.exports = {
       email: {
         type: Sequelize.STRING,
       },
+      google: {
+        type: Sequelize.STRING,
+      },
+      facebook: {
+        type: Sequelize.STRING,
+      },
       password: {
         type: Sequelize.STRING,
       },
