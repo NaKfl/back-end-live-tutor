@@ -55,4 +55,15 @@ userService.getRolesFromId = async (id) => {
   return roles;
 };
 
+userService.uploadAvatar = async ({ id, locationFile }) => {
+  const res = await User.update(
+    { avatar: locationFile },
+    {
+      where: {
+        id,
+      },
+    },
+  );
+  return res;
+};
 export default userService;

@@ -12,6 +12,7 @@ import {
   errorHandler,
   notFoundHandler,
 } from 'middlewares/error';
+import path from 'path';
 
 const app = express();
 
@@ -19,7 +20,7 @@ app.use(morgan(logs));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
+app.use(express.static(__dirname));
 app.use(helmet());
 
 app.use(cors());
@@ -27,7 +28,25 @@ app.options('*', cors());
 
 app.use(passport.initialize());
 passport.use('jwt', jwtStrategy);
-
+app.use(express.static(path.join(__dirname, '/../uploads')));
+//app.use('/avatar', express.static(path.join(__dirname, 'uploads')));
+//*custom
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'x-www-form-urlencoded, Origin, X-Requested-With, Content-Type, Accept, Authorization, *',
+  );
+  if (req.method === 'OPTIONS') {
+    res.header(
+      'Access-Control-Allow-Methods',
+      'GET, PUT, POST, PATCH, DELETE, OPTIONS',
+    );
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    return res.status(200).json({});
+  }
+  next();
+});
 // Function-level-middleware
 app.use((req, res, next) => {
   //Handle logic
