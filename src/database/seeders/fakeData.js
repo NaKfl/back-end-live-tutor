@@ -89,8 +89,15 @@ const tutorInfo = tutors
       ),
     ].map(() => faker.lorem.word()),
     resume: faker.lorem.paragraph(),
+    education: faker.lorem.paragraph(),
+    experience: faker.lorem.paragraph(),
+    interests: faker.lorem.paragraph(),
+    profession: faker.lorem.words(),
+    accent: faker.lorem.words(),
+    targetStudent: faker.lorem.words(),
     createdAt: new Date(),
     updatedAt: new Date(),
+    isActivated: true,
   }));
 
 const favoriteTutors = [...Array(200)].map(() => ({

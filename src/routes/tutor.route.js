@@ -13,4 +13,11 @@ router.get(
   tutorController.getMany,
 );
 
+router.post(
+  '/register',
+  auth(),
+  validate(tutorValidation.register),
+  tutorController.register,
+);
+
 export default router;
