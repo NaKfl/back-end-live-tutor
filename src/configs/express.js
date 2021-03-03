@@ -28,8 +28,9 @@ app.options('*', cors());
 
 app.use(passport.initialize());
 passport.use('jwt', jwtStrategy);
-app.use(express.static(path.join(__dirname, '/../uploads')));
-//app.use('/avatar', express.static(path.join(__dirname, 'uploads')));
+// app.use(express.static(path.join(__dirname, '/../uploads')));
+app.use('/avatar', express.static(path.join(__dirname, '/../uploads/avatar')));
+app.use('/video', express.static(path.join(__dirname, '/../uploads/video')));
 //*custom
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
