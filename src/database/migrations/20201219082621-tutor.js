@@ -21,6 +21,16 @@ module.exports = {
       languages: { type: Sequelize.ARRAY(Sequelize.STRING) },
       specialties: { type: Sequelize.ARRAY(Sequelize.STRING) },
       resume: { type: Sequelize.TEXT },
+      education: { type: Sequelize.TEXT },
+      experience: { type: Sequelize.TEXT },
+      accent: { type: Sequelize.STRING },
+      targetStudent: { type: Sequelize.STRING },
+      profession: { type: Sequelize.TEXT },
+      interests: { type: Sequelize.TEXT },
+      isActivated: {
+        allowNull: false,
+        type: Sequelize.BOOLEAN,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

@@ -10,4 +10,8 @@ tutorController.getMany = catchAsync(async (req, res) => {
   res.json({ tutors, favoriteTutor });
 });
 
+tutorController.register = catchAsync(async (req, res) => {
+  // TODO
+});
+
 export default tutorController;
