@@ -88,4 +88,15 @@ userService.oAuthLogin = async ({ service, id, email, name, avatar }) => {
   });
 };
 
+userService.uploadAvatar = async ({ id, locationFile }) => {
+  const res = await User.update(
+    { avatar: locationFile },
+    {
+      where: {
+        id,
+      },
+    },
+  );
+  return res;
+};
 export default userService;

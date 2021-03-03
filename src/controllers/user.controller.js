@@ -32,4 +32,15 @@ userController.manageFavoriteTutor = catchAsync(async (req, res) => {
   res.json({ message: 'Manage success', result });
 });
 
+userController.updateAvatar = catchAsync(async (req, res) => {
+  const file = req.file;
+  const url =
+    'http://' + req.headers.host + `/${req.file.fieldname}/` + file.filename;
+  const result = await userService.uploadAvatar({
+    id: req.user.id,
+    locationFile: url,
+  });
+  res.send(result);
+});
+
 export default userController;
