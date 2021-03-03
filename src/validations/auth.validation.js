@@ -16,4 +16,10 @@ authValidation.login = {
   }),
 };
 
+authValidation.oAuth = {
+  body: Joi.object({
+    access_token: Joi.string().required(),
+  }),
+};
+
 export default authValidation;

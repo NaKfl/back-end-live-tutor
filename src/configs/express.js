@@ -4,7 +4,11 @@ import bodyParser from 'body-parser';
 import helmet from 'helmet';
 import cors from 'cors';
 import passport from 'passport';
-import { jwtStrategy } from 'configs/passport';
+import {
+  jwtStrategy,
+  facebookStrategy,
+  googleStrategy,
+} from 'configs/passport';
 import { logs } from 'configs/vars';
 import routes from 'routes';
 import {
@@ -27,12 +31,8 @@ app.options('*', cors());
 
 app.use(passport.initialize());
 passport.use('jwt', jwtStrategy);
-
-// Function-level-middleware
-app.use((req, res, next) => {
-  //Handle logic
-  next();
-});
+passport.use('facebook', facebookStrategy);
+passport.use('google', googleStrategy);
 
 app.use('/', routes);
 

@@ -27,7 +27,7 @@ const verifyCallback = (req, resolve, reject, requiredRoles) => async (
   resolve();
 };
 
-const auth = (...requiredRoles) => async (req, res, next) => {
+export const auth = (...requiredRoles) => async (req, res, next) => {
   return new Promise((resolve, reject) => {
     passport.authenticate(
       'jwt',
@@ -39,4 +39,5 @@ const auth = (...requiredRoles) => async (req, res, next) => {
     .catch((err) => next(err));
 };
 
-export default auth;
+export const oAuth = (service) =>
+  passport.authenticate(service, { session: false });

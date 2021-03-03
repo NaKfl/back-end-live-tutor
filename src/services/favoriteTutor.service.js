@@ -31,15 +31,19 @@ favoriteService.getListFavoriteTutorById = async (id) => {
     include: [
       {
         model: User,
-        as: 'firstInfo',
-      },
-      {
-        model: User,
         as: 'secondInfo',
       },
     ],
-    // attributes: [],
+    attributes: [],
   });
 };
 
+favoriteService.getListFavoriteTutorOnlySecondId = async (id) => {
+  return await FavoriteTutor.findAll({
+    where: {
+      firstId: id,
+    },
+    attributes: ['id', 'secondId'],
+  });
+};
 export default favoriteService;

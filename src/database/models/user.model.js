@@ -39,6 +39,8 @@ module.exports = (sequelize, DataTypes) => {
         autoIncrement: false,
       },
       email: DataTypes.STRING,
+      google: DataTypes.STRING,
+      facebook: DataTypes.STRING,
       password: DataTypes.STRING,
       avatar: DataTypes.STRING,
       name: DataTypes.STRING,
