@@ -22,4 +22,9 @@ tutorController.register = catchAsync(async (req, res) => {
   res.send('result');
 });
 
+tutorController.getOne = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  const result = await tutorService.getOne(id);
+  res.send(result);
+});
 export default tutorController;

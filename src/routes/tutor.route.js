@@ -20,4 +20,6 @@ router.post(
   tutorController.register,
 );
 
+router.get('/:id', auth(), tutorController.getOne);
+
 export default router;
