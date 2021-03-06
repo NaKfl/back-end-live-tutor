@@ -4,7 +4,6 @@ import { auth } from 'middlewares/auth';
 import userValidation from 'validations/user.validation';
 import validate from 'middlewares/validate';
 import upload from 'middlewares/multer';
-import { blobToImage } from 'utils/common';
 const router = express.Router();
 
 router.get('/info', auth(), userController.getInfo);

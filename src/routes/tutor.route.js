@@ -3,7 +3,7 @@ import tutorController from 'controllers/tutor.controller';
 import tutorValidation from 'validations/tutor.validation';
 import { auth } from 'middlewares/auth';
 import validate from 'middlewares/validate';
-
+import upload from 'middlewares/multer';
 const router = express.Router();
 
 router.get(
@@ -16,8 +16,10 @@ router.get(
 router.post(
   '/register',
   auth(),
-  validate(tutorValidation.register),
+  upload.array('video', 2),
   tutorController.register,
 );
+
+router.get('/:id', auth(), tutorController.getOne);
 
 export default router;
