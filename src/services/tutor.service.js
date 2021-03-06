@@ -24,4 +24,19 @@ tutorService.getMany = async (query) => {
   return { ...tutors, rows };
 };
 
+tutorService.getOne = async (id) => {
+  return await Tutor.findOne({
+    where: {
+      id,
+    },
+    include: [
+      {
+        model: User,
+        attributes: {
+          exclude: ['id', 'password'],
+        },
+      },
+    ],
+  });
+};
 export default tutorService;
