@@ -22,4 +22,18 @@ router.post(
 
 router.get('/:id', auth(), tutorController.getOne);
 
+router.get(
+  '/list/approval',
+  auth(),
+  validate(tutorValidation.getWaitingList),
+  tutorController.getWaitingList,
+);
+
+router.put(
+  '/update/approval',
+  auth(),
+  validate(tutorValidation.updateTutor),
+  tutorController.updateTutor,
+);
+
 export default router;
