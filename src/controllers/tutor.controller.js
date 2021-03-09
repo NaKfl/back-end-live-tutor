@@ -1,5 +1,5 @@
 import catchAsync from 'utils/catchAsync';
-import { tutorService, favoriteService, userService } from 'services';
+import { tutorService, favoriteService } from 'services';
 
 const tutorController = {};
 
@@ -27,4 +27,17 @@ tutorController.getOne = catchAsync(async (req, res) => {
   const result = await tutorService.getOne(id);
   res.send(result);
 });
+
+tutorController.getWaitingList = catchAsync(async (req, res) => {
+  const data = await tutorService.getWaitingList();
+  res.json({ message: 'Success', data });
+});
+
+tutorController.updateTutor = catchAsync(async (req, res) => {
+  const { body } = req;
+  await tutorService.updateTutor(body);
+  const data = await tutorService.getOne(body.userId);
+  res.json({ message: 'Success', data });
+});
+
 export default tutorController;

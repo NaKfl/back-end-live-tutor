@@ -24,10 +24,10 @@ tutorService.getMany = async (query) => {
   return { ...tutors, rows };
 };
 
-tutorService.getOne = async (id) => {
+tutorService.getOne = async (userId) => {
   return await Tutor.findOne({
     where: {
-      id,
+      userId,
     },
     include: [
       {
@@ -37,6 +37,31 @@ tutorService.getOne = async (id) => {
         },
       },
     ],
+  });
+};
+
+tutorService.getWaitingList = async () => {
+  return await Tutor.findAll({
+    where: {
+      isActivated: false,
+    },
+    include: [
+      {
+        model: User,
+        attributes: {
+          exclude: ['id', 'password'],
+        },
+      },
+    ],
+  });
+};
+
+tutorService.updateTutor = async (fields) => {
+  const { userId, ...updatedFields } = fields;
+  return await Tutor.update(updatedFields, {
+    where: {
+      userId,
+    },
   });
 };
 export default tutorService;
