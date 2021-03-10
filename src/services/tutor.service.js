@@ -7,6 +7,14 @@ const tutorService = {};
 
 tutorService.getMany = async (query) => {
   const { page, perPage, search } = query;
+  let where = {};
+  if (search) {
+    where = {
+      name: {
+        [Op.iLike]: `%${search}%`,
+      },
+    };
+  }
   const tutors = await Tutor.findAndCountAll({
     include: [
       {
@@ -14,11 +22,7 @@ tutorService.getMany = async (query) => {
         attributes: {
           exclude: ['id', 'password'],
         },
-        where: {
-          name: {
-            [Op.iLike]: `%${search}%`,
-          },
-        },
+        where,
       },
     ],
     raw: true,
