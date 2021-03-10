@@ -1,17 +1,23 @@
 import { Tutor, User } from 'database/models';
 import { flatObjectsByKeys } from 'utils/common';
 import { paginate } from 'utils/sequelize';
+import { Op } from 'sequelize';
 
 const tutorService = {};
 
 tutorService.getMany = async (query) => {
-  const { page, perPage } = query;
+  const { page, perPage, search } = query;
   const tutors = await Tutor.findAndCountAll({
     include: [
       {
         model: User,
         attributes: {
           exclude: ['id', 'password'],
+        },
+        where: {
+          name: {
+            [Op.iLike]: `%${search}%`,
+          },
         },
       },
     ],
