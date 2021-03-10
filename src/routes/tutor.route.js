@@ -13,12 +13,11 @@ router.get(
   tutorController.getMany,
 );
 
-router.post(
-  '/register',
-  auth(),
-  upload.array('video', 2),
-  tutorController.register,
-);
+const cpUpload = upload.fields([
+  { name: 'avatar', maxCount: 1 },
+  { name: 'video', maxCount: 8 },
+]);
+router.post('/register', auth(), cpUpload, tutorController.register);
 
 router.get('/:id', auth(), tutorController.getOne);
 

@@ -16,6 +16,9 @@ tutorService.getMany = async (query) => {
     };
   }
   const tutors = await Tutor.findAndCountAll({
+    where: {
+      isActivated: true,
+    },
     include: [
       {
         model: User,
@@ -73,5 +76,35 @@ tutorService.updateTutor = async (fields) => {
       userId,
     },
   });
+};
+
+tutorService.createWithUserId = async (fields, userId, avatar, video) => {
+  console.log({ fields });
+  const isExist = await Tutor.findOne({
+    where: {
+      userId,
+    },
+  });
+  if (isExist) {
+    throw new Error('User have already been a tutor');
+  } else {
+    const { name, country, birthday, ...othersInfo } = fields;
+    await User.update(
+      { name, country, birthday, avatar },
+      {
+        where: {
+          id: userId,
+        },
+      },
+    );
+    const { languages, specialties, ...textValues } = othersInfo;
+    return await Tutor.create({
+      ...textValues,
+      languages: languages.split(', '),
+      specialties: specialties.split(', '),
+      video,
+      userId,
+    });
+  }
 };
 export default tutorService;

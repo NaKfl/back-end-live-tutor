@@ -4,7 +4,6 @@ import fs from 'fs';
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    console.log('🚀 ~ file: multer.js ~ line 7 ~ file', file);
     const fieldname = file.fieldname;
     if (fieldname === 'avatar') {
       cb(null, path.join(__dirname, '../uploads/avatar'));
@@ -15,12 +14,11 @@ const storage = multer.diskStorage({
     }
   },
   filename: function (req, file, cb) {
-    console.log('🚀 ~ file: multer.js ~ line 18 ~ file', file);
     const user = req.user?.id;
-    if (file.fieldname === 'avatar') {
+    if (file.fieldname === 'avatar' || file.fieldname === 'video') {
       const typeImage = file.originalname.split('.')[1];
       fs.readdirSync(path.join(__dirname, `../uploads/${file.fieldname}`))
-        .filter((file) => {
+        ?.filter((file) => {
           const f = file.split('.');
           return f[0];
         })

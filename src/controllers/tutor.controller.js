@@ -12,14 +12,24 @@ tutorController.getMany = catchAsync(async (req, res) => {
 
 tutorController.register = catchAsync(async (req, res) => {
   const file = req.files;
-  console.log(file);
-  // const url =
-  //   'http://' + req.headers.host + `/${req.files.fieldname}/` + file.filename;
-  // const result = await userService.uploadAvatar({
-  //   id: req.user.id,
-  //   locationFile: url,
-  // });
-  res.send('result');
+  const avatar =
+    'http://' +
+    req.headers.host +
+    `/${file?.avatar[0]?.fieldname}/` +
+    file?.avatar[0]?.filename;
+  const video =
+    'http://' +
+    req.headers.host +
+    `/${file?.video[0]?.fieldname}/` +
+    file?.video[0]?.filename;
+  console.log({ avatar, video });
+  const result = await tutorService.createWithUserId(
+    { ...req.body },
+    req?.user?.id,
+    avatar,
+    video,
+  );
+  res.send(result);
 });
 
 tutorController.getOne = catchAsync(async (req, res) => {
