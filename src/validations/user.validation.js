@@ -20,4 +20,12 @@ userValidation.manageFavoriteTutor = {
     tutorId: Joi.string().required(),
   }),
 };
+
+userValidation.feedbackTutor = {
+  body: Joi.object({
+    tutorId: Joi.string().required(),
+    rating: Joi.number().required(),
+    content: Joi.string().allow(null, ''),
+  }),
+};
 export default userValidation;

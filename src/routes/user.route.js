@@ -29,4 +29,12 @@ router.post(
   upload.single('avatar'),
   userController.updateAvatar,
 );
+
+router.post(
+  '/feedbackTutor',
+  auth(),
+  validate(userValidation.feedbackTutor),
+  userController.feedbackTutor,
+);
+
 export default router;

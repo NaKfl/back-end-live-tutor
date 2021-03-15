@@ -1,5 +1,5 @@
 import catchAsync from 'utils/catchAsync';
-import { userService, favoriteService } from 'services';
+import { userService, favoriteService, feedbackService } from 'services';
 
 const userController = {};
 
@@ -41,6 +41,18 @@ userController.updateAvatar = catchAsync(async (req, res) => {
     locationFile: url,
   });
   res.send(result);
+});
+
+userController.feedbackTutor = catchAsync(async (req, res) => {
+  const { user, body } = req;
+  const { tutorId, rating, content } = body;
+  const data = await feedbackService.feedbackTutor({
+    firstId: user.id,
+    secondId: tutorId,
+    rating,
+    content,
+  });
+  res.json({ message: 'Feedback success', data });
 });
 
 export default userController;
