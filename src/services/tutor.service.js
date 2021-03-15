@@ -1,5 +1,4 @@
-import { Tutor, User } from 'database/models';
-import { flatObjectsByKeys } from 'utils/common';
+import { Tutor, User, TutorFeedback } from 'database/models';
 import { paginate } from 'utils/sequelize';
 import { Op } from 'sequelize';
 
@@ -25,16 +24,24 @@ tutorService.getMany = async (query) => {
         attributes: {
           exclude: ['id', 'password'],
         },
+        include: [
+          {
+            model: TutorFeedback,
+            as: 'feedbacks',
+          },
+        ],
         where,
       },
     ],
-    raw: true,
-    nest: true,
     ...paginate({ page, perPage }),
   });
-
-  const rows = flatObjectsByKeys(tutors.rows, ['User']);
-  return { ...tutors, rows };
+  const results = tutors.rows.map((tutor) => {
+    const user = tutor.User;
+    const result = { ...user.dataValues, ...tutor.dataValues };
+    delete result.User;
+    return result;
+  });
+  return results;
 };
 
 tutorService.getOne = async (userId) => {
@@ -48,6 +55,12 @@ tutorService.getOne = async (userId) => {
         attributes: {
           exclude: ['id', 'password'],
         },
+        include: [
+          {
+            model: TutorFeedback,
+            as: 'feedbacks',
+          },
+        ],
       },
     ],
   });

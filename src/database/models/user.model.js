@@ -17,6 +17,11 @@ module.exports = (sequelize, DataTypes) => {
       this.hasOne(models.Tutor, {
         foreignKey: 'userId',
       });
+
+      this.hasMany(models.TutorFeedback, {
+        foreignKey: 'secondId',
+        as: 'feedbacks',
+      });
     }
   }
 

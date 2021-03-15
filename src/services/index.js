@@ -4,6 +4,7 @@ import authService from './auth.service';
 import tutorService from './tutor.service';
 import authProviders from './authProviders';
 import favoriteService from './favoriteTutor.service';
+import feedbackService from './tutorFeedback.service';
 
 export {
   userService,
@@ -12,4 +13,5 @@ export {
   tutorService,
   favoriteService,
   authProviders,
+  feedbackService,
 };
