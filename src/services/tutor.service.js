@@ -41,7 +41,7 @@ tutorService.getMany = async (query) => {
     delete result.User;
     return result;
   });
-  return results;
+  return { ...tutors, rows: results };
 };
 
 tutorService.getOne = async (userId) => {
