@@ -1,15 +1,19 @@
+import http from 'http';
 import express from 'express';
 import morgan from 'morgan';
 import bodyParser from 'body-parser';
 import helmet from 'helmet';
 import cors from 'cors';
 import passport from 'passport';
+import adapter from 'socket.io-redis';
 import {
   jwtStrategy,
   facebookStrategy,
   googleStrategy,
 } from 'configs/passport';
-import { logs } from 'configs/vars';
+import socketio from 'socket.io';
+import { logs, redis as redisVars } from 'configs/vars';
+import initSockets from 'sockets';
 import routes from 'routes';
 import {
   errorConverter,
@@ -68,4 +72,20 @@ app.use(errorConverter);
 
 app.use(errorHandler);
 
-export default app;
+const server = http.createServer(app);
+
+const io = socketio(server, {
+  cors: true,
+  origin: '*:*',
+  credentials: true,
+});
+
+const redisAdapter = adapter({
+  host: redisVars.host,
+  port: redisVars.port,
+});
+
+io.adapter(redisAdapter);
+initSockets(io);
+
+export default server;
