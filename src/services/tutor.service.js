@@ -28,6 +28,15 @@ tutorService.getMany = async (query) => {
           {
             model: TutorFeedback,
             as: 'feedbacks',
+            include: [
+              {
+                model: User,
+                as: 'firstInfo',
+                attributes: {
+                  exclude: ['id', 'password'],
+                },
+              },
+            ],
           },
         ],
         where,
@@ -59,6 +68,15 @@ tutorService.getOne = async (userId) => {
           {
             model: TutorFeedback,
             as: 'feedbacks',
+            include: [
+              {
+                model: User,
+                as: 'firstInfo',
+                attributes: {
+                  exclude: ['id', 'password'],
+                },
+              },
+            ],
           },
         ],
       },
