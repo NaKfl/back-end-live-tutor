@@ -110,7 +110,6 @@ tutorService.updateTutor = async (fields) => {
 };
 
 tutorService.createWithUserId = async (fields, userId, avatar, video) => {
-  console.log({ fields });
   const isExist = await Tutor.findOne({
     where: {
       userId,

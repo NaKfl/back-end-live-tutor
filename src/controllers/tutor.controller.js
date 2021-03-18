@@ -22,7 +22,6 @@ tutorController.register = catchAsync(async (req, res) => {
     req.headers.host +
     `/${file?.video[0]?.fieldname}/` +
     file?.video[0]?.filename;
-  console.log({ avatar, video });
   const result = await tutorService.createWithUserId(
     { ...req.body },
     req?.user?.id,
