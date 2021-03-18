@@ -1,4 +1,4 @@
-import { FavoriteTutor, User } from 'database/models';
+import { FavoriteTutor, User, Tutor } from 'database/models';
 const favoriteService = {};
 
 favoriteService.manageFavoriteTutor = async ({ firstId, secondId }) => {
@@ -24,18 +24,32 @@ favoriteService.manageFavoriteTutor = async ({ firstId, secondId }) => {
 };
 
 favoriteService.getListFavoriteTutorById = async (id) => {
-  return await FavoriteTutor.findAll({
+  const listFavoriteTutorId = await FavoriteTutor.findAll({
     where: {
       firstId: id,
     },
-    include: [
-      {
-        model: User,
-        as: 'secondInfo',
-      },
-    ],
-    attributes: [],
+    raw: true,
   });
+
+  const listTutor = await Promise.all(
+    listFavoriteTutorId.map(async ({ secondId }) => {
+      const rawTutor = await Tutor.findOne({
+        where: { id: secondId },
+        include: [
+          {
+            model: User,
+            as: 'User',
+            attributes: {
+              exclude: ['id', 'password'],
+            },
+          },
+        ],
+      });
+
+      return rawTutor.toJSON();
+    }),
+  );
+  return listTutor;
 };
 
 favoriteService.getListFavoriteTutorOnlySecondId = async (id) => {
