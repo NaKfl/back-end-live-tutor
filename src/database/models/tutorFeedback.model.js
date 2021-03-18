@@ -12,6 +12,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'secondId',
         as: 'secondInfo',
       });
+      this.belongsTo(models.User, {
+        foreignKey: 'firstId',
+        as: 'firstInfo',
+      });
     }
   }
   TutorFeedback.init(
