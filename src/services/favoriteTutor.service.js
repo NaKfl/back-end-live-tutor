@@ -28,11 +28,12 @@ favoriteService.getListFavoriteTutorById = async (id) => {
     where: {
       firstId: id,
     },
-    raw: true,
+    order: [['createdAt', 'DESC']],
   });
 
   const listTutor = await Promise.all(
-    listFavoriteTutorId.map(async ({ secondId }) => {
+    listFavoriteTutorId.map(async (rawData) => {
+      const { secondId } = rawData.toJSON();
       const rawTutor = await Tutor.findOne({
         where: { id: secondId },
         include: [
