@@ -15,6 +15,14 @@ class OnlineUsers {
     return this.users[userId] ?? null;
   }
 
+  isUserOnline(userId) {
+    return !!this.users[userId];
+  }
+
+  getSocketIdsByUserId(userId) {
+    return this.users[userId]?.sockets ?? [];
+  }
+
   getUserBySocketId(socketId) {
     return Object.values(this.users).find((item) =>
       item.sockets?.includes(socketId),

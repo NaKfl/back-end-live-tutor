@@ -14,7 +14,6 @@ const identityHandler = (io, socket) => {
 
   socket.on('logout', async () => {
     if (socket.user) onlineUsers.remove(socket.user, socket.id);
-    console.log('onlineUsers.getAll()', onlineUsers.getAll());
   });
 };
 

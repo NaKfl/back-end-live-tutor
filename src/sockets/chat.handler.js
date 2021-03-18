@@ -2,11 +2,21 @@ import { onlineUsers } from './models';
 import { messageService } from 'services';
 
 const chatHandler = (io, socket) => {
-  socket.on('chat:getInitiatedMessages', async ({ fromId, toId }) => {
+  const returnMessages = async ({ fromId, toId }) => {
+    const socketIds = [
+      ...onlineUsers.getSocketIdsByUserId(fromId),
+      ...onlineUsers.getSocketIdsByUserId(toId),
+    ];
     const messages = await messageService.getManyByUserIds(fromId, toId);
-    socket.emit('chat:returnInitiatedMessages', {
-      messages,
-    });
+    socketIds.forEach((socketId) =>
+      io.to(socketId).emit('chat:returnInitiatedMessages', {
+        messages,
+      }),
+    );
+  };
+
+  socket.on('chat:getInitiatedMessages', async ({ fromId, toId }) => {
+    returnMessages({ fromId, toId });
   });
 
   socket.on('chat:sendMessage', async ({ fromId, toId, content }) => {
@@ -16,10 +26,7 @@ const chatHandler = (io, socket) => {
       content,
       createdAt: new Date(),
     });
-    const messages = await messageService.getManyByUserIds(fromId, toId);
-    socket.emit('chat:returnInitiatedMessages', {
-      messages,
-    });
+    returnMessages({ fromId, toId });
   });
 };
 
