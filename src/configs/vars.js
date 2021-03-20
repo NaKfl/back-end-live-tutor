@@ -8,3 +8,7 @@ export const jwt = {
   secret: process.env.JWT_SECRET,
   accessExpirationMinutes: process.env.JWT_EXPIRATION_MINUTES,
 };
+export const redis = {
+  host: process.env.REDIS_HOST,
+  port: process.env.REDIS_PORT,
+};

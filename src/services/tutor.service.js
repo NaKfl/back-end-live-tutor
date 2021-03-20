@@ -1,4 +1,4 @@
-import { Tutor, User, TutorFeedback } from 'database/models';
+import { Tutor, User, TutorFeedback, FavoriteTutor } from 'database/models';
 import { paginate } from 'utils/sequelize';
 import { Op } from 'sequelize';
 
@@ -84,6 +84,21 @@ tutorService.getOne = async (userId) => {
   });
 };
 
+tutorService.checkIsFavoriteTutorByUserId = async (firstId, secondId) => {
+  const favoriteTutorData = await FavoriteTutor.findOne({
+    where: {
+      firstId,
+      secondId,
+    },
+  });
+
+  if (favoriteTutorData) {
+    return true;
+  }
+
+  return false;
+};
+
 tutorService.getWaitingList = async () => {
   return await Tutor.findAll({
     where: {
@@ -110,7 +125,6 @@ tutorService.updateTutor = async (fields) => {
 };
 
 tutorService.createWithUserId = async (fields, userId, avatar, video) => {
-  console.log({ fields });
   const isExist = await Tutor.findOne({
     where: {
       userId,

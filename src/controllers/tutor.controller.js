@@ -22,7 +22,6 @@ tutorController.register = catchAsync(async (req, res) => {
     req.headers.host +
     `/${file?.video[0]?.fieldname}/` +
     file?.video[0]?.filename;
-  console.log({ avatar, video });
   const result = await tutorService.createWithUserId(
     { ...req.body },
     req?.user?.id,
@@ -33,9 +32,20 @@ tutorController.register = catchAsync(async (req, res) => {
 });
 
 tutorController.getOne = catchAsync(async (req, res) => {
-  const { id } = req.params;
-  const result = await tutorService.getOne(id);
-  res.send(result);
+  const { user } = req;
+  const { id: tutorUserId } = req.params;
+  let responseData = {};
+  const rawResult = await tutorService.getOne(tutorUserId);
+  if (rawResult) {
+    responseData = rawResult.toJSON();
+
+    const isFavorite = await tutorService.checkIsFavoriteTutorByUserId(
+      user.id,
+      tutorUserId,
+    );
+    responseData.isFavorite = isFavorite;
+  }
+  res.send(responseData);
 });
 
 tutorController.getWaitingList = catchAsync(async (req, res) => {

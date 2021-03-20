@@ -28,6 +28,21 @@ favoriteService.getListFavoriteTutorById = async (id) => {
     where: {
       firstId: id,
     },
+    include: [
+      {
+        model: User,
+        as: 'secondInfo',
+        attributes: {
+          exclude: ['id', 'password'],
+        },
+        include: [
+          {
+            model: Tutor,
+            as: 'tutorInfo',
+          },
+        ],
+      },
+    ],
     order: [['createdAt', 'DESC']],
   });
 

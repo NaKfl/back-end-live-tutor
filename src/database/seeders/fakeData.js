@@ -45,6 +45,8 @@ const students = [...Array(50)].map(() => ({
   updatedAt: new Date(),
 }));
 
+const users = [...students, ...tutors];
+
 // Set role for 50 tutors
 const tutorRoles = tutors
   .map((tutor) => tutor.id)
@@ -120,6 +122,27 @@ const favoriteTutors = [...Array(200)].map(() => ({
   updatedAt: new Date(),
 }));
 
+const messages = [...Array(1000)].map(() => ({
+  id: faker.random.uuid(),
+  fromId:
+    users[
+      faker.random.number({
+        min: 0,
+        max: 99,
+      })
+    ].id,
+  toId:
+    users[
+      faker.random.number({
+        min: 0,
+        max: 99,
+      })
+    ].id,
+  content: faker.lorem.paragraph(),
+  createdAt: new Date(),
+  updatedAt: new Date(),
+}));
+
 module.exports = {
   tutors,
   students,
@@ -129,6 +152,7 @@ module.exports = {
   studentRoles,
   tutorInfo,
   favoriteTutors,
+  messages,
   up: () => Promise.resolve(),
   down: () => Promise.resolve(),
 };
