@@ -8,6 +8,9 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsTo(models.User, {
         foreignKey: 'userId',
       });
+      this.hasMany(models.FavoriteTutor, {
+        foreignKey: 'userId',
+      });
     }
   }
 

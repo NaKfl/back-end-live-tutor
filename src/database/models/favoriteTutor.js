@@ -16,6 +16,11 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'firstId',
         as: 'firstInfo',
       });
+      this.belongsTo(models.Tutor, {
+        as: 'tutorInfo',
+        foreignKey: 'secondId',
+        targetKey: 'userId',
+      });
     }
   }
   FavoriteTutor.init(
