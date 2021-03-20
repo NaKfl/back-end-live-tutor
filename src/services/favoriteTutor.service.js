@@ -1,4 +1,4 @@
-import { FavoriteTutor, User } from 'database/models';
+import { FavoriteTutor, User, Tutor } from 'database/models';
 const favoriteService = {};
 
 favoriteService.manageFavoriteTutor = async ({ firstId, secondId }) => {
@@ -32,6 +32,10 @@ favoriteService.getListFavoriteTutorById = async (id) => {
       {
         model: User,
         as: 'secondInfo',
+      },
+      {
+        model: Tutor,
+        as: 'tutorInfo',
       },
     ],
     attributes: [],
