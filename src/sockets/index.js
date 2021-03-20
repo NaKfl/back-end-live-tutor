@@ -1,5 +1,5 @@
-import chatHandler from './chat.handler';
-import identityHandler from './identity.handler';
+import chatHandler from './handlers/chat.handler';
+import identityHandler from './handlers/identity.handler';
 
 const initSockets = (io) => {
   io.on('connection', async (socket) => {

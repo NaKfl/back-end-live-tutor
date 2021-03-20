@@ -1,11 +1,11 @@
-import { onlineUsers } from './models';
+import { onlineUsers } from '../models';
 import { messageService } from 'services';
 
 const chatHandler = (io, socket) => {
   const returnMessages = async ({ fromId, toId }) => {
     const socketIds = [
-      ...onlineUsers.getSocketIdsByUserId(fromId),
-      ...onlineUsers.getSocketIdsByUserId(toId),
+      ...(await onlineUsers.getSocketIdsByUserId(fromId)),
+      ...(await onlineUsers.getSocketIdsByUserId(toId)),
     ];
     const messages = await messageService.getManyByUserIds(fromId, toId);
     socketIds.forEach((socketId) =>
