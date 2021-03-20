@@ -7,7 +7,6 @@ favoriteService.manageFavoriteTutor = async ({ firstId, secondId }) => {
       firstId,
       secondId,
     },
-    attributes: { exclude: ['userId'] },
   });
   if (exist !== null) {
     return await FavoriteTutor.destroy({
@@ -33,10 +32,12 @@ favoriteService.getListFavoriteTutorById = async (id) => {
       {
         model: User,
         as: 'secondInfo',
-      },
-      {
-        model: Tutor,
-        as: 'tutorInfo',
+        include: [
+          {
+            model: Tutor,
+            as: 'tutorInfo',
+          },
+        ],
       },
     ],
     attributes: [],
