@@ -32,6 +32,9 @@ favoriteService.getListFavoriteTutorById = async (id) => {
       {
         model: User,
         as: 'secondInfo',
+        attributes: {
+          exclude: ['id', 'password'],
+        },
         include: [
           {
             model: Tutor,
@@ -40,7 +43,7 @@ favoriteService.getListFavoriteTutorById = async (id) => {
         ],
       },
     ],
-    attributes: [],
+    order: [['createdAt', 'DESC']],
   });
 };
 
