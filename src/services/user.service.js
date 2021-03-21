@@ -57,7 +57,13 @@ userService.getRolesFromId = async (id) => {
   return roles;
 };
 
-userService.oAuthLogin = async ({ service, id, email, name, avatar }) => {
+userService.oAuthLogin = async ({
+  service,
+  id,
+  email = null,
+  name,
+  avatar,
+}) => {
   const user = await User.findOne({
     attributes: {
       exclude: ['password'],
