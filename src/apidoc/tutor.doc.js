@@ -1,4 +1,5 @@
 /**
+/**
  * @api {get} /tutor Get list of tutor
  * @apiName login
  * @apiGroup Tutor
@@ -88,6 +89,63 @@
         ]
     },
     "favoriteTutor": []
+}
+ *
+ */
+
+/**
+ * @api {get} /tutor/:id Get detail of tutor
+ * @apiName detail
+ * @apiGroup Tutor
+ *
+ * @apiPermission Member
+ * @apiHeader {String} Authorization Access token.
+ *
+ * @apiParamExample Request Param Example:
+/tutor/80a20249-f7f3-4c8c-9639-73ced94edae4
+ *
+ * @apiSuccessExample Success Response Example:
+{
+    "id": "005b331d-1e6f-4a4e-8b84-73eb58b3ce0c",
+    "userId": "80a20249-f7f3-4c8c-9639-73ced94edae4",
+    "video": "https://miller.name",
+    "bio": "Eius ut ut est.",
+    "education": "Qui aut ad natus molestiae reprehenderit et architecto dolorum dolores. Nemo est et saepe atque reiciendis distinctio. Voluptatem aliquid sit consequatur sapiente harum necessitatibus sit aut dolore.",
+    "experience": "Qui eaque tempore. Consectetur aut quia et aut ipsam ex est. Rem rem hic est et eos quibusdam qui harum. Et odio voluptas ad eos nobis reiciendis saepe facilis quaerat. Quaerat maiores soluta voluptatum quis at dolorum. In soluta quod labore at non.",
+    "profession": "enim laboriosam assumenda",
+    "accent": "id accusamus nostrum",
+    "targetStudent": "laboriosam non voluptate",
+    "interests": "Commodi qui quaerat et dolores cupiditate enim non ipsa nam. Repellendus ex voluptatem illum iure nesciunt. Rerum non fuga itaque quos minima sunt. Architecto omnis nihil. Atque nam amet odit perspiciatis officiis. Temporibus voluptates dolores et illo eum.",
+    "languages": [
+        "aut",
+        "velit",
+        "magnam",
+        "voluptatibus"
+    ],
+    "specialties": [
+        "quia"
+    ],
+    "resume": "Illo nemo numquam. Vero animi qui voluptatum. In odio fugit architecto ab accusamus earum. Non dolor consequatur ea ut nihil voluptate laudantium. Sequi vero sed eos iste illo quia.",
+    "isActivated": true,
+    "createdAt": "2021-03-20T15:34:02.039Z",
+    "updatedAt": "2021-03-20T15:34:02.039Z",
+    "User": {
+        "email": "Haylie.Bartell21@hotmail.com",
+        "google": null,
+        "facebook": null,
+        "avatar": "https://www.alliancerehabmed.com/wp-content/uploads/icon-avatar-default.png",
+        "name": "Howell Hilpert",
+        "country": "Virgin Islands, British",
+        "phone": "859.492.0839",
+        "language": "rerum at reiciendis",
+        "birthday": "2020-05-09 07:38:55.917 +00:00",
+        "isActivated": false,
+        "createdAt": "2021-03-20T15:34:02.027Z",
+        "updatedAt": "2021-03-20T15:34:02.027Z",
+        "deletedAt": null,
+        "feedbacks": []
+    },
+    "isFavorite": false
 }
  *
  */
