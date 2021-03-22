@@ -5,7 +5,7 @@
  * @apiGroup User
  *
  * @apiPermission Member
- * @apiHeader {String} Authorization Access token.
+ * @apiHeader {String} Authorization Access token
  *
  * @apiParamExample Request Param Example:
 /user/info
@@ -37,10 +37,10 @@
  * @apiGroup User
  *
  * @apiPermission Member
- * @apiHeader {String} Authorization Access token.
- * @apiParam {String} [tutorId] tutorId.
- * @apiParam {Number} [rating] rating.
- * @apiParam {String} [content] content.
+ * @apiHeader {String} Authorization Access token
+ * @apiParam {String} tutorId Id of tutor
+ * @apiParam {Number} rating Point rating
+ * @apiParam {String} content Content of feedback
  *
 * @apiParamExample {json} Request Body Example:
 {

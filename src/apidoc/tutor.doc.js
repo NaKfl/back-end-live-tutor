@@ -5,10 +5,10 @@
  * @apiGroup Tutor
  *
  * @apiPermission Member
- * @apiHeader {String} Authorization Access token.
- * @apiParam {Number} [page] Index of page.
- * @apiParam {Number} [perPage] Pages per page.
- * @apiParam {String} [search] Search by name.
+ * @apiHeader {String} Authorization Access token
+ * @apiParam {Number} [page=1] Index of page
+ * @apiParam {Number} [perPage=20] Pages per page
+ * @apiParam {String} [search] Search by name
  *
  * @apiParamExample Request Param Example:
 /tutor?page=1&perPage=2
@@ -99,7 +99,7 @@
  * @apiGroup Tutor
  *
  * @apiPermission Member
- * @apiHeader {String} Authorization Access token.
+ * @apiHeader {String} Authorization Access token
  *
  * @apiParamExample Request Param Example:
 /tutor/80a20249-f7f3-4c8c-9639-73ced94edae4

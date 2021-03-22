@@ -5,7 +5,7 @@
  * @apiGroup Admin
  *
  * @apiPermission Admin
- * @apiHeader {String} Authorization Access token.
+ * @apiHeader {String} Authorization Access token
  *
  * @apiParamExample Request Param Example:
 /tutor/list/approval
@@ -69,9 +69,9 @@
  * @apiGroup Admin
  *
  * @apiPermission Admin
- * @apiHeader {String} Authorization Access token.
- * @apiParam {String} userId userId.
- * @apiParam {Boolean} isActivated true-approve / false-deny.
+ * @apiHeader {String} Authorization Access token
+ * @apiParam {String} userId Id of user
+ * @apiParam {Boolean="true","false"} isActivated Approve/Deny
  *
  * @apiParamExample {json} Request Body Example:
 {
