@@ -9,13 +9,13 @@ const chatHandler = (io, socket) => {
     ];
     const messages = await messageService.getManyByUserIds(fromId, toId);
     socketIds.forEach((socketId) =>
-      io.to(socketId).emit('chat:returnInitiatedMessages', {
+      io.to(socketId).emit('chat:returnMessages', {
         messages,
       }),
     );
   };
 
-  socket.on('chat:getInitiatedMessages', async ({ fromId, toId }) => {
+  socket.on('chat:getMessages', async ({ fromId, toId }) => {
     returnMessages({ fromId, toId });
   });
 
