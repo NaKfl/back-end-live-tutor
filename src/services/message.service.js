@@ -14,7 +14,7 @@ messageService.getManyByUserIds = async (fromId, toId) => {
     include: [
       {
         model: User,
-        as: 'to',
+        as: 'fromInfo',
         attributes: ['name'],
         where: {
           [Op.or]: [{ id: fromId }, { id: toId }],
@@ -22,7 +22,7 @@ messageService.getManyByUserIds = async (fromId, toId) => {
       },
       {
         model: User,
-        as: 'from',
+        as: 'toInfo',
         attributes: ['name'],
         where: {
           [Op.or]: [{ id: fromId }, { id: toId }],
