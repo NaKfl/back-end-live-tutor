@@ -149,3 +149,72 @@
 }
  *
  */
+
+/**
+ * @api {get} /tutor/register Register tutor
+ * @apiName register
+ * @apiGroup Tutor
+ *
+ * @apiPermission Member
+ * @apiHeader {String} Authorization Access token
+ * @apiParam {String} name Name of Tutor
+ * @apiParam {String} country Country of Tutor
+ * @apiParam {Date} birthday Birthday
+ * @apiParam {String} interests Interests
+ * @apiParam {String} education Education
+ * @apiParam {String} experience Experience
+ * @apiParam {String} profession Profession
+ * @apiParam {String} languages Languages
+ * @apiParam {String} accent Accent
+ * @apiParam {String} bio Biography
+ * @apiParam {File} avatar Avatar
+ * @apiParam {File} video Video introduction's Tutor
+ * @apiParamExample Request Body Example:
+{
+    "name":"Hoai Bao"
+    "country":"VietNam"
+    "birthday":"2000/12/12"
+    "interests":"Travel"
+    "education":"Dai hoc"
+    "experience":"None"
+    "profession":"none"
+    "languages":"English"
+    "accent":"North America"
+    "bio":"I'm doctor"
+    "targetStudent":"Intermediate"
+    "specialties":"Business English,Grammar instruction",
+    "avatar":"ImageFile",
+    "avatar":"VideoFile"
+}
+ *
+ * @apiSuccessExample Success Response Example:
+{
+    "id": "8eb7cec7-36e6-4189-8a95-3c82e3aced7d",
+    "isActivated": false,
+    "interests": "Travel",
+    "education": "Dai hoc",
+    "experience": "None",
+    "profession": "none",
+    "accent": "North America",
+    "bio": "I'm doctor",
+    "targetStudent": "Intermediate",
+    "languages": [
+        "English"
+    ],
+    "specialties": [
+        "Business English,Grammar instruction"
+    ],
+    "video": "http://localhost:5000/video/13fd5b24-ff38-4a78-af9b-1d794c71e0f1video.mov",
+    "userId": "13fd5b24-ff38-4a78-af9b-1d794c71e0f1",
+    "updatedAt": "2021-03-23T18:11:20.987Z",
+    "createdAt": "2021-03-23T18:11:20.987Z",
+    "resume": null
+}
+ *
+ * @apiErrorExample Error: User have already been a tutor
+{
+    "statusCode": 500,
+    "message": "User have already been a tutor"
+}
+ *
+ */

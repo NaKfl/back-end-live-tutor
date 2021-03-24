@@ -14,7 +14,7 @@
     "migrate": "sequelize db:migrate:undo:all && sequelize db:migrate",
     "migrate:seed": "sequelize db:seed:undo:all && sequelize db:seed:all",
     "migrate:all": "npm run migrate && npm run migrate:seed",
-    "apidoc": "rm -rf src/apidoc/dist && npx apidoc -i src/apidoc -e src/apidoc/dist -o src/apidoc/dist"
+    "apidoc": "npx apidoc -i src/apidoc -e src/apidoc/dist -o src/apidoc/dist"
   },
   "keywords": [],
   "author": "",
