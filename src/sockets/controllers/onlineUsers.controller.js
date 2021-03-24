@@ -31,8 +31,9 @@ class OnlineUsers {
 
   async getUserBySocketId(socketId) {
     const users = JSON.parse(await redis.getAsync(ONLINE_USERS));
-    return Object.values(users).find((item) =>
-      item.sockets?.includes(socketId),
+    return (
+      Object.values(users).find((item) => item.sockets?.includes(socketId)) ??
+      null
     );
   }
 

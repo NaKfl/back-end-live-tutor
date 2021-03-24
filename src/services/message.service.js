@@ -10,7 +10,19 @@ messageService.createOne = async (data) => {
   return newMessage;
 };
 
-messageService.getManyByUserIds = async (fromId, toId) => {
+messageService.updateOne = async (fields) => {
+  const { id } = fields;
+  return await Message.update(
+    { isRead: true },
+    {
+      where: {
+        id,
+      },
+    },
+  );
+};
+
+messageService.getManyByUserIds = async (fromId = null, toId = null) => {
   const messages = await Message.findAll({
     attributes: {
       exclude: ['fromId', 'toId'],
@@ -38,7 +50,7 @@ messageService.getManyByUserIds = async (fromId, toId) => {
   return messages;
 };
 
-messageService.getRecentConversations = async (userId) => {
+messageService.getRecentConversations = async (userId = null) => {
   const haveTextedAlreadyIds = await Message.findAll({
     attributes: ['fromId', 'toId'],
     group: ['fromId', 'toId'],
@@ -55,7 +67,7 @@ messageService.getRecentConversations = async (userId) => {
 
   const distinctRecentIds = [...new Set(recentIds)];
 
-  const lastConversationPromises = distinctRecentIds.map((id) =>
+  const lastConversationPromises = distinctRecentIds.map((id = null) =>
     Message.findAll({
       attributes: {
         exclude: ['fromId', 'toId'],
