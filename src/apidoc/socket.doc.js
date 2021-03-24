@@ -1,8 +1,8 @@
 /**
- * @api {emit} identity Identity: Connection
- * @apiName identity-connect
+ * @api {emit} connection:login Connection: Login
+ * @apiName connection-login
  * @apiGroup Socket
- * @apiDescription Emit when the user was logged in
+ * @apiDescription Emit when the user was logged in to add to online user list
  *
  * @apiParam {Object} user Information of user (Can get from local storage)
  *
@@ -24,10 +24,10 @@ No data response
  */
 
 /**
- * @api {emit} logout Identity: Logout
- * @apiName identity-logout
+ * @api {emit} disconnection:logout Disconnection: Logout
+ * @apiName disconnection-logout
  * @apiGroup Socket
- * @apiDescription Emit when the user was logged out (No data request and response)
+ * @apiDescription Emit when the user was logged out to remove from online user list (No data request and response)
  *
  * @apiParamExample {json} Request Data Example:
 No data request
@@ -85,9 +85,6 @@ No data response
  * @apiGroup Socket
  * @apiDescription Listen this event to update conversation
  *
- * @apiParam {String} fromId Id of sender
- * @apiParam {String} toId Id of receiver
- *
  * @apiParamExample {json} Request Data Example:
 No data request
  *
@@ -124,5 +121,94 @@ No data request
   }
 ]
 }
+ *
+ */
+
+/**
+ * @api {emit} chat:getRecentList Chat: Get recent conversations
+ * @apiName chat-get-recent-list
+ * @apiGroup Socket
+ * @apiDescription After emit this event, please listen event `chat:returnRecentList`
+ *
+ * @apiParamExample {json} Request Data Example:
+No data request
+ *
+ * @apiSuccessExample Success Response Example:
+No data response
+ *
+ */
+
+/**
+ * @api {on} chat:returnRecentList Chat: Return recent conversations
+ * @apiName chat-return-recent-list
+ * @apiGroup Socket
+ * @apiDescription Listen this event to update recent conversations. Note: `partner` in response is information whose talk to owner of emit event `chat:getRecentList`
+ *
+ * @apiParamExample {json} Request Data Example:
+No data request
+ *
+ * @apiSuccessExample Success Response Example:
+{
+  recentList:[
+    {
+      "id": "9f222896-388a-4ede-8413-d10565eae402",
+      "content": "hi",
+      "createdAt": "2021-03-24T00:00:53.897Z",
+      "updatedAt": "2021-03-24T00:00:53.897Z",
+      "fromInfo": {
+        "id": "7a11fe4d-c111-4756-aa4b-b278077a66ba",
+        "name": "Zelma Romaguera",
+        "avatar": "https://www.alliancerehabmed.com/wp-content/uploads/icon-avatar-default.png"
+      },
+      "toInfo": {
+        "id": "d5e24816-515c-4dce-811b-fca31113850d",
+        "name": "Raheem Shields",
+        "avatar": "https://www.alliancerehabmed.com/wp-content/uploads/icon-avatar-default.png"
+      },
+      "partner": {
+        "id": "d5e24816-515c-4dce-811b-fca31113850d",
+        "name": "Raheem Shields",
+        "avatar": "https://www.alliancerehabmed.com/wp-content/uploads/icon-avatar-default.png",
+        "isOnline": false
+      }
+    },
+    {
+      "id": "16cd3758-3e3f-42e8-acff-b922189cc96a",
+      "content": "hi",
+      "createdAt": "2021-03-24T00:00:01.791Z",
+      "updatedAt": "2021-03-24T00:00:01.791Z",
+      "fromInfo": {
+        "id": "7a11fe4d-c111-4756-aa4b-b278077a66ba",
+        "name": "Zelma Romaguera",
+        "avatar": "https://www.alliancerehabmed.com/wp-content/uploads/icon-avatar-default.png"
+      },
+      "toInfo": {
+        "id": "78ad7a58-c16e-4406-8ed1-aaf6a6d421c2",
+        "name": "Trí Nguyễn",
+        "avatar": "https://lh3.googleusercontent.com/a-/AOh14GjteEF6UEflGnA7ndsHujtYp-qU6EdwqmNzMXUmVw=s96-c"
+      },
+      "partner": {
+        "id": "78ad7a58-c16e-4406-8ed1-aaf6a6d421c2",
+        "name": "Trí Nguyễn",
+        "avatar": "https://lh3.googleusercontent.com/a-/AOh14GjteEF6UEflGnA7ndsHujtYp-qU6EdwqmNzMXUmVw=s96-c",
+        "isOnline": false
+      }
+    }
+  ]
+}
+ *
+ */
+
+/**
+ * @api {on} chat:joinOrLeave Chat: Update recent conversations
+ * @apiName chat-join-or-leave
+ * @apiGroup Socket
+ * @apiDescription This event will be emitted when any user connect or disconnect. Listen this event to emit `chat:getRecentList` to update recent conversations
+ *
+ * @apiParamExample {json} Request Data Example:
+No data request
+ *
+ * @apiSuccessExample Success Response Example:
+No data response
  *
  */
