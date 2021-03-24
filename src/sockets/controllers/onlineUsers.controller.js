@@ -1,4 +1,4 @@
-import { ONLINE_USERS } from '../helper/constants';
+import { ONLINE_USERS } from '../helpers/constants';
 import redis from 'configs/redis';
 
 class OnlineUsers {

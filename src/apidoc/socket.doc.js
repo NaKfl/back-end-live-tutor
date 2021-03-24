@@ -97,28 +97,28 @@ No data request
   {
     "id": "b05f55d7-eb6d-4c1a-8c26-15ebfcc3051a",
     "content": "hi",
-    "fromId": "82918135-973a-4d4c-a003-a82415377580",
-    "toId": "205a3a59-0280-4879-9e93-611e637c5843",
     "createdAt": "2021-03-22T21:14:24.635Z",
     "updatedAt": "2021-03-22T21:14:24.636Z",
     "fromInfo": {
+      "id": "82918135-973a-4d4c-a003-a82415377580",
       "name": "Gia Tri"
     },
     "toInfo": {
+      "id": "205a3a59-0280-4879-9e93-611e637c5843",
       "name": "Humberto Gulgowski"
     }
   },
   {
     "id": "7c6931a8-eeaa-4828-80ce-44dce4b877a7",
     "content": "nice to meet you",
-    "fromId": "82918135-973a-4d4c-a003-a82415377580",
-    "toId": "205a3a59-0280-4879-9e93-611e637c5843",
     "createdAt": "2021-03-23T10:12:53.364Z",
     "updatedAt": "2021-03-23T10:12:53.364Z",
     "fromInfo": {
+      "id": "82918135-973a-4d4c-a003-a82415377580",
       "name": "Gia Tri"
     },
     "toInfo": {
+      "id": "205a3a59-0280-4879-9e93-611e637c5843",
       "name": "Humberto Gulgowski"
     }
   }
