@@ -1,4 +1,4 @@
-import { onlineUsers } from '../models';
+import { onlineUsers } from '../controllers';
 import { messageService } from 'services';
 
 const chatHandler = (io, socket) => {
@@ -15,6 +15,22 @@ const chatHandler = (io, socket) => {
     );
   };
 
+  const returnRecentList = async (userId) => {
+    const socketIds = await onlineUsers.getSocketIdsByUserId(userId);
+    const recentList = await messageService.getRecentConversations(userId);
+
+    socketIds.forEach((socketId) =>
+      io.to(socketId).emit('chat:returnRecentList', {
+        recentList,
+      }),
+    );
+  };
+
+  socket.on('chat:getRecentList', async () => {
+    const user = await onlineUsers.getUserBySocketId(socket.id);
+    returnRecentList(user?.id);
+  });
+
   socket.on('chat:getMessages', async ({ fromId, toId }) => {
     returnMessages({ fromId, toId });
   });
@@ -27,6 +43,16 @@ const chatHandler = (io, socket) => {
       createdAt: new Date(),
     });
     returnMessages({ fromId, toId });
+    returnRecentList(fromId);
+    returnRecentList(toId);
+  });
+
+  socket.on('connection:login', () => {
+    socket.broadcast.emit('chat:joinOrLeave');
+  });
+
+  socket.on('disconnect', () => {
+    socket.broadcast.emit('chat:joinOrLeave');
   });
 };
 
