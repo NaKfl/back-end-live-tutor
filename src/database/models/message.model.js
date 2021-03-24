@@ -39,6 +39,7 @@ module.exports = (sequelize, DataTypes) => {
           key: 'id',
         },
       },
+      isRead: { type: DataTypes.BOOLEAN, defaultValue: false },
       createdAt: { type: DataTypes.DATE, defaultValue: new Date() },
     },
     {

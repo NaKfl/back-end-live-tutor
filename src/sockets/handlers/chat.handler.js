@@ -18,10 +18,17 @@ const chatHandler = (io, socket) => {
   const returnRecentList = async (userId) => {
     const socketIds = await onlineUsers.getSocketIdsByUserId(userId);
     const recentList = await messageService.getRecentConversations(userId);
+    const unreadCount = recentList.reduce((acc, curr) => {
+      if (curr?.toInfo?.id === userId && !curr.isRead) {
+        return ++acc;
+      }
+      return acc;
+    }, 0);
 
     socketIds.forEach((socketId) =>
       io.to(socketId).emit('chat:returnRecentList', {
         recentList,
+        unreadCount,
       }),
     );
   };
@@ -40,11 +47,18 @@ const chatHandler = (io, socket) => {
       fromId,
       toId,
       content,
+      isRead: false,
       createdAt: new Date(),
     });
     returnMessages({ fromId, toId });
     returnRecentList(fromId);
     returnRecentList(toId);
+  });
+
+  socket.on('chat:readMessage', async ({ conversation }) => {
+    const user = await onlineUsers.getUserBySocketId(socket.id);
+    await messageService.updateOne(conversation);
+    returnRecentList(user?.id);
   });
 
   socket.on('connection:login', () => {
