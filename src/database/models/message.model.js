@@ -5,11 +5,11 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       this.belongsTo(models.User, {
         foreignKey: 'fromId',
-        as: 'from',
+        as: 'fromInfo',
       });
       this.belongsTo(models.User, {
         foreignKey: 'toId',
-        as: 'to',
+        as: 'toInfo',
       });
     }
   }
@@ -39,6 +39,7 @@ module.exports = (sequelize, DataTypes) => {
           key: 'id',
         },
       },
+      isRead: { type: DataTypes.BOOLEAN, defaultValue: false },
       createdAt: { type: DataTypes.DATE, defaultValue: new Date() },
     },
     {

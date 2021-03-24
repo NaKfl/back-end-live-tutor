@@ -29,7 +29,7 @@ app.use(morgan(logs));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname));
-app.use(helmet());
+// app.use(helmet());
 
 app.use(cors());
 app.options('*', cors());
@@ -38,10 +38,11 @@ app.use(passport.initialize());
 passport.use('jwt', jwtStrategy);
 passport.use('facebook', facebookStrategy);
 passport.use('google', googleStrategy);
-// app.use(express.static(path.join(__dirname, '/../uploads')));
+
+app.use('/apidoc', express.static('src/apidoc/dist'));
 app.use('/avatar', express.static(path.join(__dirname, '/../uploads/avatar')));
 app.use('/video', express.static(path.join(__dirname, '/../uploads/video')));
-//*custom
+
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header(
@@ -56,11 +57,6 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Credentials', true);
     return res.status(200).json({});
   }
-  next();
-});
-// Function-level-middleware
-app.use((req, res, next) => {
-  //Handle logic
   next();
 });
 

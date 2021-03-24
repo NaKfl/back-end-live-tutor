@@ -138,6 +138,7 @@ const messages = [...Array(1000)].map(() => ({
         max: 99,
       })
     ].id,
+  isRead: false,
   content: faker.lorem.paragraph(),
   createdAt: new Date(),
   updatedAt: new Date(),
