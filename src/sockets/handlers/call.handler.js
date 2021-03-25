@@ -1,5 +1,4 @@
-import { onlineUsers } from '../models';
-import { messageService } from 'services';
+import { onlineUsers } from '../controllers';
 
 const callHandler = (io, socket) => {
   socket.on('call:callVideo', async ({ userId }) => {
@@ -17,11 +16,7 @@ const callHandler = (io, socket) => {
   socket.on('call:acceptCall', async ({ userId }) => {
     const userBeCalled = await onlineUsers.getUserBySocketId(socket.id);
     const userCall = await onlineUsers.getUserById(userId);
-    const socketIds = [
-      ...(await onlineUsers.getSocketIdsByUserId(userBeCalled.id)),
-      ...(await onlineUsers.getSocketIdsByUserId(userId)),
-    ];
-    console.log('socketIds', socketIds);
+    const socketIds = [...(await onlineUsers.getSocketIdsByUserId(userId))];
     socketIds.forEach((socketId) =>
       io.to(socketId).emit('call:acceptedCall', {
         userCall,
