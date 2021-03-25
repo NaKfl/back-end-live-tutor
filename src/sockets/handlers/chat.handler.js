@@ -43,6 +43,7 @@ const chatHandler = (io, socket) => {
   });
 
   socket.on('chat:sendMessage', async ({ fromId, toId, content }) => {
+    if (!fromId || !toId || !content) return;
     await messageService.createOne({
       fromId,
       toId,
@@ -56,6 +57,7 @@ const chatHandler = (io, socket) => {
   });
 
   socket.on('chat:readMessage', async ({ conversation }) => {
+    if (!conversation) return;
     const user = await onlineUsers.getUserBySocketId(socket.id);
     await messageService.updateOne(conversation);
     returnRecentList(user?.id);

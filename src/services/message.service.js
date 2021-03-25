@@ -70,7 +70,7 @@ messageService.getRecentConversations = async (userId = null) => {
   const lastConversationPromises = distinctRecentIds.map((id = null) =>
     Message.findAll({
       attributes: {
-        exclude: ['fromId', 'toId'],
+        exclude: ['fromId', 'toId', 'updatedAt'],
       },
       limit: 1,
       order: [['createdAt', 'DESC']],
