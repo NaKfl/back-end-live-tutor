@@ -142,59 +142,38 @@ No data response
  * @api {on} chat:returnRecentList Chat: Return recent conversations
  * @apiName chat-return-recent-list
  * @apiGroup Socket
- * @apiDescription Listen this event to update recent conversations. Note: `partner` in response is information whose talk to owner of emit event `chat:getRecentList`
+ * @apiDescription Listen this event to update recent conversations. Note: `partner` in request is information whose talk to owner of emit event `chat:getRecentList and `unreadCount` in response is total of unread conversation
  *
  * @apiParamExample {json} Request Data Example:
 No data request
  *
  * @apiSuccessExample Success Response Example:
 {
-  recentList:[
+  "recentList": [
     {
-      "id": "9f222896-388a-4ede-8413-d10565eae402",
+      "id": "9da6ece2-5147-401c-922a-a3e318abc236",
       "content": "hi",
-      "createdAt": "2021-03-24T00:00:53.897Z",
-      "updatedAt": "2021-03-24T00:00:53.897Z",
+      "isRead": false,
+      "createdAt": "2021-03-25T12:24:18.259Z",
       "fromInfo": {
-        "id": "7a11fe4d-c111-4756-aa4b-b278077a66ba",
-        "name": "Zelma Romaguera",
-        "avatar": "https://www.alliancerehabmed.com/wp-content/uploads/icon-avatar-default.png"
+        "id": "2190cc1f-f061-48df-8d56-afcc5601793a",
+        "name": "Nguyễn Hữu Gia Trí",
+        "avatar": "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=3491620604268372&height=50&width=50&ext=1619266767&hash=AeTkfuLt-SBNw9a7DIY"
       },
       "toInfo": {
-        "id": "d5e24816-515c-4dce-811b-fca31113850d",
-        "name": "Raheem Shields",
+        "id": "78397346-ff0a-41d0-b4e5-5748bbe69349",
+        "name": "Beatrice Hartmann",
         "avatar": "https://www.alliancerehabmed.com/wp-content/uploads/icon-avatar-default.png"
       },
       "partner": {
-        "id": "d5e24816-515c-4dce-811b-fca31113850d",
-        "name": "Raheem Shields",
+        "id": "78397346-ff0a-41d0-b4e5-5748bbe69349",
+        "name": "Beatrice Hartmann",
         "avatar": "https://www.alliancerehabmed.com/wp-content/uploads/icon-avatar-default.png",
         "isOnline": false
       }
-    },
-    {
-      "id": "16cd3758-3e3f-42e8-acff-b922189cc96a",
-      "content": "hi",
-      "createdAt": "2021-03-24T00:00:01.791Z",
-      "updatedAt": "2021-03-24T00:00:01.791Z",
-      "fromInfo": {
-        "id": "7a11fe4d-c111-4756-aa4b-b278077a66ba",
-        "name": "Zelma Romaguera",
-        "avatar": "https://www.alliancerehabmed.com/wp-content/uploads/icon-avatar-default.png"
-      },
-      "toInfo": {
-        "id": "78ad7a58-c16e-4406-8ed1-aaf6a6d421c2",
-        "name": "Trí Nguyễn",
-        "avatar": "https://lh3.googleusercontent.com/a-/AOh14GjteEF6UEflGnA7ndsHujtYp-qU6EdwqmNzMXUmVw=s96-c"
-      },
-      "partner": {
-        "id": "78ad7a58-c16e-4406-8ed1-aaf6a6d421c2",
-        "name": "Trí Nguyễn",
-        "avatar": "https://lh3.googleusercontent.com/a-/AOh14GjteEF6UEflGnA7ndsHujtYp-qU6EdwqmNzMXUmVw=s96-c",
-        "isOnline": false
-      }
     }
-  ]
+  ],
+  "unreadCount": 0
 }
  *
  */
@@ -207,6 +186,45 @@ No data request
  *
  * @apiParamExample {json} Request Data Example:
 No data request
+ *
+ * @apiSuccessExample Success Response Example:
+No data response
+ *
+ */
+
+/**
+ * @api {emit} chat:readMessage Chat: Read message
+ * @apiName chat-read-message
+ * @apiGroup Socket
+ * @apiDescription Emit this event when the receiver reads the message
+ *
+ * @apiParam {Object} conversation Current conversation
+ *
+ * @apiParamExample {json} Request Data Example:
+{
+  conversation:{
+    "id": "9da6ece2-5147-401c-922a-a3e318abc236",
+    "content": "hi",
+    "isRead": true,
+    "createdAt": "2021-03-25T12:24:18.259Z",
+    "fromInfo": {
+      "id": "2190cc1f-f061-48df-8d56-afcc5601793a",
+      "name": "Nguyễn Hữu Gia Trí",
+      "avatar": "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=3491620604268372&height=50&width=50&ext=1619266767&hash=AeTkfuLt-SBNw9a7DIY"
+    },
+    "toInfo": {
+      "id": "78397346-ff0a-41d0-b4e5-5748bbe69349",
+      "name": "Beatrice Hartmann",
+      "avatar": "https://www.alliancerehabmed.com/wp-content/uploads/icon-avatar-default.png"
+    },
+    "partner": {
+      "id": "78397346-ff0a-41d0-b4e5-5748bbe69349",
+      "name": "Beatrice Hartmann",
+      "avatar": "https://www.alliancerehabmed.com/wp-content/uploads/icon-avatar-default.png",
+      "isOnline": false
+    }
+  }
+}
  *
  * @apiSuccessExample Success Response Example:
 No data response
