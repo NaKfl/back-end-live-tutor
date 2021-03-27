@@ -39,7 +39,7 @@ module.exports = (sequelize, DataTypes) => {
       google: DataTypes.STRING,
       facebook: DataTypes.STRING,
       password: DataTypes.STRING,
-      avatar: DataTypes.STRING,
+      avatar: DataTypes.TEXT,
       name: DataTypes.STRING,
       country: DataTypes.STRING,
       phone: DataTypes.STRING,

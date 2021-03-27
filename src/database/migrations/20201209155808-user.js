@@ -21,7 +21,9 @@ module.exports = {
         type: Sequelize.STRING,
       },
       avatar: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
+        defautValue:
+          'https://www.alliancerehabmed.com/wp-content/uploads/icon-avatar-default.png',
       },
       name: {
         type: Sequelize.STRING,
