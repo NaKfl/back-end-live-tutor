@@ -10,11 +10,11 @@ module.exports = {
       },
       startPeriod: {
         allowNull: false,
-        type: Sequelize.DATE,
+        type: Sequelize.STRING,
       },
       endPeriod: {
         allowNull: false,
-        type: Sequelize.DATE,
+        type: Sequelize.STRING,
       },
       scheduleId: {
         allowNull: false,

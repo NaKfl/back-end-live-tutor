@@ -4,31 +4,22 @@ import moment from 'moment';
 
 const schedule = {};
 
-schedule.getMany = async (tutorId) => {
+schedule.getMany = async (tutorId, query = null) => {
   const schedules = await Schedule.findAll({
-    where: { tutorId },
+    where: { tutorId, ...query },
   });
 
   const formattedSchedules = schedules.reduce((acc, curr) => {
     const { date, id, tutorId, startTime, endTime, createdAt } = curr;
-    const formattedDate = moment(date).format('YYYY-MM-DD');
-    if (acc[formattedDate]) {
-      acc[formattedDate].push({ id, tutorId, startTime, endTime, createdAt });
+    if (acc[date]) {
+      acc[date].push({ id, tutorId, startTime, endTime, createdAt });
     } else {
-      acc[formattedDate] = [{ id, tutorId, startTime, endTime, createdAt }];
+      acc[date] = [{ id, tutorId, startTime, endTime, createdAt }];
     }
     return acc;
   }, {});
 
   return formattedSchedules;
-};
-
-schedule.getScheduleDetails = async (scheduleId) => {
-  const scheduleDetails = await ScheduleDetail.findAll({
-    where: { scheduleId },
-  });
-
-  return scheduleDetails;
 };
 
 schedule.register = async (tutorId, fields) => {
@@ -39,8 +30,8 @@ schedule.register = async (tutorId, fields) => {
 
   const { id: scheduleId, startTime, endTime } = schedule;
 
-  const startPeriod = moment(startTime).hour();
-  const endPeriod = moment(endTime).hour();
+  const startPeriod = moment(startTime, 'HH:mm').hour();
+  const endPeriod = moment(endTime, 'HH:mm').hour();
 
   const startPeriods = [
     ...Array(((endPeriod - startPeriod) * 60) / MINUTES_PER_SESSION),
@@ -55,8 +46,10 @@ schedule.register = async (tutorId, fields) => {
   const scheduleDetailPromises = startPeriods.map((startPeriod) =>
     ScheduleDetail.create({
       scheduleId,
-      startPeriod: startPeriod.format(),
-      endPeriod: startPeriod.add(MINUTES_PER_SESSION, 'minutes'),
+      startPeriod: startPeriod.format('HH:mm'),
+      endPeriod: startPeriod
+        .add(MINUTES_PER_SESSION, 'minutes')
+        .format('HH:mm'),
     }),
   );
 

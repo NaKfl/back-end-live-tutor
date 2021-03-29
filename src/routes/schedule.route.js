@@ -8,23 +8,21 @@ import scheduleValidation from 'validations/schedule.validation';
 const router = express.Router();
 
 router.get(
-  '/free-time/:scheduleId',
+  '/',
   auth(ROLES.TUTOR),
-  validate(scheduleValidation.getScheduleDetails),
-  scheduleController.getScheduleDetails,
+  validate(scheduleValidation.getMany),
+  scheduleController.getMany,
 );
 
-router.get('/free-time', auth(ROLES.TUTOR), scheduleController.getMany);
-
 router.post(
-  '/free-time',
+  '/',
   auth(ROLES.TUTOR),
   validate(scheduleValidation.register),
   scheduleController.register,
 );
 
 router.delete(
-  '/free-time',
+  '/:scheduleId',
   auth(ROLES.TUTOR),
   validate(scheduleValidation.unregister),
   scheduleController.unregister,
