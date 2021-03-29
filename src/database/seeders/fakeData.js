@@ -1,4 +1,5 @@
 const faker = require('faker');
+const moment = require('moment');
 
 // Default password: 123132
 const defaultPassword =
@@ -144,6 +145,57 @@ const messages = [...Array(1000)].map(() => ({
   updatedAt: new Date(),
 }));
 
+const schedules = [...Array(100)].map(() => ({
+  id: faker.random.uuid(),
+  tutorId:
+    tutors[
+      faker.random.number({
+        min: 0,
+        max: 49,
+      })
+    ].id,
+  date: moment(faker.date.future()).format('YYYY-MM-DD'),
+  endTime: moment(faker.date.future()).format('YYYY-MM-DD HH:mm:ss'),
+  startTime: moment(faker.date.future()).format('YYYY-MM-DD HH:mm:ss'),
+  createdAt: new Date(),
+  updatedAt: new Date(),
+}));
+
+const scheduleDetails = [...Array(300)].map(() => ({
+  id: faker.random.uuid(),
+  scheduleId:
+    schedules[
+      faker.random.number({
+        min: 0,
+        max: 99,
+      })
+    ].id,
+  endPeriod: moment(faker.date.future()).format('YYYY-MM-DD HH:mm:ss'),
+  startPeriod: moment(faker.date.future()).format('YYYY-MM-DD HH:mm:ss'),
+  createdAt: new Date(),
+  updatedAt: new Date(),
+}));
+
+const bookings = [...Array(150)].map(() => ({
+  id: faker.random.uuid(),
+  scheduleDetailId:
+    scheduleDetails[
+      faker.random.number({
+        min: 0,
+        max: 299,
+      })
+    ].id,
+  userId:
+    students[
+      faker.random.number({
+        min: 0,
+        max: 49,
+      })
+    ].id,
+  createdAt: new Date(),
+  updatedAt: new Date(),
+}));
+
 module.exports = {
   tutors,
   students,
@@ -154,6 +206,9 @@ module.exports = {
   tutorInfo,
   favoriteTutors,
   messages,
+  schedules,
+  scheduleDetails,
+  bookings,
   up: () => Promise.resolve(),
   down: () => Promise.resolve(),
 };
