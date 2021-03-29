@@ -9,7 +9,18 @@ schedule.getMany = async (tutorId) => {
     where: { tutorId },
   });
 
-  return schedules;
+  const formattedSchedules = schedules.reduce((acc, curr) => {
+    const { date, id, tutorId, startTime, endTime, createdAt } = curr;
+    const formattedDate = moment(date).format('YYYY-MM-DD');
+    if (acc[formattedDate]) {
+      acc[formattedDate].push({ id, tutorId, startTime, endTime, createdAt });
+    } else {
+      acc[formattedDate] = [{ id, tutorId, startTime, endTime, createdAt }];
+    }
+    return acc;
+  }, {});
+
+  return formattedSchedules;
 };
 
 schedule.getScheduleDetails = async (scheduleId) => {
