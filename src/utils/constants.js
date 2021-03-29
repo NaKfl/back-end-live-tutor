@@ -7,3 +7,5 @@ export const ROLES = {
   ADMIN: 'admin',
   TUTOR: 'tutor',
 };
+
+export const MINUTES_PER_SESSION = 30;

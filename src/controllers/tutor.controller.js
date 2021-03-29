@@ -60,4 +60,10 @@ tutorController.updateTutor = catchAsync(async (req, res) => {
   res.json({ message: 'Success', data });
 });
 
+tutorController.scheduleRegister = catchAsync(async (req, res) => {
+  const { user, body } = req;
+  const data = await tutorService.scheduleRegister(user?.id, body);
+  res.json({ message: 'Success', data });
+});
+
 export default tutorController;

@@ -1,36 +1,28 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('TutorFeedbacks', {
+    await queryInterface.createTable('Bookings', {
       id: {
         allowNull: false,
         autoIncrement: false,
         primaryKey: true,
         type: Sequelize.UUID,
       },
-      firstId: {
-        type: Sequelize.UUID,
+      userId: {
         allowNull: false,
+        type: Sequelize.UUID,
         references: {
           model: 'Users',
           key: 'id',
         },
       },
-      secondId: {
-        type: Sequelize.UUID,
+      scheduleDetailId: {
         allowNull: false,
+        type: Sequelize.UUID,
         references: {
-          model: 'Users',
+          model: 'ScheduleDetails',
           key: 'id',
         },
-      },
-      rating: {
-        type: Sequelize.FLOAT,
-        allowNull: false,
-      },
-      content: {
-        type: Sequelize.TEXT,
-        allowNull: false,
       },
       createdAt: {
         allowNull: false,
@@ -43,6 +35,6 @@ module.exports = {
     });
   },
   down: async (queryInterface) => {
-    await queryInterface.dropTable('TutorFeedbacks');
+    await queryInterface.dropTable('Bookings');
   },
 };
