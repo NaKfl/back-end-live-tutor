@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
         autoIncrement: false,
       },
       tutorId: DataTypes.UUID,
+      date: { type: DataTypes.DATE },
       startTime: { type: DataTypes.DATE },
       endTime: { type: DataTypes.DATE },
       createdAt: { type: DataTypes.DATE, defaultValue: new Date() },
