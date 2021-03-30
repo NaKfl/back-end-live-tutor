@@ -1,10 +1,10 @@
-import { Schedule, ScheduleDetail } from 'database/models';
+import { Schedule, ScheduleDetail, Booking } from 'database/models';
 import { MINUTES_PER_SESSION } from 'utils/constants';
 import moment from 'moment';
 
-const schedule = {};
+const scheduleService = {};
 
-schedule.getMany = async (tutorId, query = null) => {
+scheduleService.getMany = async (tutorId, query = null) => {
   const schedules = await Schedule.findAll({
     where: { tutorId, ...query },
   });
@@ -22,7 +22,27 @@ schedule.getMany = async (tutorId, query = null) => {
   return formattedSchedules;
 };
 
-schedule.register = async (tutorId, fields) => {
+scheduleService.getOne = async (scheduleId) => {
+  const scheduleDetails = await ScheduleDetail.findAll({
+    where: { scheduleId },
+  });
+
+  const updateBookingStatusPromises = scheduleDetails.map(async (item) => {
+    const { id } = item;
+    item.dataValues.isBooked = !!(await Booking.findOne({
+      where: {
+        scheduleDetailId: id,
+      },
+    }));
+    return item;
+  });
+
+  const updateBookingStatus = Promise.all(updateBookingStatusPromises);
+
+  return updateBookingStatus;
+};
+
+scheduleService.register = async (tutorId, fields) => {
   const schedule = await Schedule.create({
     tutorId,
     ...fields,
@@ -58,7 +78,7 @@ schedule.register = async (tutorId, fields) => {
   return schedule;
 };
 
-schedule.unregister = async (scheduleId) => {
+scheduleService.unregister = async (scheduleId) => {
   const deletedScheduleDetails = await ScheduleDetail.findAll({
     where: {
       scheduleId,
@@ -74,4 +94,4 @@ schedule.unregister = async (scheduleId) => {
   return deletedSchedule;
 };
 
-export default schedule;
+export default scheduleService;

@@ -8,6 +8,13 @@ import scheduleValidation from 'validations/schedule.validation';
 const router = express.Router();
 
 router.get(
+  '/:scheduleId',
+  auth(ROLES.TUTOR),
+  validate(scheduleValidation.getOne),
+  scheduleController.getOne,
+);
+
+router.get(
   '/',
   auth(ROLES.TUTOR),
   validate(scheduleValidation.getMany),
