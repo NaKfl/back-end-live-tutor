@@ -9,6 +9,12 @@ scheduleController.getMany = catchAsync(async (req, res) => {
   return res.json({ message: 'Get schedules successful', data });
 });
 
+scheduleController.getOne = catchAsync(async (req, res) => {
+  const { params } = req;
+  const data = await scheduleService.getOne(params?.scheduleId);
+  return res.json({ message: 'Get schedule details successful', data });
+});
+
 scheduleController.register = catchAsync(async (req, res) => {
   const { user, body } = req;
   const data = await scheduleService.register(user?.id, body);

@@ -8,9 +8,9 @@ scheduleValidation.getMany = {
   }),
 };
 
-scheduleValidation.getScheduleDetails = {
+scheduleValidation.getOne = {
   params: Joi.object({
-    scheduleId: Joi.string().guid(),
+    scheduleId: Joi.string().required().guid(),
   }),
 };
 
@@ -28,13 +28,7 @@ scheduleValidation.register = {
 
 scheduleValidation.unregister = {
   params: Joi.object({
-    scheduleId: Joi.string().guid(),
-  }),
-};
-
-scheduleValidation.getFreeTimeDetails = {
-  body: Joi.object({
-    date: Joi.date().required(),
+    scheduleId: Joi.string().required().guid(),
   }),
 };
 
