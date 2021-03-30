@@ -18,10 +18,10 @@ scheduleValidation.register = {
   body: Joi.object({
     date: Joi.date().required(),
     startTime: Joi.string()
-      .regex(/^(0?[1-9]|1[0-2]):[0-5][0-9]$/)
+      .regex(/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/)
       .required(),
     endTime: Joi.string()
-      .regex(/^(0?[1-9]|1[0-2]):[0-5][0-9]$/)
+      .regex(/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/)
       .required(),
   }),
 };
