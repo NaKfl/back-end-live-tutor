@@ -2,33 +2,23 @@ import Joi from 'joi';
 
 const scheduleValidation = {};
 
-scheduleValidation.getMany = {
-  query: Joi.object({
-    date: Joi.date(),
-  }),
-};
-
-scheduleValidation.getOne = {
+scheduleValidation.getScheduleDetails = {
   params: Joi.object({
-    scheduleId: Joi.string().required().guid(),
+    scheduleId: Joi.string().guid(),
   }),
 };
 
 scheduleValidation.register = {
   body: Joi.object({
     date: Joi.date().required(),
-    startTime: Joi.string()
-      .regex(/^(0?[1-9]|1[0-2]):[0-5][0-9]$/)
-      .required(),
-    endTime: Joi.string()
-      .regex(/^(0?[1-9]|1[0-2]):[0-5][0-9]$/)
-      .required(),
+    startTime: Joi.date().required(),
+    endTime: Joi.date().required(),
   }),
 };
 
 scheduleValidation.unregister = {
-  params: Joi.object({
-    scheduleId: Joi.string().required().guid(),
+  body: Joi.object({
+    scheduleId: Joi.string().guid(),
   }),
 };
 

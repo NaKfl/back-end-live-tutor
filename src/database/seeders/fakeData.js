@@ -155,8 +155,8 @@ const schedules = [...Array(100)].map(() => ({
       })
     ].id,
   date: moment(faker.date.future()).format('YYYY-MM-DD'),
-  endTime: moment(faker.date.future()).format('HH:mm'),
-  startTime: moment(faker.date.future()).format('HH:mm'),
+  endTime: moment(faker.date.future()).format('YYYY-MM-DD HH:mm:ss'),
+  startTime: moment(faker.date.future()).format('YYYY-MM-DD HH:mm:ss'),
   createdAt: new Date(),
   updatedAt: new Date(),
 }));
@@ -170,8 +170,8 @@ const scheduleDetails = [...Array(300)].map(() => ({
         max: 99,
       })
     ].id,
-  endPeriod: moment(faker.date.future()).format('HH:mm'),
-  startPeriod: moment(faker.date.future()).format('HH:mm'),
+  endPeriod: moment(faker.date.future()).format('YYYY-MM-DD HH:mm:ss'),
+  startPeriod: moment(faker.date.future()).format('YYYY-MM-DD HH:mm:ss'),
   createdAt: new Date(),
   updatedAt: new Date(),
 }));
