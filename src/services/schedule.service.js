@@ -1,20 +1,21 @@
-import { Schedule, ScheduleDetail, Booking } from 'database/models';
+import { Schedule, ScheduleDetail } from 'database/models';
 import { MINUTES_PER_SESSION } from 'utils/constants';
 import moment from 'moment';
 
-const scheduleService = {};
+const schedule = {};
 
-scheduleService.getMany = async (tutorId, query = null) => {
+schedule.getMany = async (tutorId) => {
   const schedules = await Schedule.findAll({
-    where: { tutorId, ...query },
+    where: { tutorId },
   });
 
   const formattedSchedules = schedules.reduce((acc, curr) => {
     const { date, id, tutorId, startTime, endTime, createdAt } = curr;
-    if (acc[date]) {
-      acc[date].push({ id, tutorId, startTime, endTime, createdAt });
+    const formattedDate = moment(date).format('YYYY-MM-DD');
+    if (acc[formattedDate]) {
+      acc[formattedDate].push({ id, tutorId, startTime, endTime, createdAt });
     } else {
-      acc[date] = [{ id, tutorId, startTime, endTime, createdAt }];
+      acc[formattedDate] = [{ id, tutorId, startTime, endTime, createdAt }];
     }
     return acc;
   }, {});
@@ -22,27 +23,15 @@ scheduleService.getMany = async (tutorId, query = null) => {
   return formattedSchedules;
 };
 
-scheduleService.getOne = async (scheduleId) => {
+schedule.getScheduleDetails = async (scheduleId) => {
   const scheduleDetails = await ScheduleDetail.findAll({
     where: { scheduleId },
   });
 
-  const updateBookingStatusPromises = scheduleDetails.map(async (item) => {
-    const { id } = item;
-    item.dataValues.isBooked = !!(await Booking.findOne({
-      where: {
-        scheduleDetailId: id,
-      },
-    }));
-    return item;
-  });
-
-  const updateBookingStatus = Promise.all(updateBookingStatusPromises);
-
-  return updateBookingStatus;
+  return scheduleDetails;
 };
 
-scheduleService.register = async (tutorId, fields) => {
+schedule.register = async (tutorId, fields) => {
   const schedule = await Schedule.create({
     tutorId,
     ...fields,
@@ -50,8 +39,8 @@ scheduleService.register = async (tutorId, fields) => {
 
   const { id: scheduleId, startTime, endTime } = schedule;
 
-  const startPeriod = moment(startTime, 'HH:mm').hour();
-  const endPeriod = moment(endTime, 'HH:mm').hour();
+  const startPeriod = moment(startTime).hour();
+  const endPeriod = moment(endTime).hour();
 
   const startPeriods = [
     ...Array(((endPeriod - startPeriod) * 60) / MINUTES_PER_SESSION),
@@ -66,10 +55,8 @@ scheduleService.register = async (tutorId, fields) => {
   const scheduleDetailPromises = startPeriods.map((startPeriod) =>
     ScheduleDetail.create({
       scheduleId,
-      startPeriod: startPeriod.format('HH:mm'),
-      endPeriod: startPeriod
-        .add(MINUTES_PER_SESSION, 'minutes')
-        .format('HH:mm'),
+      startPeriod: startPeriod.format(),
+      endPeriod: startPeriod.add(MINUTES_PER_SESSION, 'minutes'),
     }),
   );
 
@@ -78,7 +65,7 @@ scheduleService.register = async (tutorId, fields) => {
   return schedule;
 };
 
-scheduleService.unregister = async (scheduleId) => {
+schedule.unregister = async (scheduleId) => {
   const deletedScheduleDetails = await ScheduleDetail.findAll({
     where: {
       scheduleId,
@@ -94,4 +81,4 @@ scheduleService.unregister = async (scheduleId) => {
   return deletedSchedule;
 };
 
-export default scheduleService;
+export default schedule;

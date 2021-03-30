@@ -10,15 +10,15 @@ module.exports = {
       },
       date: {
         allowNull: false,
-        type: Sequelize.DATEONLY,
+        type: Sequelize.DATE,
       },
       startTime: {
         allowNull: false,
-        type: Sequelize.STRING,
+        type: Sequelize.DATE,
       },
       endTime: {
         allowNull: false,
-        type: Sequelize.STRING,
+        type: Sequelize.DATE,
       },
       tutorId: {
         allowNull: false,

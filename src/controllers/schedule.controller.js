@@ -4,14 +4,14 @@ import { scheduleService } from 'services';
 const scheduleController = {};
 
 scheduleController.getMany = catchAsync(async (req, res) => {
-  const { user, query } = req;
-  const data = await scheduleService.getMany(user?.id, query);
+  const { user } = req;
+  const data = await scheduleService.getMany(user?.id);
   return res.json({ message: 'Get schedules successful', data });
 });
 
-scheduleController.getOne = catchAsync(async (req, res) => {
+scheduleController.getScheduleDetails = catchAsync(async (req, res) => {
   const { params } = req;
-  const data = await scheduleService.getOne(params?.scheduleId);
+  const data = await scheduleService.getScheduleDetails(params?.scheduleId);
   return res.json({ message: 'Get schedule details successful', data });
 });
 
@@ -22,8 +22,8 @@ scheduleController.register = catchAsync(async (req, res) => {
 });
 
 scheduleController.unregister = catchAsync(async (req, res) => {
-  const { params } = req;
-  const isDeleted = await scheduleService.unregister(params?.scheduleId);
+  const { body } = req;
+  const isDeleted = await scheduleService.unregister(body?.scheduleId);
   if (isDeleted) return res.json({ message: 'Unregister schedule successful' });
   return res.json({ message: 'Unregister schedule failed' });
 });

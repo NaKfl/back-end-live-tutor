@@ -1,7 +1,5 @@
 'use strict';
 const { Model } = require('sequelize');
-const moment = require('moment');
-
 module.exports = (sequelize, DataTypes) => {
   class Schedule extends Model {
     static associate(models) {
@@ -21,18 +19,9 @@ module.exports = (sequelize, DataTypes) => {
         autoIncrement: false,
       },
       tutorId: DataTypes.UUID,
-      date: {
-        type: DataTypes.DATEONLY,
-        get: function () {
-          return moment(this.getDataValue('date')).format('YYYY-MM-DD');
-        },
-      },
-      startTime: {
-        type: DataTypes.STRING,
-      },
-      endTime: {
-        type: DataTypes.STRING,
-      },
+      date: { type: DataTypes.DATE },
+      startTime: { type: DataTypes.DATE },
+      endTime: { type: DataTypes.DATE },
       createdAt: { type: DataTypes.DATE, defaultValue: new Date() },
       updatedAt: { type: DataTypes.DATE, defaultValue: new Date() },
     },
