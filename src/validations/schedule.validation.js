@@ -6,6 +6,9 @@ scheduleValidation.getMany = {
   query: Joi.object({
     date: Joi.date(),
   }),
+  body: Joi.object({
+    tutorId: Joi.string().guid(),
+  }),
 };
 
 scheduleValidation.getOne = {

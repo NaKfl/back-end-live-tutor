@@ -68,17 +68,18 @@ scheduleService.getOne = async (scheduleId) => {
 };
 
 scheduleService.register = async (tutorId, fields) => {
+  const { startTime, endTime, date } = fields;
+
   const existedSchedules = await Schedule.findAll({
     where: {
       tutorId,
+      date,
     },
   });
 
-  const { startTime, endTime } = fields;
   const newStartTime = moment(startTime, 'HH:mm');
   const newEndTime = moment(endTime, 'HH:mm');
   const startPeriod = moment(startTime, 'HH:mm').hour();
-  const endPeriod = moment(endTime, 'HH:mm').hour();
   const diff = newEndTime.diff(newStartTime, 'minute');
   const isNotDivisible = diff % MINUTES_PER_SESSION !== 0;
 
@@ -106,7 +107,7 @@ scheduleService.register = async (tutorId, fields) => {
       (newEndTime > oldStartTime && newEndTime < oldEndTime) ||
       (newStartTime <= oldStartTime && newEndTime >= oldEndTime)
     ) {
-      throw new ApiError(httpStatus.BAD_REQUEST, 'Booking duplicate');
+      throw new ApiError(httpStatus.BAD_REQUEST, 'Schedule duplicate');
     }
   });
 
@@ -117,15 +118,15 @@ scheduleService.register = async (tutorId, fields) => {
 
   const { id: scheduleId } = schedule;
 
-  const startPeriods = [
-    ...Array(((endPeriod - startPeriod) * 60) / MINUTES_PER_SESSION),
-  ].map((_, index) => {
-    return moment().set({
-      hour: startPeriod,
-      minute: index * MINUTES_PER_SESSION,
-      second: 0,
-    });
-  });
+  const startPeriods = [...Array(diff / MINUTES_PER_SESSION)].map(
+    (_, index) => {
+      return moment().set({
+        hour: startPeriod,
+        minute: index * MINUTES_PER_SESSION,
+        second: 0,
+      });
+    },
+  );
 
   const scheduleDetailPromises = startPeriods.map((startPeriod) =>
     ScheduleDetail.create({

@@ -16,7 +16,7 @@ router.get(
 
 router.get(
   '/',
-  auth(ROLES.TUTOR),
+  auth(),
   validate(scheduleValidation.getMany),
   scheduleController.getMany,
 );
