@@ -1,5 +1,5 @@
 /**
- * @api {get} /schedule Get all free time
+ * @api {post} /schedule Get all free time
  * @apiName get-all-free-time
  * @apiGroup Schedule
  *
@@ -8,82 +8,97 @@
  *
  * @apiParam {String} [tutorId] Id of tutor which you want to get the schedules (Note: If this param is null, server will response the schedules of request's owner)
  *
+ * @apiParamExample {json} Request Params Example:
+{
+    "tutorId":"4e85658f-48c7-4128-b0c7-1862d663a0d3"
+}
+ *
  * @apiSuccessExample Success Response Example:
 {
     "message": "Get schedules successful",
     "data": {
-        "2022-01-08": [
+        "2021-03-12": [
             {
-                "id": "b9279afe-22a3-4f19-b545-ad01083b2972",
-                "tutorId": "96f4af6a-4575-4d57-8f5a-878581d7b43b",
-                "startTime": "18:33",
-                "endTime": "21:45",
-                "createdAt": "2021-03-29T18:34:55.812Z"
+                "id": "6fc9362e-687c-4a90-99ea-d66c5096e0ca",
+                "tutorId": "4e85658f-48c7-4128-b0c7-1862d663a0d3",
+                "startTime": "09:00",
+                "endTime": "11:00",
+                "createdAt": "2021-04-01T12:11:59.001Z",
+                "isBooked": true
             }
         ],
-        "2021-03-29": [
+        "2021-03-13": [
             {
-                "id": "9de90658-3f1c-4b3d-8435-07cc087a050f",
-                "tutorId": "96f4af6a-4575-4d57-8f5a-878581d7b43b",
-                "startTime": "01:00",
-                "endTime": "2:00",
-                "createdAt": "2021-03-30T14:58:31.313Z"
-            },
-            {
-                "id": "2167ccbd-0d1f-452f-8af3-3340e6a83ca0",
-                "tutorId": "96f4af6a-4575-4d57-8f5a-878581d7b43b",
-                "startTime": "02:00",
-                "endTime": "2:30",
-                "createdAt": "2021-03-30T15:04:45.951Z"
+                "id": "141f7613-d7b4-44f8-8f5b-8522c375a7df",
+                "tutorId": "4e85658f-48c7-4128-b0c7-1862d663a0d3",
+                "startTime": "09:00",
+                "endTime": "11:00",
+                "createdAt": "2021-04-01T12:31:12.641Z",
+                "isBooked": true
             }
-        ]
+        ],
     }
 }
  *
  */
 
 /**
- * @api {get} /schedule Get free time in a date
+ * @api {post} /schedule Get free time in a date
  * @apiName get-free-time-in-a-date
  * @apiGroup Schedule
  *
- * @apiPermission Tutor
+ * @apiPermission Member
  * @apiHeader {String} Authorization Access token
  *
  * @apiParam {String} [date] Date in format YYYY-MM-DD
  *
  * @apiParamExample {json} Request Params Example:
-/schedule?date=2021-03-29
+{
+    "tutorId":"4e85658f-48c7-4128-b0c7-1862d663a0d3"
+}
  *
  * @apiSuccessExample Success Response Example:
 {
-    "message": "Get schedules successful",
-    "data": [
+  "message": "Get schedules successful",
+  "data": [
+    {
+      "id": "2fd335c6-61e7-4538-8c03-5a9a560c3548",
+      "tutorId": "4e85658f-48c7-4128-b0c7-1862d663a0d3",
+      "startTime": "09:00",
+      "endTime": "11:00",
+      "createdAt": "2021-03-30T04:30:17.830Z",
+      "isBooked": true,
+      "scheduleDetails": [
         {
-            "id": "82ffe0cd-4580-4246-9da1-8f574d830e13",
-            "tutorId": "4e85658f-48c7-4128-b0c7-1862d663a0d3",
-            "startTime": "09:00",
-            "endTime": "11:00",
-            "createdAt": "2021-03-30T03:08:33.466Z",
-            "isBooked": true
+          "id": "c88d56bc-0d51-48e5-9d34-ed2e3080d3e8",
+          "scheduleId": "2fd335c6-61e7-4538-8c03-5a9a560c3548",
+          "startPeriod": "09:30",
+          "endPeriod": "10:00",
+          "createdAt": "2021-03-30T04:30:17.832Z",
+          "updatedAt": "2021-03-30T04:30:17.832Z",
+          "isBooked": true
         },
         {
-            "id": "2fd335c6-61e7-4538-8c03-5a9a560c3548",
-            "tutorId": "4e85658f-48c7-4128-b0c7-1862d663a0d3",
-            "startTime": "09:00",
-            "endTime": "11:00",
-            "createdAt": "2021-03-30T04:30:17.830Z",
-            "isBooked": true
+          "id": "86718670-0a7c-4ae4-8c7b-ebb0c61a9b67",
+          "scheduleId": "2fd335c6-61e7-4538-8c03-5a9a560c3548",
+          "startPeriod": "10:30",
+          "endPeriod": "11:00",
+          "createdAt": "2021-03-30T04:30:17.832Z",
+          "updatedAt": "2021-03-30T04:30:17.832Z",
+          "isBooked": true
         },
-        {
-            "id": "57a4c301-b9df-4bd9-a109-dfe53ff9ee08",
-            "tutorId": "4e85658f-48c7-4128-b0c7-1862d663a0d3",
-            "startTime": "09:00",
-            "endTime": "11:00",
-            "createdAt": "2021-03-30T04:44:50.911Z",
-            "isBooked": true
-        }
-    ]
+      ]
+    },
+    {
+      "id": "3c471b2b-7c42-4474-ad0c-9d4107e3d658",
+      "tutorId": "4e85658f-48c7-4128-b0c7-1862d663a0d3",
+      "startTime": "07:15",
+      "endTime": "07:45",
+      "createdAt": "2021-03-31T11:39:28.421Z",
+      "isBooked": false,
+      "scheduleDetails": []
+    }
+  ]
 }
  *
  */
