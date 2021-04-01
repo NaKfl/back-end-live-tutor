@@ -1,6 +1,7 @@
 import { Tutor, User, TutorFeedback, FavoriteTutor } from 'database/models';
 import { paginate } from 'utils/sequelize';
 import { Op } from 'sequelize';
+import { onlineUsers } from 'sockets/controllers';
 
 const tutorService = {};
 
@@ -44,13 +45,17 @@ tutorService.getMany = async (query) => {
     ],
     ...paginate({ page, perPage }),
   });
-  const results = tutors.rows.map((tutor) => {
+
+  const promises = tutors.rows.map(async (tutor) => {
     const user = tutor.User;
-    const result = { ...user.dataValues, ...tutor.dataValues };
-    delete result.User;
-    return result;
+    const groupUser = { ...user.dataValues, ...tutor.dataValues };
+    groupUser.isOnline = await onlineUsers.isUserOnline(tutor.userId);
+    delete groupUser.User;
+    return groupUser;
   });
-  return { ...tutors, rows: results };
+
+  const result = await Promise.all(promises);
+  return { ...tutors, rows: result };
 };
 
 tutorService.getOne = async (userId) => {
