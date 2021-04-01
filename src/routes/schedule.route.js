@@ -14,7 +14,7 @@ router.get(
   scheduleController.getOne,
 );
 
-router.get(
+router.post(
   '/',
   auth(),
   validate(scheduleValidation.getMany),
