@@ -1,8 +1,7 @@
 import http from 'http';
 import express from 'express';
 import morgan from 'morgan';
-import bodyParser from 'body-parser';
-import helmet from 'helmet';
+// TODO: import helmet from 'helmet';
 import cors from 'cors';
 import passport from 'passport';
 import adapter from 'socket.io-redis';
@@ -26,8 +25,8 @@ const app = express();
 
 app.use(morgan(logs));
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname));
 // app.use(helmet());
 
