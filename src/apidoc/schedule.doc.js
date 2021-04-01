@@ -144,7 +144,7 @@
  */
 
 /**
- * @api {post} /schedule Register new schedule
+ * @api {post} /schedule/register Register new schedule
  * @apiName register-schedule
  * @apiGroup Schedule
  *

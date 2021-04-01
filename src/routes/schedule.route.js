@@ -22,7 +22,7 @@ router.post(
 );
 
 router.post(
-  '/',
+  '/register',
   auth(ROLES.TUTOR),
   validate(scheduleValidation.register),
   scheduleController.register,
