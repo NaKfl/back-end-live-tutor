@@ -33,14 +33,44 @@ scheduleService.getMany = async (tutorId, query = null) => {
       createdAt,
       scheduleDetailInfo,
     } = curr;
-    const isBooked = scheduleDetailInfo.length
-      ? scheduleDetailInfo.some(({ bookingInfo }) => bookingInfo.length)
-      : false;
+
+    let isBooked = false;
+    const scheduleDetails = scheduleDetailInfo.map((item) => {
+      if (item.bookingInfo.length > 0) isBooked = true;
+      item.dataValues.isBooked = item.bookingInfo.length > 0;
+      delete item.dataValues.bookingInfo;
+      return item;
+    });
+
+    let returnObject = null;
+    if (query.date)
+      returnObject = {
+        id,
+        tutorId,
+        startTime,
+        endTime,
+        createdAt,
+        isBooked,
+        scheduleDetails,
+      };
+    else
+      returnObject = {
+        id,
+        tutorId,
+        startTime,
+        endTime,
+        createdAt,
+        isBooked,
+      };
+
     if (acc[date]) {
-      acc[date].push({ id, tutorId, startTime, endTime, createdAt, isBooked });
+      if (query.date) acc[date].push(returnObject);
+      else acc[date].push(returnObject);
     } else {
-      acc[date] = [{ id, tutorId, startTime, endTime, createdAt, isBooked }];
+      if (query.date) acc[date] = [returnObject];
+      else acc[date] = [returnObject];
     }
+
     return acc;
   }, {});
 
