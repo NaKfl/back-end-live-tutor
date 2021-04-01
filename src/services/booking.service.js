@@ -1,6 +1,8 @@
-import { Booking } from 'database/models';
+import { Booking, User, ScheduleDetail, Schedule } from 'database/models';
 import httpStatus from 'http-status';
 import ApiError from 'utils/ApiError';
+import { confirmBookingNewSchedule } from 'configs/nodemailer';
+import moment from 'moment';
 
 const bookingService = {};
 
@@ -22,6 +24,53 @@ bookingService.book = async (userId, scheduleDetailIds) => {
   );
 
   const bookings = await Promise.all(bookingPromises);
+
+  const student = await User.findByPk(userId);
+  const scheduleDetails = await ScheduleDetail.findAll({
+    where: {
+      id: scheduleDetailIds,
+    },
+    include: [
+      {
+        model: Schedule,
+        as: 'scheduleInfo',
+        include: [
+          {
+            model: User,
+            as: 'tutorInfo',
+          },
+        ],
+      },
+    ],
+  });
+
+  if (
+    student &&
+    scheduleDetails.length &&
+    scheduleDetails[0]?.scheduleInfo?.tutorInfo
+  ) {
+    const dates = scheduleDetails
+      .map((item) => {
+        const { scheduleInfo, startPeriod, endPeriod } = item;
+        const date = moment(scheduleInfo.date, 'YYYY-MM-DD').format(
+          'YYYY-MM-DD',
+        );
+        const start = moment(startPeriod, 'HH:mm').format('HH:mm');
+        const end = moment(endPeriod, 'HH:mm').format('HH:mm');
+        return {
+          date,
+          start,
+          end,
+        };
+      })
+      .reverse();
+
+    confirmBookingNewSchedule({
+      receiver: student?.email,
+      tutor: scheduleDetails[0]?.scheduleInfo?.tutorInfo?.name,
+      dates,
+    });
+  }
 
   return bookings;
 };

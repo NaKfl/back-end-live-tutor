@@ -12,3 +12,13 @@ export const redis = {
   host: process.env.REDIS_HOST,
   port: process.env.REDIS_PORT,
 };
+export const nodemailer = {
+  email: process.env.NODE_MAILER_EMAIL,
+  password: process.env.NODE_MAILER_PASSWORD,
+};
+export const googleCredential = {
+  clientId: process.env.GOOGLE_CLIENT_ID,
+  clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+  refreshToken: process.env.GOOGLE_REFRESH_TOKEN,
+  accessToken: process.env.GOOGLE_ACCESS_TOKEN,
+};
