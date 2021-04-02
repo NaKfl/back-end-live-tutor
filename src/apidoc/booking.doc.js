@@ -1,5 +1,5 @@
 /**
- * @api {get} /booking Book new call schedule
+ * @api {post} /booking Book new call schedule
  * @apiName book
  * @apiGroup Booking
  *
@@ -42,7 +42,7 @@
  */
 
 /**
- * @api {get} /booking Cancel booking call schedule
+ * @api {delete} /booking Cancel booking call schedule
  * @apiName cancel-booking
  * @apiGroup Booking
  *

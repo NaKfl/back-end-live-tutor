@@ -9,7 +9,7 @@ const router = express.Router();
 
 router.get(
   '/:scheduleId',
-  auth(ROLES.TUTOR),
+  auth(),
   validate(scheduleValidation.getOne),
   scheduleController.getOne,
 );
