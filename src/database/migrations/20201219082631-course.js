@@ -1,35 +1,28 @@
 'use strict';
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Messages', {
+    await queryInterface.createTable('Courses', {
       id: {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV4,
       },
-      content: {
-        type: Sequelize.TEXT,
-      },
-      fromId: {
-        allowNull: false,
+      tutorId: {
         type: Sequelize.UUID,
+        allowNull: false,
         references: {
           model: 'Users',
           key: 'id',
         },
       },
-      toId: {
-        allowNull: false,
-        type: Sequelize.UUID,
-        references: {
-          model: 'Users',
-          key: 'id',
-        },
-      },
-      isRead: {
-        type: Sequelize.BOOLEAN,
-      },
+      name: { type: Sequelize.TEXT },
+      description: { type: Sequelize.TEXT },
+      level: { type: Sequelize.TEXT },
+      other_details: { type: Sequelize.TEXT },
+      imageUrl: { type: Sequelize.TEXT },
+      default_price: { type: Sequelize.FLOAT },
+      course_price: { type: Sequelize.FLOAT },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
@@ -40,7 +33,8 @@ module.exports = {
       },
     });
   },
+
   down: async (queryInterface) => {
-    await queryInterface.dropTable('Messages');
+    await queryInterface.dropTable('Courses');
   },
 };
