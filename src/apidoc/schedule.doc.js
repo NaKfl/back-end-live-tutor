@@ -51,8 +51,10 @@
  * @apiHeader {String} Authorization Access token
  *
  * @apiParam {String} [date] Date in format YYYY-MM-DD
+ * @apiParam {String} [tutorId] Id of tutor which you want to get the schedules (Note: If this param is null, server will response the schedules of request's owner)
  *
  * @apiParamExample {json} Request Params Example:
+/schedule?date=2021-03-29
 {
     "tutorId":"4e85658f-48c7-4128-b0c7-1862d663a0d3"
 }
