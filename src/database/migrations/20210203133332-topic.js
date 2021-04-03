@@ -1,35 +1,25 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Messages', {
+    await queryInterface.createTable('Topics', {
       id: {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
       },
-      content: {
-        type: Sequelize.TEXT,
-      },
-      fromId: {
+      courseId: {
         allowNull: false,
         type: Sequelize.UUID,
         references: {
-          model: 'Users',
+          model: 'Courses',
           key: 'id',
         },
       },
-      toId: {
-        allowNull: false,
-        type: Sequelize.UUID,
-        references: {
-          model: 'Users',
-          key: 'id',
-        },
-      },
-      isRead: {
-        type: Sequelize.BOOLEAN,
-      },
+      name: { type: Sequelize.TEXT },
+      description: { type: Sequelize.TEXT },
+      orderCourse: { type: Sequelize.INTEGER },
+      videoUrl: { type: Sequelize.TEXT },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
@@ -41,6 +31,6 @@ module.exports = {
     });
   },
   down: async (queryInterface) => {
-    await queryInterface.dropTable('Messages');
+    await queryInterface.dropTable('Topics');
   },
 };

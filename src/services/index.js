@@ -8,6 +8,7 @@ import feedbackService from './tutorFeedback.service';
 import messageService from './message.service';
 import scheduleService from './schedule.service';
 import bookingService from './booking.service';
+import courseService from './course.service';
 
 export {
   userService,
@@ -20,4 +21,5 @@ export {
   messageService,
   scheduleService,
   bookingService,
+  courseService,
 };

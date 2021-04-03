@@ -196,6 +196,48 @@ const bookings = [...Array(150)].map(() => ({
   updatedAt: new Date(),
 }));
 
+// Fake 50 course
+const courses = [...Array(50)].map(() => ({
+  id: faker.random.uuid(),
+  tutorId:
+    tutorInfo[
+      faker.random.number({
+        min: 0,
+        max: 49,
+      })
+    ].userId,
+  name: faker.lorem.sentence(),
+  description: faker.lorem.sentence(),
+  level: faker.lorem.word(),
+  other_details: faker.lorem.sentence(),
+  imageUrl:
+    'https://camblycurriculumicons.s3.amazonaws.com/5eb03d0f9934e038cfcf0372?h=d41d8cd98f00b204e9800998ecf8427e',
+  default_price: faker.random.number({
+    min: 100,
+    max: 500,
+  }),
+  course_price: faker.random.number({
+    min: 100,
+    max: 500,
+  }),
+  createdAt: new Date(),
+  updatedAt: new Date(),
+}));
+
+const topics = courses.reduce((pre, now) => {
+  const topic = [...Array(10)].map((_, index) => ({
+    id: faker.random.uuid(),
+    courseId: now.id,
+    orderCourse: index,
+    name: faker.lorem.sentence(),
+    description: faker.lorem.sentence(),
+    videoUrl: faker.lorem.sentence(),
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  }));
+  return [...pre, ...topic];
+}, []);
+
 module.exports = {
   tutors,
   students,
@@ -209,6 +251,8 @@ module.exports = {
   schedules,
   scheduleDetails,
   bookings,
+  topics,
+  courses,
   up: () => Promise.resolve(),
   down: () => Promise.resolve(),
 };
