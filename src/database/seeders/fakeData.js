@@ -207,7 +207,7 @@ const courses = [...Array(50)].map(() => ({
       })
     ].userId,
   name: faker.lorem.sentence(),
-  description: faker.lorem.sentence(),
+  description: faker.lorem.paragraph(),
   level: faker.lorem.word(),
   other_details: faker.lorem.sentence(),
   imageUrl:
@@ -230,7 +230,7 @@ const topics = courses.reduce((pre, now) => {
     courseId: now.id,
     orderCourse: index,
     name: faker.lorem.sentence(),
-    description: faker.lorem.sentence(),
+    description: faker.lorem.paragraph(),
     videoUrl: faker.lorem.sentence(),
     createdAt: new Date(),
     updatedAt: new Date(),
