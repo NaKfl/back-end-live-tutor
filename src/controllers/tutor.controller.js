@@ -5,7 +5,7 @@ const tutorController = {};
 
 tutorController.getMany = catchAsync(async (req, res) => {
   const { query, user } = req;
-  const tutors = await tutorService.getMany(query);
+  const tutors = await tutorService.search(query);
   const favoriteTutor = await favoriteService.getListFavoriteTutorById(user.id);
   res.json({ tutors, favoriteTutor });
 });
@@ -64,6 +64,13 @@ tutorController.scheduleRegister = catchAsync(async (req, res) => {
   const { user, body } = req;
   const data = await tutorService.scheduleRegister(user?.id, body);
   res.json({ message: 'Success', data });
+});
+
+tutorController.searchTutor = catchAsync(async (req, res) => {
+  const { query, user } = req;
+  const tutors = await tutorService.search(query);
+  const favoriteTutor = await favoriteService.getListFavoriteTutorById(user.id);
+  res.json({ tutors, favoriteTutor });
 });
 
 export default tutorController;

@@ -9,8 +9,10 @@ import messageService from './message.service';
 import scheduleService from './schedule.service';
 import bookingService from './booking.service';
 import courseService from './course.service';
+import callService from './callSession.service';
 
 export {
+  callService,
   userService,
   tokenService,
   authService,

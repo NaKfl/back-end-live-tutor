@@ -29,3 +29,11 @@ export const flatObjectsByKeys = (objects, flattedKeys) => {
     return obj;
   });
 };
+
+export const excludeUndefined = (field) => {
+  const where = Object.keys(field).reduce((pre, now) => {
+    if (typeof field[now] === 'undefined') return { ...pre };
+    return Object.assign(pre, { [now]: field[now] });
+  }, {});
+  return where;
+};
