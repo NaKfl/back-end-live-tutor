@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       });
       this.hasMany(models.Topic, {
         foreignKey: 'courseId',
+        as: 'topics',
       });
     }
   }
