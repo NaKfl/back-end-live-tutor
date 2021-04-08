@@ -8,4 +8,10 @@ courseController.getCourses = catchAsync(async (req, res) => {
   res.json({ message: 'Success', data });
 });
 
+courseController.getDetailCourse = catchAsync(async (req, res) => {
+  const { id: courseId } = req.params;
+  const data = await courseService.getDetailCourse(courseId);
+  res.json({ message: 'Success', data });
+});
+
 export default courseController;
