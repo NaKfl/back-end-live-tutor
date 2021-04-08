@@ -1,6 +1,11 @@
 import catchAsync from 'utils/catchAsync';
-import { userService, favoriteService, feedbackService } from 'services';
-
+import {
+  userService,
+  favoriteService,
+  feedbackService,
+  callService,
+} from 'services';
+import moment from 'moment';
 const userController = {};
 
 userController.getInfo = catchAsync(async (req, res) => {
@@ -55,4 +60,21 @@ userController.feedbackTutor = catchAsync(async (req, res) => {
   res.json({ message: 'Feedback success', data });
 });
 
+userController.endCall = catchAsync(async (req, res) => {
+  const field = req.body;
+  field.startTime = new Date(field.startTime);
+  field.endTime = moment(field.endTime).toISOString();
+  console.log(field);
+  const result = await callService.add(field);
+  res.send(result);
+});
+
+userController.getCallSessionHistory = catchAsync(async (req, res) => {
+  const { user, query } = req;
+  const result = await callService.getSessionByStudentId({
+    id: user?.id,
+    ...query,
+  });
+  res.send(result);
+});
 export default userController;
