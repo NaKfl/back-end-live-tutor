@@ -196,6 +196,15 @@ const bookings = [...Array(150)].map(() => ({
   updatedAt: new Date(),
 }));
 
+const imageURLs = [
+  'https://camblycurriculumicons.s3.amazonaws.com/5eb03d0f9934e038cfcf0372?h=d41d8cd98f00b204e9800998ecf8427e',
+  'https://camblycurriculumicons.s3.amazonaws.com/5e2b895e541a832674533c18?h=d41d8cd98f00b204e9800998ecf8427e',
+  'https://camblycurriculumicons.s3.amazonaws.com/5e7e51cca52da4ab4bd958e6?h=d41d8cd98f00b204e9800998ecf8427e',
+  'https://camblycurriculumicons.s3.amazonaws.com/5fd9240c4143a75bf6c2de8b?h=d41d8cd98f00b204e9800998ecf8427e',
+];
+
+const levels = ['Beginner', 'Intermediate', 'Advanced'];
+
 // Fake 50 course
 const courses = [...Array(50)].map(() => ({
   id: faker.random.uuid(),
@@ -208,10 +217,21 @@ const courses = [...Array(50)].map(() => ({
     ].userId,
   name: faker.lorem.sentence(),
   description: faker.lorem.paragraph(),
-  level: faker.lorem.word(),
+  level:
+    levels[
+      faker.random.number({
+        min: 0,
+        max: 2,
+      })
+    ],
   other_details: faker.lorem.sentence(),
   imageUrl:
-    'https://camblycurriculumicons.s3.amazonaws.com/5eb03d0f9934e038cfcf0372?h=d41d8cd98f00b204e9800998ecf8427e',
+    imageURLs[
+      faker.random.number({
+        min: 0,
+        max: 3,
+      })
+    ],
   default_price: faker.random.number({
     min: 100,
     max: 500,
