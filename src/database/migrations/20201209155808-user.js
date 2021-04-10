@@ -22,7 +22,7 @@ module.exports = {
       },
       avatar: {
         type: Sequelize.TEXT,
-        defautValue:
+        defaultValue:
           'https://www.alliancerehabmed.com/wp-content/uploads/icon-avatar-default.png',
       },
       name: {
