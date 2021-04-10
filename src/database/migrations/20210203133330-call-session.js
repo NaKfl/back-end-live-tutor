@@ -1,17 +1,14 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Messages', {
+    await queryInterface.createTable('CallSessions', {
       id: {
         allowNull: false,
+        autoIncrement: false,
         primaryKey: true,
         type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV4,
       },
-      content: {
-        type: Sequelize.TEXT,
-      },
-      fromId: {
+      studentId: {
         allowNull: false,
         type: Sequelize.UUID,
         references: {
@@ -19,7 +16,7 @@ module.exports = {
           key: 'id',
         },
       },
-      toId: {
+      tutorId: {
         allowNull: false,
         type: Sequelize.UUID,
         references: {
@@ -27,8 +24,13 @@ module.exports = {
           key: 'id',
         },
       },
-      isRead: {
-        type: Sequelize.BOOLEAN,
+      startTime: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+      endTime: {
+        allowNull: false,
+        type: Sequelize.DATE,
       },
       createdAt: {
         allowNull: false,
@@ -41,6 +43,6 @@ module.exports = {
     });
   },
   down: async (queryInterface) => {
-    await queryInterface.dropTable('Messages');
+    await queryInterface.dropTable('CallSessions');
   },
 };
