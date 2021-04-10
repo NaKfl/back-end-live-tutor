@@ -1,22 +1,18 @@
 import { Course, Topic, sequelize } from 'database/models';
-
+import { paginate } from 'utils/sequelize';
 const courseService = {};
 
 courseService.getCourses = async () => {
+  const page = 1;
+  const perPage = 20;
   const courses = await Course.findAll({
-    attributes: [
-      '*',
-      [sequelize.fn('COUNT', sequelize.col('topics.courseId')), 'topicCount'],
-    ],
-    group: [sequelize.col('Course.id')],
     include: [
       {
         model: Topic,
         as: 'topics',
-        attributes: [],
       },
     ],
-    raw: true,
+    ...paginate({ page, perPage }),
   });
   return courses;
 };

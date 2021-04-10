@@ -158,4 +158,102 @@ tutorService.createWithUserId = async (fields, userId, avatar, video) => {
   }
 };
 
+tutorService.search = async ({ search, page, perPage }) => {
+  let where = {};
+  let whereUser = {};
+  if (search) {
+    whereUser = {
+      [Op.or]: [
+        {
+          name: {
+            [Op.iLike]: `%${search}%`,
+          },
+        },
+      ],
+    };
+    where = {
+      [Op.or]: [
+        {
+          education: {
+            [Op.like]: `%${search}%`,
+          },
+        },
+        {
+          bio: {
+            [Op.like]: `%${search}%`,
+          },
+        },
+        {
+          experience: {
+            [Op.like]: `%${search}%`,
+          },
+        },
+        {
+          profession: {
+            [Op.like]: `%${search}%`,
+          },
+        },
+        {
+          accent: {
+            [Op.like]: `%${search}%`,
+          },
+        },
+        {
+          targetStudent: {
+            [Op.like]: `%${search}%`,
+          },
+        },
+        {
+          interests: {
+            [Op.like]: `%${search}%`,
+          },
+        },
+        {
+          resume: {
+            [Op.like]: `%${search}%`,
+          },
+        },
+      ],
+    };
+  }
+  const tutors = await Tutor.findAndCountAll({
+    where: {
+      isActivated: true,
+      ...where,
+    },
+    include: [
+      {
+        model: User,
+        attributes: {
+          exclude: ['id', 'password'],
+        },
+        include: [
+          {
+            model: TutorFeedback,
+            as: 'feedbacks',
+            include: [
+              {
+                model: User,
+                as: 'firstInfo',
+                attributes: {
+                  exclude: ['id', 'password'],
+                },
+              },
+            ],
+          },
+        ],
+        // whereUser,
+      },
+    ],
+    ...paginate({ page, perPage }),
+  });
+  const results = tutors.rows.map((tutor) => {
+    const user = tutor.User;
+    const result = { ...user.dataValues, ...tutor.dataValues };
+    delete result.User;
+    return result;
+  });
+  return { ...tutors, rows: results };
+};
+
 export default tutorService;
