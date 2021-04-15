@@ -159,11 +159,17 @@ tutorService.createWithUserId = async (fields, userId, avatar, video) => {
 };
 
 tutorService.search = async ({ search, page, perPage }) => {
-  const tutors = await Tutor.findAndCountAll({
-    where: {
+  let where = {
+    isActivated: true,
+  };
+  if (search) {
+    where = {
       isActivated: true,
       [Op.or]: searchHelp({ Op, keys: null, searchKey: search }),
-    },
+    };
+  }
+  const tutors = await Tutor.findAndCountAll({
+    where,
     include: [
       {
         model: User,
