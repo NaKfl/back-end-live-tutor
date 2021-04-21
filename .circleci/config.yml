@@ -34,14 +34,14 @@ jobs:
 workflows:
   test-and-build-and-deploy:
     jobs:
-      - node/test
+      # - node/test
       - build-and-push:
-          requires:
-            - node/test
+          # requires:
+          # - node/test
           filters:
             branches:
               only:
-                - dev
+                - deploy
       - deploy:
           requires:
             - build-and-push
