@@ -19,12 +19,19 @@ feedbackService.feedbackTutor = async ({
       content,
       rating,
     };
-    return await TutorFeedback.update(fields, {
+    await TutorFeedback.update(fields, {
       where: {
         firstId,
         secondId,
       },
     });
+    const data = await TutorFeedback.findOne({
+      where: {
+        firstId,
+        secondId,
+      },
+    });
+    return data;
   } else {
     return await TutorFeedback.create({
       firstId,
