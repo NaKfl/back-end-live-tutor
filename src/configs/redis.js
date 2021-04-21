@@ -7,6 +7,7 @@ bluebird.promisifyAll(redis);
 const client = redis.createClient({
   host: redisVars.host,
   port: redisVars.port,
+  connectTimeout: 10000,
 });
 
 export default client;
