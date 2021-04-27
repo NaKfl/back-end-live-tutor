@@ -1,6 +1,7 @@
 import nodemailer from 'nodemailer';
 import { nodemailer as nodemailerVars, googleCredential } from 'configs/vars';
 import bookingConfirm from './templates/bookingConfirm';
+import { forgotPassword } from './templates/forgotPassword';
 
 const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
@@ -22,6 +23,19 @@ export const confirmBookingNewSchedule = async (bookingInfo) => {
       to: bookingInfo?.receiver,
       subject: 'You already have register new schedule successfully',
       html: bookingConfirm(bookingInfo),
+    });
+  } catch (error) {
+    console.log('Error: ', error);
+  }
+};
+
+export const sendForgotPasswordEmail = async ({ receiver, link }) => {
+  try {
+    await transporter.sendMail({
+      from: `"Live tutor" peterpans2030@gmail.com`,
+      subject: 'Reset your password email',
+      to: receiver,
+      html: forgotPassword(link),
     });
   } catch (error) {
     console.log('Error: ', error);
