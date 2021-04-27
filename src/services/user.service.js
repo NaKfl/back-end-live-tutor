@@ -124,8 +124,7 @@ userService.uploadAvatar = async ({ id, locationFile }) => {
       id,
     },
   });
-  user.update({ avatar: locationFile });
-  return user;
+  return await user.update({ avatar: locationFile });
 };
 
 userService.forgotPasswordRequest = async ({ email }) => {
@@ -141,6 +140,7 @@ userService.forgotPasswordRequest = async ({ email }) => {
     { id: user.id, email: user.email },
     jwtVar.secret,
   );
+  await user.update({ requestPassword: true });
   return token;
 };
 
@@ -152,8 +152,9 @@ userService.resetPassword = async (token, password) => {
       email,
     },
   });
-  await user.update({ password });
-  return user;
+  if (user.requestPassword === false)
+    throw Error('User is not request to change password');
+  return await user.update({ password, requestPassword: false });
 };
 
 export default userService;

@@ -27,6 +27,7 @@ const tutors = [...Array(50)].map(() => ({
   isActivated: false,
   createdAt: new Date(),
   updatedAt: new Date(),
+  requestPassword: false,
 }));
 
 // Fake 50 students
@@ -44,6 +45,7 @@ const students = [...Array(50)].map(() => ({
   isActivated: false,
   createdAt: new Date(),
   updatedAt: new Date(),
+  requestPassword: false,
 }));
 
 const users = [...students, ...tutors];

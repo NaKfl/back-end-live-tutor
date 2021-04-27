@@ -45,6 +45,7 @@ module.exports = (sequelize, DataTypes) => {
       phone: DataTypes.STRING,
       language: DataTypes.STRING,
       birthday: DataTypes.STRING,
+      requestPassword: DataTypes.BOOLEAN,
       isActivated: { type: DataTypes.BOOLEAN, defaultValue: false },
     },
     {

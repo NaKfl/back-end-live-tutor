@@ -42,4 +42,7 @@ router.post(
   validate(userValidation.forgotPassword),
   userController.forgotPassword,
 );
+
+router.post('/resetpassword', userController.resetPassword);
+
 export default router;

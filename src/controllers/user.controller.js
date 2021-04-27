@@ -84,12 +84,12 @@ userController.forgotPassword = catchAsync(async (req, res) => {
   const { email } = req.body;
   const token = await userService.forgotPasswordRequest({ email });
   const origin = req.headers?.origin || 'http://localhost:3000';
-  const linkToken = `${origin}/resetpassword?token=${token}`;
+  const linkToken = `${origin}/password?token=${token}`;
   await sendForgotPasswordEmail({ receiver: email, link: linkToken });
   res.send({ message: 'Email send success!' });
 });
 
-userController.ressetPassword = catchAsync(async (req, res) => {
+userController.resetPassword = catchAsync(async (req, res) => {
   const { token, password } = req.body;
   const user = await userService.resetPassword(token, password);
   res.send(user);

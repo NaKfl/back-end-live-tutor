@@ -25,8 +25,6 @@ const storage = multer.diskStorage({
     ensureExists(dirUpload, 0o744, function (err) {
       if (err) {
         console.log(err);
-      } else {
-        cb(null, path.join(dirAvatar));
       }
     });
     const fieldname = file.fieldname;
@@ -35,7 +33,7 @@ const storage = multer.diskStorage({
         if (err) {
           console.log(err);
         } else {
-          cb(null, path.join(dirAvatar));
+          cb(null, dirAvatar);
         }
       });
     } else if (fieldname === 'video') {
@@ -43,7 +41,7 @@ const storage = multer.diskStorage({
         if (err) {
           console.log(err);
         } else {
-          cb(null, path.join(dirAvatar));
+          cb(null, dirAvatar);
         }
       });
     } else {
@@ -51,27 +49,16 @@ const storage = multer.diskStorage({
         if (err) {
           console.log(err);
         } else {
-          cb(null, path.join(dirTemp));
+          cb(null, dirTemp);
         }
       });
     }
   },
   filename: function (req, file, cb) {
+    console.log(file);
     const user = req.user?.id;
     if (file.fieldname === 'avatar' || file.fieldname === 'video') {
       const typeImage = file.originalname.split('.')[1];
-      // fs.readdirSync(path.join(__dirname, `../uploads/${file.fieldname}`))
-      //   ?.filter((file) => {
-      //     const f = file.split('.');
-      //     return f[0];
-      //   })
-      //   .forEach((existFile) => {
-      //     if (existFile.split('.')[0] === `${user + file.fieldname}`) {
-      //       fs.unlinkSync(
-      //         path.join(__dirname, `../uploads/${file.fieldname}/${existFile}`),
-      //       );
-      //     }
-      //   });
       const uniqueSuffix = '.' + typeImage;
       cb(null, user + file.fieldname + new Date().getTime() + uniqueSuffix);
     } else {

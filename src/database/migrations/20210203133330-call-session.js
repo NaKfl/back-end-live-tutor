@@ -24,6 +24,18 @@ module.exports = {
           key: 'id',
         },
       },
+      feedbackId: {
+        allowNull: true,
+        type: Sequelize.UUID,
+        references: {
+          model: 'TutorFeedbacks',
+          key: 'id',
+        },
+      },
+      videoUrl: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
       startTime: {
         allowNull: false,
         type: Sequelize.DATE,
