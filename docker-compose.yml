@@ -5,6 +5,7 @@ services:
     image: nakfl/back-end-live-tutor:latest
     depends_on:
       - database
+      - redis
     environment:
       NODE_ENV: development
       DATABASE_URL: postgres://postgres:password@database:5432/live-tutor
@@ -13,7 +14,16 @@ services:
       JWT_SECRET: anhem1nha
       JWT_EXPIRATION_MINUTES: 30
       JWT_REFRESH_EXPIRATION_DAYS: 30
-    command: sh -c "./wait-for-it.sh database:5432 && npm run migrate && npm run migrate:seed && npm start"
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      NODE_MAILER_EMAIL: peterpans2030@gmail.com
+      NODE_MAILER_PASSWORD: anhchien01
+      GOOGLE_CLIENT_ID: 573146987855-2ejarqfbv09mu5hif5js6j741t7gec15.apps.googleusercontent.com
+      GOOGLE_CLIENT_SECRET: 0i5peIrrQZ5E4mt24-h5qNhf
+      GOOGLE_REFRESH_TOKEN: 1//04gJ6d2woZ9DsCgYIARAAGAQSNwF-L9IrntvPxGi8DaiM88CANUOPr6XCac0tng4ipAVp3msBYgtKKkWSwjiyWZ1ltYu114xeoSk
+      GOOGLE_ACCESS_TOKEN: ya29.a0AfH6SMAsNrekFP0SnCkIIuk0O0gmfcl4q96GPtrih3HS6THeBmxqGf--fmSdg8ruEjfGTgJJMMZPFDBih4pnndMCnuiW0vwMjX3ZpUIxCEtnrsHzsUNugenURsp1EO1x1aJK6as1u_3vJ6rEBLov30bFlGBc
+
+    command: sh -c "./wait-for-it.sh database:5432 && npm run migrate && npm run migrate:seed && pm2-runtime ecosystem.config.js"
     ports:
       - 6969:6969
 
@@ -23,3 +33,8 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
       POSTGRES_DB: live-tutor
+
+  redis:
+    image: redis:6.2.1
+    ports:
+      - 6379:6379

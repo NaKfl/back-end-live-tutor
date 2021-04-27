@@ -1,5 +1,5 @@
 import { Tutor, User, TutorFeedback, FavoriteTutor } from 'database/models';
-import { paginate } from 'utils/sequelize';
+import { paginate, searchHelp, SetById } from 'utils/sequelize';
 import { Op } from 'sequelize';
 import { onlineUsers } from 'sockets/controllers';
 
@@ -159,68 +159,17 @@ tutorService.createWithUserId = async (fields, userId, avatar, video) => {
 };
 
 tutorService.search = async ({ search, page, perPage }) => {
-  let where = {};
-  let whereUser = {};
+  let where = {
+    isActivated: true,
+  };
   if (search) {
-    whereUser = {
-      [Op.or]: [
-        {
-          name: {
-            [Op.iLike]: `%${search}%`,
-          },
-        },
-      ],
-    };
     where = {
-      [Op.or]: [
-        {
-          education: {
-            [Op.like]: `%${search}%`,
-          },
-        },
-        {
-          bio: {
-            [Op.like]: `%${search}%`,
-          },
-        },
-        {
-          experience: {
-            [Op.like]: `%${search}%`,
-          },
-        },
-        {
-          profession: {
-            [Op.like]: `%${search}%`,
-          },
-        },
-        {
-          accent: {
-            [Op.like]: `%${search}%`,
-          },
-        },
-        {
-          targetStudent: {
-            [Op.like]: `%${search}%`,
-          },
-        },
-        {
-          interests: {
-            [Op.like]: `%${search}%`,
-          },
-        },
-        {
-          resume: {
-            [Op.like]: `%${search}%`,
-          },
-        },
-      ],
+      isActivated: true,
+      [Op.or]: searchHelp({ Op, keys: null, searchKey: search }),
     };
   }
   const tutors = await Tutor.findAndCountAll({
-    where: {
-      isActivated: true,
-      ...where,
-    },
+    where,
     include: [
       {
         model: User,
@@ -242,18 +191,58 @@ tutorService.search = async ({ search, page, perPage }) => {
             ],
           },
         ],
-        // whereUser,
       },
     ],
     ...paginate({ page, perPage }),
   });
-  const results = tutors.rows.map((tutor) => {
-    const user = tutor.User;
-    const result = { ...user.dataValues, ...tutor.dataValues };
-    delete result.User;
-    return result;
+  const tutorsByName = await Tutor.findAndCountAll({
+    where: {
+      isActivated: true,
+    },
+    include: [
+      {
+        model: User,
+        attributes: {
+          exclude: ['id', 'password'],
+        },
+        where: {
+          name: {
+            [Op.like]: `%${search}%`,
+          },
+        },
+        include: [
+          {
+            model: TutorFeedback,
+            as: 'feedbacks',
+            include: [
+              {
+                model: User,
+                as: 'firstInfo',
+                attributes: {
+                  exclude: ['id', 'password'],
+                },
+              },
+            ],
+          },
+        ],
+      },
+    ],
+    ...paginate({ page, perPage }),
   });
-  return { ...tutors, rows: results };
+
+  const matchTutor = SetById([...tutors.rows, ...tutorsByName.rows]);
+
+  const promises = matchTutor.map(async (tutor) => {
+    const user = tutor.User;
+    const groupUser = { ...user.dataValues, ...tutor.dataValues };
+    groupUser.isOnline = await onlineUsers.isUserOnline(tutor.userId);
+    delete groupUser.User;
+    return groupUser;
+  });
+
+  const result = await Promise.all(promises);
+
+  return { count: tutorsByName.count + tutors.count, rows: result };
 };
 
 export default tutorService;
