@@ -21,6 +21,8 @@ router.post('/register', auth(), cpUpload, tutorController.register);
 
 router.get('/:id', auth(), tutorController.getOne);
 
+router.get('/rank/:num', auth(), tutorController.getListRankTutor);
+
 router.get(
   '/list/approval',
   auth(),

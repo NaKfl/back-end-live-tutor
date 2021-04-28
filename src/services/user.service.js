@@ -4,7 +4,8 @@ import ApiError from 'utils/ApiError';
 import { Op } from 'sequelize';
 import { v4 as uuidv4 } from 'uuid';
 import { ROLES } from 'utils/constants';
-
+import jwt from 'jsonwebtoken';
+import { jwt as jwtVar } from 'configs/vars';
 const userService = {};
 
 userService.getUserByEmail = async (email) => {
@@ -95,14 +96,41 @@ userService.oAuthLogin = async ({
 };
 
 userService.uploadAvatar = async ({ id, locationFile }) => {
-  const res = await User.update(
-    { avatar: locationFile },
-    {
-      where: {
-        id,
-      },
+  const user = await User.findOne({
+    where: {
+      id,
     },
-  );
-  return res;
+  });
+  user.update({ avatar: locationFile });
+  return user;
 };
+
+userService.forgotPasswordRequest = async ({ email }) => {
+  const user = await User.findOne({
+    where: {
+      email,
+    },
+  });
+  if (!user) {
+    throw Error("Email doesn't exist!");
+  }
+  const token = await jwt.sign(
+    { id: user.id, email: user.email },
+    jwtVar.secret,
+  );
+  return token;
+};
+
+userService.resetPassword = async (token, password) => {
+  const { email, id } = await jwt.decode(token, jwtVar.secret);
+  const user = await User.findOne({
+    where: {
+      id,
+      email,
+    },
+  });
+  await user.update({ password });
+  return user;
+};
+
 export default userService;

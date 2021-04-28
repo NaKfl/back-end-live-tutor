@@ -37,4 +37,9 @@ router.post(
   userController.feedbackTutor,
 );
 
+router.post(
+  '/forgotPassword',
+  validate(userValidation.forgotPassword),
+  userController.forgotPassword,
+);
 export default router;

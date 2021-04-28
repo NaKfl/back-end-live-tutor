@@ -28,4 +28,11 @@ userValidation.feedbackTutor = {
     content: Joi.string().allow(null, ''),
   }),
 };
+
+userValidation.forgotPassword = {
+  body: Joi.object({
+    email: Joi.string().required().email(),
+  }),
+};
+
 export default userValidation;
