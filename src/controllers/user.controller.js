@@ -6,6 +6,8 @@ import {
   callService,
 } from 'services';
 import moment from 'moment';
+import { sendForgotPasswordEmail } from 'configs/nodemailer';
+
 const userController = {};
 
 userController.getInfo = catchAsync(async (req, res) => {
@@ -40,7 +42,7 @@ userController.manageFavoriteTutor = catchAsync(async (req, res) => {
 userController.updateAvatar = catchAsync(async (req, res) => {
   const file = req.file;
   const url =
-    'http://' + req.headers.host + `/${req.file.fieldname}/` + file.filename;
+    'http://' + req.headers.host + `/${file.fieldname}/` + file.filename;
   const result = await userService.uploadAvatar({
     id: req.user.id,
     locationFile: url,
@@ -77,4 +79,20 @@ userController.getCallSessionHistory = catchAsync(async (req, res) => {
   });
   res.send(result);
 });
+
+userController.forgotPassword = catchAsync(async (req, res) => {
+  const { email } = req.body;
+  const token = await userService.forgotPasswordRequest({ email });
+  const origin = req.headers?.origin || 'http://localhost:3000';
+  const linkToken = `${origin}/resetpassword?token=${token}`;
+  await sendForgotPasswordEmail({ receiver: email, link: linkToken });
+  res.send({ message: 'Email send success!' });
+});
+
+userController.ressetPassword = catchAsync(async (req, res) => {
+  const { token, password } = req.body;
+  const user = await userService.resetPassword(token, password);
+  res.send(user);
+});
+
 export default userController;
