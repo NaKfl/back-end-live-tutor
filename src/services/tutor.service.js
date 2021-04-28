@@ -159,6 +159,7 @@ tutorService.createWithUserId = async (fields, userId, avatar, video) => {
 };
 
 tutorService.search = async ({ search, page, perPage }) => {
+  console.log({ search, page, perPage });
   let where = {
     isActivated: true,
   };
@@ -195,6 +196,7 @@ tutorService.search = async ({ search, page, perPage }) => {
     ],
     ...paginate({ page, perPage }),
   });
+
   const tutorsByName = await Tutor.findAndCountAll({
     where: {
       isActivated: true,
@@ -231,7 +233,6 @@ tutorService.search = async ({ search, page, perPage }) => {
   });
 
   const matchTutor = SetById([...tutors.rows, ...tutorsByName.rows]);
-
   const promises = matchTutor.map(async (tutor) => {
     const user = tutor.User;
     const groupUser = { ...user.dataValues, ...tutor.dataValues };

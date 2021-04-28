@@ -2,6 +2,7 @@ import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
 
+const dirUpload = path.join(__dirname, '../uploads');
 const dirAvatar = path.join(__dirname, '../uploads/avatar');
 const dirVideo = path.join(__dirname, '../uploads/video');
 const dirTemp = path.join(__dirname, '../uploads/temp');
@@ -21,6 +22,13 @@ function ensureExists(path, mask, cb) {
 }
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
+    ensureExists(dirUpload, 0o744, function (err) {
+      if (err) {
+        console.log(err);
+      } else {
+        cb(null, path.join(dirAvatar));
+      }
+    });
     const fieldname = file.fieldname;
     if (fieldname === 'avatar') {
       ensureExists(dirAvatar, 0o744, function (err) {
@@ -52,20 +60,20 @@ const storage = multer.diskStorage({
     const user = req.user?.id;
     if (file.fieldname === 'avatar' || file.fieldname === 'video') {
       const typeImage = file.originalname.split('.')[1];
-      fs.readdirSync(path.join(__dirname, `../uploads/${file.fieldname}`))
-        ?.filter((file) => {
-          const f = file.split('.');
-          return f[0];
-        })
-        .forEach((existFile) => {
-          if (existFile.split('.')[0] === `${user + file.fieldname}`) {
-            fs.unlinkSync(
-              path.join(__dirname, `../uploads/${file.fieldname}/${existFile}`),
-            );
-          }
-        });
+      // fs.readdirSync(path.join(__dirname, `../uploads/${file.fieldname}`))
+      //   ?.filter((file) => {
+      //     const f = file.split('.');
+      //     return f[0];
+      //   })
+      //   .forEach((existFile) => {
+      //     if (existFile.split('.')[0] === `${user + file.fieldname}`) {
+      //       fs.unlinkSync(
+      //         path.join(__dirname, `../uploads/${file.fieldname}/${existFile}`),
+      //       );
+      //     }
+      //   });
       const uniqueSuffix = '.' + typeImage;
-      cb(null, user + file.fieldname + uniqueSuffix);
+      cb(null, user + file.fieldname + new Date().getTime() + uniqueSuffix);
     } else {
       cb(null, user + file.fieldname + file.originalname);
     }
