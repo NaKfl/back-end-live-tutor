@@ -1,5 +1,6 @@
 import catchAsync from 'utils/catchAsync';
-import { tutorService, favoriteService } from 'services';
+import { tutorService, favoriteService, userService } from 'services';
+import { ROLES } from 'utils/constants';
 
 const tutorController = {};
 
@@ -28,6 +29,7 @@ tutorController.register = catchAsync(async (req, res) => {
     avatar,
     video,
   );
+  await userService.createRole(req?.user?.id, ROLES.TUTOR);
   res.send(result);
 });
 
