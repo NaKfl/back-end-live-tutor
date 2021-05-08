@@ -9,11 +9,15 @@ import { jwt as jwtVar } from 'configs/vars';
 const userService = {};
 
 userService.getUserByEmail = async (email) => {
-  return await User.findOne({
+  const user = await User.findOne({
     where: {
       email,
     },
+    include: {
+      model: Role,
+    },
   });
+  return user;
 };
 
 userService.getUserById = async (id) => {
@@ -23,6 +27,9 @@ userService.getUserById = async (id) => {
     },
     where: {
       id,
+    },
+    include: {
+      model: Role,
     },
   });
 };
@@ -43,6 +50,15 @@ userService.createUser = async (userBody) => {
   const roleId = await Role.findRoleIdByName(ROLES.STUDENT);
   await UserRole.create({ userId: user.id, roleId });
   return user;
+};
+
+userService.createRole = async (userId, roleName) => {
+  const roleId = await Role.findRoleIdByName(roleName);
+
+  return await UserRole.create({
+    userId,
+    roleId,
+  });
 };
 
 userService.getRolesFromId = async (id) => {
@@ -78,6 +94,9 @@ userService.oAuthLogin = async ({
         },
       },
     },
+    include: {
+      model: Role,
+    },
   });
   if (user) {
     user[service] = id;
@@ -86,13 +105,17 @@ userService.oAuthLogin = async ({
     return user.save();
   }
   const password = uuidv4();
-  return User.create({
+
+  const newUser = await User.create({
     [service]: id,
     email,
     password,
     name,
     avatar,
   });
+
+  await userService.createRole(newUser.id, ROLES.STUDENT);
+  return await userService.getUserById(newUser.id);
 };
 
 userService.uploadAvatar = async ({ id, locationFile }) => {
