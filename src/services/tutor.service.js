@@ -1,4 +1,10 @@
-import { Tutor, User, TutorFeedback, FavoriteTutor } from 'database/models';
+import {
+  Tutor,
+  User,
+  TutorFeedback,
+  FavoriteTutor,
+  sequelize,
+} from 'database/models';
 import { paginate, searchHelp, SetById } from 'utils/sequelize';
 import { Op } from 'sequelize';
 import { onlineUsers } from 'sockets/controllers';
@@ -244,6 +250,54 @@ tutorService.search = async ({ search, page, perPage }) => {
   const result = await Promise.all(promises);
 
   return { count: tutorsByName.count + tutors.count, rows: result };
+};
+
+tutorService.getListRankTutor = async (num) => {
+  const numberOfTutor = num ? num : 5;
+  const listTutorIds = await Tutor.findAll({
+    where: sequelize.where(sequelize.col('User.feedbacks.rating'), {
+      [Op.ne]: null,
+    }),
+    order: [
+      [sequelize.fn('AVG', sequelize.col('User.feedbacks.rating')), 'DESC'],
+    ],
+    limit: numberOfTutor,
+    include: [
+      {
+        model: User,
+        attributes: [
+          'name',
+          'email',
+          'avatar',
+          'country',
+          [
+            sequelize.fn('AVG', sequelize.col('User.feedbacks.rating')),
+            'avgRating',
+          ],
+        ],
+        include: [
+          {
+            model: TutorFeedback,
+            as: 'feedbacks',
+            attributes: [],
+            duplicating: false,
+            required: false,
+          },
+        ],
+      },
+    ],
+    group: [
+      'Tutor.id',
+      'User.name',
+      'User.email',
+      'User.avatar',
+      'User.country',
+    ],
+    raw: true,
+    nest: true,
+  });
+
+  return listTutorIds;
 };
 
 export default tutorService;

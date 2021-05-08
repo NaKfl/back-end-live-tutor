@@ -58,9 +58,18 @@ const chatHandler = (io, socket) => {
 
   socket.on('chat:readMessage', async ({ conversation }) => {
     if (!conversation) return;
+
+    const {
+      fromInfo: { id: fromId },
+      toInfo: { id: toId },
+    } = conversation;
     const user = await onlineUsers.getUserBySocketId(socket.id);
     await messageService.updateOne(conversation);
     returnRecentList(user?.id);
+    returnMessages({
+      fromId,
+      toId,
+    });
   });
 
   socket.on('connection:login', () => {

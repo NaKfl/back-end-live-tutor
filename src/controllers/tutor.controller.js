@@ -73,4 +73,10 @@ tutorController.searchTutor = catchAsync(async (req, res) => {
   res.json({ tutors, favoriteTutor });
 });
 
+tutorController.getListRankTutor = catchAsync(async (req, res) => {
+  const { num } = req.params;
+  const data = await tutorService.getListRankTutor(num);
+  res.json({ message: 'Success', data });
+});
+
 export default tutorController;
