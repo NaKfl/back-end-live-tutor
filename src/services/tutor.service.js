@@ -215,7 +215,7 @@ tutorService.search = async ({ search, page, perPage }) => {
         },
         where: {
           name: {
-            [Op.like]: `%${search}%`,
+            [Op.iLike]: `%${search}%`,
           },
         },
         include: [
