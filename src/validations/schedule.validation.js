@@ -19,7 +19,10 @@ scheduleValidation.getOne = {
 
 scheduleValidation.register = {
   body: Joi.object({
-    date: Joi.date().required(),
+    date: Joi.date(),
+    startDate: Joi.date(),
+    endDate: Joi.date(),
+    isRepeated: Joi.boolean(),
     startTime: Joi.string()
       .regex(/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/)
       .required(),

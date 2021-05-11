@@ -21,7 +21,13 @@ scheduleController.getOne = catchAsync(async (req, res) => {
 
 scheduleController.register = catchAsync(async (req, res) => {
   const { user, body } = req;
-  const data = await scheduleService.register(user?.id, body);
+  const { isRepeated } = body;
+  let data;
+  if (isRepeated) {
+    data = await scheduleService.registerRepeatDays(user?.id, body);
+  } else {
+    data = await scheduleService.register(user?.id, body);
+  }
   return res.json({ message: 'Register schedule successful', data });
 });
 
