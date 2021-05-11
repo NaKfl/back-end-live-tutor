@@ -173,6 +173,24 @@ scheduleService.register = async (tutorId, fields) => {
   return schedule;
 };
 
+scheduleService.registerRepeatDays = async (tutorId, fields) => {
+  const { startTime, endTime, startDate, endDate } = fields;
+  const numOfDays = moment(endDate).diff(moment(startDate), 'days');
+  const registerSchedulePromises = [];
+  let dateRegister = startDate;
+  for (let i = 0; i < numOfDays; i++) {
+    const fields = {
+      startTime,
+      endTime,
+      date: dateRegister,
+    };
+    registerSchedulePromises.push(scheduleService.register(tutorId, fields));
+    dateRegister = moment(dateRegister).add(1, 'days');
+  }
+  const results = Promise.all(registerSchedulePromises);
+  return results;
+};
+
 scheduleService.unregister = async (scheduleId) => {
   const deletedScheduleDetails = await ScheduleDetail.findAll({
     where: {
