@@ -37,15 +37,15 @@ tutorController.getOne = catchAsync(async (req, res) => {
   const { user } = req;
   const { id: tutorUserId } = req.params;
   let responseData = {};
-  const rawResult = await tutorService.getOne(tutorUserId);
-  if (rawResult) {
-    responseData = rawResult.toJSON();
-
+  const { tutor, avgRating } = await tutorService.getOne(tutorUserId);
+  if (tutor) {
+    responseData = tutor.toJSON();
     const isFavorite = await tutorService.checkIsFavoriteTutorByUserId(
       user.id,
       tutorUserId,
     );
     responseData.isFavorite = isFavorite;
+    responseData.avgRating = avgRating ? avgRating : 0;
   }
   res.send(responseData);
 });

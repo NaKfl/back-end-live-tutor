@@ -8,6 +8,14 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.UUID,
       },
+      sessionId: {
+        type: Sequelize.UUID,
+        allowNull: false,
+        references: {
+          model: 'CallSessions',
+          key: 'id',
+        },
+      },
       firstId: {
         type: Sequelize.UUID,
         allowNull: false,

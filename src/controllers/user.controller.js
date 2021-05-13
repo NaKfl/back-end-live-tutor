@@ -52,8 +52,9 @@ userController.updateAvatar = catchAsync(async (req, res) => {
 
 userController.feedbackTutor = catchAsync(async (req, res) => {
   const { user, body } = req;
-  const { tutorId, rating, content } = body;
+  const { sessionId, tutorId, rating, content } = body;
   const data = await feedbackService.feedbackTutor({
+    sessionId,
     firstId: user.id,
     secondId: tutorId,
     rating,

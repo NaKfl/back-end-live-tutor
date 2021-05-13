@@ -1,8 +1,8 @@
-import e from 'cors';
-import { TutorFeedback } from 'database/models';
+import { TutorFeedback, CallSession } from 'database/models';
 const feedbackService = {};
 
 feedbackService.feedbackTutor = async ({
+  sessionId,
   firstId,
   secondId,
   content,
@@ -33,12 +33,25 @@ feedbackService.feedbackTutor = async ({
     });
     return data;
   } else {
-    return await TutorFeedback.create({
+    const review = await TutorFeedback.create({
+      sessionId,
       firstId,
       secondId,
       content,
       rating,
     });
+
+    await CallSession.update(
+      {
+        isReviewed: true,
+      },
+      {
+        where: {
+          id: sessionId,
+        },
+      },
+    );
+    return review;
   }
 };
 
