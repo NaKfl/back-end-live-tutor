@@ -27,6 +27,14 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: DataTypes.UUIDV4,
         autoIncrement: false,
       },
+      sessionId: {
+        type: DataTypes.UUID,
+        allowNull: false,
+        references: {
+          model: 'CallSession',
+          key: 'id',
+        },
+      },
       firstId: DataTypes.UUID,
       secondId: DataTypes.UUID,
       rating: {

@@ -11,10 +11,6 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'studentId',
         as: 'studentInfo',
       });
-      this.hasOne(models.TutorFeedback, {
-        foreignKey: 'id',
-        as: 'feedbackInfo',
-      });
     }
   }
   CallSession.init(
@@ -42,15 +38,6 @@ module.exports = (sequelize, DataTypes) => {
           key: 'id',
         },
       },
-      feedbackId: {
-        allowNull: true,
-        type: DataTypes.UUID,
-        defaultValue: null,
-        references: {
-          model: 'TutorFeedback',
-          key: 'id',
-        },
-      },
       videoUrl: {
         type: DataTypes.STRING,
         allowNull: true,
@@ -64,6 +51,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         type: DataTypes.DATE,
       },
+      isReviewed: { type: DataTypes.BOOLEAN, defaultValue: false },
       createdAt: { type: DataTypes.DATE, defaultValue: new Date() },
       updatedAt: { type: DataTypes.DATE, defaultValue: new Date() },
     },

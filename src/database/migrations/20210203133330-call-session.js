@@ -24,14 +24,6 @@ module.exports = {
           key: 'id',
         },
       },
-      feedbackId: {
-        allowNull: true,
-        type: Sequelize.UUID,
-        references: {
-          model: 'TutorFeedbacks',
-          key: 'id',
-        },
-      },
       videoUrl: {
         type: Sequelize.STRING,
         allowNull: true,
@@ -43,6 +35,10 @@ module.exports = {
       endTime: {
         allowNull: false,
         type: Sequelize.DATE,
+      },
+      isReviewed: {
+        allowNull: false,
+        type: Sequelize.BOOLEAN,
       },
       createdAt: {
         allowNull: false,

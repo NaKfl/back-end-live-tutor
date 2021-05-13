@@ -65,7 +65,14 @@ tutorService.getMany = async (query) => {
 };
 
 tutorService.getOne = async (userId) => {
-  return await Tutor.findOne({
+  const feedback = await TutorFeedback.findOne({
+    separate: true,
+    attributes: [[sequelize.fn('AVG', sequelize.col('rating')), 'avgRating']],
+    where: {
+      secondId: userId,
+    },
+  });
+  const tutor = await Tutor.findOne({
     where: {
       userId,
     },
@@ -93,6 +100,7 @@ tutorService.getOne = async (userId) => {
       },
     ],
   });
+  return { tutor, avgRating: feedback.dataValues.avgRating };
 };
 
 tutorService.checkIsFavoriteTutorByUserId = async (firstId, secondId) => {
