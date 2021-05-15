@@ -8,51 +8,25 @@ feedbackService.feedbackTutor = async ({
   content,
   rating,
 }) => {
-  const feedback = await TutorFeedback.findOne({
-    where: {
-      firstId,
-      secondId,
-    },
+  const review = await TutorFeedback.create({
+    sessionId,
+    firstId,
+    secondId,
+    content,
+    rating,
   });
-  if (feedback) {
-    const fields = {
-      content,
-      rating,
-    };
-    await TutorFeedback.update(fields, {
-      where: {
-        firstId,
-        secondId,
-      },
-    });
-    const data = await TutorFeedback.findOne({
-      where: {
-        firstId,
-        secondId,
-      },
-    });
-    return data;
-  } else {
-    const review = await TutorFeedback.create({
-      sessionId,
-      firstId,
-      secondId,
-      content,
-      rating,
-    });
 
-    await CallSession.update(
-      {
-        isReviewed: true,
+  await CallSession.update(
+    {
+      isReviewed: true,
+    },
+    {
+      where: {
+        id: sessionId,
       },
-      {
-        where: {
-          id: sessionId,
-        },
-      },
-    );
-    return review;
-  }
+    },
+  );
+  return review;
 };
 
 export default feedbackService;
