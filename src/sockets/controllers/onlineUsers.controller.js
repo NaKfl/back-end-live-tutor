@@ -14,6 +14,15 @@ class OnlineUsers {
     return JSON.parse(await redis.getAsync(ONLINE_USERS));
   }
 
+  async getAllIdsExcludeMe() {
+    const users = JSON.parse(await redis.getAsync(ONLINE_USERS));
+    return (
+      Object.values(users)
+        .map((item) => item?.id)
+        .reverse() ?? []
+    );
+  }
+
   async getUserById(userId) {
     const users = JSON.parse(await redis.getAsync(ONLINE_USERS));
     return users[userId] ?? null;
