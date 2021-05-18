@@ -64,6 +64,53 @@ tutorService.getMany = async (query) => {
   return { ...tutors, rows: result };
 };
 
+tutorService.getAllOnlineTutors = async () => {
+  const allIdsExcludeMe = await onlineUsers.getAllIdsExcludeMe();
+  const tutors = await Tutor.findAndCountAll({
+    where: {
+      isActivated: true,
+    },
+    include: [
+      {
+        model: User,
+        where: {
+          id: allIdsExcludeMe,
+        },
+        attributes: {
+          exclude: ['id', 'password'],
+        },
+        include: [
+          {
+            model: TutorFeedback,
+            as: 'feedbacks',
+            include: [
+              {
+                model: User,
+                as: 'firstInfo',
+                attributes: {
+                  exclude: ['id', 'password'],
+                },
+              },
+            ],
+          },
+        ],
+      },
+    ],
+    raw: true,
+    nest: true,
+  });
+  const ratedTutors = tutors?.rows.map((item) => {
+    const rating =
+      item?.feedbacks?.reduce((acc, curr) => acc + curr.rating, 0) ?? 0;
+    if (item?.feedbacks?.length > 0) {
+      item.rating = +(rating / item.feedbacks.length).toFixed(1);
+    }
+    item.isOnline = true;
+    return { ...item.User, ...item };
+  });
+  return ratedTutors;
+};
+
 tutorService.getOne = async (userId) => {
   const feedback = await TutorFeedback.findOne({
     separate: true,
