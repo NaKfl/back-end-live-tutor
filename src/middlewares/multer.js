@@ -29,7 +29,7 @@ const storage = multer.diskStorage({
     });
     const fieldname = file.fieldname;
     if (fieldname === 'avatar') {
-      ensureExists(dirAvatar, 0o744, function (err) {
+      ensureExists(dirAvatar, { recursive: true }, function (err) {
         if (err) {
           console.log(err);
         } else {
@@ -37,7 +37,7 @@ const storage = multer.diskStorage({
         }
       });
     } else if (fieldname === 'video') {
-      ensureExists(dirVideo, 0o744, function (err) {
+      ensureExists(dirVideo, { recursive: true }, function (err) {
         if (err) {
           console.log(err);
         } else {
@@ -45,7 +45,7 @@ const storage = multer.diskStorage({
         }
       });
     } else {
-      ensureExists(dirTemp, 0o744, function (err) {
+      ensureExists(dirTemp, { recursive: true }, function (err) {
         if (err) {
           console.log(err);
         } else {
