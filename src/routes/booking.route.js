@@ -20,4 +20,6 @@ router.delete(
   bookingController.cancelBooking,
 );
 
+router.get('/', auth(), bookingController.getListBooking);
+
 export default router;

@@ -15,4 +15,14 @@ bookingController.cancelBooking = catchAsync(async (req, res) => {
   return res.json({ message: 'Cancel booking successful' });
 });
 
+bookingController.getListBooking = catchAsync(async (req, res) => {
+  const { user, query } = req;
+  const data = await bookingService.getList({
+    userId: user?.id,
+    ...query,
+  });
+
+  return res.json({ message: 'Cancel booking successful', data });
+});
+
 export default bookingController;

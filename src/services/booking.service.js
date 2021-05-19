@@ -2,6 +2,7 @@ import { Booking, User, ScheduleDetail, Schedule } from 'database/models';
 import httpStatus from 'http-status';
 import ApiError from 'utils/ApiError';
 import { confirmBookingNewSchedule } from 'configs/nodemailer';
+import { paginate } from 'utils/sequelize';
 import moment from 'moment';
 
 const bookingService = {};
@@ -97,6 +98,35 @@ bookingService.cancelBooking = async (userId, scheduleDetailIds) => {
   });
 
   return deletedBookings;
+};
+
+bookingService.getList = async ({ userId, page = 1, perPage = 10 }) => {
+  const bookingList = await Booking.findAll({
+    include: [
+      {
+        model: ScheduleDetail,
+        as: 'scheduleDetailInfo',
+        include: [
+          {
+            model: Schedule,
+            as: 'scheduleInfo',
+            include: [
+              {
+                model: User,
+                as: 'tutorInfo',
+              },
+            ],
+          },
+        ],
+      },
+    ],
+    where: {
+      userId,
+    },
+    ...paginate({ page, perPage }),
+    order: [['createdAt', 'DESC']],
+  });
+  return bookingList;
 };
 
 export default bookingService;
