@@ -13,7 +13,7 @@ const userController = {};
 userController.getInfo = catchAsync(async (req, res) => {
   const { id } = req.user;
   const user = await userService.getUserById(id);
-  res.json({ user });
+  res.json({ user: user.transform() });
 });
 
 userController.updateInfo = catchAsync(async (req, res) => {
