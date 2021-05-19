@@ -55,7 +55,6 @@ const storage = multer.diskStorage({
     }
   },
   filename: function (req, file, cb) {
-    console.log(file);
     const user = req.user?.id;
     if (file.fieldname === 'avatar' || file.fieldname === 'video') {
       const typeImage = file.originalname.split('.')[1];

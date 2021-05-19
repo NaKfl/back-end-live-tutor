@@ -91,6 +91,9 @@ module.exports = (sequelize, DataTypes) => {
       'country',
       'phone',
       'roles',
+      'language',
+      'birthday',
+      'isActivated',
     ];
     return pick(this, fields);
   };
