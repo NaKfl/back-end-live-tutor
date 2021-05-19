@@ -26,6 +26,8 @@ services:
     command: sh -c "./wait-for-it.sh database:5432 && npm run migrate && npm run migrate:seed && pm2-runtime ecosystem.config.js"
     ports:
       - 6969:6969
+    volumes:
+      - ./src/uploads:/src/uploads
 
   database:
     image: postgres:13
@@ -36,5 +38,6 @@ services:
 
   redis:
     image: redis:6.2.1
-    ports:
-      - 6379:6379
+    command: redis-server --appendonly yes
+    volumes:
+      - ./data:/data
