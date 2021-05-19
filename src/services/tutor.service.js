@@ -220,7 +220,6 @@ tutorService.createWithUserId = async (fields, userId, avatar, video) => {
 };
 
 tutorService.search = async ({ search, page, perPage }) => {
-  console.log({ search, page, perPage });
   let where = {
     isActivated: true,
   };

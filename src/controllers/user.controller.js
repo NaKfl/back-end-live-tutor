@@ -67,7 +67,6 @@ userController.endCall = catchAsync(async (req, res) => {
   const field = req.body;
   field.startTime = new Date(field.startTime);
   field.endTime = moment(field.endTime).toISOString();
-  console.log(field);
   const result = await callService.add(field);
   res.send(result);
 });
