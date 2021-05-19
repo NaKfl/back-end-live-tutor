@@ -27,7 +27,7 @@ services:
     ports:
       - 6969:6969
     volumes:
-      - ./src/uploads:/src/uploads
+      - ./uploads:/server/build/uploads
 
   database:
     image: postgres:13
