@@ -1,4 +1,4 @@
-import { Role, User, UserRole } from 'database/models';
+import { Role, User, UserRole, Tutor } from 'database/models';
 import httpStatus from 'http-status';
 import ApiError from 'utils/ApiError';
 import { Op } from 'sequelize';
@@ -31,6 +31,18 @@ userService.getUserById = async (id) => {
     include: {
       model: Role,
     },
+  });
+};
+
+userService.getInfoById = async (id) => {
+  return await User.findOne({
+    attributes: {
+      exclude: ['password'],
+    },
+    where: {
+      id,
+    },
+    include: [{ model: Role }, { model: Tutor, as: 'tutorInfo' }],
   });
 };
 

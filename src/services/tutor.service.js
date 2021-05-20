@@ -64,6 +64,53 @@ tutorService.getMany = async (query) => {
   return { ...tutors, rows: result };
 };
 
+tutorService.getMore = async (query, user) => {
+  const { page, perPage } = query;
+  const tutors = await Tutor.findAndCountAll({
+    where: {
+      isActivated: true,
+    },
+    include: [
+      {
+        model: User,
+        where: {
+          [Op.not]: [{ id: user?.id }],
+        },
+        attributes: {
+          exclude: ['id', 'password'],
+        },
+        include: [
+          {
+            model: TutorFeedback,
+            as: 'feedbacks',
+            include: [
+              {
+                model: User,
+                as: 'firstInfo',
+                attributes: {
+                  exclude: ['id', 'password'],
+                },
+              },
+            ],
+          },
+        ],
+      },
+    ],
+    ...paginate({ page, perPage }),
+  });
+
+  const promises = tutors.rows.map(async (tutor) => {
+    const user = tutor.User;
+    const groupUser = { ...user.dataValues, ...tutor.dataValues };
+    groupUser.isOnline = await onlineUsers.isUserOnline(tutor.userId);
+    delete groupUser.User;
+    return groupUser;
+  });
+
+  const result = await Promise.all(promises);
+  return { ...tutors, rows: result };
+};
+
 tutorService.getAllOnlineTutors = async () => {
   const allIdsExcludeMe = await onlineUsers.getAllIdsExcludeMe();
   const tutors = await Tutor.findAndCountAll({

@@ -260,6 +260,27 @@ const topics = courses.reduce((pre, now) => {
   return [...pre, ...topic];
 }, []);
 
+const MAJOR_NAMES = [
+  { englishName: 'Foreign Languages', vietnameseName: 'Ngoại ngữ' },
+  { englishName: 'Marketing', vietnameseName: 'Marketing' },
+  { englishName: 'Office Information', vietnameseName: 'Tin học văn phòng' },
+  { englishName: 'Design', vietnameseName: 'Thiết kế' },
+  { englishName: 'Business', vietnameseName: 'Kinh doanh' },
+  { englishName: 'Health Care', vietnameseName: 'Chăm sóc sức khỏe' },
+  {
+    englishName: 'Information Technology',
+    vietnameseName: 'Công nghệ thông tin',
+  },
+];
+
+const majors = MAJOR_NAMES.map(({ englishName, vietnameseName }) => ({
+  id: faker.random.uuid(),
+  englishName,
+  vietnameseName,
+  createdAt: new Date(),
+  updatedAt: new Date(),
+}));
+
 module.exports = {
   tutors,
   students,
@@ -275,6 +296,7 @@ module.exports = {
   bookings,
   topics,
   courses,
+  majors,
   up: () => Promise.resolve(),
   down: () => Promise.resolve(),
 };
