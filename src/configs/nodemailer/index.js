@@ -5,6 +5,7 @@ import {
   jwt as jwtVar,
 } from 'configs/vars';
 import bookingConfirm from './templates/bookingConfirm';
+import activateAccount from './templates/activateAccount';
 import { forgotPassword } from './templates/forgotPassword';
 import jwt from 'jsonwebtoken';
 
@@ -60,6 +61,19 @@ export const sendForgotPasswordEmail = async ({ receiver, link }) => {
       subject: 'Reset your password email',
       to: receiver,
       html: forgotPassword(link),
+    });
+  } catch (error) {
+    console.log('Error: ', error);
+  }
+};
+
+export const sendMailActivateAccount = async (user, verifyLink) => {
+  try {
+    await transporter.sendMail({
+      from: `"Live tutor" peterpans2030@gmail.com`,
+      to: user?.email,
+      subject: 'Verify your email address',
+      html: activateAccount(verifyLink),
     });
   } catch (error) {
     console.log('Error: ', error);
