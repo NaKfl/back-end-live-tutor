@@ -6,7 +6,7 @@ const tutorController = {};
 
 tutorController.getMany = catchAsync(async (req, res) => {
   const { query, user } = req;
-  const tutors = await tutorService.search(query);
+  const tutors = await tutorService.getMany(query);
   const favoriteTutor = await favoriteService.getListFavoriteTutorById(user.id);
   res.json({ tutors, favoriteTutor });
 });
@@ -75,17 +75,22 @@ tutorController.scheduleRegister = catchAsync(async (req, res) => {
   res.json({ message: 'Success', data });
 });
 
-tutorController.searchTutor = catchAsync(async (req, res) => {
-  const { query, user } = req;
-  const tutors = await tutorService.search(query);
-  const favoriteTutor = await favoriteService.getListFavoriteTutorById(user.id);
-  res.json({ tutors, favoriteTutor });
-});
-
 tutorController.getListRankTutor = catchAsync(async (req, res) => {
   const { num } = req.params;
   const data = await tutorService.getListRankTutor(num);
   res.json({ message: 'Success', data });
+});
+
+tutorController.searchTutor = catchAsync(async (req, res) => {
+  const { filters, search, page, perPage } = req.body;
+  console.log({ filters, search, page, perPage });
+  const result = await tutorService.searchWithFilter({
+    filters,
+    search,
+    page,
+    perPage,
+  });
+  res.send(result);
 });
 
 export default tutorController;

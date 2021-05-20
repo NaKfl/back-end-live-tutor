@@ -22,6 +22,7 @@ function ensureExists(path, mask, cb) {
 }
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
+    console.log(file);
     ensureExists(dirUpload, 0o744, function (err) {
       if (err) {
         console.log(err);
@@ -41,7 +42,7 @@ const storage = multer.diskStorage({
         if (err) {
           console.log(err);
         } else {
-          cb(null, dirAvatar);
+          cb(null, dirVideo);
         }
       });
     } else {

@@ -44,4 +44,5 @@ router.put(
   tutorController.updateTutor,
 );
 
+router.post('/search', auth(), tutorController.searchTutor);
 export default router;

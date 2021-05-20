@@ -43,3 +43,12 @@ export const getProtocol = (req) => {
   proto = req.headers['x-forwarded-proto'] || proto;
   return proto.split(/\s*,\s*/)[0];
 };
+
+export const includeArray = (superset, subset) => {
+  if (0 === subset.length) {
+    return false;
+  }
+  return subset.every(function (value) {
+    return superset.indexOf(value) >= 0;
+  });
+};

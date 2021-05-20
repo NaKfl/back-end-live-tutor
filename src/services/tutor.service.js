@@ -266,93 +266,6 @@ tutorService.createWithUserId = async (fields, userId, avatar, video) => {
   }
 };
 
-tutorService.search = async ({ search, page, perPage }) => {
-  let where = {
-    isActivated: true,
-  };
-  if (search) {
-    where = {
-      isActivated: true,
-      [Op.or]: searchHelp({ Op, keys: null, searchKey: search }),
-    };
-  }
-  const tutors = await Tutor.findAndCountAll({
-    where,
-    include: [
-      {
-        model: User,
-        attributes: {
-          exclude: ['id', 'password'],
-        },
-        include: [
-          {
-            model: TutorFeedback,
-            as: 'feedbacks',
-            include: [
-              {
-                model: User,
-                as: 'firstInfo',
-                attributes: {
-                  exclude: ['id', 'password'],
-                },
-              },
-            ],
-          },
-        ],
-      },
-    ],
-    ...paginate({ page, perPage }),
-  });
-
-  const tutorsByName = await Tutor.findAndCountAll({
-    where: {
-      isActivated: true,
-    },
-    include: [
-      {
-        model: User,
-        attributes: {
-          exclude: ['id', 'password'],
-        },
-        where: {
-          name: {
-            [Op.iLike]: `%${search}%`,
-          },
-        },
-        include: [
-          {
-            model: TutorFeedback,
-            as: 'feedbacks',
-            include: [
-              {
-                model: User,
-                as: 'firstInfo',
-                attributes: {
-                  exclude: ['id', 'password'],
-                },
-              },
-            ],
-          },
-        ],
-      },
-    ],
-    ...paginate({ page, perPage }),
-  });
-
-  const matchTutor = SetById([...tutors.rows, ...tutorsByName.rows]);
-  const promises = matchTutor.map(async (tutor) => {
-    const user = tutor.User;
-    const groupUser = { ...user.dataValues, ...tutor.dataValues };
-    groupUser.isOnline = await onlineUsers.isUserOnline(tutor.userId);
-    delete groupUser.User;
-    return groupUser;
-  });
-
-  const result = await Promise.all(promises);
-
-  return { count: tutorsByName.count + tutors.count, rows: result };
-};
-
 tutorService.getListRankTutor = async (num) => {
   const numberOfTutor = num ? num : 5;
   const listTutorIds = await Tutor.findAll({
@@ -399,6 +312,135 @@ tutorService.getListRankTutor = async (num) => {
   });
 
   return listTutorIds;
+};
+
+tutorService.searchWithFilter = async ({
+  search = '',
+  page = 1,
+  perPage = 20,
+  filters = {},
+}) => {
+  const { accents, ...filter } = filters;
+  // let accent = accents
+  //   ? {
+  //       accent: {
+  //         [Op.in]: accents,
+  //       },
+  //     }
+  //   : {};
+
+  const where = Object.keys(filter).reduce(
+    (pre, now) => {
+      return {
+        ...pre,
+        [now]: {
+          [Op.contains]: filter[now],
+        },
+      };
+    },
+    search !== ''
+      ? {
+          isActivated: true,
+        }
+      : {},
+  );
+
+  let andFilter = Object.keys(where).map((key) => ({ [key]: where[key] }));
+
+  const tutorsFilter = await Tutor.findAndCountAll({
+    where: {
+      [Op.and]: [
+        ...andFilter,
+        {
+          [Op.or]: searchHelp({
+            Op,
+            keys: [
+              'education',
+              'bio',
+              'experience',
+              'profession',
+              'accent',
+              'interests',
+              'resume',
+            ],
+            searchKey: search,
+          }),
+        },
+      ],
+    },
+    include: [
+      {
+        model: User,
+        attributes: {
+          exclude: ['id', 'password'],
+        },
+        include: [
+          {
+            model: TutorFeedback,
+            as: 'feedbacks',
+            include: [
+              {
+                model: User,
+                as: 'firstInfo',
+                attributes: {
+                  exclude: ['id', 'password'],
+                },
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  });
+
+  let matchTutor = tutorsFilter?.rows;
+  if (search) {
+    const tutorsByName = await Tutor.findAndCountAll({
+      where: {
+        isActivated: true,
+        ...where,
+      },
+      include: [
+        {
+          model: User,
+          attributes: {
+            exclude: ['id', 'password'],
+          },
+          where: {
+            name: {
+              [Op.iLike]: `%${search}%`,
+            },
+          },
+          include: [
+            {
+              model: TutorFeedback,
+              as: 'feedbacks',
+              include: [
+                {
+                  model: User,
+                  as: 'firstInfo',
+                  attributes: {
+                    exclude: ['id', 'password'],
+                  },
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    });
+    matchTutor = SetById([...tutorsFilter.rows, ...tutorsByName.rows]);
+  }
+
+  const promises = matchTutor
+    .map((tutor) => {
+      const user = tutor.User;
+      const groupUser = { ...user.dataValues, ...tutor.dataValues };
+      delete groupUser.User;
+      return groupUser;
+    })
+    .slice((page - 1) * perPage, (page - 1) * perPage + perPage);
+  return { count: matchTutor.length, rows: promises };
 };
 
 export default tutorService;
