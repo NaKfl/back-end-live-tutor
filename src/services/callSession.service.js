@@ -1,4 +1,4 @@
-import { sequelize, CallSession, User } from 'database/models';
+import { sequelize, CallSession, User, TutorFeedback } from 'database/models';
 import { query } from 'express';
 import { paginate } from 'utils/sequelize';
 
@@ -41,6 +41,21 @@ callSessionService.getSessionByStudentId = async ({
       include: {
         model: User,
         as: 'studentInfo',
+        include: [
+          {
+            model: TutorFeedback,
+            as: 'feedbacks',
+            include: [
+              {
+                model: User,
+                as: 'firstInfo',
+                attributes: {
+                  exclude: ['id', 'password'],
+                },
+              },
+            ],
+          },
+        ],
       },
     };
   } else {
@@ -51,6 +66,21 @@ callSessionService.getSessionByStudentId = async ({
       include: {
         model: User,
         as: 'tutorInfo',
+        include: [
+          {
+            model: TutorFeedback,
+            as: 'feedbacks',
+            include: [
+              {
+                model: User,
+                as: 'firstInfo',
+                attributes: {
+                  exclude: ['id', 'password'],
+                },
+              },
+            ],
+          },
+        ],
       },
     };
   }
