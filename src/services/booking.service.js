@@ -3,6 +3,7 @@ import httpStatus from 'http-status';
 import ApiError from 'utils/ApiError';
 import { confirmBookingNewSchedule } from 'configs/nodemailer';
 import { paginate } from 'utils/sequelize';
+import { v4 as uuidv4 } from 'uuid';
 import moment from 'moment';
 
 const bookingService = {};
@@ -65,11 +66,23 @@ bookingService.book = async (userId, scheduleDetailIds) => {
         };
       })
       .reverse();
-
+    const roomName = uuidv4();
+    const startTime = moment();
     confirmBookingNewSchedule({
-      receiver: student?.email,
-      tutor: scheduleDetails[0]?.scheduleInfo?.tutorInfo?.name,
+      student: student.dataValues,
+      tutor: scheduleDetails[0]?.scheduleInfo?.tutorInfo.dataValues,
       dates,
+      roomName,
+      startTime,
+      isSendTutor: true,
+    });
+    confirmBookingNewSchedule({
+      student: student.dataValues,
+      tutor: scheduleDetails[0]?.scheduleInfo?.tutorInfo.dataValues,
+      dates,
+      roomName,
+      startTime,
+      isSendTutor: false,
     });
   }
 

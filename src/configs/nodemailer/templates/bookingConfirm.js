@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable prettier/prettier */
 export default (bookingInfo) => {
   return `
@@ -7,8 +8,14 @@ export default (bookingInfo) => {
 </tr></table><table class="es-content" cellspacing="0" cellpadding="0" align="center"><tr></tr><tr><td align="center"><table class="es-header-body" style="background-color: #be52f2" width="600" cellspacing="0" cellpadding="0" bgcolor="#BE52F2" align="center"><tr><td class="es-p35t es-p35b es-p35r es-p35l" align="left"> <!--[if mso]><table width="530" cellpadding="0" cellspacing="0"><tr><td width="340" valign="top"><![endif]--><table class="es-left" cellspacing="0" cellpadding="0" align="left"><tr><td class="es-m-p0r es-m-p20b" width="340" valign="top" align="center"><table width="100%" cellspacing="0" cellpadding="0" role="presentation"><tr><td class="es-m-txt-c" align="left"><h1 style="color: #ffffff;line-height: 100%">Live Tutor</h1></td></tr></table></td></tr></table> <!--[if mso]></td><td width="20"></td>
 <td width="170" valign="top"><![endif]--><table cellspacing="0" cellpadding="0" align="right"><tr><td width="170" align="left"><table width="100%" cellspacing="0" cellpadding="0"><tr><td align="center" style="font-size: 0px"><img class="adapt-img" src="https://pbmqug.stripocdn.email/content/guids/cba01582-caf4-40f1-bcfe-6b2507af9322/images/82161617276539403.png" alt style="display: block" width="170" height="170" layout="responsive"></td></tr><tr><td><table cellspacing="0" cellpadding="0" align="right"><tr><td align="center" style="display: none"></td></tr></table></td></tr></table></td></tr></table> <!--[if mso]></td></tr></table><![endif]--></td></tr></table></td>
 </tr></table><table class="es-content" cellspacing="0" cellpadding="0" align="center"><tr><td align="center"><table class="es-content-body" width="600" cellspacing="0" cellpadding="0" bgcolor="#ffffff" align="center"><tr><td class="es-p40t es-p35b es-p35r es-p35l" style="background-color: #f7f7f7" bgcolor="#f7f7f7" align="left"><table width="100%" cellspacing="0" cellpadding="0"><tr><td width="530" valign="top" align="center"><table width="100%" cellspacing="0" cellpadding="0" role="presentation"><tr><td class="es-p20t es-p25b es-p35r es-p35l" align="center" style="font-size: 0px"><a target="_blank" href="https://viewstripo.email/"><img src="https://pbmqug.stripocdn.email/content/guids/cba01582-caf4-40f1-bcfe-6b2507af9322/images/65491617276875042.png" alt="ship" style="display: block" title="ship" width="150" height="150"></a></td>
-</tr><tr><td class="es-p15b" align="center"><h2 style="color: #333333;font-family: 'open sans', 'helvetica neue', helvetica, arial, sans-serif">Your Booking Was Successful</h2></td></tr></table></td></tr></table></td></tr><tr><td class="es-p40t es-p40b es-p35r es-p35l" align="left"><table width="100%" cellspacing="0" cellpadding="0"><tr><td width="530" valign="top" align="center"><table width="100%" cellspacing="0" cellpadding="0" role="presentation"><tr><td class="es-p20t" align="center"><h3 style="color: #333333">Tutor:</h3></td></tr><tr><td class="es-p15t es-p10b" align="center"><p style="font-size: 16px;color: #777777">${
-    bookingInfo?.tutor || 'Error'
+</tr><tr><td class="es-p15b" align="center"><h2 style="color: #333333;font-family: 'open sans', 'helvetica neue', helvetica, arial, sans-serif">${
+    bookingInfo.isSendTutor
+      ? `You were booked by ${bookingInfo?.student?.name}`
+      : `Your Booking Was Successful`
+  }</h2></td></tr></table></td></tr></table></td></tr><tr><td class="es-p40t es-p40b es-p35r es-p35l" align="left"><table width="100%" cellspacing="0" cellpadding="0"><tr><td width="530" valign="top" align="center"><table width="100%" cellspacing="0" cellpadding="0" role="presentation"><tr><td class="es-p20t" align="center"><h3 style="color: #333333">Tutor:</h3></td></tr><tr><td class="es-p15t es-p10b" align="center"><p style="font-size: 16px;color: #777777">${
+    bookingInfo.isSendTutor
+      ? bookingInfo?.student?.name
+      : bookingInfo?.tutor?.name
   }</p></td></tr><tr><td class="es-p20t" align="center"><h3 style="color: #333333">Date:</h3></td></tr>${
     (bookingInfo?.dates &&
       bookingInfo.dates
@@ -25,7 +32,9 @@ export default (bookingInfo) => {
         )
         .join('')) ||
     'Error'
-  }<tr><td class="es-p20t es-p15b es-p10r es-p10l" align="center"><span class="es-button-border" style="background: #be52f2"><a href="https://livetutor.live" class="es-button" target="_blank" style="font-weight: normal;color: #ffffff;font-size: 18px;border-width: 15px 30px;background: #be52f2;border-color: #be52f2">Visit Live Tutor</a></span></td></tr></table></td></tr></table></td></tr></table></td></tr></table><table class="es-content" cellspacing="0" cellpadding="0" align="center"><tr><td align="center"><table class="es-content-body" style="background-color: transparent" width="600" cellspacing="0" cellpadding="0" align="center"><tr><td class="es-p30t es-p30b es-p20r es-p20l" align="left"><table width="100%" cellspacing="0" cellpadding="0"><tr><td width="560" valign="top" align="center"><table width="100%" cellspacing="0" cellpadding="0"><tr><td align="center" style="display: none"></td></tr></table></td></tr></table></td>
+  }<tr><td class="es-p20t es-p15b es-p10r es-p10l" align="center"><span class="es-button-border" style="background: #be52f2"><a href="${
+    bookingInfo?.link
+  }" class="es-button" target="_blank" style="font-weight: normal;color: #ffffff;font-size: 18px;border-width: 15px 30px;background: #be52f2;border-color: #be52f2">Join Meeting</a></span></td></tr></table></td></tr></table></td></tr></table></td></tr></table><table class="es-content" cellspacing="0" cellpadding="0" align="center"><tr><td align="center"><table class="es-content-body" style="background-color: transparent" width="600" cellspacing="0" cellpadding="0" align="center"><tr><td class="es-p30t es-p30b es-p20r es-p20l" align="left"><table width="100%" cellspacing="0" cellpadding="0"><tr><td width="560" valign="top" align="center"><table width="100%" cellspacing="0" cellpadding="0"><tr><td align="center" style="display: none"></td></tr></table></td></tr></table></td>
 </tr></table></td></tr></table></td></tr></table></div></body></html>
 `;
 };

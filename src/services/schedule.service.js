@@ -178,7 +178,7 @@ scheduleService.registerRepeatDays = async (tutorId, fields) => {
   const numOfDays = moment(endDate).diff(moment(startDate), 'days');
   const registerSchedulePromises = [];
   let dateRegister = startDate;
-  for (let i = 0; i < numOfDays; i++) {
+  for (let i = 0; i <= numOfDays; i++) {
     const fields = {
       startTime,
       endTime,

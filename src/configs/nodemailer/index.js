@@ -1,7 +1,12 @@
 import nodemailer from 'nodemailer';
-import { nodemailer as nodemailerVars, googleCredential } from 'configs/vars';
+import {
+  nodemailer as nodemailerVars,
+  googleCredential,
+  jwt as jwtVar,
+} from 'configs/vars';
 import bookingConfirm from './templates/bookingConfirm';
 import { forgotPassword } from './templates/forgotPassword';
+import jwt from 'jsonwebtoken';
 
 const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
@@ -18,9 +23,28 @@ const transporter = nodemailer.createTransport({
 
 export const confirmBookingNewSchedule = async (bookingInfo) => {
   try {
+    const userInfo = {
+      displayName: bookingInfo?.student?.name,
+      email: bookingInfo?.student?.email,
+    };
+    const token = jwt.sign(
+      {
+        participantId: bookingInfo?.tutor?.id,
+        roomName: bookingInfo?.roomName,
+        userInfo,
+        userCall: bookingInfo?.student,
+        userBeCalled: bookingInfo?.tutor,
+        isTutor: bookingConfirm?.isSendTutor,
+        startTime: bookingInfo?.startTime,
+      },
+      jwtVar.secret,
+    );
+    bookingInfo.link = `http://localhost:3000/call/?token=${token}`;
     await transporter.sendMail({
       from: `"Live tutor" peterpans2030@gmail.com`,
-      to: bookingInfo?.receiver,
+      to: bookingInfo?.isSendTutor
+        ? bookingInfo?.tutor?.email
+        : bookingInfo?.student?.email,
       subject: 'You already have register new schedule successfully',
       html: bookingConfirm(bookingInfo),
     });
