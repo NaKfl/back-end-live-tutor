@@ -11,6 +11,13 @@ tutorController.getMany = catchAsync(async (req, res) => {
   res.json({ tutors, favoriteTutor });
 });
 
+tutorController.getMore = catchAsync(async (req, res) => {
+  const { query, user } = req;
+  const tutors = await tutorService.getMore(query, user);
+  const favoriteTutor = await favoriteService.getListFavoriteTutorById(user.id);
+  res.json({ tutors, favoriteTutor });
+});
+
 tutorController.register = catchAsync(async (req, res) => {
   const file = req.files;
   const avatar =

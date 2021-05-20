@@ -82,7 +82,11 @@ module.exports = (sequelize, DataTypes) => {
   };
 
   User.prototype.transform = function () {
-    this.roles = this?.Roles?.map((role) => role?.name);
+    this.roles = this?.Roles?.filter((role) => {
+      if (role?.name === 'tutor') return this.tutorInfo?.isActivated;
+      return role?.name;
+    }).map((role) => role?.name);
+
     const fields = [
       'id',
       'email',
@@ -94,6 +98,7 @@ module.exports = (sequelize, DataTypes) => {
       'language',
       'birthday',
       'isActivated',
+      'tutorInfo',
     ];
     return pick(this, fields);
   };

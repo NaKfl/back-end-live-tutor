@@ -13,6 +13,13 @@ router.get(
   tutorController.getMany,
 );
 
+router.get(
+  '/more',
+  auth(),
+  validate(tutorValidation.getMany),
+  tutorController.getMore,
+);
+
 const cpUpload = upload.fields([
   { name: 'avatar', maxCount: 1 },
   { name: 'video', maxCount: 8 },
