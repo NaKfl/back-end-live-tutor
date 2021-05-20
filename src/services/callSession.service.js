@@ -73,7 +73,7 @@ callSessionService.getSessionByStudentId = async ({
             include: [
               {
                 model: User,
-                as: 'firstInfo',
+                as: 'secondInfo',
                 attributes: {
                   exclude: ['id', 'password'],
                 },
