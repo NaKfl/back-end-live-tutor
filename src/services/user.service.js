@@ -6,6 +6,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { ROLES } from 'utils/constants';
 import jwt from 'jsonwebtoken';
 import { jwt as jwtVar } from 'configs/vars';
+import { sendMailActivateAccount } from 'configs/nodemailer';
+
 const userService = {};
 
 userService.getUserByEmail = async (email) => {
@@ -54,13 +56,19 @@ userService.updateUserById = async (fields, id) => {
   });
 };
 
-userService.createUser = async (userBody) => {
+userService.createUser = async (userBody, origin) => {
   if (await User.isEmailTaken(userBody.email)) {
     throw new ApiError(httpStatus.BAD_REQUEST, 'Email already taken');
   }
   const user = await User.create(userBody);
   const roleId = await Role.findRoleIdByName(ROLES.STUDENT);
   await UserRole.create({ userId: user.id, roleId });
+  const token = await jwt.sign(
+    { id: user.id, email: user.email },
+    jwtVar.secret,
+  );
+  const verifyLink = `${origin}/verifyAccount?token=${token}`;
+  sendMailActivateAccount(user, verifyLink);
   return user;
 };
 
@@ -154,6 +162,21 @@ userService.forgotPasswordRequest = async ({ email }) => {
   );
   await user.update({ requestPassword: true });
   return token;
+};
+
+userService.verifyAccount = async (token) => {
+  const user = jwt.verify(token, jwtVar.secret);
+  const { id } = user;
+  const result = await User.update(
+    { isActivated: true },
+    {
+      where: {
+        id,
+      },
+    },
+  );
+
+  return result;
 };
 
 userService.resetPassword = async (token, password) => {

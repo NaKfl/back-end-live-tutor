@@ -26,4 +26,10 @@ authValidation.oAuth = {
   }),
 };
 
+authValidation.verifyAccount = {
+  query: Joi.object({
+    token: Joi.string().required(),
+  }),
+};
+
 export default authValidation;

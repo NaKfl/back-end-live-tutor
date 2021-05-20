@@ -14,6 +14,12 @@ router.post(
 
 router.post('/login', validate(authValidation.login), authController.login);
 
+router.get(
+  '/verifyAccount',
+  validate(authValidation.verifyAccount),
+  authController.verifyAccount,
+);
+
 router
   .route('/google')
   .post(
