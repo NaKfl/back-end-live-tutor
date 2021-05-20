@@ -20,8 +20,8 @@ const constKey = [
   'interests',
   'resume',
 ];
-export const searchHelp = ({ Op, keys, searchKey }) => {
-  return constKey.reduce((pre, now) => {
+export const searchHelp = ({ Op, keys = constKey, searchKey }) => {
+  return keys.reduce((pre, now) => {
     return [
       ...pre,
       Object.assign({}, { [now]: { [Op.like]: `%${searchKey}%` } }),

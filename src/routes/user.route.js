@@ -46,4 +46,5 @@ router.post(
 
 router.post('/resetpassword', userController.resetPassword);
 
+router.post('/search');
 export default router;
