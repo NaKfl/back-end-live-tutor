@@ -22,7 +22,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-export const confirmBookingNewSchedule = async (bookingInfo) => {
+export const confirmBookingNewSchedule = async ({ origin, ...bookingInfo }) => {
   try {
     const userInfo = {
       displayName: bookingInfo?.student?.name,
@@ -40,7 +40,7 @@ export const confirmBookingNewSchedule = async (bookingInfo) => {
       },
       jwtVar.secret,
     );
-    bookingInfo.link = `http://localhost:3000/call/?token=${token}`;
+    bookingInfo.link = `${origin}/call/?token=${token}`;
     await transporter.sendMail({
       from: `"Live tutor" peterpans2030@gmail.com`,
       to: bookingInfo?.isSendTutor

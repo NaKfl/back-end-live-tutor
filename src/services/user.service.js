@@ -133,7 +133,14 @@ userService.oAuthLogin = async ({
     name,
     avatar,
   });
-
+  await User.update(
+    { isActivated: true },
+    {
+      where: {
+        id: newUser.id,
+      },
+    },
+  );
   await userService.createRole(newUser.id, ROLES.STUDENT);
   return await userService.getUserById(newUser.id);
 };

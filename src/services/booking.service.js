@@ -8,7 +8,7 @@ import moment from 'moment';
 
 const bookingService = {};
 
-bookingService.book = async (userId, scheduleDetailIds) => {
+bookingService.book = async (userId, scheduleDetailIds, origin) => {
   const existsBookings = await Booking.findAll({
     where: {
       scheduleDetailId: scheduleDetailIds,
@@ -75,6 +75,7 @@ bookingService.book = async (userId, scheduleDetailIds) => {
       roomName,
       startTime,
       isSendTutor: true,
+      origin,
     });
     confirmBookingNewSchedule({
       student: student.dataValues,
@@ -83,6 +84,7 @@ bookingService.book = async (userId, scheduleDetailIds) => {
       roomName,
       startTime,
       isSendTutor: false,
+      origin,
     });
   }
 

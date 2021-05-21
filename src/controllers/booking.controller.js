@@ -5,7 +5,12 @@ const bookingController = {};
 
 bookingController.book = catchAsync(async (req, res) => {
   const { user, body } = req;
-  const data = await bookingService.book(user?.id, body?.scheduleDetailIds);
+  const origin = req.headers?.origin || 'http://localhost:3000';
+  const data = await bookingService.book(
+    user?.id,
+    body?.scheduleDetailIds,
+    origin,
+  );
   return res.json({ message: 'Book successful', data });
 });
 
