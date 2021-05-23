@@ -9,7 +9,17 @@ scheduleController.getMany = catchAsync(async (req, res) => {
   let data = null;
   if (tutorId) data = await scheduleService.getMany(tutorId, query);
   else data = await scheduleService.getMany(user?.id, query);
-  if (query?.date) data = Object.values(data)[0];
+  if (query?.date) {
+    data = Object.values(data)[0];
+    const listScheduleDetails = data[0].scheduleDetails;
+
+    const sortedArray = listScheduleDetails.sort((a, b) => {
+      const timeCur = a.startPeriod.split(':');
+      const timeNext = b.startPeriod.split(':');
+      return parseInt(timeCur[0]) - parseInt(timeNext[0]);
+    });
+    data[0].scheduleDetails = sortedArray;
+  }
   return res.json({ message: 'Get schedules successful', data });
 });
 
