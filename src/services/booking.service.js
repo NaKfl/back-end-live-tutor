@@ -66,12 +66,28 @@ bookingService.book = async (userId, scheduleDetailIds, origin) => {
         };
       })
       .reverse();
+    let result = [];
+    let tmp = [dates[0]];
+    if (dates.length !== 1) {
+      for (let i = 1; i < dates.length; i++) {
+        if (dates[i].start === tmp[tmp.length - 1].end) {
+          tmp.push(dates[i]);
+        } else {
+          result.push(tmp);
+          tmp = [dates[i]];
+        }
+        if (i === dates.length - 1) result.push(tmp);
+      }
+    } else {
+      result.push(tmp);
+    }
+
     const roomName = uuidv4();
     const startTime = moment();
     confirmBookingNewSchedule({
       student: student.dataValues,
       tutor: scheduleDetails[0]?.scheduleInfo?.tutorInfo.dataValues,
-      dates,
+      dates: result,
       roomName,
       startTime,
       isSendTutor: true,
@@ -80,7 +96,7 @@ bookingService.book = async (userId, scheduleDetailIds, origin) => {
     confirmBookingNewSchedule({
       student: student.dataValues,
       tutor: scheduleDetails[0]?.scheduleInfo?.tutorInfo.dataValues,
-      dates,
+      dates: result,
       roomName,
       startTime,
       isSendTutor: false,

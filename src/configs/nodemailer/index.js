@@ -28,19 +28,31 @@ export const confirmBookingNewSchedule = async ({ origin, ...bookingInfo }) => {
       displayName: bookingInfo?.student?.name,
       email: bookingInfo?.student?.email,
     };
-    const token = jwt.sign(
-      {
-        participantId: bookingInfo?.tutor?.id,
-        roomName: bookingInfo?.roomName,
-        userInfo,
-        userCall: bookingInfo?.student,
-        userBeCalled: bookingInfo?.tutor,
-        isTutor: bookingConfirm?.isSendTutor,
-        startTime: bookingInfo?.startTime,
-      },
-      jwtVar.secret,
-    );
-    bookingInfo.link = `${origin}/call/?token=${token}`;
+    const listDates = bookingInfo.dates.map((date) => {
+      const day = date[0].date;
+      const startPeriod = date[0].start;
+      const endPeriod = date[date.length - 1].end;
+      const token = jwt.sign(
+        {
+          participantId: bookingInfo?.tutor?.id,
+          roomName: bookingInfo?.roomName,
+          userInfo,
+          userCall: bookingInfo?.student,
+          userBeCalled: bookingInfo?.tutor,
+          isTutor: bookingConfirm?.isSendTutor,
+          startTime: bookingInfo?.startTime,
+        },
+        jwtVar.secret,
+      );
+      const link = `${origin}/call/?token=${token}`;
+      return {
+        date: day,
+        start: startPeriod,
+        end: endPeriod,
+        link,
+      };
+    });
+    bookingInfo.listDates = listDates;
     await transporter.sendMail({
       from: `"Live tutor" peterpans2030@gmail.com`,
       to: bookingInfo?.isSendTutor

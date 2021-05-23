@@ -12,29 +12,32 @@ export default (bookingInfo) => {
     bookingInfo.isSendTutor
       ? `You were booked by ${bookingInfo?.student?.name}`
       : `Your Booking Was Successful`
-  }</h2></td></tr></table></td></tr></table></td></tr><tr><td class="es-p40t es-p40b es-p35r es-p35l" align="left"><table width="100%" cellspacing="0" cellpadding="0"><tr><td width="530" valign="top" align="center"><table width="100%" cellspacing="0" cellpadding="0" role="presentation"><tr><td class="es-p20t" align="center"><h3 style="color: #333333">Tutor:</h3></td></tr><tr><td class="es-p15t es-p10b" align="center"><p style="font-size: 16px;color: #777777">${
+  }</h2></td></tr></table></td></tr></table></td></tr><tr><td class="es-p40t es-p40b es-p35r es-p35l" align="left"><table width="100%" cellspacing="0" cellpadding="0"><tr><td width="530" valign="top" align="center"><table width="100%" cellspacing="0" cellpadding="0" role="presentation"><tr><td class="es-p20t" align="center"><h3 style="color: #333333">${
+    bookingInfo.isSendTutor ? 'Student' : 'Tutor'
+  }:</h3></td></tr><tr><td class="es-p15t es-p10b" align="center"><p style="font-size: 16px;color: #777777">${
     bookingInfo.isSendTutor
       ? bookingInfo?.student?.name
       : bookingInfo?.tutor?.name
   }</p></td></tr><tr><td class="es-p20t" align="center"><h3 style="color: #333333">Date:</h3></td></tr>${
-    (bookingInfo?.dates &&
-      bookingInfo.dates
+    (bookingInfo?.listDates &&
+      bookingInfo.listDates
         ?.map(
-          ({ date, start, end }) => `
+          ({ date, start, end, link }) => `
           <tr>
             <td class="es-p15t es-p10b" align="center">
-              <p style="font-size: 16px; color: #777777">
+              <div style="display:flex; justify-content:center; align-items:center">
+              <p style="font-size: 16px; color: #777777; margin-right:10px">
                 ${date} from ${start} to ${end}
               </p>
+              <a href="${link}" class="es-button" target="_blank" style="font-weight: normal;color: #ffffff;font-size: 14px;border-width: 10px 20px;background: #be52f2;border-color: #be52f2">Join Meeting</a>
+              </div>
             </td>
           </tr>
         `,
         )
         .join('')) ||
     'Error'
-  }<tr><td class="es-p20t es-p15b es-p10r es-p10l" align="center"><span class="es-button-border" style="background: #be52f2"><a href="${
-    bookingInfo?.link
-  }" class="es-button" target="_blank" style="font-weight: normal;color: #ffffff;font-size: 18px;border-width: 15px 30px;background: #be52f2;border-color: #be52f2">Join Meeting</a></span></td></tr></table></td></tr></table></td></tr></table></td></tr></table><table class="es-content" cellspacing="0" cellpadding="0" align="center"><tr><td align="center"><table class="es-content-body" style="background-color: transparent" width="600" cellspacing="0" cellpadding="0" align="center"><tr><td class="es-p30t es-p30b es-p20r es-p20l" align="left"><table width="100%" cellspacing="0" cellpadding="0"><tr><td width="560" valign="top" align="center"><table width="100%" cellspacing="0" cellpadding="0"><tr><td align="center" style="display: none"></td></tr></table></td></tr></table></td>
+  }<tr><td class="es-p20t es-p15b es-p10r es-p10l" align="center"><span class="es-button-border" style="background: #be52f2"></span></td></tr></table></td></tr></table></td></tr></table></td></tr></table><table class="es-content" cellspacing="0" cellpadding="0" align="center"><tr><td align="center"><table class="es-content-body" style="background-color: transparent" width="600" cellspacing="0" cellpadding="0" align="center"><tr><td class="es-p30t es-p30b es-p20r es-p20l" align="left"><table width="100%" cellspacing="0" cellpadding="0"><tr><td width="560" valign="top" align="center"><table width="100%" cellspacing="0" cellpadding="0"><tr><td align="center" style="display: none"></td></tr></table></td></tr></table></td>
 </tr></table></td></tr></table></td></tr></table></div></body></html>
 `;
 };
