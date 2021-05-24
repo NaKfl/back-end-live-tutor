@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 export const pick = (object, keys) => {
   if (!keys) return object;
   return keys.reduce((obj, key) => {
@@ -51,4 +53,26 @@ export const includeArray = (superset, subset) => {
   return subset.every(function (value) {
     return superset.indexOf(value) >= 0;
   });
+};
+
+export const stringDate = (miliseconds) => {
+  let during = moment.duration(miliseconds);
+  const days = during.days();
+  const hours = during.hours();
+  const minutes = during.minutes();
+  const seconds = during.seconds();
+  let strDates = '';
+  if (days > 0) {
+    strDates = strDates + days + ' days ';
+  }
+  if (hours > 0) {
+    strDates = strDates + hours + ' hours ';
+  }
+  if (minutes > 0) {
+    strDates = strDates + minutes + ' minutes ';
+  }
+  if (seconds > 0) {
+    strDates = strDates + seconds + ' seconds ';
+  }
+  return strDates;
 };
