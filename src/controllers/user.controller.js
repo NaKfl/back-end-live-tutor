@@ -7,6 +7,7 @@ import {
 } from 'services';
 import moment from 'moment';
 import { sendForgotPasswordEmail } from 'configs/nodemailer';
+import { stringDate } from 'utils/common';
 
 const userController = {};
 
@@ -77,6 +78,18 @@ userController.getCallSessionHistory = catchAsync(async (req, res) => {
     id: user?.id,
     ...query,
   });
+  const listSessions = result.rows.map((row) => {
+    const callSession = row.toJSON();
+    const start = moment(callSession.startTime);
+    const end = moment(callSession.endTime);
+    const ms = end.diff(start) > 0 ? end.diff(start) : start.diff(end);
+
+    return {
+      ...callSession,
+      during: stringDate(ms),
+    };
+  });
+  result.rows = listSessions;
   res.send(result);
 });
 
