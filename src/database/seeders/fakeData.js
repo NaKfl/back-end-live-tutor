@@ -260,26 +260,71 @@ const topics = courses.reduce((pre, now) => {
   return [...pre, ...topic];
 }, []);
 
-const MAJOR_NAMES = [
-  { englishName: 'Foreign Languages', vietnameseName: 'Ngoại ngữ' },
-  { englishName: 'Marketing', vietnameseName: 'Marketing' },
-  { englishName: 'Office Information', vietnameseName: 'Tin học văn phòng' },
-  { englishName: 'Design', vietnameseName: 'Thiết kế' },
-  { englishName: 'Business', vietnameseName: 'Kinh doanh' },
-  { englishName: 'Health Care', vietnameseName: 'Chăm sóc sức khỏe' },
-  {
+const MAJOR_NAMES = {
+  fl: { englishName: 'Foreign Languages', vietnameseName: 'Ngoại ngữ' },
+  mt: { englishName: 'Marketing', vietnameseName: 'Marketing' },
+  of: {
+    englishName: 'Office Information',
+    vietnameseName: 'Tin học văn phòng',
+  },
+  ds: { englishName: 'Design', vietnameseName: 'Thiết kế' },
+  bs: { englishName: 'Business', vietnameseName: 'Kinh doanh' },
+  hc: { englishName: 'Health Care', vietnameseName: 'Chăm sóc sức khỏe' },
+  it: {
     englishName: 'Information Technology',
     vietnameseName: 'Công nghệ thông tin',
   },
-];
+};
 
-const majors = MAJOR_NAMES.map(({ englishName, vietnameseName }) => ({
+const majors = Object.entries(MAJOR_NAMES).map(
+  ([key, { englishName, vietnameseName }]) => ({
+    id: faker.random.uuid(),
+    key,
+    englishName,
+    vietnameseName,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  }),
+);
+
+const wallets = users.map((user) => ({
   id: faker.random.uuid(),
-  englishName,
-  vietnameseName,
+  userId: user.id,
+  amount: faker.random.number({
+    min: 0,
+    max: 5000000,
+  }),
   createdAt: new Date(),
   updatedAt: new Date(),
 }));
+
+const transactions = [...Array(500)].map(() => ({
+  id: faker.random.uuid(),
+  walletId:
+    wallets[
+      faker.random.number({
+        min: 0,
+        max: wallets.length - 1,
+      })
+    ].id,
+  price: faker.random.number({
+    min: 100000,
+    max: 1000000,
+  }),
+  status: 'success',
+  createdAt: new Date(),
+  updatedAt: new Date(),
+}));
+
+const fees = [
+  {
+    id: faker.random.uuid(),
+    key: 'chargePerHour',
+    price: 100000,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+];
 
 module.exports = {
   tutors,
@@ -297,6 +342,9 @@ module.exports = {
   topics,
   courses,
   majors,
+  wallets,
+  transactions,
+  fees,
   up: () => Promise.resolve(),
   down: () => Promise.resolve(),
 };

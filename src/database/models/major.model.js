@@ -18,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: DataTypes.UUIDV4,
         autoIncrement: false,
       },
+      key: DataTypes.STRING,
       englishName: DataTypes.TEXT,
       vietnameseName: DataTypes.TEXT,
       createdAt: { type: DataTypes.DATE, defaultValue: new Date() },

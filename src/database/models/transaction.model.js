@@ -1,15 +1,15 @@
 'use strict';
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class SubMajor extends Model {
+  class Transaction extends Model {
     static associate(models) {
-      this.belongsTo(models.Major, {
-        foreignKey: 'majorId',
-        as: 'major',
+      this.belongsTo(models.Wallet, {
+        foreignKey: 'walletId',
+        as: 'walletInfo',
       });
     }
   }
-  SubMajor.init(
+  Transaction.init(
     {
       id: {
         allowNull: false,
@@ -18,24 +18,23 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: DataTypes.UUIDV4,
         autoIncrement: false,
       },
-      majorId: {
+      walletId: {
         type: DataTypes.UUID,
         allowNull: false,
         references: {
-          model: 'Major',
+          model: 'Wallet',
           key: 'id',
         },
       },
-      key: DataTypes.STRING,
-      englishName: DataTypes.TEXT,
-      vietnameseName: DataTypes.TEXT,
+      price: { type: DataTypes.BIGINT, defaultValue: 0 },
+      status: DataTypes.STRING,
       createdAt: { type: DataTypes.DATE, defaultValue: new Date() },
       updatedAt: { type: DataTypes.DATE, defaultValue: new Date() },
     },
     {
       sequelize,
-      modelName: 'SubMajor',
+      modelName: 'Transaction',
     },
   );
-  return SubMajor;
+  return Transaction;
 };

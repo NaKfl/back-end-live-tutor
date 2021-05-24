@@ -1,30 +1,28 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('SubMajors', {
+    await queryInterface.createTable('Transactions', {
       id: {
         allowNull: false,
         autoIncrement: false,
         primaryKey: true,
         type: Sequelize.UUID,
       },
-      majorId: {
+      walletId: {
         type: Sequelize.UUID,
         allowNull: false,
         references: {
-          model: 'Majors',
+          model: 'Wallets',
           key: 'id',
         },
       },
-      key: {
-        type: Sequelize.STRING,
+      price: {
+        type: Sequelize.BIGINT,
         allowNull: false,
       },
-      englishName: {
-        type: Sequelize.TEXT,
-      },
-      vietnameseName: {
-        type: Sequelize.TEXT,
+      status: {
+        type: Sequelize.STRING,
+        defaultValue: false,
       },
       createdAt: {
         allowNull: false,
@@ -37,6 +35,6 @@ module.exports = {
     });
   },
   down: async (queryInterface) => {
-    await queryInterface.dropTable('SubMajors');
+    await queryInterface.dropTable('Transactions');
   },
 };

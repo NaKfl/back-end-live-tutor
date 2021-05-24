@@ -1,15 +1,10 @@
 'use strict';
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class SubMajor extends Model {
-    static associate(models) {
-      this.belongsTo(models.Major, {
-        foreignKey: 'majorId',
-        as: 'major',
-      });
-    }
+  class Fee extends Model {
+    static associate(models) {}
   }
-  SubMajor.init(
+  Fee.init(
     {
       id: {
         allowNull: false,
@@ -18,24 +13,15 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: DataTypes.UUIDV4,
         autoIncrement: false,
       },
-      majorId: {
-        type: DataTypes.UUID,
-        allowNull: false,
-        references: {
-          model: 'Major',
-          key: 'id',
-        },
-      },
       key: DataTypes.STRING,
-      englishName: DataTypes.TEXT,
-      vietnameseName: DataTypes.TEXT,
+      price: DataTypes.BIGINT,
       createdAt: { type: DataTypes.DATE, defaultValue: new Date() },
       updatedAt: { type: DataTypes.DATE, defaultValue: new Date() },
     },
     {
       sequelize,
-      modelName: 'SubMajor',
+      modelName: 'Fee',
     },
   );
-  return SubMajor;
+  return Fee;
 };
