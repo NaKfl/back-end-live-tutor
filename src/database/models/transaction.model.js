@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
           key: 'id',
         },
       },
-      price: DataTypes.BIGINT,
+      price: { type: DataTypes.BIGINT, defaultValue: 0 },
       status: DataTypes.STRING,
       createdAt: { type: DataTypes.DATE, defaultValue: new Date() },
       updatedAt: { type: DataTypes.DATE, defaultValue: new Date() },

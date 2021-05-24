@@ -8,13 +8,15 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.UUID,
       },
+      key: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       englishName: {
         type: Sequelize.TEXT,
-        allowNull: false,
       },
       vietnameseName: {
         type: Sequelize.TEXT,
-        allowNull: false,
       },
       createdAt: {
         allowNull: false,
