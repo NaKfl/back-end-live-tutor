@@ -52,7 +52,7 @@ bookingService.book = async (userId, scheduleDetailIds, origin) => {
           {
             walletId: wallet.id,
             bookingId: booking.id,
-            price: currentPricePerSession,
+            price: -currentPricePerSession,
             status: 'success',
           },
           { transaction },
@@ -192,6 +192,10 @@ bookingService.getList = async ({ userId, page = 1, perPage = 10 }) => {
             ],
           },
         ],
+      },
+      {
+        model: Transaction,
+        as: 'transactionInfo',
       },
     ],
     where: {

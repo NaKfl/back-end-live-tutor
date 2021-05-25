@@ -11,6 +11,20 @@ paymentController.getWallet = catchAsync(async (req, res) => {
   return res.json({ message: 'Get wallet successfully', data });
 });
 
+paymentController.getHistory = catchAsync(async (req, res) => {
+  const {
+    user: { id },
+    query: { date, page, perPage },
+  } = req;
+  const data = await paymentService.getHistory({
+    userId: id,
+    date,
+    page,
+    perPage,
+  });
+  return res.json({ message: "Get transaction's history successfully", data });
+});
+
 paymentController.deposit = catchAsync(async (req, res) => {
   const {
     user: { id },
