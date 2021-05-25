@@ -5,6 +5,16 @@ import { PRICE_PER_SESSION_KEY } from 'utils/constants';
 
 const paymentService = {};
 
+paymentService.createWallet = async (userId) => {
+  const wallet = await Wallet.create({
+    userId,
+    amount: 0,
+    isBlocked: false,
+  });
+
+  return wallet;
+};
+
 paymentService.getWallet = async (userId) => {
   const wallet = await Wallet.findOne({
     where: {

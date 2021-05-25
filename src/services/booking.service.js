@@ -64,6 +64,10 @@ bookingService.book = async (userId, scheduleDetailIds, origin) => {
       return bookings;
     }
 
+    return false;
+  });
+
+  if (result) {
     const student = await User.findByPk(userId);
     const scheduleDetails = await ScheduleDetail.findAll({
       where: {
@@ -141,9 +145,7 @@ bookingService.book = async (userId, scheduleDetailIds, origin) => {
         origin,
       });
     }
-
-    return false;
-  });
+  }
 
   return result;
 };
