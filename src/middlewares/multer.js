@@ -67,6 +67,24 @@ const storage = multer.diskStorage({
   },
 });
 
-const upload = multer({ storage: storage });
+const upload = multer({
+  storage: storage,
+  fileFilter: function (req, file, cb) {
+    if (file.fieldname === 'avatar') {
+      const fileTypes = /\.(gif|jpe?g|tiff?|png|webp|bmp)$/i;
+      const mimetype = fileTypes.test(file.originalname);
+      if (mimetype) {
+        return cb(null, true);
+      }
+    } else if (file.fieldname === 'video') {
+      const fileTypes = /\.(mp4|mov|wmv|mkv|flv|avi)$/i;
+      const mimetype = fileTypes.test(file.originalname);
+      if (mimetype) {
+        return cb(null, true);
+      }
+    }
+    cb(new Error('File type not support in situation'));
+  },
+});
 
 export default upload;
