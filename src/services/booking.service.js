@@ -193,6 +193,10 @@ bookingService.getList = async ({ userId, page = 1, perPage = 10 }) => {
           },
         ],
       },
+      {
+        model: Transaction,
+        as: 'transactionInfo',
+      },
     ],
     where: {
       userId,
