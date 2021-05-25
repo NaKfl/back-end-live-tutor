@@ -7,6 +7,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'walletId',
         as: 'walletInfo',
       });
+      this.belongsTo(models.Booking, {
+        foreignKey: 'bookingId',
+        as: 'bookingInfo',
+      });
     }
   }
   Transaction.init(
@@ -23,6 +27,14 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         references: {
           model: 'Wallet',
+          key: 'id',
+        },
+      },
+      bookingId: {
+        type: DataTypes.UUID,
+        allowNull: false,
+        references: {
+          model: 'Booking',
           key: 'id',
         },
       },

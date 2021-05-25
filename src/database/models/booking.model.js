@@ -23,7 +23,14 @@ module.exports = (sequelize, DataTypes) => {
         autoIncrement: false,
       },
       userId: DataTypes.UUID,
-      scheduleDetailId: DataTypes.UUID,
+      scheduleDetailId: {
+        type: DataTypes.UUID,
+        allowNull: false,
+        references: {
+          model: 'ScheduleDetail',
+          key: 'id',
+        },
+      },
       createdAt: { type: DataTypes.DATE, defaultValue: new Date() },
       updatedAt: { type: DataTypes.DATE, defaultValue: new Date() },
     },

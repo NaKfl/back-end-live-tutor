@@ -10,6 +10,7 @@ import scheduleService from './schedule.service';
 import bookingService from './booking.service';
 import courseService from './course.service';
 import callService from './callSession.service';
+import paymentService from './payment.service';
 
 export {
   callService,
@@ -24,4 +25,5 @@ export {
   scheduleService,
   bookingService,
   courseService,
+  paymentService,
 };
