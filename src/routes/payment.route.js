@@ -13,6 +13,13 @@ router.get(
   paymentController.getWallet,
 );
 
+router.get(
+  '/history',
+  auth(),
+  validate(paymentValidation.getHistory),
+  paymentController.getHistory,
+);
+
 router.post(
   '/deposit',
   auth(),

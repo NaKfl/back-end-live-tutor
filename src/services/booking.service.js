@@ -52,7 +52,7 @@ bookingService.book = async (userId, scheduleDetailIds, origin) => {
           {
             walletId: wallet.id,
             bookingId: booking.id,
-            price: currentPricePerSession,
+            price: -currentPricePerSession,
             status: 'success',
           },
           { transaction },

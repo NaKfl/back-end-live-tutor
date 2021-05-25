@@ -32,7 +32,6 @@ module.exports = (sequelize, DataTypes) => {
       },
       bookingId: {
         type: DataTypes.UUID,
-        allowNull: false,
         references: {
           model: 'Booking',
           key: 'id',
