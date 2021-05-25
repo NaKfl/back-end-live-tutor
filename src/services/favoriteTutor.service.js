@@ -16,9 +16,31 @@ favoriteService.manageFavoriteTutor = async ({ firstId, secondId }) => {
       },
     });
   } else {
-    return await FavoriteTutor.create({
+    await FavoriteTutor.create({
       firstId,
       secondId,
+    });
+    return await FavoriteTutor.findOne({
+      where: {
+        firstId,
+        secondId,
+      },
+      include: [
+        {
+          model: User,
+          as: 'secondInfo',
+          attributes: {
+            exclude: ['password'],
+          },
+          include: [
+            {
+              model: Tutor,
+              as: 'tutorInfo',
+            },
+          ],
+        },
+      ],
+      order: [['createdAt', 'DESC']],
     });
   }
 };
