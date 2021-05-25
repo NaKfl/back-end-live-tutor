@@ -1,4 +1,4 @@
-import { Role, User, UserRole, Tutor } from 'database/models';
+import { Role, User, UserRole, Tutor, Wallet } from 'database/models';
 import httpStatus from 'http-status';
 import ApiError from 'utils/ApiError';
 import { Op } from 'sequelize';
@@ -16,9 +16,15 @@ userService.getUserByEmail = async (email) => {
     where: {
       email,
     },
-    include: {
-      model: Role,
-    },
+    include: [
+      {
+        model: Role,
+      },
+      {
+        model: Wallet,
+        as: 'walletInfo',
+      },
+    ],
   });
   return user;
 };
@@ -31,9 +37,15 @@ userService.getUserById = async (id) => {
     where: {
       id,
     },
-    include: {
-      model: Role,
-    },
+    include: [
+      {
+        model: Role,
+      },
+      {
+        model: Wallet,
+        as: 'walletInfo',
+      },
+    ],
   });
 };
 
@@ -45,7 +57,11 @@ userService.getInfoById = async (id) => {
     where: {
       id,
     },
-    include: [{ model: Role }, { model: Tutor, as: 'tutorInfo' }],
+    include: [
+      { model: Role },
+      { model: Wallet, as: 'walletInfo' },
+      { model: Tutor, as: 'tutorInfo' },
+    ],
   });
 };
 
@@ -130,7 +146,8 @@ userService.oAuthLogin = async ({
     user[service] = id;
     if (!user.name) user.name = name;
     if (!user.avatar) user.avatar = avatar;
-    return user.save();
+    await user.save();
+    return await userService.getUserById(user.id);
   }
   const password = uuidv4();
 

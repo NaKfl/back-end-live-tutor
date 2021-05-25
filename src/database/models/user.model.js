@@ -19,6 +19,11 @@ module.exports = (sequelize, DataTypes) => {
         as: 'tutorInfo',
       });
 
+      this.hasOne(models.Wallet, {
+        foreignKey: 'userId',
+        as: 'walletInfo',
+      });
+
       this.hasMany(models.TutorFeedback, {
         foreignKey: 'secondId',
         as: 'feedbacks',
@@ -99,6 +104,7 @@ module.exports = (sequelize, DataTypes) => {
       'birthday',
       'isActivated',
       'tutorInfo',
+      'walletInfo',
     ];
     return pick(this, fields);
   };
