@@ -39,6 +39,11 @@
     "statusCode": 400,
     "message": "Booking already exists"
 }
+ * @apiErrorExample Error: Not enough money
+{
+  "statusCode": 400,
+  "message": "Not enough money"
+}
  */
 
 /**
