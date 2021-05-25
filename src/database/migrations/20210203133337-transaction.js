@@ -16,6 +16,14 @@ module.exports = {
           key: 'id',
         },
       },
+      bookingId: {
+        type: Sequelize.UUID,
+        allowNull: false,
+        references: {
+          model: 'Bookings',
+          key: 'id',
+        },
+      },
       price: {
         type: Sequelize.BIGINT,
         allowNull: false,

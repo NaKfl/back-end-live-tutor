@@ -178,7 +178,7 @@ const scheduleDetails = [...Array(300)].map(() => ({
   updatedAt: new Date(),
 }));
 
-const bookings = [...Array(150)].map(() => ({
+const bookings = [...Array(300)].map(() => ({
   id: faker.random.uuid(),
   scheduleDetailId:
     scheduleDetails[
@@ -298,7 +298,7 @@ const wallets = users.map((user) => ({
   updatedAt: new Date(),
 }));
 
-const transactions = [...Array(500)].map(() => ({
+const transactions = bookings.map((booking) => ({
   id: faker.random.uuid(),
   walletId:
     wallets[
@@ -307,6 +307,7 @@ const transactions = [...Array(500)].map(() => ({
         max: wallets.length - 1,
       })
     ].id,
+  bookingId: booking.id,
   price: faker.random.number({
     min: 100000,
     max: 1000000,
@@ -319,7 +320,7 @@ const transactions = [...Array(500)].map(() => ({
 const fees = [
   {
     id: faker.random.uuid(),
-    key: 'chargePerHour',
+    key: 'pricePerSession',
     price: 100000,
     createdAt: new Date(),
     updatedAt: new Date(),

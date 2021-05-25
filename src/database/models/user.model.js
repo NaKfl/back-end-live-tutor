@@ -19,11 +19,6 @@ module.exports = (sequelize, DataTypes) => {
         as: 'tutorInfo',
       });
 
-      this.hasOne(models.Wallet, {
-        foreignKey: 'walletId',
-        as: 'walletInfo',
-      });
-
       this.hasMany(models.TutorFeedback, {
         foreignKey: 'secondId',
         as: 'feedbacks',
