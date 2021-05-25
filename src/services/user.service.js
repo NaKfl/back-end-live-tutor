@@ -7,6 +7,7 @@ import { ROLES } from 'utils/constants';
 import jwt from 'jsonwebtoken';
 import { jwt as jwtVar } from 'configs/vars';
 import { sendMailActivateAccount } from 'configs/nodemailer';
+import { paymentService } from 'services';
 
 const userService = {};
 
@@ -61,8 +62,15 @@ userService.createUser = async (userBody, origin) => {
     throw new ApiError(httpStatus.BAD_REQUEST, 'Email already taken');
   }
   const user = await User.create(userBody);
+
+  // Create role
   const roleId = await Role.findRoleIdByName(ROLES.STUDENT);
   await UserRole.create({ userId: user.id, roleId });
+
+  // Create wallet
+  await paymentService.createWallet(user.id);
+
+  // Mailing
   const token = await jwt.sign(
     { id: user.id, email: user.email },
     jwtVar.secret,
@@ -128,20 +136,19 @@ userService.oAuthLogin = async ({
 
   const newUser = await User.create({
     [service]: id,
+    isActivated: true,
     email,
     password,
     name,
     avatar,
   });
-  await User.update(
-    { isActivated: true },
-    {
-      where: {
-        id: newUser.id,
-      },
-    },
-  );
+
+  // Create role
   await userService.createRole(newUser.id, ROLES.STUDENT);
+
+  // Create wallet
+  await paymentService.createWallet(newUser.id);
+
   return await userService.getUserById(newUser.id);
 };
 
