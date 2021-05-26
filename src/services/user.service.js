@@ -97,7 +97,8 @@ userService.sendMailToActiveAccount = async (user, origin) => {
     jwtVar.secret,
   );
   const verifyLink = `${origin}/verifyAccount?token=${token}`;
-  return sendMailActivateAccount(user, verifyLink);
+  sendMailActivateAccount(user, verifyLink);
+  return true;
 };
 
 userService.createRole = async (userId, roleName) => {
