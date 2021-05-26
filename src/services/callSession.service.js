@@ -87,7 +87,7 @@ callSessionService.getSessionByStudentId = async ({
   return await CallSession.findAndCountAll({
     ...query,
     ...paginate({ page, perPage }),
-    order: [['startTime', 'DESC']],
+    order: [['createdAt', 'DESC']],
   });
 };
 
