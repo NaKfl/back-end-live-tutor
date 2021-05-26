@@ -11,6 +11,13 @@ authController.register = catchAsync(async (req, res) => {
   res.status(httpStatus.CREATED).json({ user: user.transform(), tokens });
 });
 
+authController.sendMailActivateAccount = catchAsync(async (req, res) => {
+  const origin = req.headers?.origin || 'http://localhost:3000';
+  const { user } = req;
+  await userService.sendMailToActiveAccount(user, origin);
+  res.json({ message: 'Send an activate email successfully' });
+});
+
 authController.login = catchAsync(async (req, res) => {
   const { email, password } = req.body;
   const user = await authService.loginUserWithEmailAndPassword(email, password);

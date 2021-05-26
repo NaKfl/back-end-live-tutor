@@ -86,14 +86,18 @@ userService.createUser = async (userBody, origin) => {
   // Create wallet
   await paymentService.createWallet(user.id);
 
+  await userService.sendMailToActiveAccount(user, origin);
+  return user;
+};
+
+userService.sendMailToActiveAccount = async (user, origin) => {
   // Mailing
   const token = await jwt.sign(
     { id: user.id, email: user.email },
     jwtVar.secret,
   );
   const verifyLink = `${origin}/verifyAccount?token=${token}`;
-  sendMailActivateAccount(user, verifyLink);
-  return user;
+  return sendMailActivateAccount(user, verifyLink);
 };
 
 userService.createRole = async (userId, roleName) => {
