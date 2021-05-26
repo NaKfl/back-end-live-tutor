@@ -1,10 +1,20 @@
-import { sequelize, Wallet, Fee, Transaction, Booking } from 'database/models';
+import {
+  sequelize,
+  Wallet,
+  Fee,
+  Transaction,
+  Booking,
+  ScheduleDetail,
+  Schedule,
+  User,
+} from 'database/models';
 import { Op } from 'sequelize';
 import httpStatus from 'http-status';
 import ApiError from 'utils/ApiError';
 import { paginate } from 'utils/sequelize';
 import moment from 'moment';
 import { PRICE_PER_SESSION_KEY } from 'utils/constants';
+import get from 'lodash/fp/get';
 
 const paymentService = {};
 
@@ -141,12 +151,35 @@ paymentService.getHistory = async ({
     };
   }
 
-  const history = await Transaction.findAll({
+  const history = await Transaction.findAndCountAll({
     where,
     include: [
       {
         model: Booking,
         as: 'bookingInfo',
+        attributes: {
+          exclude: ['userId', 'updatedAt'],
+        },
+        include: {
+          model: ScheduleDetail,
+          as: 'scheduleDetailInfo',
+          attributes: {
+            exclude: ['scheduleId', 'createdAt', 'updatedAt'],
+          },
+          include: [
+            {
+              model: Schedule,
+              as: 'scheduleInfo',
+              include: [
+                {
+                  model: User,
+                  as: 'tutorInfo',
+                  attributes: ['id', 'name', 'email', 'avatar'],
+                },
+              ],
+            },
+          ],
+        },
       },
     ],
 
@@ -154,7 +187,21 @@ paymentService.getHistory = async ({
     order: [['createdAt', 'DESC']],
   });
 
-  return history;
+  const formattedHistory = history.rows.map((item) => {
+    const tutor = get(
+      'bookingInfo.scheduleDetailInfo.scheduleInfo.tutorInfo',
+      item,
+    );
+
+    if (tutor) {
+      delete item.bookingInfo.scheduleDetailInfo.dataValues.scheduleInfo;
+      item.bookingInfo.scheduleDetailInfo.dataValues.tutorInfo = tutor;
+    }
+
+    return item;
+  });
+
+  return { count: history.count, rows: formattedHistory };
 };
 
 export default paymentService;
