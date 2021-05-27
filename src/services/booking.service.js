@@ -17,6 +17,27 @@ import { paymentService } from 'services';
 const bookingService = {};
 
 bookingService.book = async (userId, scheduleDetailIds, origin) => {
+  // Get tutor and student info
+  const student = await User.findByPk(userId);
+  const scheduleDetails = await ScheduleDetail.findAll({
+    where: {
+      id: scheduleDetailIds,
+    },
+    include: [
+      {
+        model: Schedule,
+        as: 'scheduleInfo',
+        include: [
+          {
+            model: User,
+            as: 'tutorInfo',
+          },
+        ],
+      },
+    ],
+  });
+  const tutor = scheduleDetails?.[0]?.scheduleInfo?.tutorInfo;
+
   const result = await sequelize.transaction(async (transaction) => {
     const existsBookings = await Booking.findAll({
       where: {
@@ -40,17 +61,19 @@ bookingService.book = async (userId, scheduleDetailIds, origin) => {
     const bookings = await Promise.all(bookingPromises);
 
     const purchase = await paymentService.purchase(
-      userId,
+      student.id,
+      tutor.id,
       scheduleDetailIds.length,
       transaction,
     );
 
     if (purchase) {
-      const { wallet, currentPricePerSession } = purchase;
-      const transactionPromises = bookings.map(async (booking) => {
+      const { buyerWallet, sellerWallet, currentPricePerSession } = purchase;
+
+      const buyerTransactionPromises = bookings.map(async (booking) => {
         return Transaction.create(
           {
-            walletId: wallet.id,
+            walletId: buyerWallet.id,
             bookingId: booking.id,
             price: -currentPricePerSession,
             status: 'success',
@@ -59,7 +82,21 @@ bookingService.book = async (userId, scheduleDetailIds, origin) => {
         );
       });
 
-      await Promise.all(transactionPromises);
+      await Promise.all(buyerTransactionPromises);
+
+      const sellerTransactionPromises = bookings.map(async (booking) => {
+        return Transaction.create(
+          {
+            walletId: sellerWallet.id,
+            bookingId: booking.id,
+            price: +currentPricePerSession,
+            status: 'success',
+          },
+          { transaction },
+        );
+      });
+
+      await Promise.all(sellerTransactionPromises);
 
       return bookings;
     }
@@ -68,31 +105,8 @@ bookingService.book = async (userId, scheduleDetailIds, origin) => {
   });
 
   if (result) {
-    const student = await User.findByPk(userId);
-    const scheduleDetails = await ScheduleDetail.findAll({
-      where: {
-        id: scheduleDetailIds,
-      },
-      include: [
-        {
-          model: Schedule,
-          as: 'scheduleInfo',
-          include: [
-            {
-              model: User,
-              as: 'tutorInfo',
-            },
-          ],
-        },
-      ],
-    });
-
     //Mailing
-    if (
-      student &&
-      scheduleDetails.length &&
-      scheduleDetails[0]?.scheduleInfo?.tutorInfo
-    ) {
+    if (student && tutor) {
       const dates = scheduleDetails
         .map((item) => {
           const { scheduleInfo, startPeriod, endPeriod } = item;
@@ -128,7 +142,7 @@ bookingService.book = async (userId, scheduleDetailIds, origin) => {
       const startTime = moment();
       confirmBookingNewSchedule({
         student: student.dataValues,
-        tutor: scheduleDetails[0]?.scheduleInfo?.tutorInfo.dataValues,
+        tutor: tutor.dataValues,
         dates: result,
         roomName,
         startTime,
@@ -137,7 +151,7 @@ bookingService.book = async (userId, scheduleDetailIds, origin) => {
       });
       confirmBookingNewSchedule({
         student: student.dataValues,
-        tutor: scheduleDetails[0]?.scheduleInfo?.tutorInfo.dataValues,
+        tutor: tutor.dataValues,
         dates: result,
         roomName,
         startTime,
@@ -192,10 +206,6 @@ bookingService.getList = async ({ userId, page = 1, perPage = 10 }) => {
             ],
           },
         ],
-      },
-      {
-        model: Transaction,
-        as: 'transactionInfo',
       },
     ],
     where: {

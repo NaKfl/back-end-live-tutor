@@ -42,18 +42,31 @@ paymentService.getWallet = async (userId) => {
   return wallet;
 };
 
-paymentService.purchase = async (userId, numberOfSession, transaction) => {
-  const wallet = await Wallet.findOne({
+paymentService.purchase = async (
+  buyerId,
+  sellerId,
+  numberOfSession,
+  transaction,
+) => {
+  const buyerWallet = await Wallet.findOne({
     where: {
-      userId,
+      userId: buyerId,
       isBlocked: false,
     },
     lock: true,
     transaction,
   });
 
-  if (!wallet)
+  if (!buyerWallet)
     throw new ApiError(httpStatus.BAD_REQUEST, 'Your wallet is blocked');
+
+  const sellerWallet = await Wallet.findOne({
+    where: {
+      userId: sellerId,
+    },
+    lock: true,
+    transaction,
+  });
 
   const currentPricePerSession = await Fee.findOne({
     where: {
@@ -61,17 +74,36 @@ paymentService.purchase = async (userId, numberOfSession, transaction) => {
     },
   });
 
-  const currentAmount = +wallet.amount;
-  const newAmount =
-    currentAmount - +currentPricePerSession.price * numberOfSession;
-  if (newAmount < 0)
+  const currentBuyerAmount = +buyerWallet.amount;
+  const newBuyerAmount =
+    currentBuyerAmount - +currentPricePerSession.price * numberOfSession;
+
+  const currentSellerAmount = +sellerWallet.amount;
+  const newSellerAmount =
+    currentSellerAmount + +currentPricePerSession.price * numberOfSession;
+
+  if (newBuyerAmount < 0)
     throw new ApiError(httpStatus.BAD_REQUEST, 'Not enough money');
 
-  const newWallet = await Wallet.update(
-    { amount: newAmount },
+  const newBuyerWallet = await Wallet.update(
+    { amount: newBuyerAmount },
     {
       where: {
-        id: wallet.id,
+        id: buyerWallet.id,
+      },
+      lock: true,
+      transaction,
+      returning: true,
+    },
+  );
+
+  const newSellerWallet = await Wallet.update(
+    {
+      amount: newSellerAmount,
+    },
+    {
+      where: {
+        id: sellerWallet.id,
       },
       lock: true,
       transaction,
@@ -80,7 +112,8 @@ paymentService.purchase = async (userId, numberOfSession, transaction) => {
   );
 
   return {
-    wallet: newWallet[1][0],
+    buyerWallet: newBuyerWallet[1][0],
+    sellerWallet: newSellerWallet[1][0],
     currentPricePerSession: +currentPricePerSession.price,
   };
 };
@@ -131,7 +164,6 @@ paymentService.getHistory = async ({
   const wallet = await Wallet.findOne({
     where: {
       userId,
-      isBlocked: false,
     },
   });
 
@@ -160,26 +192,33 @@ paymentService.getHistory = async ({
         attributes: {
           exclude: ['userId', 'updatedAt'],
         },
-        include: {
-          model: ScheduleDetail,
-          as: 'scheduleDetailInfo',
-          attributes: {
-            exclude: ['scheduleId', 'createdAt', 'updatedAt'],
+        include: [
+          {
+            model: User,
+            as: 'userInfo',
+            attributes: ['id', 'name', 'email', 'avatar'],
           },
-          include: [
-            {
-              model: Schedule,
-              as: 'scheduleInfo',
-              include: [
-                {
-                  model: User,
-                  as: 'tutorInfo',
-                  attributes: ['id', 'name', 'email', 'avatar'],
-                },
-              ],
+          {
+            model: ScheduleDetail,
+            as: 'scheduleDetailInfo',
+            attributes: {
+              exclude: ['scheduleId', 'createdAt', 'updatedAt'],
             },
-          ],
-        },
+            include: [
+              {
+                model: Schedule,
+                as: 'scheduleInfo',
+                include: [
+                  {
+                    model: User,
+                    as: 'tutorInfo',
+                    attributes: ['id', 'name', 'email', 'avatar'],
+                  },
+                ],
+              },
+            ],
+          },
+        ],
       },
     ],
 
