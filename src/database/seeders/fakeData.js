@@ -313,6 +313,12 @@ const transactions = bookings.map((booking) => ({
     max: 1000000,
   }),
   status: 'success',
+  type: ['buy', 'sell', 'deposit', 'cancel', 'return'][
+    faker.random.number({
+      min: 0,
+      max: 4,
+    })
+  ],
   createdAt: new Date(),
   updatedAt: new Date(),
 }));

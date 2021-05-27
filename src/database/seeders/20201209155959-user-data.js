@@ -11,7 +11,7 @@ module.exports = {
       [
         {
           id: '18e8afec-887c-418e-b419-d997b8e9cf6f',
-          email: 'student@gmail.com',
+          email: 'student@yopmail.com',
           password: defaultPassword,
           name: 'Im Student',
           requestPassword: false,
@@ -21,7 +21,7 @@ module.exports = {
         },
         {
           id: '4e85658f-48c7-4128-b0c7-1862d663a0d3',
-          email: 'tutor@gmail.com',
+          email: 'tutor@yopmail.com',
           password: defaultPassword,
           requestPassword: false,
           name: 'Im Tutor',
@@ -31,7 +31,7 @@ module.exports = {
         },
         {
           id: '6f807670-2175-46b9-87f5-23925f30405e',
-          email: 'admin@gmail.com',
+          email: 'admin@yopmail.com',
           password: defaultPassword,
           requestPassword: false,
           name: 'Im Admin',

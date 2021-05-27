@@ -13,7 +13,7 @@ import httpStatus from 'http-status';
 import ApiError from 'utils/ApiError';
 import { paginate } from 'utils/sequelize';
 import moment from 'moment';
-import { PRICE_PER_SESSION_KEY } from 'utils/constants';
+import { PRICE_PER_SESSION_KEY, TRANSACTION_TYPES } from 'utils/constants';
 import get from 'lodash/fp/get';
 
 const paymentService = {};
@@ -118,6 +118,79 @@ paymentService.purchase = async (
   };
 };
 
+paymentService.refund = async (
+  buyerId,
+  sellerId,
+  numberOfSession,
+  transaction,
+) => {
+  const buyerWallet = await Wallet.findOne({
+    where: {
+      userId: buyerId,
+      isBlocked: false,
+    },
+    lock: true,
+    transaction,
+  });
+
+  const sellerWallet = await Wallet.findOne({
+    where: {
+      userId: sellerId,
+    },
+    lock: true,
+    transaction,
+  });
+
+  const currentPricePerSession = await Fee.findOne({
+    where: {
+      key: PRICE_PER_SESSION_KEY,
+    },
+  });
+
+  const currentBuyerAmount = +buyerWallet.amount;
+  const newBuyerAmount =
+    currentBuyerAmount + +currentPricePerSession.price * numberOfSession;
+
+  const currentSellerAmount = +sellerWallet.amount;
+  const newSellerAmount =
+    currentSellerAmount - +currentPricePerSession.price * numberOfSession;
+
+  if (currentSellerAmount < 0)
+    throw new ApiError(httpStatus.BAD_REQUEST, 'Seller amount not enough');
+
+  const newBuyerWallet = await Wallet.update(
+    { amount: newBuyerAmount },
+    {
+      where: {
+        id: buyerWallet.id,
+      },
+      lock: true,
+      transaction,
+      returning: true,
+    },
+  );
+
+  const newSellerWallet = await Wallet.update(
+    {
+      amount: newSellerAmount,
+    },
+    {
+      where: {
+        id: sellerWallet.id,
+      },
+      lock: true,
+      transaction,
+      returning: true,
+    },
+  );
+
+  return {
+    buyerWallet: newBuyerWallet[1][0],
+    sellerWallet: newSellerWallet[1][0],
+    currentPricePerSession: +currentPricePerSession.price,
+  };
+};
+
 paymentService.deposit = async (userId, price) => {
   const result = await sequelize.transaction(async (transaction) => {
     const wallet = await Wallet.findOne({
@@ -147,6 +220,7 @@ paymentService.deposit = async (userId, price) => {
       walletId: wallet.id,
       price: price,
       status: 'success',
+      type: TRANSACTION_TYPES.DEPOSIT,
     });
 
     return newWallet[1][0];
