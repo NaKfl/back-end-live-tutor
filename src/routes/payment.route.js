@@ -27,4 +27,6 @@ router.post(
   paymentController.deposit,
 );
 
+router.get('/price-of-session', paymentController.getPriceOfOneSession);
+
 export default router;

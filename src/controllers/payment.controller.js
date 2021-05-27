@@ -34,4 +34,8 @@ paymentController.deposit = catchAsync(async (req, res) => {
   return res.json({ message: 'Deposit successfully', data });
 });
 
+paymentController.getPriceOfOneSession = catchAsync(async (req, res) => {
+  const data = await paymentService.getPriceOfEachSession();
+  res.json(data);
+});
 export default paymentController;

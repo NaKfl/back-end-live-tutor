@@ -317,4 +317,12 @@ paymentService.getHistory = async ({
   return { count: history.count, rows: formattedHistory };
 };
 
+paymentService.getPriceOfEachSession = async () => {
+  return await Fee.findOne({
+    where: {
+      key: PRICE_PER_SESSION_KEY,
+    },
+  });
+};
+
 export default paymentService;
