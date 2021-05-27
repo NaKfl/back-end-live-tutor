@@ -36,8 +36,10 @@ scheduleService.getMany = async (tutorId, query = null) => {
 
     let isBooked = false;
     const scheduleDetails = scheduleDetailInfo.map((item) => {
-      if (item.bookingInfo.length > 0) isBooked = true;
-      item.dataValues.isBooked = item.bookingInfo.length > 0;
+      isBooked =
+        item?.bookingInfo?.length > 0 &&
+        item.bookingInfo.some((item) => item.isDeleted === false);
+      item.dataValues.isBooked = isBooked;
       delete item.dataValues.bookingInfo;
       return item;
     });
@@ -87,6 +89,7 @@ scheduleService.getOne = async (scheduleId) => {
     item.dataValues.isBooked = !!(await Booking.findOne({
       where: {
         scheduleDetailId: id,
+        isDeleted: false,
       },
     }));
     return item;
