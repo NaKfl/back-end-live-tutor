@@ -27,7 +27,7 @@ bookingController.getListBooking = catchAsync(async (req, res) => {
     ...query,
   });
 
-  return res.json({ message: 'Cancel booking successful', data });
+  return res.json({ message: 'Get history successful', data });
 });
 
 export default bookingController;
