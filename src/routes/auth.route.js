@@ -1,6 +1,6 @@
 import express from 'express';
 import validate from 'middlewares/validate';
-import { oAuth as oAuthLogin } from 'middlewares/auth';
+import { oAuth as oAuthLogin, auth } from 'middlewares/auth';
 import authController from 'controllers/auth.controller';
 import authValidation from 'validations/auth.validation';
 
@@ -18,6 +18,12 @@ router.get(
   '/verifyAccount',
   validate(authValidation.verifyAccount),
   authController.verifyAccount,
+);
+
+router.get(
+  '/sendActivateAccountMail',
+  auth(),
+  authController.sendMailActivateAccount,
 );
 
 router
