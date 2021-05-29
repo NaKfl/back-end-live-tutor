@@ -1,5 +1,4 @@
 import { sequelize, CallSession, User, TutorFeedback } from 'database/models';
-import { query } from 'express';
 import { paginate } from 'utils/sequelize';
 
 const callSessionService = {};
@@ -17,7 +16,7 @@ callSessionService.add = async ({ studentId, tutorId, startTime, endTime }) => {
     if (existedSession) {
       return existedSession;
     } else {
-      return await CallSession.create(
+      return CallSession.create(
         { studentId, tutorId, startTime, endTime },
         { lock: true, transaction: t },
       );
@@ -84,7 +83,7 @@ callSessionService.getSessionByStudentId = async ({
       },
     };
   }
-  return await CallSession.findAndCountAll({
+  return CallSession.findAndCountAll({
     ...query,
     ...paginate({ page, perPage }),
     order: [['createdAt', 'DESC']],
