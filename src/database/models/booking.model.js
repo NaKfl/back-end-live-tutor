@@ -37,6 +37,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       createdAt: { type: DataTypes.DATE, defaultValue: new Date() },
       updatedAt: { type: DataTypes.DATE, defaultValue: new Date() },
+      isDeleted: { type: DataTypes.BOOLEAN, defaultValue: false },
     },
     {
       sequelize,

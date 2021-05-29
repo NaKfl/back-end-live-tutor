@@ -11,3 +11,11 @@ export const ROLES = {
 export const MINUTES_PER_SESSION = 30;
 
 export const PRICE_PER_SESSION_KEY = 'pricePerSession';
+
+export const TRANSACTION_TYPES = {
+  BUY: 'buy',
+  SELL: 'sell',
+  DEPOSIT: 'deposit',
+  CANCEL: 'cancel',
+  RETURN: 'return',
+};
