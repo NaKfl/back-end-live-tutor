@@ -1,5 +1,6 @@
 import catchAsync from 'utils/catchAsync';
 import { scheduleService } from 'services';
+import moment from 'moment';
 
 const scheduleController = {};
 
@@ -18,9 +19,9 @@ scheduleController.getMany = catchAsync(async (req, res) => {
       const listScheduleDetails = data[0].scheduleDetails;
 
       const sortedArray = listScheduleDetails.sort((a, b) => {
-        const timeCur = a.startPeriod.split(':');
-        const timeNext = b.startPeriod.split(':');
-        return parseInt(timeCur[0]) - parseInt(timeNext[0]);
+        const start = moment.duration(a.startPeriod);
+        const end = moment.duration(b.startPeriod);
+        return start.asMilliseconds() - end.asMilliseconds();
       });
       data[0].scheduleDetails = sortedArray;
     }
