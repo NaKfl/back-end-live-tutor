@@ -25,8 +25,8 @@ module.exports = (sequelize, DataTypes) => {
       scheduleId: DataTypes.UUID,
       startPeriod: { type: DataTypes.STRING },
       endPeriod: { type: DataTypes.STRING },
-      createdAt: { type: DataTypes.DATE, defaultValue: new Date() },
-      updatedAt: { type: DataTypes.DATE, defaultValue: new Date() },
+      createdAt: DataTypes.DATE,
+      updatedAt: DataTypes.DATE,
     },
     {
       sequelize,

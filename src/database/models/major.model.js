@@ -21,8 +21,8 @@ module.exports = (sequelize, DataTypes) => {
       key: DataTypes.STRING,
       englishName: DataTypes.TEXT,
       vietnameseName: DataTypes.TEXT,
-      createdAt: { type: DataTypes.DATE, defaultValue: new Date() },
-      updatedAt: { type: DataTypes.DATE, defaultValue: new Date() },
+      createdAt: DataTypes.DATE,
+      updatedAt: DataTypes.DATE,
     },
     {
       sequelize,

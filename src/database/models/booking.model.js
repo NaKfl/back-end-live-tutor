@@ -35,8 +35,8 @@ module.exports = (sequelize, DataTypes) => {
           key: 'id',
         },
       },
-      createdAt: { type: DataTypes.DATE, defaultValue: new Date() },
-      updatedAt: { type: DataTypes.DATE, defaultValue: new Date() },
+      createdAt: DataTypes.DATE,
+      updatedAt: DataTypes.DATE,
       isDeleted: { type: DataTypes.BOOLEAN, defaultValue: false },
     },
     {
