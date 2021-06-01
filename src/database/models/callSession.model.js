@@ -52,8 +52,8 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.DATE,
       },
       isReviewed: { type: DataTypes.BOOLEAN, defaultValue: false },
-      createdAt: { type: DataTypes.DATE },
-      updatedAt: { type: DataTypes.DATE },
+      createdAt: DataTypes.DATE,
+      updatedAt: DataTypes.DATE,
     },
     {
       sequelize,
