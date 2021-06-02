@@ -19,3 +19,5 @@ export const TRANSACTION_TYPES = {
   CANCEL: 'cancel',
   RETURN: 'return',
 };
+
+export const DATE_TIME_FORMAT_YY_MM_HH_MM_SS = 'YY/MM/DD HH:mm:ss';

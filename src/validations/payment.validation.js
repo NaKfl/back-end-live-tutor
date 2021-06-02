@@ -18,6 +18,12 @@ paymentValidation.getHistory = {
   }),
 };
 
+paymentValidation.getStatistics = {
+  body: Joi.object({}),
+  params: Joi.object({}),
+  query: Joi.object({}),
+};
+
 paymentValidation.deposit = {
   body: Joi.object({
     price: Joi.number().min(1).required(),

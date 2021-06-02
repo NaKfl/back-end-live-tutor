@@ -14,7 +14,9 @@ import ApiError from 'utils/ApiError';
 import { paginate } from 'utils/sequelize';
 import moment from 'moment';
 import { PRICE_PER_SESSION_KEY, TRANSACTION_TYPES } from 'utils/constants';
+import { SERVER_URL } from 'configs/vars';
 import get from 'lodash/fp/get';
+import { getIncomeOutCome } from 'utils/helpers';
 
 const paymentService = {};
 
@@ -317,12 +319,217 @@ paymentService.getHistory = async ({
   return { count: history.count, rows: formattedHistory };
 };
 
+paymentService.getStatistics = async ({ userId }) => {
+  const wallet = await Wallet.findOne({
+    where: {
+      userId,
+    },
+  });
+
+  let where = {
+    walletId: wallet.id,
+  };
+
+  const history = await Transaction.findAll({
+    where,
+    include: [
+      {
+        model: Booking,
+        as: 'bookingInfo',
+        attributes: {
+          exclude: ['userId', 'updatedAt'],
+        },
+        include: [
+          {
+            model: User,
+            as: 'userInfo',
+            attributes: ['id', 'name', 'email', 'avatar'],
+          },
+          {
+            model: ScheduleDetail,
+            as: 'scheduleDetailInfo',
+            attributes: {
+              exclude: ['scheduleId', 'createdAt', 'updatedAt'],
+            },
+            include: [
+              {
+                model: Schedule,
+                as: 'scheduleInfo',
+                include: [
+                  {
+                    model: User,
+                    as: 'tutorInfo',
+                    attributes: ['id', 'name', 'email', 'avatar'],
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+    order: [['createdAt', 'ASC']],
+  });
+
+  const statistics = getIncomeOutCome(history);
+  return statistics;
+};
+
 paymentService.getPriceOfEachSession = async () => {
   return await Fee.findOne({
     where: {
       key: PRICE_PER_SESSION_KEY,
     },
   });
+};
+
+paymentService.getBanks = () => {
+  return [
+    {
+      id: '1',
+      bankCode: 'VNPAYQR',
+      bankName: 'Ngân hàng VNPAYQR',
+      bankLogo: `${SERVER_URL}/banks/vnpay.jpg`,
+    },
+    {
+      id: '2',
+      bankCode: 'NCB',
+      bankName: 'Ngân hàng NCB',
+      bankLogo: `${SERVER_URL}/banks/ncb.png`,
+    },
+    {
+      id: '3',
+      bankCode: 'SCB',
+      bankName: 'Ngân hàng SCB',
+      bankLogo: `${SERVER_URL}/banks/scb.png`,
+    },
+    {
+      id: '4',
+      bankCode: 'SACOMBANK',
+      bankName: 'Ngân hàng SACOMBANK',
+      bankLogo: `${SERVER_URL}/banks/sacombank.png`,
+    },
+    {
+      id: '5',
+      bankCode: 'EXIMBANK',
+      bankName: 'Ngân hàng EXIMBANK',
+      bankLogo: `${SERVER_URL}/banks/eximbank.png`,
+    },
+    {
+      id: '6',
+      bankCode: 'MSBANK',
+      bankName: 'Ngân hàng MSBANK',
+      bankLogo: `${SERVER_URL}/banks/msbank.png`,
+    },
+    {
+      id: '7',
+      bankCode: 'NAMABANK',
+      bankName: 'Ngân hàng NAMABANK',
+      bankLogo: `${SERVER_URL}/banks/namabank.png`,
+    },
+    {
+      id: '8',
+      bankCode: 'VISA',
+      bankName: 'Ngân hàng VISA',
+      bankLogo: `${SERVER_URL}/banks/visa.png`,
+    },
+    {
+      id: '9',
+      bankCode: 'VNMART',
+      bankName: 'Ngân hàng VNMART',
+      bankLogo: `${SERVER_URL}/banks/vnmart.png`,
+    },
+    {
+      id: '10',
+      bankCode: 'VIETINBANK',
+      bankName: 'Ngân hàng VIETINBANK',
+      bankLogo: `${SERVER_URL}/banks/vietinbank.png`,
+    },
+    {
+      id: '11',
+      bankCode: 'VIETCOMBANK',
+      bankName: 'Ngân hàng VIETCOMBANK',
+      bankLogo: `${SERVER_URL}/banks/vietcombank.png`,
+    },
+    {
+      id: '12',
+      bankCode: 'HDBANK',
+      bankName: 'Ngân hàng HDBANK',
+      bankLogo: `${SERVER_URL}/banks/hdbank.png`,
+    },
+    {
+      id: '13',
+      bankCode: 'DONGABANK',
+      bankName: 'Ngân hàng Dong A',
+      bankLogo: `${SERVER_URL}/banks/dongabank.png`,
+    },
+    {
+      id: '14',
+      bankCode: 'TPBANK',
+      bankName: 'Ngân hàng TPBANK',
+      bankLogo: `${SERVER_URL}/banks/tpbank.png`,
+    },
+    {
+      id: '15',
+      bankCode: 'OJB',
+      bankName: 'Ngân hàng OceanBank',
+      bankLogo: `${SERVER_URL}/banks/ojb.png`,
+    },
+    {
+      id: '17',
+      bankCode: 'BIDV',
+      bankName: 'Ngân hàng BIDV',
+      bankLogo: `${SERVER_URL}/banks/bidv.png`,
+    },
+    {
+      id: '18',
+      bankCode: 'TECHCOMBANK',
+      bankName: 'Ngân hàng TECHCOMBANK',
+      bankLogo: `${SERVER_URL}/banks/techcombank.png`,
+    },
+    {
+      id: '19',
+      bankCode: 'VPBANK',
+      bankName: 'Ngân hàng VPBANK',
+      bankLogo: `${SERVER_URL}/banks/vpbank.png`,
+    },
+    {
+      id: '20',
+      bankCode: 'AGRIBANK',
+      bankName: 'Ngân hàng AGRIBANK',
+      bankLogo: `${SERVER_URL}/banks/agribank.png`,
+    },
+    {
+      id: '21',
+      bankCode: 'MBBANK',
+      bankName: 'Ngân hàng MBBANK',
+      bankLogo: `${SERVER_URL}/banks/mbbank.png`,
+    },
+    {
+      id: '22',
+      bankCode: 'ACB',
+      bankName: 'Ngân hàng ACB',
+      bankLogo: `${SERVER_URL}/banks/acb.png`,
+    },
+    {
+      id: '23',
+      bankCode: 'OCB',
+      bankName: 'Ngân hàng OCB',
+      bankLogo: `${SERVER_URL}/banks/ocb.png`,
+    },
+    {
+      id: '24',
+      bankCode: 'SHB',
+      bankName: 'Ngân hàng SHB',
+      bankLogo: `${SERVER_URL}/banks/shb.png`,
+    },
+    {
+      id: '25',
+      bankCode: 'IVB',
+      bankName: 'Ngân hàng IVB',
+      bankLogo: `${SERVER_URL}/banks/ivb.png`,
+    },
+  ];
 };
 
 export default paymentService;
