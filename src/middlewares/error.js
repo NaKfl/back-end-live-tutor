@@ -3,6 +3,7 @@ import ApiError from 'utils/ApiError';
 
 export const errorHandler = (err, req, res) => {
   const { statusCode, message } = err;
+  console.log('aaaa', statusCode, message);
 
   res.locals.errorMessage = err.message;
 
@@ -11,7 +12,7 @@ export const errorHandler = (err, req, res) => {
     message: message ?? httpStatus[httpStatus.INTERNAL_SERVER_ERROR],
   };
 
-  return res.status(statusCode).json(response);
+  return res.status(500).json(response);
 };
 
 export const errorConverter = (err, req, res, next) => {

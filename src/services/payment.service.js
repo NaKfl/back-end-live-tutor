@@ -9,11 +9,14 @@ import {
   User,
 } from 'database/models';
 import { Op } from 'sequelize';
-import httpStatus from 'http-status';
 import ApiError from 'utils/ApiError';
 import { paginate } from 'utils/sequelize';
 import moment from 'moment';
-import { PRICE_PER_SESSION_KEY, TRANSACTION_TYPES } from 'utils/constants';
+import {
+  PRICE_PER_SESSION_KEY,
+  TRANSACTION_TYPES,
+  ERROR_CODE,
+} from 'utils/constants';
 import { SERVER_URL } from 'configs/vars';
 import get from 'lodash/fp/get';
 import { getIncomeOutCome } from 'utils/helpers';
@@ -39,7 +42,10 @@ paymentService.getWallet = async (userId) => {
   });
 
   if (!wallet)
-    throw new ApiError(httpStatus.BAD_REQUEST, 'Your wallet is blocked');
+    throw new ApiError(
+      ERROR_CODE.WALLET_BLOCKED.code,
+      ERROR_CODE.WALLET_BLOCKED.message,
+    );
 
   return wallet;
 };
@@ -60,7 +66,10 @@ paymentService.purchase = async (
   });
 
   if (!buyerWallet)
-    throw new ApiError(httpStatus.BAD_REQUEST, 'Your wallet is blocked');
+    throw new ApiError(
+      ERROR_CODE.WALLET_BLOCKED.code,
+      ERROR_CODE.WALLET_BLOCKED.message,
+    );
 
   const sellerWallet = await Wallet.findOne({
     where: {
@@ -85,7 +94,10 @@ paymentService.purchase = async (
     currentSellerAmount + +currentPricePerSession.price * numberOfSession;
 
   if (newBuyerAmount < 0)
-    throw new ApiError(httpStatus.BAD_REQUEST, 'Not enough money');
+    throw new ApiError(
+      ERROR_CODE.NOT_ENOUGH_MONEY.code,
+      ERROR_CODE.NOT_ENOUGH_MONEY.message,
+    );
 
   const newBuyerWallet = await Wallet.update(
     { amount: newBuyerAmount },
@@ -158,7 +170,10 @@ paymentService.refund = async (
     currentSellerAmount - +currentPricePerSession.price * numberOfSession;
 
   if (currentSellerAmount < 0)
-    throw new ApiError(httpStatus.BAD_REQUEST, 'Seller amount not enough');
+    throw new ApiError(
+      ERROR_CODE.SELLER_NOT_ENOUGH.code,
+      ERROR_CODE.SELLER_NOT_ENOUGH.message,
+    );
 
   const newBuyerWallet = await Wallet.update(
     { amount: newBuyerAmount },
@@ -203,7 +218,10 @@ paymentService.deposit = async (userId, price) => {
     });
 
     if (!wallet)
-      throw new ApiError(httpStatus.BAD_REQUEST, 'Your wallet is blocked');
+      throw new ApiError(
+        ERROR_CODE.WALLET_BLOCKED.code,
+        ERROR_CODE.WALLET_BLOCKED.message,
+      );
 
     const newAmount = +wallet.amount + price;
 

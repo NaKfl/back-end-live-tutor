@@ -8,6 +8,8 @@ import {
 import { paginate, searchHelp, SetById } from 'utils/sequelize';
 import { Op } from 'sequelize';
 import { onlineUsers } from 'sockets/controllers';
+import ApiError from 'utils/ApiError';
+import { ERROR_CODE } from 'utils/constants';
 
 const tutorService = {};
 
@@ -244,7 +246,10 @@ tutorService.createWithUserId = async (fields, userId, avatar, video) => {
     },
   });
   if (isExist) {
-    throw new Error('User have already been a tutor');
+    throw new ApiError(
+      ERROR_CODE.HAVE_BEEN_TUTOR.code,
+      ERROR_CODE.HAVE_BEEN_TUTOR.message,
+    );
   } else {
     const { name, country, birthday, ...othersInfo } = fields;
     await User.update(

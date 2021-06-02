@@ -1,6 +1,8 @@
 import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
+import ApiError from 'utils/ApiError';
+import { ERROR_CODE } from 'utils/constants';
 
 const dirUpload = path.join(__dirname, '../uploads');
 const dirAvatar = path.join(__dirname, '../uploads/avatar');
@@ -83,7 +85,12 @@ const upload = multer({
         return cb(null, true);
       }
     }
-    cb(new Error('File type not support in situation'));
+    cb(
+      new ApiError(
+        ERROR_CODE.FILE_TYPE_NOT_SUPPORT.code,
+        ERROR_CODE.FILE_TYPE_NOT_SUPPORT.message,
+      ),
+    );
   },
 });
 

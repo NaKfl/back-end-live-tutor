@@ -1,9 +1,10 @@
 import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt';
 import { jwt as jwtVars } from 'configs/vars';
-import { TOKEN_TYPES } from 'utils/constants';
+import { TOKEN_TYPES, ERROR_CODE } from 'utils/constants';
 import BearerStrategy from 'passport-http-bearer';
 import { authProviders, userService } from 'services';
 import { User } from 'database/models';
+import ApiError from 'utils/ApiError';
 
 const jwtOptions = {
   secretOrKey: jwtVars.secret,
@@ -13,7 +14,10 @@ const jwtOptions = {
 const jwtVerify = async (payload, done) => {
   try {
     if (payload.type !== TOKEN_TYPES.ACCESS) {
-      throw new Error('Invalid token type');
+      throw new ApiError(
+        ERROR_CODE.INVALID_TOKEN_TYPE.code,
+        ERROR_CODE.INVALID_TOKEN_TYPE.message,
+      );
     }
     const user = await User.findByPk(payload.sub);
     if (!user) {
