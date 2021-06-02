@@ -2,6 +2,7 @@ import passport from 'passport';
 import httpStatus from 'http-status';
 import ApiError from 'utils/ApiError';
 import { userService } from 'services';
+import { ERROR_CODE } from 'utils/constants';
 
 const verifyCallback = (req, resolve, reject, requiredRoles) => async (
   err,
@@ -9,7 +10,12 @@ const verifyCallback = (req, resolve, reject, requiredRoles) => async (
   info,
 ) => {
   if (err || info || !user) {
-    return reject(new ApiError(httpStatus.UNAUTHORIZED, 'Please authenticate'));
+    return reject(
+      new ApiError(
+        ERROR_CODE.PLEASE_AUTHENTICATE.code,
+        ERROR_CODE.PLEASE_AUTHENTICATE.message,
+      ),
+    );
   }
 
   req.user = user;

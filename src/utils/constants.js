@@ -21,3 +21,85 @@ export const TRANSACTION_TYPES = {
 };
 
 export const DATE_TIME_FORMAT_YY_MM_HH_MM_SS = 'YY/MM/DD HH:mm:ss';
+export const ERROR_CODE = {
+  INVALID_TOKEN_TYPE: {
+    code: 0,
+    message: 'Invalid token type',
+  },
+  PLEASE_AUTHENTICATE: {
+    code: 1,
+    message: 'Please authenticate',
+  },
+  ACCOUNT_NOT_ACTIVATED: {
+    code: 2,
+    message: 'Your account has not activated',
+  },
+  PERMISSION_DENIED: {
+    code: 3,
+    message: 'Permission denied',
+  },
+  EMAIL_EXIST: {
+    code: 4,
+    message: 'Email has already taken',
+  },
+  EMAIL_NOT_EXIST: {
+    code: 5,
+    message: "Email doesn't exist!",
+  },
+  USER_NOT_REQUEST_CHANGEPW: {
+    code: 6,
+    message: 'User does not request to change password',
+  },
+  INCORRECT_EMAIL_PASSWORD: {
+    code: 7,
+    message: 'Incorrect email or password',
+  },
+  HAVE_BEEN_TUTOR: {
+    code: 8,
+    message: 'User has already been a tutor',
+  },
+  FILE_TYPE_NOT_SUPPORT: {
+    code: 9,
+    message: 'File type does not support in situation',
+  },
+  BOOKING_CANCEL_BEFORE_1DAY: {
+    code: 10,
+    message: 'You can only cancel booking before 1 day',
+  },
+  BOOKING_EXIST: {
+    code: 11,
+    message: 'Booking has already exists',
+  },
+  BOOKING_NOT_EXIST: {
+    code: 12,
+    message: 'Booking does not exist',
+  },
+  PAYMENT_SYSTEM: {
+    code: 13,
+    message: 'Payment system has problems',
+  },
+  WALLET_BLOCKED: {
+    code: 14,
+    message: 'Your wallet is blocked',
+  },
+  NOT_ENOUGH_MONEY: {
+    code: 15,
+    message: 'Not enough money',
+  },
+  SELLER_NOT_ENOUGH: {
+    code: 16,
+    message: 'Seller amount not enough',
+  },
+  END_GREATER_START: {
+    code: 17,
+    message: 'End time should be greater than start time',
+  },
+  PERIOD_DIVISIABLE_30: {
+    code: 18,
+    message: 'The period must be divisible by 30',
+  },
+  SCHEDULE_DUPLICATE: {
+    code: 19,
+    message: 'Conflict to register schedule',
+  },
+};

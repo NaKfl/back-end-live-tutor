@@ -1,9 +1,8 @@
 import { Role, User, UserRole, Tutor, Wallet } from 'database/models';
-import httpStatus from 'http-status';
 import ApiError from 'utils/ApiError';
 import { Op } from 'sequelize';
 import { v4 as uuidv4 } from 'uuid';
-import { ROLES } from 'utils/constants';
+import { ROLES, ERROR_CODE } from 'utils/constants';
 import jwt from 'jsonwebtoken';
 import { jwt as jwtVar } from 'configs/vars';
 import { sendMailActivateAccount } from 'configs/nodemailer';
@@ -75,7 +74,10 @@ userService.updateUserById = async (fields, id) => {
 
 userService.createUser = async (userBody, origin) => {
   if (await User.isEmailTaken(userBody.email)) {
-    throw new ApiError(httpStatus.BAD_REQUEST, 'Email already taken');
+    throw new ApiError(
+      ERROR_CODE.EMAIL_EXIST.code,
+      ERROR_CODE.EMAIL_EXIST.message,
+    );
   }
   const user = await User.create(userBody);
 
@@ -190,7 +192,10 @@ userService.forgotPasswordRequest = async ({ email }) => {
     },
   });
   if (!user) {
-    throw Error("Email doesn't exist!");
+    throw new ApiError(
+      ERROR_CODE.EMAIL_NOT_EXIST.code,
+      ERROR_CODE.EMAIL_NOT_EXIST.message,
+    );
   }
   const token = await jwt.sign(
     { id: user.id, email: user.email },
@@ -224,7 +229,10 @@ userService.resetPassword = async (token, password) => {
     },
   });
   if (user.requestPassword === false)
-    throw Error('User is not request to change password');
+    throw new ApiError(
+      ERROR_CODE.USER_NOT_REQUEST_CHANGEPW.code,
+      ERROR_CODE.USER_NOT_REQUEST_CHANGEPW.message,
+    );
   return await user.update({ password, requestPassword: false });
 };
 

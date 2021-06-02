@@ -17,13 +17,17 @@ scheduleController.getMany = catchAsync(async (req, res) => {
     }
     if (data) {
       const listScheduleDetails = data[0].scheduleDetails;
-
       const sortedArray = listScheduleDetails.sort((a, b) => {
         const start = moment.duration(a.startPeriod);
         const end = moment.duration(b.startPeriod);
         return start.asMilliseconds() - end.asMilliseconds();
       });
       data[0].scheduleDetails = sortedArray;
+      data = data.sort((a, b) => {
+        const start = moment.duration(a.startTime);
+        const end = moment.duration(b.startTime);
+        return start.asMilliseconds() - end.asMilliseconds();
+      });
     }
   }
   return res.json({ message: 'Get schedules successful', data });

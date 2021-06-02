@@ -6,14 +6,13 @@ import {
   Schedule,
   Transaction,
 } from 'database/models';
-import httpStatus from 'http-status';
 import ApiError from 'utils/ApiError';
 import { confirmBookingNewSchedule } from 'configs/nodemailer';
 import { paginate } from 'utils/sequelize';
 import { v4 as uuidv4 } from 'uuid';
 import moment from 'moment';
 import { paymentService } from 'services';
-import { TRANSACTION_TYPES } from 'utils/constants';
+import { TRANSACTION_TYPES, ERROR_CODE } from 'utils/constants';
 
 const bookingService = {};
 
@@ -50,7 +49,10 @@ bookingService.book = async (userId, scheduleDetailIds, origin) => {
       existsBookings.length &&
       existsBookings.some((item) => item.isDeleted === false)
     )
-      throw new ApiError(httpStatus.BAD_REQUEST, 'Booking already exists');
+      throw new ApiError(
+        ERROR_CODE.BOOKING_EXIST.code,
+        ERROR_CODE.BOOKING_EXIST.message,
+      );
 
     const bookingPromises = scheduleDetailIds.map((scheduleDetailId) =>
       Booking.create(
@@ -72,7 +74,10 @@ bookingService.book = async (userId, scheduleDetailIds, origin) => {
     );
 
     if (!purchase)
-      throw new ApiError(httpStatus.BAD_REQUEST, 'Payment system has problems');
+      throw new ApiError(
+        ERROR_CODE.PAYMENT_SYSTEM.code,
+        ERROR_CODE.PAYMENT_SYSTEM.message,
+      );
 
     const { buyerWallet, sellerWallet, currentPricePerSession } = purchase;
 
@@ -197,7 +202,25 @@ bookingService.cancelBooking = async (userId, scheduleDetailIds) => {
     });
 
     if (existsBookings.length < scheduleDetailIds.length)
-      throw new ApiError(httpStatus.NOT_FOUND, 'Booking does not exist');
+      throw new ApiError(
+        ERROR_CODE.BOOKING_NOT_EXIST.code,
+        ERROR_CODE.BOOKING_NOT_EXIST.message,
+      );
+
+    const scheduleBookingInfo =
+      existsBookings?.[0]?.scheduleDetailInfo?.scheduleInfo;
+    const dateBooking = scheduleBookingInfo.date;
+    const timeBooking = scheduleBookingInfo.startTime;
+    const canCancelBook =
+      moment(dateBooking + ' ' + timeBooking).diff(moment(), 'days') >= 1;
+    console.log(dateBooking + ' ' + timeBooking, canCancelBook);
+
+    if (!canCancelBook) {
+      throw new ApiError(
+        ERROR_CODE.BOOKING_CANCEL_BEFORE_1DAY.code,
+        ERROR_CODE.BOOKING_CANCEL_BEFORE_1DAY.message,
+      );
+    }
 
     const student = existsBookings?.[0]?.userInfo;
     const tutor =
@@ -206,7 +229,10 @@ bookingService.cancelBooking = async (userId, scheduleDetailIds) => {
     const ids = existsBookings.map((item) => {
       const { id, userId: userIdBooking } = item;
       if (userIdBooking !== userId)
-        throw new ApiError(httpStatus.FORBIDDEN, 'Permission denied');
+        throw new ApiError(
+          ERROR_CODE.PERMISSION_DENIED.code,
+          ERROR_CODE.PERMISSION_DENIED.message,
+        );
       return id;
     });
 
@@ -224,7 +250,10 @@ bookingService.cancelBooking = async (userId, scheduleDetailIds) => {
     });
 
     if (!refund)
-      throw new ApiError(httpStatus.BAD_REQUEST, 'Payment system has problems');
+      throw new ApiError(
+        ERROR_CODE.PAYMENT_SYSTEM.code,
+        ERROR_CODE.PAYMENT_SYSTEM.message,
+      );
 
     const { buyerWallet, sellerWallet, currentPricePerSession } = refund;
     const refundTractionPromises = ids.map((bookingId) => {

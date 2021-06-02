@@ -1,7 +1,6 @@
 import { Schedule, ScheduleDetail, Booking } from 'database/models';
-import { MINUTES_PER_SESSION } from 'utils/constants';
+import { MINUTES_PER_SESSION, ERROR_CODE } from 'utils/constants';
 import moment from 'moment';
-import httpStatus from 'http-status';
 import ApiError from 'utils/ApiError';
 
 const scheduleService = {};
@@ -113,21 +112,23 @@ scheduleService.register = async (tutorId, fields) => {
   const newStartTime = moment(startTime, 'HH:mm');
   const newEndTime = moment(endTime, 'HH:mm');
   const startPeriod = moment(startTime, 'HH:mm').hour();
+  const startPeriodMinutes = moment(startTime, 'HH:mm').minute();
+  console.log('startPeriodMinutes', startPeriodMinutes);
   const diff = newEndTime.diff(newStartTime, 'minute');
   const isNotDivisible = diff % MINUTES_PER_SESSION !== 0;
 
   // Check end time greater than start time
   if (newEndTime <= newStartTime)
     throw new ApiError(
-      httpStatus.BAD_REQUEST,
-      'End time should be greater than start time',
+      ERROR_CODE.END_GREATER_START.code,
+      ERROR_CODE.END_GREATER_START.message,
     );
 
   //Check divisible by MINUTES_PER_SESSION
   if (isNotDivisible)
     throw new ApiError(
-      httpStatus.BAD_REQUEST,
-      `The period must be divisible by ${MINUTES_PER_SESSION}`,
+      ERROR_CODE.PERIOD_DIVISIABLE_30.code,
+      ERROR_CODE.PERIOD_DIVISIABLE_30.message,
     );
 
   // Check duplicate
@@ -140,7 +141,10 @@ scheduleService.register = async (tutorId, fields) => {
       (newEndTime > oldStartTime && newEndTime < oldEndTime) ||
       (newStartTime <= oldStartTime && newEndTime >= oldEndTime)
     ) {
-      throw new ApiError(httpStatus.BAD_REQUEST, 'Schedule duplicate');
+      throw new ApiError(
+        ERROR_CODE.SCHEDULE_DUPLICATE.code,
+        ERROR_CODE.SCHEDULE_DUPLICATE.message,
+      );
     }
   });
 
@@ -155,7 +159,7 @@ scheduleService.register = async (tutorId, fields) => {
     (_, index) => {
       return moment().set({
         hour: startPeriod,
-        minute: index * MINUTES_PER_SESSION,
+        minute: index * MINUTES_PER_SESSION + startPeriodMinutes,
         second: 0,
       });
     },
