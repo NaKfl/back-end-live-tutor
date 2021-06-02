@@ -20,6 +20,15 @@ router.get(
   paymentController.getHistory,
 );
 
+router.get(
+  '/statistics',
+  auth(),
+  validate(paymentValidation.getStatistics),
+  paymentController.getStatistics,
+);
+
+router.get('/banks', auth(), paymentController.getBanks);
+
 router.post(
   '/deposit',
   auth(),

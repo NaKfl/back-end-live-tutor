@@ -25,6 +25,21 @@ paymentController.getHistory = catchAsync(async (req, res) => {
   return res.json({ message: "Get transaction's history successfully", data });
 });
 
+paymentController.getStatistics = catchAsync(async (req, res) => {
+  const {
+    user: { id },
+  } = req;
+  const data = await paymentService.getStatistics({
+    userId: id,
+  });
+  return res.json({ message: 'Get statistics successfully', data });
+});
+
+paymentController.getBanks = catchAsync(async (req, res) => {
+  const data = paymentService.getBanks();
+  return res.json({ message: 'Get banks successfully', data });
+});
+
 paymentController.deposit = catchAsync(async (req, res) => {
   const {
     user: { id },

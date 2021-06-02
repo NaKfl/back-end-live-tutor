@@ -38,6 +38,7 @@ passport.use('facebook', facebookStrategy);
 passport.use('google', googleStrategy);
 
 app.use('/apidoc', express.static('src/apidoc/dist'));
+app.use('/banks', express.static('src/public/banks'));
 app.use('/avatar', express.static(path.join(__dirname, '/../uploads/avatar')));
 app.use('/video', express.static(path.join(__dirname, '/../uploads/video')));
 
