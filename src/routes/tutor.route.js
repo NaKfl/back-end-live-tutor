@@ -41,7 +41,7 @@ router.put(
   '/update/approval',
   auth(),
   validate(tutorValidation.updateTutor),
-  tutorController.updateTutor,
+  tutorController.acceptedTutor,
 );
 
 router.post('/search', auth(), tutorController.searchTutor);
