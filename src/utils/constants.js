@@ -102,4 +102,8 @@ export const ERROR_CODE = {
     code: 19,
     message: 'Conflict to register schedule',
   },
+  SCHEDULE_INVALID_DATE: {
+    code: 20,
+    message: 'Register schedule with invalid date',
+  },
 };
