@@ -43,6 +43,12 @@ scheduleService.getMany = async (tutorId, query = null) => {
       return item;
     });
 
+    scheduleDetails.sort((a, b) => {
+      const start = moment.duration(a.startPeriod);
+      const end = moment.duration(b.startPeriod);
+      return start.asMilliseconds() - end.asMilliseconds();
+    });
+
     let returnObject = null;
     if (query.date)
       returnObject = {
@@ -65,12 +71,16 @@ scheduleService.getMany = async (tutorId, query = null) => {
       };
 
     if (acc[date]) {
-      if (query.date) acc[date].push(returnObject);
-      else acc[date].push(returnObject);
+      acc[date].push(returnObject);
     } else {
-      if (query.date) acc[date] = [returnObject];
-      else acc[date] = [returnObject];
+      acc[date] = [returnObject];
     }
+
+    acc[date].sort((a, b) => {
+      const start = moment.duration(a.startTime);
+      const end = moment.duration(b.startTime);
+      return start.asMilliseconds() - end.asMilliseconds();
+    });
 
     return acc;
   }, {});
@@ -102,6 +112,13 @@ scheduleService.getOne = async (scheduleId) => {
 scheduleService.register = async (tutorId, fields) => {
   const { startTime, endTime, date } = fields;
 
+  const compareToDateNow = moment(date).diff(moment(), 'days');
+  if (compareToDateNow < 0) {
+    throw new ApiError(
+      ERROR_CODE.SCHEDULE_INVALID_DATE.code,
+      ERROR_CODE.SCHEDULE_INVALID_DATE.message,
+    );
+  }
   const existedSchedules = await Schedule.findAll({
     where: {
       tutorId,
