@@ -62,10 +62,9 @@ tutorController.getWaitingList = catchAsync(async (req, res) => {
   res.json({ message: 'Success', data });
 });
 
-tutorController.updateTutor = catchAsync(async (req, res) => {
+tutorController.acceptedTutor = catchAsync(async (req, res) => {
   const { body } = req;
-  await tutorService.updateTutor(body);
-  const data = await tutorService.getOne(body.userId);
+  const data = await tutorService.acceptedTutor(body);
   res.json({ message: 'Success', data });
 });
 

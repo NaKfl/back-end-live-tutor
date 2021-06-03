@@ -10,6 +10,8 @@ import { Op } from 'sequelize';
 import { onlineUsers } from 'sockets/controllers';
 import ApiError from 'utils/ApiError';
 import { ERROR_CODE } from 'utils/constants';
+import { userService } from 'services';
+import { sendMailAcceptedTutor } from 'configs/nodemailer';
 
 const tutorService = {};
 
@@ -230,13 +232,23 @@ tutorService.getWaitingList = async () => {
   });
 };
 
-tutorService.updateTutor = async (fields) => {
+tutorService.acceptedTutor = async (fields) => {
   const { userId, ...updatedFields } = fields;
-  return await Tutor.update(updatedFields, {
-    where: {
-      userId,
-    },
-  });
+  const { isActivated } = updatedFields;
+  if (isActivated)
+    await Tutor.update(updatedFields, {
+      where: {
+        userId,
+      },
+    });
+  else {
+    await Tutor.destroy({
+      where: { userId },
+    });
+  }
+  const user = await userService.getUserById(userId);
+  sendMailAcceptedTutor(user, isActivated);
+  return user;
 };
 
 tutorService.createWithUserId = async (fields, userId, avatar, video) => {

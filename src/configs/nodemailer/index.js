@@ -8,6 +8,7 @@ import bookingConfirm from './templates/bookingConfirm';
 import activateAccount from './templates/activateAccount';
 import { forgotPassword } from './templates/forgotPassword';
 import jwt from 'jsonwebtoken';
+import acceptedTutor from './templates/acceptedTutor';
 
 const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
@@ -86,6 +87,20 @@ export const sendMailActivateAccount = async (user, verifyLink) => {
       to: user?.email,
       subject: 'Verify your email address',
       html: activateAccount(verifyLink),
+    });
+  } catch (error) {
+    console.log('Error: ', error);
+  }
+};
+
+export const sendMailAcceptedTutor = async (user, isActivated) => {
+  try {
+    console.log({ user });
+    await transporter.sendMail({
+      from: `"Live tutor" peterpans2030@gmail.com`,
+      to: user?.email,
+      subject: 'Verify your email address',
+      html: acceptedTutor(isActivated),
     });
   } catch (error) {
     console.log('Error: ', error);
