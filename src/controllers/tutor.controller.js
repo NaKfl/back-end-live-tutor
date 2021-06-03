@@ -83,7 +83,6 @@ tutorController.getListRankTutor = catchAsync(async (req, res) => {
 
 tutorController.searchTutor = catchAsync(async (req, res) => {
   const { filters, search, page, perPage } = req.body;
-  console.log({ filters, search, page, perPage });
   const result = await tutorService.searchWithFilter({
     filters,
     search,

@@ -1,5 +1,6 @@
 const faker = require('faker');
 const moment = require('moment');
+const { languages, specialties } = require('./categoryData');
 
 // Default password: 123132
 const defaultPassword =
@@ -11,6 +12,29 @@ const roleIds = {
   student: faker.random.uuid(),
   admin: faker.random.uuid(),
 };
+
+const types = [
+  {
+    id: faker.random.uuid(),
+    title: 'languages',
+  },
+  {
+    id: faker.random.uuid(),
+    title: 'specialties',
+  },
+];
+
+const languageCategory = languages.map((language) => ({
+  id: faker.random.uuid(),
+  typeId: types[0].id,
+  description: language,
+}));
+
+const specialtieCategory = specialties.map((specialtie) => ({
+  id: faker.random.uuid(),
+  typeId: types[1].id,
+  description: specialtie,
+}));
 
 // Fake 50 tutors
 const tutors = [...Array(50)].map(() => ({
@@ -84,7 +108,11 @@ const tutorInfo = tutors
           max: 4,
         }),
       ),
-    ].map(() => faker.lorem.word()),
+    ].map(
+      () =>
+        languageCategory[faker.random.number(languageCategory.length - 1)]
+          .description,
+    ),
     specialties: [
       ...Array(
         faker.random.number({
@@ -92,7 +120,11 @@ const tutorInfo = tutors
           max: 5,
         }),
       ),
-    ].map(() => faker.lorem.word()),
+    ].map(
+      () =>
+        specialtieCategory[faker.random.number(specialtieCategory.length - 1)]
+          .description,
+    ),
     resume: faker.lorem.paragraph(),
     education: faker.lorem.paragraph(),
     experience: faker.lorem.paragraph(),
@@ -352,6 +384,9 @@ module.exports = {
   wallets,
   transactions,
   fees,
+  types,
+  languageCategory,
+  specialtieCategory,
   up: () => Promise.resolve(),
   down: () => Promise.resolve(),
 };
