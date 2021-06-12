@@ -147,10 +147,10 @@ tutorService.getAllOnlineTutors = async () => {
         ],
       },
     ],
-    raw: true,
-    nest: true,
   });
-  const ratedTutors = tutors?.rows.map((item) => {
+
+  const ratedTutors = tutors.rows.map((rawTutor) => {
+    const item = rawTutor.toJSON();
     const rating =
       item?.feedbacks?.reduce((acc, curr) => acc + curr.rating, 0) ?? 0;
     if (item?.feedbacks?.length > 0) {
