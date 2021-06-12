@@ -147,22 +147,10 @@ tutorService.getAllOnlineTutors = async () => {
         ],
       },
     ],
-    raw: true,
-    nest: true,
   });
-  const groupTutorListById = tutors.rows.reduce((acc, tutor) => {
-    if (!acc[tutor.id]) {
-      acc[tutor.id] = tutor;
-    }
-    const { User: { feedbacks = {} } = {} } = tutor;
-    const curFeedbacks = acc[tutor.id].feedbacks || [];
-    acc[tutor.id].feedbacks = [...curFeedbacks, feedbacks];
 
-    return acc;
-  }, {});
-
-  const ratedTutors = Object.keys(groupTutorListById).map((key) => {
-    const item = groupTutorListById[key];
+  const ratedTutors = tutors.rows.map((rawTutor) => {
+    const item = rawTutor.toJSON();
     const rating =
       item?.feedbacks?.reduce((acc, curr) => acc + curr.rating, 0) ?? 0;
     if (item?.feedbacks?.length > 0) {
