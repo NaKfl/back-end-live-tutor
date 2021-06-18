@@ -25,7 +25,7 @@ services:
       CLIENT_URL: https://livetutor.live
       SERVER_URL: https://api.livetutor.live
 
-    command: sh -c "./wait-for-it.sh database:5432 && npm run migrate && npm run migrate:seed && pm2-runtime ecosystem.config.js"
+    command: sh -c "./wait-for-it.sh database:5432 && pm2-runtime ecosystem.config.js"
     ports:
       - 6969:6969
     volumes:
@@ -37,6 +37,8 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
       POSTGRES_DB: live-tutor
+    volumes:
+      - ./dump/version_1.sql:/docker-entrypoint-initdb.d/version_1.sql
 
   redis:
     image: redis:6.2.1
