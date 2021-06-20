@@ -5,8 +5,8 @@ const authValidation = {};
 authValidation.register = {
   body: Joi.object({
     name: Joi.string()
-      .regex(/^([a-zA-Z]+\s)*[a-zA-Z]+$/)
-      .min(2)
+      .regex(/^([a-zA-Z]|[à-ú]|[À-Ú]+\s)*[a-zA-Z]|[à-ú]|[À-Ú]+$/)
+      .min(1)
       .max(50),
     email: Joi.string().required().email(),
     password: Joi.string().required().min(6).max(128),
