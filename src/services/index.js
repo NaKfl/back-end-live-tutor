@@ -11,6 +11,7 @@ import bookingService from './booking.service';
 import courseService from './course.service';
 import callService from './callSession.service';
 import paymentService from './payment.service';
+import refreshTokenService from './refreshToken.service';
 
 export {
   callService,
@@ -26,4 +27,5 @@ export {
   bookingService,
   courseService,
   paymentService,
+  refreshTokenService,
 };

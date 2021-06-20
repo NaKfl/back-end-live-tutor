@@ -1,7 +1,14 @@
 import httpStatus from 'http-status';
 import catchAsync from 'utils/catchAsync';
-import { userService, tokenService, authService } from 'services';
-
+import {
+  userService,
+  tokenService,
+  authService,
+  refreshTokenService,
+} from 'services';
+import moment from 'moment';
+import { ERROR_CODE } from 'utils/constants';
+import ApiError from 'utils/ApiError';
 const authController = {};
 
 authController.register = catchAsync(async (req, res) => {
@@ -36,6 +43,23 @@ authController.verifyAccount = catchAsync(async (req, res) => {
   const { token } = query;
   await userService.verifyAccount(token);
   res.json({ message: 'Active account successfully' });
+});
+
+authController.refresh = catchAsync(async (req, res) => {
+  const { email, refreshToken } = req.body;
+  const existedRefreshToken = await refreshTokenService.getOneAndDestroy(
+    email,
+    refreshToken,
+  );
+  if (!existedRefreshToken || moment(existedRefreshToken.expires).isBefore()) {
+    throw new ApiError(
+      ERROR_CODE.INVALID_REFRESH_TOKEN.code,
+      ERROR_CODE.INVALID_REFRESH_TOKEN.message,
+    );
+  }
+  const user = await userService.getUserByEmail(email);
+  const tokens = await tokenService.generateAuthTokens(user);
+  res.json({ user: user.transform(), tokens });
 });
 
 export default authController;

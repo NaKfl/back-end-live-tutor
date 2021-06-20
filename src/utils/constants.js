@@ -1,5 +1,6 @@
 export const TOKEN_TYPES = {
   ACCESS: 'access',
+  REFRESH: 'refresh',
 };
 
 export const ROLES = {
@@ -105,5 +106,9 @@ export const ERROR_CODE = {
   SCHEDULE_INVALID_DATE: {
     code: 20,
     message: 'Register schedule with invalid date',
+  },
+  INVALID_REFRESH_TOKEN: {
+    code: 21,
+    message: 'Invalid refresh token',
   },
 };

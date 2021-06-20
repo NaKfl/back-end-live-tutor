@@ -32,4 +32,11 @@ authValidation.verifyAccount = {
   }),
 };
 
+authValidation.refresh = {
+  body: Joi.object({
+    email: Joi.string().email().required(),
+    refreshToken: Joi.string().required(),
+  }),
+};
+
 export default authValidation;

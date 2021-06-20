@@ -14,6 +14,12 @@ router.post(
 
 router.post('/login', validate(authValidation.login), authController.login);
 
+router.post(
+  '/refresh-token',
+  validate(authValidation.refresh),
+  authController.refresh,
+);
+
 router.get(
   '/verifyAccount',
   validate(authValidation.verifyAccount),

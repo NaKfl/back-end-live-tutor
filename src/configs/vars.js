@@ -9,6 +9,7 @@ export const SERVER_URL = process.env.SERVER_URL;
 export const jwt = {
   secret: process.env.JWT_SECRET,
   accessExpirationMinutes: process.env.JWT_EXPIRATION_MINUTES,
+  refreshTokenExpirationDays: process.env.JWT_REFRESH_EXPIRATION_DAYS,
 };
 export const redis = {
   host: process.env.REDIS_HOST,
