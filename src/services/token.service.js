@@ -2,6 +2,7 @@ import jwt from 'jsonwebtoken';
 import moment from 'moment';
 import { jwt as jwtVars } from 'configs/vars';
 import { TOKEN_TYPES } from 'utils/constants';
+import { refreshTokenService } from 'services';
 
 const tokenService = {};
 
@@ -20,16 +21,35 @@ tokenService.generateAuthTokens = async (user) => {
     jwtVars.accessExpirationMinutes,
     'minutes',
   );
+  const refreshTokenTokenExpires = moment().add(
+    jwtVars.refreshTokenExpirationDays,
+    'days',
+  );
   const accessToken = generateToken(
     user.id,
     accessTokenExpires,
     TOKEN_TYPES.ACCESS,
+  );
+  const refreshToken = generateToken(
+    user.id,
+    refreshTokenTokenExpires,
+    TOKEN_TYPES.REFRESH,
+  );
+
+  await refreshTokenService.createOne(
+    user,
+    refreshToken,
+    accessTokenExpires.toDate(),
   );
 
   return {
     access: {
       token: accessToken,
       expires: accessTokenExpires.toDate(),
+    },
+    refresh: {
+      token: refreshToken,
+      expires: refreshTokenTokenExpires.toDate(),
     },
   };
 };
