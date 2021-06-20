@@ -22,8 +22,10 @@ services:
       GOOGLE_CLIENT_SECRET: 0i5peIrrQZ5E4mt24-h5qNhf
       GOOGLE_REFRESH_TOKEN: 1//04gJ6d2woZ9DsCgYIARAAGAQSNwF-L9IrntvPxGi8DaiM88CANUOPr6XCac0tng4ipAVp3msBYgtKKkWSwjiyWZ1ltYu114xeoSk
       GOOGLE_ACCESS_TOKEN: ya29.a0AfH6SMAsNrekFP0SnCkIIuk0O0gmfcl4q96GPtrih3HS6THeBmxqGf--fmSdg8ruEjfGTgJJMMZPFDBih4pnndMCnuiW0vwMjX3ZpUIxCEtnrsHzsUNugenURsp1EO1x1aJK6as1u_3vJ6rEBLov30bFlGBc
+      CLIENT_URL: https://livetutor.live
+      SERVER_URL: https://api.livetutor.live
 
-    command: sh -c "./wait-for-it.sh database:5432 && npm run migrate && npm run migrate:seed && pm2-runtime ecosystem.config.js"
+    command: sh -c "./wait-for-it.sh database:5432 && pm2-runtime ecosystem.config.js"
     ports:
       - 6969:6969
     volumes:
@@ -35,6 +37,8 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
       POSTGRES_DB: live-tutor
+    volumes:
+      - ./dump/version_1.sql:/docker-entrypoint-initdb.d/version_1.sql
 
   redis:
     image: redis:6.2.1

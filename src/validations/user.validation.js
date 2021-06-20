@@ -6,7 +6,7 @@ const userValidation = {};
 userValidation.updateInfo = {
   body: Joi.object({
     email: Joi.string().email(),
-    name: Joi.string().pattern(nameRegex),
+    name: Joi.string(),
     avatar: Joi.string().allow(null, ''),
     country: Joi.string().allow(null, ''),
     phone: Joi.string().allow(null, ''),
