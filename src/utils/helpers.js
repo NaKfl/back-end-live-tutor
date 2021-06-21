@@ -1,5 +1,8 @@
 import moment from 'moment';
-import { DATE_TIME_FORMAT_YY_MM_HH_MM_SS } from 'utils/constants';
+import {
+  DATE_TIME_FORMAT_YY_MM_HH_MM_SS,
+  TRANSACTION_TYPES,
+} from 'utils/constants';
 
 export const getIncomeOutCome = (history) => {
   if (!history || !history.length) {
@@ -22,7 +25,14 @@ export const getIncomeOutCome = (history) => {
               ),
             },
           ],
-          outcome: acc.outcome + +curr.price,
+          income:
+            curr.type === TRANSACTION_TYPES.RETURN
+              ? acc.income + +curr.price
+              : acc.income,
+          outcome:
+            curr.type === TRANSACTION_TYPES.RETURN
+              ? acc.outcome
+              : acc.outcome + +curr.price,
           total,
         };
       if (+curr.price > 0)
@@ -39,7 +49,14 @@ export const getIncomeOutCome = (history) => {
               ),
             },
           ],
-          income: acc.income + +curr.price,
+          income:
+            curr.type === TRANSACTION_TYPES.CANCEL
+              ? acc.income
+              : acc.income + +curr.price,
+          outcome:
+            curr.type === TRANSACTION_TYPES.CANCEL
+              ? acc.outcome + +curr.price
+              : acc.outcome,
           total,
         };
       return acc;
