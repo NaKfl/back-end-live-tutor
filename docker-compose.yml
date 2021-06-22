@@ -7,8 +7,8 @@ services:
       - database
       - redis
     environment:
-      NODE_ENV: development
-      DATABASE_URL: postgres://postgres:password@database:5432/live-tutor
+      NODE_ENV: production
+      DATABASE_URL: postgres://livetutor:Anhem1nha@database:5432/live-tutor
       DATABASE_DIALECT: postgres
       PORT: 6969
       JWT_SECRET: anhem1nha
@@ -34,11 +34,11 @@ services:
   database:
     image: postgres:13
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
+      POSTGRES_USER: livetutor
+      POSTGRES_PASSWORD: anhem1nha
       POSTGRES_DB: live-tutor
     volumes:
-      - ./dump/version_1.sql:/docker-entrypoint-initdb.d/version_1.sql
+      - ./dump/data.sql:/docker-entrypoint-initdb.d/data.sql
 
   redis:
     image: redis:6.2.1
