@@ -29,12 +29,13 @@ import path from 'path';
 
 const app = express();
 
+app.use(helmet());
 app.use(morgan(logs));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname));
-// app.use(helmet());
+
 app.use(
   cors({
     origin: [ADMIN_URL, CLIENT_URL, SERVER_URL],
