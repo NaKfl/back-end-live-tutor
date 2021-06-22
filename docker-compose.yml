@@ -24,6 +24,7 @@ services:
       GOOGLE_ACCESS_TOKEN: ya29.a0AfH6SMAsNrekFP0SnCkIIuk0O0gmfcl4q96GPtrih3HS6THeBmxqGf--fmSdg8ruEjfGTgJJMMZPFDBih4pnndMCnuiW0vwMjX3ZpUIxCEtnrsHzsUNugenURsp1EO1x1aJK6as1u_3vJ6rEBLov30bFlGBc
       CLIENT_URL: https://livetutor.live
       SERVER_URL: https://api.livetutor.live
+      ADMIN_URL: https://admin.livetutor.live
 
     command: sh -c "./wait-for-it.sh database:5432 && pm2-runtime ecosystem.config.js"
     ports:

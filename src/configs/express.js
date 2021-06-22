@@ -1,7 +1,7 @@
 import http from 'http';
 import express from 'express';
 import morgan from 'morgan';
-// TODO: import helmet from 'helmet';
+import helmet from 'helmet';
 import cors from 'cors';
 import passport from 'passport';
 import adapter from 'socket.io-redis';
@@ -11,7 +11,13 @@ import {
   googleStrategy,
 } from 'configs/passport';
 import socketio from 'socket.io';
-import { logs, redis as redisVars } from 'configs/vars';
+import {
+  logs,
+  redis as redisVars,
+  CLIENT_URL,
+  SERVER_URL,
+  ADMIN_URL,
+} from 'configs/vars';
 import initSockets from 'sockets';
 import routes from 'routes';
 import {
@@ -29,8 +35,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname));
 // app.use(helmet());
-
-app.use(cors('*'));
+app.use(
+  cors({
+    origin: [ADMIN_URL, CLIENT_URL, SERVER_URL],
+  }),
+);
 
 app.use(passport.initialize());
 passport.use('jwt', jwtStrategy);

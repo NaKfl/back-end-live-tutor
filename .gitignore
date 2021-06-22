@@ -54,3 +54,5 @@ dist
 
 # Static files
 src/uploads/*
+
+build
