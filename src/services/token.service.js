@@ -39,7 +39,7 @@ tokenService.generateAuthTokens = async (user) => {
   await refreshTokenService.createOne(
     user,
     refreshToken,
-    accessTokenExpires.toDate(),
+    refreshTokenTokenExpires.toDate(),
   );
 
   return {
