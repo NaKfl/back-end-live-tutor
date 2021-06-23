@@ -4,10 +4,10 @@ module.exports = {
       name: 'live-tutor-server',
       script: './build/index.js',
       watch: false,
-      instances: 2,
+      instances: 3,
       exec_mode: 'cluster',
       env: {
-        NODE_ENV: 'development',
+        NODE_ENV: 'production',
       },
     },
   ],
