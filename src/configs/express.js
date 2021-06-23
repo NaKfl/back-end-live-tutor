@@ -85,6 +85,7 @@ const io = socketio(server, {
     methods: ['GET', 'POST'],
     credentials: true,
   },
+  transports: ['websocket', 'polling'],
 });
 
 const redisAdapter = adapter({

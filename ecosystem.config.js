@@ -3,9 +3,9 @@ module.exports = {
     {
       name: 'live-tutor-server',
       script: './build/index.js',
-      watch: true,
-      ignore_watch: ['node_modules', 'build'],
+      watch: false,
       instances: 2,
+      exec_mode: 'cluster',
       env: {
         NODE_ENV: 'development',
       },
