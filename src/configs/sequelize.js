@@ -1,11 +1,12 @@
 import { sequelize } from 'database/models';
+import logger from 'configs/logger';
 
 const connectDatabase = () => {
   sequelize
     .authenticate()
-    .then(() => console.log('Successfully connected to the database'))
+    .then(() => logger.info('Successfully connected to the database'))
     .catch((error) => {
-      console.log(
+      logger.error(
         `Could not connect to the database. Exiting now...\n${error}`,
       );
       process.exit(-1);

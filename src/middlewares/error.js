@@ -1,9 +1,10 @@
 import httpStatus from 'http-status';
 import ApiError from 'utils/ApiError';
+import logger from 'configs/logger';
 
 export const errorHandler = (err, req, res) => {
   const { statusCode, message } = err;
-  console.log(message);
+  logger.error(message);
 
   res.locals.errorMessage = err.message;
 
