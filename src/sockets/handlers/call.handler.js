@@ -50,6 +50,14 @@ const callHandler = (io, socket) => {
     );
   });
 
+  socket.on('call:selfCancelCall', async ({ userId }) => {
+    console.log('userId', userId);
+    const socketIds = [...(await onlineUsers.getSocketIdsByUserId(userId))];
+    socketIds.forEach((socketId) =>
+      io.to(socketId).emit('call:selfCancelCalled'),
+    );
+  });
+
   socket.on(
     'call:endCall',
     async ({ userCall, userBeCalled, startTime, endTime }) => {
