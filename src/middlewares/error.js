@@ -3,7 +3,7 @@ import ApiError from 'utils/ApiError';
 
 export const errorHandler = (err, req, res) => {
   const { statusCode, message } = err;
-  console.log('aaaa', statusCode, message);
+  console.log(message);
 
   res.locals.errorMessage = err.message;
 
