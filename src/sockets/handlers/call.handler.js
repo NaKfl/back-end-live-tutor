@@ -51,7 +51,6 @@ const callHandler = (io, socket) => {
   });
 
   socket.on('call:selfCancelCall', async ({ userId }) => {
-    console.log('userId', userId);
     const socketIds = [...(await onlineUsers.getSocketIdsByUserId(userId))];
     socketIds.forEach((socketId) =>
       io.to(socketId).emit('call:selfCancelCalled'),
