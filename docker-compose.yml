@@ -31,6 +31,7 @@ services:
       - 6969:6969
     volumes:
       - ./uploads:/server/build/uploads
+      - ./logs:/server/build/logs
 
   database:
     image: postgres:13
