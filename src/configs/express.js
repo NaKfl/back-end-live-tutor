@@ -18,6 +18,7 @@ import {
   SERVER_URL,
   ADMIN_URL,
 } from 'configs/vars';
+import logger from 'configs/logger';
 import initSockets from 'sockets';
 import routes from 'routes';
 import {
@@ -30,7 +31,7 @@ import path from 'path';
 const app = express();
 
 app.use(helmet());
-app.use(morgan(logs));
+app.use(morgan(logs, { stream: logger.stream }));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
