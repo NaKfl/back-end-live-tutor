@@ -9,6 +9,7 @@ import activateAccount from './templates/activateAccount';
 import { forgotPassword } from './templates/forgotPassword';
 import jwt from 'jsonwebtoken';
 import acceptedTutor from './templates/acceptedTutor';
+import logger from 'configs/logger';
 
 const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
@@ -63,7 +64,7 @@ export const confirmBookingNewSchedule = async ({ origin, ...bookingInfo }) => {
       html: bookingConfirm(bookingInfo),
     });
   } catch (error) {
-    console.log('Error: ', error);
+    logger.error(error);
   }
 };
 
@@ -76,7 +77,7 @@ export const sendForgotPasswordEmail = async ({ receiver, link }) => {
       html: forgotPassword(link),
     });
   } catch (error) {
-    console.log('Error: ', error);
+    logger.error(error);
   }
 };
 
@@ -89,13 +90,12 @@ export const sendMailActivateAccount = async (user, verifyLink) => {
       html: activateAccount(verifyLink),
     });
   } catch (error) {
-    console.log('Error: ', error);
+    logger.error(error);
   }
 };
 
 export const sendMailAcceptedTutor = async (user, isActivated) => {
   try {
-    console.log({ user });
     await transporter.sendMail({
       from: `"Live tutor" peterpans2030@gmail.com`,
       to: user?.email,
@@ -103,6 +103,6 @@ export const sendMailAcceptedTutor = async (user, isActivated) => {
       html: acceptedTutor(isActivated),
     });
   } catch (error) {
-    console.log('Error: ', error);
+    logger.error(error);
   }
 };

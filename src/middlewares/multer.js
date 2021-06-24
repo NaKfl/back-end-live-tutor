@@ -3,6 +3,7 @@ import path from 'path';
 import fs from 'fs';
 import ApiError from 'utils/ApiError';
 import { ERROR_CODE } from 'utils/constants';
+import logger from 'configs/logger';
 
 const dirUpload = path.join(__dirname, '../uploads');
 const dirAvatar = path.join(__dirname, '../uploads/avatar');
@@ -24,17 +25,16 @@ function ensureExists(path, mask, cb) {
 }
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    console.log(file);
     ensureExists(dirUpload, 0o744, function (err) {
       if (err) {
-        console.log(err);
+        logger.error(err);
       }
     });
     const fieldname = file.fieldname;
     if (fieldname === 'avatar') {
       ensureExists(dirAvatar, { recursive: true }, function (err) {
         if (err) {
-          console.log(err);
+          logger.error(err);
         } else {
           cb(null, dirAvatar);
         }
@@ -42,7 +42,7 @@ const storage = multer.diskStorage({
     } else if (fieldname === 'video') {
       ensureExists(dirVideo, { recursive: true }, function (err) {
         if (err) {
-          console.log(err);
+          logger.error(err);
         } else {
           cb(null, dirVideo);
         }
@@ -50,7 +50,7 @@ const storage = multer.diskStorage({
     } else {
       ensureExists(dirTemp, { recursive: true }, function (err) {
         if (err) {
-          console.log(err);
+          logger.error(err);
         } else {
           cb(null, dirTemp);
         }

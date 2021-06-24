@@ -130,7 +130,6 @@ scheduleService.register = async (tutorId, fields) => {
   const newEndTime = moment(endTime, 'HH:mm');
   const startPeriod = moment(startTime, 'HH:mm').hour();
   const startPeriodMinutes = moment(startTime, 'HH:mm').minute();
-  console.log('startPeriodMinutes', startPeriodMinutes);
   const diff = newEndTime.diff(newStartTime, 'minute');
   const isNotDivisible = diff % MINUTES_PER_SESSION !== 0;
 

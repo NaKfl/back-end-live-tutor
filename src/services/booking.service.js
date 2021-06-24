@@ -213,8 +213,6 @@ bookingService.cancelBooking = async (userId, scheduleDetailIds) => {
     const timeBooking = scheduleBookingInfo.startTime;
     const canCancelBook =
       moment(dateBooking + ' ' + timeBooking).diff(moment(), 'days') >= 1;
-    console.log(dateBooking + ' ' + timeBooking, canCancelBook);
-
     if (!canCancelBook) {
       throw new ApiError(
         ERROR_CODE.BOOKING_CANCEL_BEFORE_1DAY.code,
