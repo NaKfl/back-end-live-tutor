@@ -2,10 +2,10 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 13.3
+-- Dumped from database version 13.1
 -- Dumped by pg_dump version 13.1
 
--- Started on 2021-06-21 10:32:20 +07
+-- Started on 2021-06-25 17:25:29
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -23,7 +23,7 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- TOC entry 200 (class 1259 OID 155090)
+-- TOC entry 200 (class 1259 OID 41731)
 -- Name: Bookings; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -40,7 +40,7 @@ CREATE TABLE public."Bookings" (
 ALTER TABLE public."Bookings" OWNER TO livetutor;
 
 --
--- TOC entry 201 (class 1259 OID 155096)
+-- TOC entry 201 (class 1259 OID 41737)
 -- Name: CallSessions; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -60,7 +60,7 @@ CREATE TABLE public."CallSessions" (
 ALTER TABLE public."CallSessions" OWNER TO livetutor;
 
 --
--- TOC entry 202 (class 1259 OID 155101)
+-- TOC entry 202 (class 1259 OID 41742)
 -- Name: Categories; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -76,7 +76,7 @@ CREATE TABLE public."Categories" (
 ALTER TABLE public."Categories" OWNER TO livetutor;
 
 --
--- TOC entry 203 (class 1259 OID 155106)
+-- TOC entry 203 (class 1259 OID 41747)
 -- Name: Courses; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -98,7 +98,7 @@ CREATE TABLE public."Courses" (
 ALTER TABLE public."Courses" OWNER TO livetutor;
 
 --
--- TOC entry 204 (class 1259 OID 155114)
+-- TOC entry 204 (class 1259 OID 41755)
 -- Name: FavoriteTutors; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -114,7 +114,7 @@ CREATE TABLE public."FavoriteTutors" (
 ALTER TABLE public."FavoriteTutors" OWNER TO livetutor;
 
 --
--- TOC entry 205 (class 1259 OID 155117)
+-- TOC entry 205 (class 1259 OID 41758)
 -- Name: Fees; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -130,7 +130,7 @@ CREATE TABLE public."Fees" (
 ALTER TABLE public."Fees" OWNER TO livetutor;
 
 --
--- TOC entry 206 (class 1259 OID 155122)
+-- TOC entry 206 (class 1259 OID 41763)
 -- Name: Majors; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -147,7 +147,7 @@ CREATE TABLE public."Majors" (
 ALTER TABLE public."Majors" OWNER TO livetutor;
 
 --
--- TOC entry 207 (class 1259 OID 155130)
+-- TOC entry 207 (class 1259 OID 41771)
 -- Name: Messages; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -165,7 +165,7 @@ CREATE TABLE public."Messages" (
 ALTER TABLE public."Messages" OWNER TO livetutor;
 
 --
--- TOC entry 221 (class 1259 OID 155373)
+-- TOC entry 208 (class 1259 OID 41779)
 -- Name: RefreshTokens; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -183,7 +183,7 @@ CREATE TABLE public."RefreshTokens" (
 ALTER TABLE public."RefreshTokens" OWNER TO livetutor;
 
 --
--- TOC entry 208 (class 1259 OID 155138)
+-- TOC entry 209 (class 1259 OID 41787)
 -- Name: Roles; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -198,7 +198,7 @@ CREATE TABLE public."Roles" (
 ALTER TABLE public."Roles" OWNER TO livetutor;
 
 --
--- TOC entry 209 (class 1259 OID 155143)
+-- TOC entry 210 (class 1259 OID 41792)
 -- Name: ScheduleDetails; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -215,7 +215,7 @@ CREATE TABLE public."ScheduleDetails" (
 ALTER TABLE public."ScheduleDetails" OWNER TO livetutor;
 
 --
--- TOC entry 210 (class 1259 OID 155151)
+-- TOC entry 211 (class 1259 OID 41800)
 -- Name: Schedules; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -233,7 +233,7 @@ CREATE TABLE public."Schedules" (
 ALTER TABLE public."Schedules" OWNER TO livetutor;
 
 --
--- TOC entry 211 (class 1259 OID 155159)
+-- TOC entry 212 (class 1259 OID 41808)
 -- Name: SequelizeMeta; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -245,7 +245,7 @@ CREATE TABLE public."SequelizeMeta" (
 ALTER TABLE public."SequelizeMeta" OWNER TO livetutor;
 
 --
--- TOC entry 212 (class 1259 OID 155162)
+-- TOC entry 213 (class 1259 OID 41811)
 -- Name: SubMajors; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -263,7 +263,7 @@ CREATE TABLE public."SubMajors" (
 ALTER TABLE public."SubMajors" OWNER TO livetutor;
 
 --
--- TOC entry 213 (class 1259 OID 155170)
+-- TOC entry 214 (class 1259 OID 41819)
 -- Name: Topics; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -282,7 +282,7 @@ CREATE TABLE public."Topics" (
 ALTER TABLE public."Topics" OWNER TO livetutor;
 
 --
--- TOC entry 214 (class 1259 OID 155178)
+-- TOC entry 215 (class 1259 OID 41827)
 -- Name: Transactions; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -301,7 +301,7 @@ CREATE TABLE public."Transactions" (
 ALTER TABLE public."Transactions" OWNER TO livetutor;
 
 --
--- TOC entry 215 (class 1259 OID 155186)
+-- TOC entry 216 (class 1259 OID 41835)
 -- Name: TutorFeedbacks; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -320,7 +320,7 @@ CREATE TABLE public."TutorFeedbacks" (
 ALTER TABLE public."TutorFeedbacks" OWNER TO livetutor;
 
 --
--- TOC entry 216 (class 1259 OID 155194)
+-- TOC entry 217 (class 1259 OID 41843)
 -- Name: Tutors; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -347,7 +347,7 @@ CREATE TABLE public."Tutors" (
 ALTER TABLE public."Tutors" OWNER TO livetutor;
 
 --
--- TOC entry 217 (class 1259 OID 155202)
+-- TOC entry 218 (class 1259 OID 41851)
 -- Name: Types; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -362,7 +362,7 @@ CREATE TABLE public."Types" (
 ALTER TABLE public."Types" OWNER TO livetutor;
 
 --
--- TOC entry 218 (class 1259 OID 155207)
+-- TOC entry 219 (class 1259 OID 41856)
 -- Name: UserRoles; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -377,7 +377,7 @@ CREATE TABLE public."UserRoles" (
 ALTER TABLE public."UserRoles" OWNER TO livetutor;
 
 --
--- TOC entry 219 (class 1259 OID 155212)
+-- TOC entry 220 (class 1259 OID 41861)
 -- Name: Users; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -404,7 +404,7 @@ CREATE TABLE public."Users" (
 ALTER TABLE public."Users" OWNER TO livetutor;
 
 --
--- TOC entry 220 (class 1259 OID 155222)
+-- TOC entry 221 (class 1259 OID 41871)
 -- Name: Wallets; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -421,7 +421,7 @@ CREATE TABLE public."Wallets" (
 ALTER TABLE public."Wallets" OWNER TO livetutor;
 
 --
--- TOC entry 3449 (class 0 OID 155090)
+-- TOC entry 3184 (class 0 OID 41731)
 -- Dependencies: 200
 -- Data for Name: Bookings; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
@@ -497,17 +497,34 @@ fc141146-23ee-4c73-b0ff-13127ceaf4e9	fbf670b6-6a3d-45b1-9711-08de91ac7181	6364e5
 
 
 --
--- TOC entry 3450 (class 0 OID 155096)
+-- TOC entry 3185 (class 0 OID 41737)
 -- Dependencies: 201
 -- Data for Name: CallSessions; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
 
 COPY public."CallSessions" (id, "studentId", "tutorId", "videoUrl", "startTime", "endTime", "isReviewed", "createdAt", "updatedAt") FROM stdin;
+7800b820-32b1-4647-9c13-fc16643a8d02	5df1c8dd-1939-4fdd-b01d-d03d28ad67eb	02ed45b7-b427-4f24-8705-d182b7199e1a	\N	2021-06-25 03:14:31+07	2021-06-25 03:14:52+07	t	2021-06-25 03:14:56.658+07	2021-06-25 03:15:07.707+07
+09eea1bb-039d-4287-a98a-ad2c00b78e81	846710e2-e0f4-4f11-b6aa-54efe4fbe455	02ed45b7-b427-4f24-8705-d182b7199e1a	\N	2021-06-25 03:15:32+07	2021-06-25 03:15:49+07	f	2021-06-25 03:15:53.62+07	2021-06-25 03:15:53.62+07
+ad77bb75-454d-4d1b-a848-eea1d7bfb130	846710e2-e0f4-4f11-b6aa-54efe4fbe455	02ed45b7-b427-4f24-8705-d182b7199e1a	\N	2021-06-25 03:15:32+07	2021-06-25 03:15:50+07	t	2021-06-25 03:15:53.653+07	2021-06-25 03:16:32.436+07
+8c1b2dac-936d-4620-a680-a88cb61ce05a	74655b72-3b14-463e-98b6-a2f64a459aa9	02ed45b7-b427-4f24-8705-d182b7199e1a	\N	2021-06-25 03:16:51+07	2021-06-25 03:17:10+07	f	2021-06-25 03:17:14.332+07	2021-06-25 03:17:14.332+07
+e77980b6-2be4-4460-9759-945457f83746	74655b72-3b14-463e-98b6-a2f64a459aa9	02ed45b7-b427-4f24-8705-d182b7199e1a	\N	2021-06-25 03:16:51+07	2021-06-25 03:17:09+07	f	2021-06-25 03:17:14.339+07	2021-06-25 03:17:14.339+07
+ef79b9da-5949-4bfc-bd98-82192b7fe4af	74655b72-3b14-463e-98b6-a2f64a459aa9	02ed45b7-b427-4f24-8705-d182b7199e1a	\N	2021-06-25 03:16:51+07	2021-06-25 03:17:09+07	t	2021-06-25 03:17:14.327+07	2021-06-25 03:17:23.077+07
+2add1213-eaec-4fb4-9fda-415aaf555d6d	04ef870e-60cc-4822-9b6d-67c8143d2029	02ed45b7-b427-4f24-8705-d182b7199e1a	\N	2021-06-25 03:17:46+07	2021-06-25 03:18:05+07	t	2021-06-25 03:18:11.092+07	2021-06-25 03:18:15.978+07
+24581968-1e22-4d46-ba66-94ab1ade6fb0	04ef870e-60cc-4822-9b6d-67c8143d2029	0d7d4348-cf7e-4b6a-9a01-1d88f283e910	\N	2021-06-25 03:18:38+07	2021-06-25 03:18:52+07	f	2021-06-25 03:18:59.111+07	2021-06-25 03:18:59.111+07
+80bf2a99-2498-4313-bc73-c4fcc2e442b3	04ef870e-60cc-4822-9b6d-67c8143d2029	0d7d4348-cf7e-4b6a-9a01-1d88f283e910	\N	2021-06-25 03:18:38+07	2021-06-25 03:18:53+07	f	2021-06-25 03:18:59.127+07	2021-06-25 03:18:59.127+07
+166b835a-8eca-423f-8ee4-e06c1bb50b8d	04ef870e-60cc-4822-9b6d-67c8143d2029	0d7d4348-cf7e-4b6a-9a01-1d88f283e910	\N	2021-06-25 03:18:38+07	2021-06-25 03:18:53+07	f	2021-06-25 03:18:59.319+07	2021-06-25 03:18:59.319+07
+45be1221-fee3-4fd7-a871-c74b3ee2ed6c	04ef870e-60cc-4822-9b6d-67c8143d2029	0d7d4348-cf7e-4b6a-9a01-1d88f283e910	\N	2021-06-25 03:19:04+07	2021-06-25 03:19:21+07	t	2021-06-25 03:19:25.016+07	2021-06-25 03:19:32.962+07
+21663c3e-da38-4d02-97cf-d6c2f37821af	846710e2-e0f4-4f11-b6aa-54efe4fbe455	0d7d4348-cf7e-4b6a-9a01-1d88f283e910	\N	2021-06-25 03:20:02+07	2021-06-25 03:20:28+07	f	2021-06-25 03:20:32.45+07	2021-06-25 03:20:32.45+07
+eb62fa84-69e4-415a-9ec4-4c980bc0f4bd	846710e2-e0f4-4f11-b6aa-54efe4fbe455	0d7d4348-cf7e-4b6a-9a01-1d88f283e910	\N	2021-06-25 03:20:02+07	2021-06-25 03:20:29+07	t	2021-06-25 03:20:32.434+07	2021-06-25 03:20:40.444+07
+d07deb91-a3ca-4970-bcda-a9691d78bb0c	846710e2-e0f4-4f11-b6aa-54efe4fbe455	02ed45b7-b427-4f24-8705-d182b7199e1a	\N	2021-06-25 03:20:54+07	2021-06-25 03:21:13+07	t	2021-06-25 03:21:17.19+07	2021-06-25 03:21:32.584+07
+d9011256-57ea-4560-b7ec-d67b4d42ab9b	846710e2-e0f4-4f11-b6aa-54efe4fbe455	c6e0dd89-bc9d-45f2-87d4-975fd07ff8ba	\N	2021-06-25 03:21:54+07	2021-06-25 03:22:07+07	t	2021-06-25 03:22:11.573+07	2021-06-25 03:22:18.74+07
+66f8359d-5906-41d1-b528-effa8822beac	74655b72-3b14-463e-98b6-a2f64a459aa9	c6e0dd89-bc9d-45f2-87d4-975fd07ff8ba	\N	2021-06-25 03:22:36+07	2021-06-25 03:22:48+07	t	2021-06-25 03:22:52.056+07	2021-06-25 03:23:01.757+07
+8b1ccf34-4fba-452f-8ddd-8ed2b5d6d719	74655b72-3b14-463e-98b6-a2f64a459aa9	a57371e1-07d7-403f-bd71-fa2f14c7c537	\N	2021-06-25 03:23:24+07	2021-06-25 03:23:36+07	t	2021-06-25 03:23:40.365+07	2021-06-25 03:58:10.404+07
 \.
 
 
 --
--- TOC entry 3451 (class 0 OID 155101)
+-- TOC entry 3186 (class 0 OID 41742)
 -- Dependencies: 202
 -- Data for Name: Categories; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
@@ -562,11 +579,60 @@ aeed714d-8ed2-4634-98c7-9eea0499b05c	bfed6a51-c79e-45f7-a32b-7c880d6c6ac7	design
 ad310923-ac7a-4d72-8ebd-8434410eb116	bfed6a51-c79e-45f7-a32b-7c880d6c6ac7	business	2021-06-10 21:51:05.215092+07	2021-06-10 21:51:05.215092+07
 4729204d-dc38-4dbe-a6aa-4367b7dc9ecb	bfed6a51-c79e-45f7-a32b-7c880d6c6ac7	health care	2021-06-10 21:51:05.215092+07	2021-06-10 21:51:05.215092+07
 1178a786-7b9d-4ffd-9bcc-9d04d2f2d71f	bfed6a51-c79e-45f7-a32b-7c880d6c6ac7	infomation technology	2021-06-10 21:51:05.215092+07	2021-06-10 21:51:05.215092+07
+d3fc67a1-b3ea-4724-bf96-e5691d41f282	38da0d33-dcf8-4e3d-b1af-f8eceb4a02d1	andorra	2021-06-25 03:59:30.486243+07	2021-06-25 03:59:30.486243+07
+0978dbc6-c70b-4bf5-b843-4d766dcccc9a	38da0d33-dcf8-4e3d-b1af-f8eceb4a02d1	armenia	2021-06-25 03:59:30.486243+07	2021-06-25 03:59:30.486243+07
+7c444fdb-bdec-49bd-b16d-f97ae423054e	38da0d33-dcf8-4e3d-b1af-f8eceb4a02d1	aahrain	2021-06-25 03:59:30.486243+07	2021-06-25 03:59:30.486243+07
+da802955-9721-4b9d-83d0-153f83f53b0b	38da0d33-dcf8-4e3d-b1af-f8eceb4a02d1	angola	2021-06-25 03:59:30.486243+07	2021-06-25 03:59:30.486243+07
+4af32ddb-3f36-4760-9d53-8d879883aabd	38da0d33-dcf8-4e3d-b1af-f8eceb4a02d1	australia	2021-06-25 03:59:30.486243+07	2021-06-25 03:59:30.486243+07
+836eaf3c-552f-460e-9d5b-a1c6507b5370	38da0d33-dcf8-4e3d-b1af-f8eceb4a02d1	bangladesh	2021-06-25 03:59:30.486243+07	2021-06-25 03:59:30.486243+07
+35f31352-5496-4cfd-991a-9b549a2e7d44	38da0d33-dcf8-4e3d-b1af-f8eceb4a02d1	albania	2021-06-25 03:59:30.486243+07	2021-06-25 03:59:30.486243+07
+28f502a2-b805-42a1-910c-868c2334dc69	38da0d33-dcf8-4e3d-b1af-f8eceb4a02d1	anguilla	2021-06-25 03:59:30.486243+07	2021-06-25 03:59:30.486243+07
+f227463c-6ca1-4a9a-bdac-4392925e2587	38da0d33-dcf8-4e3d-b1af-f8eceb4a02d1	austria	2021-06-25 03:59:30.486243+07	2021-06-25 03:59:30.486243+07
+dbec9d4a-155e-4edb-8304-f6d8db4e5bce	38da0d33-dcf8-4e3d-b1af-f8eceb4a02d1	belarus	2021-06-25 03:59:30.486243+07	2021-06-25 03:59:30.486243+07
+d4935ba6-9241-4eda-89b0-bee1d7b5dd53	38da0d33-dcf8-4e3d-b1af-f8eceb4a02d1	algeria	2021-06-25 03:59:30.486243+07	2021-06-25 03:59:30.486243+07
+458b099e-2690-4689-a748-afe04eb765bf	38da0d33-dcf8-4e3d-b1af-f8eceb4a02d1	antigua & barbuda	2021-06-25 03:59:30.486243+07	2021-06-25 03:59:30.486243+07
+d8e555e0-310c-42c1-95fe-a1b48faf3b5b	38da0d33-dcf8-4e3d-b1af-f8eceb4a02d1	azerbaijan	2021-06-25 03:59:30.486243+07	2021-06-25 03:59:30.486243+07
+5bb7def1-441b-4817-9c6c-d0d02ad02a8a	38da0d33-dcf8-4e3d-b1af-f8eceb4a02d1	american samoa	2021-06-25 03:59:30.486243+07	2021-06-25 03:59:30.486243+07
+d86a0edf-4f2e-4308-9c97-330bc8ada0d9	38da0d33-dcf8-4e3d-b1af-f8eceb4a02d1	argentina	2021-06-25 03:59:30.486243+07	2021-06-25 03:59:30.486243+07
+a67baa0c-ce40-4765-a04d-81d35c186093	38da0d33-dcf8-4e3d-b1af-f8eceb4a02d1	bahamas	2021-06-25 03:59:30.486243+07	2021-06-25 03:59:30.486243+07
+7a410a13-1066-4e18-9dfd-e719a52d9c9c	38da0d33-dcf8-4e3d-b1af-f8eceb4a02d1	benin	2021-06-25 03:59:30.486243+07	2021-06-25 03:59:30.486243+07
+8c4e688c-ddc1-4469-8e79-ced3549de097	38da0d33-dcf8-4e3d-b1af-f8eceb4a02d1	gernamy	2021-06-25 03:59:30.486243+07	2021-06-25 03:59:30.486243+07
+e7cd6fa6-5e9a-47cb-a813-1e1e1db012ca	38da0d33-dcf8-4e3d-b1af-f8eceb4a02d1	mexico	2021-06-25 03:59:30.486243+07	2021-06-25 03:59:30.486243+07
+eebbb576-123c-4184-884f-c7ff59d66acb	38da0d33-dcf8-4e3d-b1af-f8eceb4a02d1	bolivia	2021-06-25 03:59:30.486243+07	2021-06-25 03:59:30.486243+07
+590472c3-3ae6-442e-b37e-6c59db5eac08	38da0d33-dcf8-4e3d-b1af-f8eceb4a02d1	brazil	2021-06-25 03:59:30.486243+07	2021-06-25 03:59:30.486243+07
+882480ba-cbbe-4f97-9a09-9c5006517eaf	38da0d33-dcf8-4e3d-b1af-f8eceb4a02d1	brunei	2021-06-25 03:59:30.486243+07	2021-06-25 03:59:30.486243+07
+645696c7-f072-4258-b1a7-dbf0affe0aab	38da0d33-dcf8-4e3d-b1af-f8eceb4a02d1	myanmar	2021-06-25 03:59:30.486243+07	2021-06-25 03:59:30.486243+07
+c81a902d-11fa-4d81-acda-70942fd3ebcd	38da0d33-dcf8-4e3d-b1af-f8eceb4a02d1	south africa	2021-06-25 03:59:30.486243+07	2021-06-25 03:59:30.486243+07
+d05ecbb3-af14-4195-86f6-2f8748c1f18d	38da0d33-dcf8-4e3d-b1af-f8eceb4a02d1	south korea	2021-06-25 03:59:30.486243+07	2021-06-25 03:59:30.486243+07
+115e5bed-9fa6-4413-94de-cbae7b1c1cf6	38da0d33-dcf8-4e3d-b1af-f8eceb4a02d1	hugary	2021-06-25 03:59:30.486243+07	2021-06-25 03:59:30.486243+07
+01a97f45-26f4-4ed0-940b-822788e2ad56	38da0d33-dcf8-4e3d-b1af-f8eceb4a02d1	hong kong	2021-06-25 03:59:30.486243+07	2021-06-25 03:59:30.486243+07
+3339b961-2a00-40b1-a06d-4b95b438480a	38da0d33-dcf8-4e3d-b1af-f8eceb4a02d1	spain	2021-06-25 03:59:30.486243+07	2021-06-25 03:59:30.486243+07
+20703d8a-bd19-4501-a042-a3b77d1c059f	38da0d33-dcf8-4e3d-b1af-f8eceb4a02d1	nauru	2021-06-25 03:59:30.486243+07	2021-06-25 03:59:30.486243+07
+0afb028d-2a16-4a71-95be-33e78796bc86	38da0d33-dcf8-4e3d-b1af-f8eceb4a02d1	nepal	2021-06-25 03:59:30.486243+07	2021-06-25 03:59:30.486243+07
+4900638f-ad80-47f8-862a-5faab51eb3e3	38da0d33-dcf8-4e3d-b1af-f8eceb4a02d1	india	2021-06-25 03:59:30.486243+07	2021-06-25 03:59:30.486243+07
+e1aea1e7-9907-4391-8190-0736c99465fa	38da0d33-dcf8-4e3d-b1af-f8eceb4a02d1	indonesia	2021-06-25 03:59:30.486243+07	2021-06-25 03:59:30.486243+07
+72042ad8-1ec7-4af0-be9d-e8e5f9d19ae5	38da0d33-dcf8-4e3d-b1af-f8eceb4a02d1	new Zealand	2021-06-25 03:59:30.486243+07	2021-06-25 03:59:30.486243+07
+0c029ce2-c723-4979-bc8b-1e7e216e2a77	38da0d33-dcf8-4e3d-b1af-f8eceb4a02d1	nigeria	2021-06-25 03:59:30.486243+07	2021-06-25 03:59:30.486243+07
+df9628fa-1cf9-44e5-8e44-81f7affbd56f	38da0d33-dcf8-4e3d-b1af-f8eceb4a02d1	taiwan	2021-06-25 03:59:30.486243+07	2021-06-25 03:59:30.486243+07
+9f5b6ea0-b96a-46c0-9a44-08c4bfea51f1	38da0d33-dcf8-4e3d-b1af-f8eceb4a02d1	english	2021-06-25 03:59:30.486243+07	2021-06-25 03:59:30.486243+07
+2725f82b-3223-4135-99cd-8836cfd54fd9	38da0d33-dcf8-4e3d-b1af-f8eceb4a02d1	cuba	2021-06-25 03:59:30.486243+07	2021-06-25 03:59:30.486243+07
+e4cb52fc-37e4-4348-835d-c588ca149159	38da0d33-dcf8-4e3d-b1af-f8eceb4a02d1	france	2021-06-25 03:59:30.486243+07	2021-06-25 03:59:30.486243+07
+179c8c53-f2ac-490c-8a78-92692bd98b44	38da0d33-dcf8-4e3d-b1af-f8eceb4a02d1	vietnamese	2021-06-25 03:59:30.486243+07	2021-06-25 03:59:30.486243+07
+4d8537fb-cadd-4719-9744-ab8ff7e9550e	38da0d33-dcf8-4e3d-b1af-f8eceb4a02d1	zambia	2021-06-25 03:59:30.486243+07	2021-06-25 03:59:30.486243+07
+0b2ee0e6-f975-47d1-a1fd-fa2224738c10	38da0d33-dcf8-4e3d-b1af-f8eceb4a02d1	united kingdom	2021-06-25 03:59:30.486243+07	2021-06-25 03:59:30.486243+07
+cf1d89ff-fb30-4b42-aef1-d97969eb7187	38da0d33-dcf8-4e3d-b1af-f8eceb4a02d1	united states	2021-06-25 03:59:30.486243+07	2021-06-25 03:59:30.486243+07
+a53bee2e-1a0f-4165-ac41-7cfde3c43c0a	1e3061ab-0e15-42f7-b81d-6641e4067393	foreign languages	2021-06-25 03:59:30.486243+07	2021-06-25 03:59:30.486243+07
+ec94977f-c32f-4fb1-95e9-ad3f57610277	1e3061ab-0e15-42f7-b81d-6641e4067393	marketing	2021-06-25 03:59:30.486243+07	2021-06-25 03:59:30.486243+07
+1138d900-90b2-4059-8a34-2ef9af9ea99e	1e3061ab-0e15-42f7-b81d-6641e4067393	office infomation	2021-06-25 03:59:30.486243+07	2021-06-25 03:59:30.486243+07
+7baba75e-fe0c-4a3d-b763-8cf1e1dbeb86	1e3061ab-0e15-42f7-b81d-6641e4067393	design	2021-06-25 03:59:30.486243+07	2021-06-25 03:59:30.486243+07
+85cb36eb-ab06-4390-9262-5bb669f6d87d	1e3061ab-0e15-42f7-b81d-6641e4067393	business	2021-06-25 03:59:30.486243+07	2021-06-25 03:59:30.486243+07
+1ad2b504-f1c0-4fca-9a0e-e5ae9dbe5432	1e3061ab-0e15-42f7-b81d-6641e4067393	health care	2021-06-25 03:59:30.486243+07	2021-06-25 03:59:30.486243+07
+0048186d-28f3-491b-9268-ede23f7ca4a7	1e3061ab-0e15-42f7-b81d-6641e4067393	infomation technology	2021-06-25 03:59:30.486243+07	2021-06-25 03:59:30.486243+07
 \.
 
 
 --
--- TOC entry 3452 (class 0 OID 155106)
+-- TOC entry 3187 (class 0 OID 41747)
 -- Dependencies: 203
 -- Data for Name: Courses; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
@@ -576,7 +642,7 @@ COPY public."Courses" (id, "tutorId", name, description, level, other_details, "
 
 
 --
--- TOC entry 3453 (class 0 OID 155114)
+-- TOC entry 3188 (class 0 OID 41755)
 -- Dependencies: 204
 -- Data for Name: FavoriteTutors; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
@@ -591,7 +657,7 @@ fcbd0c88-cc9a-4412-a7bd-a628fa0d7132	0712174d-c389-4286-af91-8a6b1beb9077	42c2a8
 
 
 --
--- TOC entry 3454 (class 0 OID 155117)
+-- TOC entry 3189 (class 0 OID 41758)
 -- Dependencies: 205
 -- Data for Name: Fees; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
@@ -602,7 +668,7 @@ COPY public."Fees" (id, key, price, "createdAt", "updatedAt") FROM stdin;
 
 
 --
--- TOC entry 3455 (class 0 OID 155122)
+-- TOC entry 3190 (class 0 OID 41763)
 -- Dependencies: 206
 -- Data for Name: Majors; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
@@ -615,11 +681,18 @@ ebbbca1a-157c-4bd1-a18c-2f7828c84826	of	Office Information	Tin học văn phòng
 ad234a86-4d84-4af0-b50e-0f44573895e0	bs	Business	Kinh doanh	2021-06-10 21:54:31.964+07	2021-06-10 21:54:31.964+07
 e8f0ec67-70ef-47d6-92fc-7de07bd42990	hc	Health Care	Chăm sóc sức khỏe	2021-06-10 21:54:31.964+07	2021-06-10 21:54:31.964+07
 47245390-e608-4bf4-a5db-8487763215e6	it	Information Technology	Công nghệ thông tin	2021-06-10 21:54:31.964+07	2021-06-10 21:54:31.964+07
+9ec73cac-5416-43a2-bad2-ce076af5542f	fl	Foreign Languages	Ngoại ngữ	2021-06-25 03:59:53.999+07	2021-06-25 03:59:53.999+07
+195bded2-c8b3-4bb7-a773-b4ea9e5d55e7	mt	Marketing	Marketing	2021-06-25 03:59:53.999+07	2021-06-25 03:59:53.999+07
+cc4ec334-298f-440f-b9ad-1ffc9b18e73a	of	Office Information	Tin học văn phòng	2021-06-25 03:59:53.999+07	2021-06-25 03:59:53.999+07
+f380d0d3-8ebd-4d63-9bc3-778a42d49a5e	ds	Design	Thiết kế	2021-06-25 03:59:53.999+07	2021-06-25 03:59:53.999+07
+981d5f33-0e56-4f2a-ab37-0a1228bb596e	bs	Business	Kinh doanh	2021-06-25 03:59:53.999+07	2021-06-25 03:59:53.999+07
+b054f380-0b71-42d4-961a-0e8ae2b4c695	hc	Health Care	Chăm sóc sức khỏe	2021-06-25 03:59:54+07	2021-06-25 03:59:54+07
+a83ec7aa-d96f-443e-bda6-cbfb011e8924	it	Information Technology	Công nghệ thông tin	2021-06-25 03:59:54+07	2021-06-25 03:59:54+07
 \.
 
 
 --
--- TOC entry 3456 (class 0 OID 155130)
+-- TOC entry 3191 (class 0 OID 41771)
 -- Dependencies: 207
 -- Data for Name: Messages; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
@@ -673,18 +746,30 @@ de70953b-137d-4e02-a1cf-7739e471fe74	Dịch dủm chán lắm	0728421c-15d0-4a81
 
 
 --
--- TOC entry 3470 (class 0 OID 155373)
--- Dependencies: 221
+-- TOC entry 3192 (class 0 OID 41779)
+-- Dependencies: 208
 -- Data for Name: RefreshTokens; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
 
 COPY public."RefreshTokens" (id, token, "userId", "userEmail", expires, "createdAt", "updatedAt") FROM stdin;
+f28fd7b2-ca65-4786-9bf5-8f232dc38e1d	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMmVkNDViNy1iNDI3LTRmMjQtODcwNS1kMTgyYjcxOTllMWEiLCJpYXQiOjE2MjQ1NjU1MTQsImV4cCI6MTYyNzE1NzUxNCwidHlwZSI6InJlZnJlc2gifQ.xny9m8yBgICjuBoMqQEJQ6228RC63kvlrbSHNRDFIaU	02ed45b7-b427-4f24-8705-d182b7199e1a	lttutor7@yopmail.com	2021-07-25 03:11:54.357+07	2021-06-25 03:11:54.358+07	2021-06-25 03:11:54.358+07
+92657b6e-2232-4c59-aea4-250a983966f9	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMmVkNDViNy1iNDI3LTRmMjQtODcwNS1kMTgyYjcxOTllMWEiLCJpYXQiOjE2MjQ1NjU2MzksImV4cCI6MTYyNzE1NzYzOSwidHlwZSI6InJlZnJlc2gifQ.Je7bquy3do7l1e8y5N1OfClUKMD57vzdBIsdyPFtYDg	02ed45b7-b427-4f24-8705-d182b7199e1a	lttutor7@yopmail.com	2021-07-25 03:13:59.638+07	2021-06-25 03:13:59.64+07	2021-06-25 03:13:59.64+07
+6877528f-ce5c-4ec9-8ea5-4db276e116b8	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZGYxYzhkZC0xOTM5LTRmZGQtYjAxZC1kMDNkMjhhZDY3ZWIiLCJpYXQiOjE2MjQ1NjU2NjMsImV4cCI6MTYyNzE1NzY2MywidHlwZSI6InJlZnJlc2gifQ.bsMmcLvsO2kBYv94ayss7kkdiZAdohCF1WSaj89Qn0w	5df1c8dd-1939-4fdd-b01d-d03d28ad67eb	ltstudent1@yopmail.com	2021-07-25 03:14:23.451+07	2021-06-25 03:14:23.451+07	2021-06-25 03:14:23.451+07
+aadf7769-4f8f-4b49-994c-f64971c275fb	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4NDY3MTBlMi1lMGY0LTRmMTEtYjZhYS01NGVmZTRmYmU0NTUiLCJpYXQiOjE2MjQ1NjU3MjgsImV4cCI6MTYyNzE1NzcyOCwidHlwZSI6InJlZnJlc2gifQ.xqEiohnnVKFsYK0KvS0tWZ6WDr18fEyDbv2sF03Uz08	846710e2-e0f4-4f11-b6aa-54efe4fbe455	ltstudent2@yopmail.com	2021-07-25 03:15:28.689+07	2021-06-25 03:15:28.689+07	2021-06-25 03:15:28.689+07
+2f9b806b-b248-45ce-8c58-f94d6f115299	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3NDY1NWI3Mi0zYjE0LTQ2M2UtOThiNi1hMmY2NGE0NTlhYTkiLCJpYXQiOjE2MjQ1NjU4MDcsImV4cCI6MTYyNzE1NzgwNywidHlwZSI6InJlZnJlc2gifQ.--wwnaYaGVmm6Xh9oAZv7Oh8lJHzu72UfOV1XcNVRls	74655b72-3b14-463e-98b6-a2f64a459aa9	ltstudent4@yopmail.com	2021-07-25 03:16:47.231+07	2021-06-25 03:16:47.232+07	2021-06-25 03:16:47.232+07
+dae55482-d2e6-4f0c-978a-d5a93fbb5104	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwNGVmODcwZS02MGNjLTQ4MjItOWI2ZC02N2M4MTQzZDIwMjkiLCJpYXQiOjE2MjQ1NjU4NjAsImV4cCI6MTYyNzE1Nzg2MCwidHlwZSI6InJlZnJlc2gifQ.790isksZBar43W4CMZp6Dm-ds-Ix7coKOyxdC_KWQ9g	04ef870e-60cc-4822-9b6d-67c8143d2029	ltstudent7@yopmail.com	2021-07-25 03:17:40.168+07	2021-06-25 03:17:40.169+07	2021-06-25 03:17:40.169+07
+1328f195-da6f-4789-a6af-2b99eda1ed8d	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwZDdkNDM0OC1jZjdlLTRiNmEtOWEwMS0xZDg4ZjI4M2U5MTAiLCJpYXQiOjE2MjQ1NjU5MTMsImV4cCI6MTYyNzE1NzkxMywidHlwZSI6InJlZnJlc2gifQ.4DGA-g485qVjb7-BT_hI0QnEkVFLPh5HENebVo9ecR4	0d7d4348-cf7e-4b6a-9a01-1d88f283e910	lttutor1@yopmail.com	2021-07-25 03:18:33.269+07	2021-06-25 03:18:33.269+07	2021-06-25 03:18:33.269+07
+d7b8b070-2d00-462a-8fb4-046b9f109abf	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4NDY3MTBlMi1lMGY0LTRmMTEtYjZhYS01NGVmZTRmYmU0NTUiLCJpYXQiOjE2MjQ1NjU5OTEsImV4cCI6MTYyNzE1Nzk5MSwidHlwZSI6InJlZnJlc2gifQ.85lxrmP7Z95k9ROx9-ApJ9bhZnlNCP1hrQnTbObuIzg	846710e2-e0f4-4f11-b6aa-54efe4fbe455	ltstudent2@yopmail.com	2021-07-25 03:19:51.409+07	2021-06-25 03:19:51.41+07	2021-06-25 03:19:51.41+07
+3aaf1c96-0d36-4664-934f-3c4183711870	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMmVkNDViNy1iNDI3LTRmMjQtODcwNS1kMTgyYjcxOTllMWEiLCJpYXQiOjE2MjQ1NjYwNTAsImV4cCI6MTYyNzE1ODA1MCwidHlwZSI6InJlZnJlc2gifQ.dst_zzKO3vixn20ZAxZwaCSr2VaxpL7HLm0eIQGppn4	02ed45b7-b427-4f24-8705-d182b7199e1a	lttutor7@yopmail.com	2021-07-25 03:20:50.081+07	2021-06-25 03:20:50.082+07	2021-06-25 03:20:50.082+07
+0bb0aa97-fbcf-452b-88ba-d66fb664eaca	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjNmUwZGQ4OS1iYzlkLTQ1ZjItODdkNC05NzVmZDA3ZmY4YmEiLCJpYXQiOjE2MjQ1NjYxMDQsImV4cCI6MTYyNzE1ODEwNCwidHlwZSI6InJlZnJlc2gifQ.R6q7gUbw6NLHy9wfOGXqQaG1wBg76ZL4d0MPgdITqDg	c6e0dd89-bc9d-45f2-87d4-975fd07ff8ba	lttutor9@yopmail.com	2021-07-25 03:21:44.08+07	2021-06-25 03:21:44.081+07	2021-06-25 03:21:44.081+07
+69b94b72-6c5d-444e-bf7b-411080908602	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3NDY1NWI3Mi0zYjE0LTQ2M2UtOThiNi1hMmY2NGE0NTlhYTkiLCJpYXQiOjE2MjQ1Njc4ODksImV4cCI6MTYyNzE1OTg4OSwidHlwZSI6InJlZnJlc2gifQ.LNN2gWglj5Tyc_NKqSDQLAzgeSALHy3-HIxTdIkvdXo	74655b72-3b14-463e-98b6-a2f64a459aa9	ltstudent4@yopmail.com	2021-07-25 03:51:29.204+07	2021-06-25 03:51:29.205+07	2021-06-25 03:51:29.205+07
+c1806c9e-499f-4538-8152-6a7b031595e1	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhNTczNzFlMS0wN2Q3LTQwM2YtYmQ3MS1mYTJmMTRjN2M1MzciLCJpYXQiOjE2MjQ1Njc5MzgsImV4cCI6MTYyNzE1OTkzOCwidHlwZSI6InJlZnJlc2gifQ.u-dgzB_syuSxGfHUvVyk8UUKFqIhAhQfu0Z6guXK1Mg	a57371e1-07d7-403f-bd71-fa2f14c7c537	lttutor6@yopmail.com	2021-07-25 03:52:18.118+07	2021-06-25 03:52:18.119+07	2021-06-25 03:52:18.119+07
 \.
 
 
 --
--- TOC entry 3457 (class 0 OID 155138)
--- Dependencies: 208
+-- TOC entry 3193 (class 0 OID 41787)
+-- Dependencies: 209
 -- Data for Name: Roles; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
 
@@ -696,8 +781,8 @@ a31e0f43-d0f5-4046-8eb9-837e001b62b6	admin	2021-06-10 21:51:58.012+07	2021-06-10
 
 
 --
--- TOC entry 3458 (class 0 OID 155143)
--- Dependencies: 209
+-- TOC entry 3194 (class 0 OID 41792)
+-- Dependencies: 210
 -- Data for Name: ScheduleDetails; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
 
@@ -1364,8 +1449,8 @@ efea8c02-13fb-4d83-af09-540dd0a45d10	14:00	14:30	9de5c53f-dbe0-42a3-bca4-09cd23e
 
 
 --
--- TOC entry 3459 (class 0 OID 155151)
--- Dependencies: 210
+-- TOC entry 3195 (class 0 OID 41800)
+-- Dependencies: 211
 -- Data for Name: Schedules; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
 
@@ -1543,8 +1628,8 @@ c975b40f-73a0-441e-98e9-c6f263a30864	2021-06-22	14:00	15:00	42c2a84a-163b-44d7-9
 
 
 --
--- TOC entry 3460 (class 0 OID 155159)
--- Dependencies: 211
+-- TOC entry 3196 (class 0 OID 41808)
+-- Dependencies: 212
 -- Data for Name: SequelizeMeta; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
 
@@ -1574,8 +1659,8 @@ COPY public."SequelizeMeta" (name) FROM stdin;
 
 
 --
--- TOC entry 3461 (class 0 OID 155162)
--- Dependencies: 212
+-- TOC entry 3197 (class 0 OID 41811)
+-- Dependencies: 213
 -- Data for Name: SubMajors; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
 
@@ -1584,8 +1669,8 @@ COPY public."SubMajors" (id, "majorId", key, "englishName", "vietnameseName", "c
 
 
 --
--- TOC entry 3462 (class 0 OID 155170)
--- Dependencies: 213
+-- TOC entry 3198 (class 0 OID 41819)
+-- Dependencies: 214
 -- Data for Name: Topics; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
 
@@ -1594,8 +1679,8 @@ COPY public."Topics" (id, "courseId", name, description, "orderCourse", "videoUr
 
 
 --
--- TOC entry 3463 (class 0 OID 155178)
--- Dependencies: 214
+-- TOC entry 3199 (class 0 OID 41827)
+-- Dependencies: 215
 -- Data for Name: Transactions; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
 
@@ -1744,51 +1829,63 @@ d666954a-7116-418a-a33d-26bb55422535	80f2de40-8038-4396-b329-82e20fea9ab1	331724
 
 
 --
--- TOC entry 3464 (class 0 OID 155186)
--- Dependencies: 215
+-- TOC entry 3200 (class 0 OID 41835)
+-- Dependencies: 216
 -- Data for Name: TutorFeedbacks; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
 
 COPY public."TutorFeedbacks" (id, "sessionId", "firstId", "secondId", rating, content, "createdAt", "updatedAt") FROM stdin;
+c02aac90-4a8c-4762-81ba-ae611bf23a1e	7800b820-32b1-4647-9c13-fc16643a8d02	5df1c8dd-1939-4fdd-b01d-d03d28ad67eb	02ed45b7-b427-4f24-8705-d182b7199e1a	5	Tuyệt vời	2021-06-25 03:15:07.681+07	2021-06-25 03:15:07.681+07
+4525c41b-4291-4dcd-a785-db4a5cb44b9d	ad77bb75-454d-4d1b-a848-eea1d7bfb130	846710e2-e0f4-4f11-b6aa-54efe4fbe455	02ed45b7-b427-4f24-8705-d182b7199e1a	5	2232	2021-06-25 03:16:32.412+07	2021-06-25 03:16:32.412+07
+b11b7aad-9105-4ca4-b739-601c455c286d	ef79b9da-5949-4bfc-bd98-82192b7fe4af	74655b72-3b14-463e-98b6-a2f64a459aa9	02ed45b7-b427-4f24-8705-d182b7199e1a	5	proooo	2021-06-25 03:17:23.058+07	2021-06-25 03:17:23.058+07
+0bea3bb9-7499-43dd-9a16-ed71864feb8b	2add1213-eaec-4fb4-9fda-415aaf555d6d	04ef870e-60cc-4822-9b6d-67c8143d2029	02ed45b7-b427-4f24-8705-d182b7199e1a	5	abc	2021-06-25 03:18:15.956+07	2021-06-25 03:18:15.956+07
+ab6d0e29-7073-4ced-83a9-9d2bb97f0a7e	45be1221-fee3-4fd7-a871-c74b3ee2ed6c	04ef870e-60cc-4822-9b6d-67c8143d2029	0d7d4348-cf7e-4b6a-9a01-1d88f283e910	5	ádasdsad	2021-06-25 03:19:32.954+07	2021-06-25 03:19:32.954+07
+d546d796-bc51-4de9-bb10-c4676b0aea19	eb62fa84-69e4-415a-9ec4-4c980bc0f4bd	846710e2-e0f4-4f11-b6aa-54efe4fbe455	0d7d4348-cf7e-4b6a-9a01-1d88f283e910	5	123123	2021-06-25 03:20:40.418+07	2021-06-25 03:20:40.418+07
+d6eecc88-3ffd-48db-a0ab-def7ce1f5861	d07deb91-a3ca-4970-bcda-a9691d78bb0c	846710e2-e0f4-4f11-b6aa-54efe4fbe455	02ed45b7-b427-4f24-8705-d182b7199e1a	4	dqdqd	2021-06-25 03:21:32.558+07	2021-06-25 03:21:32.558+07
+8ffbf043-2f5c-4829-b448-227a27cfda50	d9011256-57ea-4560-b7ec-d67b4d42ab9b	846710e2-e0f4-4f11-b6aa-54efe4fbe455	c6e0dd89-bc9d-45f2-87d4-975fd07ff8ba	5	123123	2021-06-25 03:22:18.716+07	2021-06-25 03:22:18.716+07
+09d59194-9a5a-4ca3-aacb-c4e774a22bc5	66f8359d-5906-41d1-b528-effa8822beac	74655b72-3b14-463e-98b6-a2f64a459aa9	c6e0dd89-bc9d-45f2-87d4-975fd07ff8ba	5	Dạy siêu hay	2021-06-25 03:23:01.732+07	2021-06-25 03:23:01.732+07
+e846eda6-7202-4ab7-80fc-6f161d2dc4ab	8b1ccf34-4fba-452f-8ddd-8ed2b5d6d719	74655b72-3b14-463e-98b6-a2f64a459aa9	a57371e1-07d7-403f-bd71-fa2f14c7c537	5	Siêu víp	2021-06-25 03:58:10.382+07	2021-06-25 03:58:10.382+07
 \.
 
 
 --
--- TOC entry 3465 (class 0 OID 155194)
--- Dependencies: 216
+-- TOC entry 3201 (class 0 OID 41843)
+-- Dependencies: 217
 -- Data for Name: Tutors; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
 
 COPY public."Tutors" (id, "userId", video, bio, languages, specialties, resume, education, experience, accent, "targetStudent", profession, interests, "isActivated", "createdAt", "updatedAt") FROM stdin;
-162c019b-82f7-4ba2-aef9-db81442731e8	42c2a84a-163b-44d7-9a72-b136f85b594e	https://api.livetutor.live/video/42c2a84a-163b-44d7-9a72-b136f85b594evideo1623933524577.com - What Happens In One Minute.mp4	I am a financial advisor so can help you practice your business English . I am very friendly and speak Italian and Portuguese also.	{"english,italian,united kingdom,indonesia"}	{"of,hc,ds,fl"}	\N	none	none	\N	Intermediate	none	My interests include playing football, running, and all sports in general. I love to cook and do some baking also. My other hobbies include playing the guitar and an interest in the financial markets.	t	2021-06-17 19:38:44.776+07	2021-06-18 02:31:31.76+07
-27ef7ca8-ba9f-45e2-9e79-b741423fa660	ed6fd0c2-ed38-430a-ae55-a9e6a460b239	https://api.livetutor.live/video/ed6fd0c2-ed38-430a-ae55-a9e6a460b239video1623957239312.mp4	I offer an easy going, friendly engaging and engaging conversational style. Centred around what the student wants to learn and achieve, we will work together and their pace. I will offer corrections & insight into their english.	{"english,spanish"}	{"bs,it,hc,mt,of"}	\N	Higher National Diploma in Illustration\r\nVisual Arts\r\nHigher National Diploma in Illustration.	Apple\r\nAnnotation Analyst.	\N	Advanced	Globetech\r\nTranscription and Grading Analyst.\r\n\r\nVoxpro\r\nCustomer Service Specialist for an online retailer.\r\n\r\nIllustrator\r\nSelf Employed freelance commercial illustrator.	Hello! My name is Fergal, I am from the beautiful south west of Ireland. I am a creative professional currently working in the Tech industry. I love to draw and paint and I also work a lot in commerical and private illustration projects. From children's books to international art exhibitions, concept work for games studio, to being published in major international art magazines.	t	2021-06-18 02:14:01.958+07	2021-06-18 02:31:40.245+07
-41da1af7-847f-4540-b5fc-2693785c9738	0728421c-15d0-4a81-8382-a23fb30d6500	https://api.livetutor.live/video/0728421c-15d0-4a81-8382-a23fb30d6500video1623956191864.com - YingYing Lu 1min SelfIntroduction.mp4	Hi, my name is Hossein and I live in London, UK. I currently work as a Policy Adviser for the Civil Service and also have a passion for teaching.	{"united kingdom,brazil,indonesia"}	{"mt,ds"}	\N	BA Politics And IR\r\nGovernment\r\nBachelor's degree in Politics & IR	Policy Adviser\r\nGovernment\r\nUndertake or commission research Gather and analyse data and information Develop expertise in a particular area, or draw on the expertise of others Keep up to date with social, political and economic developments, and brief others	\N	Intermediate	Teacher	I love playing sports and going to the gym. I live with my family in London and have been in the UK since 2001. I have been fortunate enough to have been educated in the UK and have significantly improved my English skills as a result. Happy to pass it on and teach others the same as well.	t	2021-06-18 01:56:34.455+07	2021-06-18 02:31:36.386+07
-45bc6d10-eddf-40e5-af24-320eb94b915c	c616bfac-c701-484c-8c3f-f914639be512	https://api.livetutor.live/video/c616bfac-c701-484c-8c3f-f914639be512video1623351190279.com - For Milo AWARD WINNING 1 Minute Short film 2020.mp4	Hi im student and want to become tutor	{"vietnamese,france,englishm,united kingdom"}	{"mt,fl,it,hc"}	\N	Certificate from Cambrihge	none	\N	Intermediate	none	I like playing game	t	2021-06-11 01:53:10.432+07	2021-06-18 02:31:43.273+07
-4849d58b-23c7-4758-87cd-bf88ebb22969	c6e0dd89-bc9d-45f2-87d4-975fd07ff8ba	https://api.livetutor.live/video/c6e0dd89-bc9d-45f2-87d4-975fd07ff8bavideo1623956580739.mp4	Hi there! I'm teacher Ellie. I have a bachelors associate in Modern History & Politics and my greatest strength is my ability to communicate. I am approachable, creative and love to think outside of the box. I have worked as both a nanny in the U.K & camp counsellor in America. I have been to 32 states and 8 different countries. I love the great outdoors, reading fiction and my German Shepard puppy.	{english}	{"of,hc,it,ds,fl"}	\N	Bachelor of Arts with Honours in Modern History & Politics\r\nEducation\r\nI studied modern History and Politics at the University of Liverpool	Camp Counsellor\r\nEducation\r\nMy role required me to structure lesson plans, which consisted of organising fun and engaging activities for children aged 8-16 on both land and water which developed me to be highly adept at planning, executive, and supervising activities\r\n\r\nNanny\r\nEducation\r\nMy role required me to care for the daily needs of a 3 year old child while engaging with mentally stimulating actives that would help develop brain development such as reading, crafting and brain games	\N	Advanced	teacher	Hi there! My name is Ellie, I am from England. I love to be outside, running & hiking are some of my favourite things to do. I am an avid reader of fantasy novels. I like to cook, bake and paint in my spare time. I love animals and I currently have a 5 month old German Shepard puppy.	t	2021-06-18 02:03:03.438+07	2021-06-18 02:31:38.373+07
-6703deaa-7a79-4796-ba10-187cc849caf7	0712174d-c389-4286-af91-8a6b1beb9077	https://api.livetutor.live/video/0712174d-c389-4286-af91-8a6b1beb9077video1623943598898.com - Introduce Yourself  Talk About Yourself  Ask About What Others Like  English Speaking Practice.mp4	I am looking forward to having you in class. I am a calm, patient professional teacher who is flexible to help you achieve your English goals. I am open to discuss varying topics.	{"vietnamese,united states,united kingdom,new Zealand"}	{"bs,it"}	\N	Certificate from University of Science	none	\N	Beginner	Software engineer	I love to travel, and have spent time living and visiting many wonderful places around the globe. I have many animals and enjoy spending time with them too. . When not working, I can be found in my garden, reading a book, taking a walk, or going for a drive and enjoying a new adventure. I love teaching and the adventures it takes me on. I am a simple, calm person who enjoys talking to everyone.	t	2021-06-17 22:26:41.576+07	2021-06-18 02:31:41.828+07
-6e0dc67b-1dc9-44d9-9d22-3db18325a2ca	8aa24fdf-f527-46d8-8523-c21f477c9edf	https://api.livetutor.live/video/8aa24fdf-f527-46d8-8523-c21f477c9edfvideo1623867145123.com - For Milo AWARD WINNING 1 Minute Short film 2020.mp4	I was 22 years old, I want to teach student under my old.	{"vietnamese,english,hong kong"}	{"it,hc,ds,bs"}	\N	Professor Software Engineer	None	\N	Intermediate	Senior Programmer	I interested in bitcoin	t	2021-06-17 01:12:27.754+07	2021-06-18 02:31:46.998+07
-981037f9-e9f1-41d4-98cc-5959cce7a3fc	a57371e1-07d7-403f-bd71-fa2f14c7c537	https://api.livetutor.live/video/a57371e1-07d7-403f-bd71-fa2f14c7c537video1623954887833.mp4	I am looking forward to having you in class. I am a calm, patient professional teacher who is flexible to help you achieve your English goals. I am open to discuss varying topics.	{"vietnamese,english"}	{"mt,bs,ds,it"}	\N	Studies International hospitality management at British University Vietnam	none	\N	Intermediate	none	I love to travel, and have spent time living and visiting many wonderful places around the globe. I have many animals and enjoy spending time with them too. . When not working, I can be found in my garden, reading a book, taking a walk, or going for a drive and enjoying a new adventure. I love teaching and the adventures it takes me on. I am a simple, calm person who enjoys talking to everyone.	t	2021-06-18 01:34:49.363+07	2021-06-18 02:31:48.582+07
-9aef4ca2-24bb-4600-a6f5-fb10814f1e31	02ed45b7-b427-4f24-8705-d182b7199e1a	https://api.livetutor.live/video/02ed45b7-b427-4f24-8705-d182b7199e1avideo1623955891592.mp4	In 2019 I lived in Argentina where I fell in love with photography! I am also into books, cinematography, nature and music. A few new hobbies are: learning how to surf and how to play ukulele. I enjoy deep and meaningful conversations about what makes us human and the mysteries of the universe! Meeting new people and learning about different cultures are also at the top of the list!	{"vietnamese,english,south korea"}	{"ds,bs,hc,it"}	\N	Graduate in University of Technology and Information	none	\N	Intermediate	Student	I'm greatly interested in learning about the stock market.	t	2021-06-18 01:51:34.121+07	2021-06-18 02:31:27.518+07
-b3be0106-189a-4fba-9c36-2cee0442ce28	08d34ffc-e19c-40d3-8265-55044d5ed68e	https://api.livetutor.live/video/08d34ffc-e19c-40d3-8265-55044d5ed68evideo1623942938219.com - What Happens In One Minute.mp4	I'm Brazilian but was raised in Canada so I'm fluent in both languages. I worked for Disney Cruise Lines for many years and lived in Europe.	{"vietnamese,france,taiwan"}	{"of,bs,ds,fl"}	\N	none	none	\N	Intermediate	none	I love cooking, wine tasting, horseback riding, going to the beach.	t	2021-06-17 22:15:38.39+07	2021-06-18 02:31:34.188+07
-b6d32be6-d8c8-48e4-b1d3-fd5f3f24797c	0d7d4348-cf7e-4b6a-9a01-1d88f283e910	https://api.livetutor.live/video/0d7d4348-cf7e-4b6a-9a01-1d88f283e910video1623865846484.com - For Milo AWARD WINNING 1 Minute Short film 2020.mp4	I was a software engineer have three year 	{"united states,hong kong,vietnamese,united kingdom,english"}	{"ds,bs,of,it"}	\N	Project Management Certifications	I work in cambrige for two years.	\N	Intermediate	none	I would like to play football	t	2021-06-17 00:50:48.969+07	2021-06-18 02:31:45.599+07
+162c019b-82f7-4ba2-aef9-db81442731e8	42c2a84a-163b-44d7-9a72-b136f85b594e	https://api.livetutor.live/video/42c2a84a-163b-44d7-9a72-b136f85b594evideo1623933524577.com - What Happens In One Minute.mp4	Thầy tin rằng với hơn 10 năm kinh nghiệm trong nghề lập trình ở nhiều công ty và trải qua nhiều dự án lớn nhỏ khác nhau, những gì thầy truyền đạt cho các em đều là những thứ các em thực sự cần khi đi làm thực tế. Thầy sẽ giúp các em học nhanh hơn, đỡ vất vả hơn và học đúng trọng tâm thị trường cần.\nThầy tin chắc rằng trong vòng 3-6 tháng, một người chưa biết gì lập trình có thể kiếm được tiền từ lập trình nếu học đúng cách và đủ chăm chỉ.	{"english,italian,united kingdom,indonesia"}	{"of,hc,ds,fl"}	\N	Cựu sinh viên ĐH Bách Khoa Hà Nội.\nTốt nghiệp khoa kỹ nghệ phần mềm (software engineering) tại ĐH FPT\nCEO & Founder của Gia Sư Bảo Châu - Trung tâm có số lượng gia sư giỏi lớn nhất Việt Nam	- Cựu giảng viên tại trung tâm đào tạo lập trình CodeGym\n- Hiện tại đang là Senior Web Developer làm việc remote cho tập đoàn Shopinvest tại Pháp. Đây là một trong những tập đoàn thương mại điện tử lớn nhất của Pháp với hệ thống nhiều website bán hàng lớn như: rueducommerce.fr, 3suisses.fr, mencorner.com, bijourama.com...	\N	Intermediate	Teacher	Hiện tại thầy nhận dạy offline tại nhà riêng hoặc dạy online với thời gian linh hoạt sáng, chiều, tối từ thứ 2 đến thứ 7.\nThầy hiện cũng đang dạy các nhóm nhỏ về PHP/Laravel/Javascript cho các bạn mới bắt đầu. Thầy có thể hỗ trợ để các em có thể tham gia vào các nhóm này để học hiệu quả hơn, tiết kiệm chi phí hơn.\nThầy tin rằng với hơn 10 năm kinh nghiệm trong nghề lập trình ở nhiều công ty và trải qua nhiều dự án lớn nhỏ khác nhau, những gì thầy truyền đạt cho các em đều là những thứ các em thực sự cần khi đi làm thực tế. Thầy sẽ giúp các em học nhanh hơn, đỡ vất vả hơn và học đúng trọng tâm thị trường cần.	t	2021-06-17 19:38:44.776+07	2021-06-18 02:31:31.76+07
+27ef7ca8-ba9f-45e2-9e79-b741423fa660	ed6fd0c2-ed38-430a-ae55-a9e6a460b239	https://api.livetutor.live/video/ed6fd0c2-ed38-430a-ae55-a9e6a460b239video1623957239312.mp4	Tôi tên là Lưu Khánh Phương. Quê quán ở Quảng Nam,tôi đã tốt nghiệp ĐH Ngoại Ngữ Huế tháng 5 năm 2016. Ngành ngôn ngữ Anh, chuyên ngành cử nhân tiếng Anh. Hiện đang có kinh nghiệm dạy tiếng Anh được 4 năm.	{"english,spanish"}	{"bs,it,hc,mt,of"}	\N	Đạt Top Teacher liên tiếp tại trung tâm anh ngữ SAS\nGiáo viên dạy tiếng Anh ở trung tâm Anh Ngữ SAS Đà Nẵng	Kinh nghiệm dạy:\n- 9 tháng dạy tiếng Anh cho trẻ em ở Hà Nội tại trung tâm Anh Ngữ Dreams\n- 2/2017 đến 2/2018, đang là giáo viên dạy tiếng Anh ở trung tâm Anh Ngữ IRIS Đà Nẵng\n- 3/2017 đến nay, đang là giáo viên dạy tiếng Anh ONLINE ở trung tâm Anh Ngữ PICCABOO Đà Nẵng.\n- 4/2018 đến nay, đang là giáo viên dạy tiếng Anh ở trung tâm Anh Ngữ SAS Đà Nẵng\n- Đạt Top Teacher liên tiếp tại trung tâm anh ngữ SAS	\N	Advanced	Globetech\r\nTranscription and Grading Analyst.\r\n\r\nVoxpro\r\nCustomer Service Specialist for an online retailer.\r\n\r\nIllustrator\r\nSelf Employed freelance commercial illustrator.	Trong suốt những năm được học và dạy tiếng Anh, tôi tự tin mình có thể bồi dưỡng và dạy các học sinh ở mọi lứa tuổi. Đặc biệt, thế mạnh của tôi là dạy ôn thi đại học, anh văn giao tiếp và có thể giúp đỡ nâng cao được những học sinh bị mất căn bản. Hơn nữa, trong suốt cấp 2 và 3, tôi đều trong top học sinh giỏi văn của trường.\n\nBằng kinh nghiệm và trách nhiệm của 1 giáo viên, tôi tin rằng mình sẽ mang đến những hiệu quả rõ rệt cho các em học sinh, sinh viên tương lai.	t	2021-06-18 02:14:01.958+07	2021-06-18 02:31:40.245+07
+41da1af7-847f-4540-b5fc-2693785c9738	0728421c-15d0-4a81-8382-a23fb30d6500	https://api.livetutor.live/video/0728421c-15d0-4a81-8382-a23fb30d6500video1623956191864.com - YingYing Lu 1min SelfIntroduction.mp4	Em hiện đã tốt nghiệp trường Đại học Sư Phạm Hà Nội chuyên ngành sư phạm Âm Nhạc.\nTính đến nay em đã có kinh nghiệm 4 năm dạy tại trung tâm cũng như gia sư. Ngoài những điều được học tại trường về chuyên môn cũng như những kĩ năng về sư phạm, em luôn tìm hiểu những phương pháp dạy học sáng tạo mới phù hợp với những đối tượng học sinh, đặc biệt là với trẻ em.	{"united kingdom,brazil,indonesia"}	{"mt,ds"}	\N	Tốt nghiệp ĐH. Sư Phạm	Trong 4 năm học tại trường ĐHSPHN, em luôn cố gắng trau dồi bản thân, tích cực tham gia những hoạt động ngoại khóa bên ngoài để tích lũy thêm những kinh nghiệm cho bản thân và cũng 1 phần chia sẻ kinh nghiệm với học sinh. Để học tập không chỉ là thầy và trò, mà còn có thể là những người bạn!	\N	Intermediate	Teacher	Ngoài Piano, em còn có thể chơi thêm những nhạc cụ khác như keyboard, đàn Tranh, Guitar, ukulele. Mong muốn những sự hiểu biết này có thể mang đến những nguồn cảm hứng mới cho học sinh của mình.	t	2021-06-18 01:56:34.455+07	2021-06-18 02:31:36.386+07
+45bc6d10-eddf-40e5-af24-320eb94b915c	c616bfac-c701-484c-8c3f-f914639be512	https://api.livetutor.live/video/c616bfac-c701-484c-8c3f-f914639be512video1623351190279.com - For Milo AWARD WINNING 1 Minute Short film 2020.mp4	Em đã tốt nghiệp đại học và hiện đang học thạc sĩ Toán học tại trường Đại học sư phạm Hà Nội. Em yêu thích công việc gia sư và mong muốn dùng những kiến thức cũng như phương pháp dạy của mình để giúp đỡ các em học sinh.	{"vietnamese,france,englishm,united kingdom"}	{"mt,fl,it,hc"}	\N	Tốt nghiệp cấp 3\n	Em đã có kinh nghiệm gia sư cho các em học sinh có lực học trung bình, trung bình khá, khá các lớp 6,7,8,9 và các em đều tiến bộ rõ rệt. Quan điểm của em đó là không có gì là không thể chỉ cần cố gắng. 	\N	Intermediate	Tutor	Em rất yêu thích công việc giảng dạy, đúng với chuyên ngành em đang theo học	t	2021-06-11 01:53:10.432+07	2021-06-18 02:31:43.273+07
+4849d58b-23c7-4758-87cd-bf88ebb22969	c6e0dd89-bc9d-45f2-87d4-975fd07ff8ba	https://api.livetutor.live/video/c6e0dd89-bc9d-45f2-87d4-975fd07ff8bavideo1623956580739.mp4	Mình là sinh viên đã tốt nghiệp khoa Pháp trường Đại học Hà Nội. Thông thạo tiếng Anh, tiếng Pháp và tiếng Tây Ban Nha	{english}	{"of,hc,it,ds,fl"}	\N	C1 CEFR của châu Âu tiếng Pháp\nHọc tập bên Pháp 1 năm rưỡi	Mình có kinh nghiệm dạy 2 năm và chuyên về ngữ pháp và phát âm, đủ trình độ từ tiểu học -> cấp 3, đã từng làm ở trung tâm MS. Hoa Giao tiếp.\nCòn với tiếng Pháp, trong gần 4 năm qua mình đã giúp hàng chục học sinh thực hiện được ước mơ du học Pháp với tấm bằng TCF và DELF trên tay. Mình thực sự tự tin về khả năng phát âm và giao tiếp cả tiếng Anh lẫn tiếng Pháp.	\N	Advanced	teacher	Với mình, dạy học không chỉ đơn giản là truyền đạt kiến thức mà đó còn là trách nhiệm đánh thức niềm đam mê ngoại ngữ với người học, làm sao để cho học viên thấy hứng thú và muốn học chứ không cảm thấy ép buộc nặng nề, để học viên khám phá về những nét đẹp thật sự của thứ tiếng mà họ đang học.	t	2021-06-18 02:03:03.438+07	2021-06-18 02:31:38.373+07
+6703deaa-7a79-4796-ba10-187cc849caf7	0712174d-c389-4286-af91-8a6b1beb9077	https://api.livetutor.live/video/0712174d-c389-4286-af91-8a6b1beb9077video1623943598898.com - Introduce Yourself  Talk About Yourself  Ask About What Others Like  English Speaking Practice.mp4	Mình hiện đang là sinh viên trường đại học Hà Nội ngành ngôn ngữ Anh, khoa Tiếng Anh	{"vietnamese,united states,united kingdom,new Zealand"}	{"bs,it"}	\N	- Thủ khoa xuất sắc kì thi Thạc sĩ Đại học Ngoại Thương năm 2020\n- Điểm thi THPT Quốc gia 2015 : 27.5 điểm khối A1 & 26.25 điểm khối D1 (Toán: 9.75; Lý: 8.0; Anh: 9.75; Văn: 7.75)\n- Giải Ba kì thi HSG cấp tỉnh môn Toán lớp 9 năm học 2011-2012,\n- Thi đỗ 3 trường chuyên trong kì thi Tuyển sinh vào 10 năm học 2012-2013: Chuyên Toán- THPT chuyên ĐHSP HN (10 điểm Toán), Chuyên Anh - THPT chuyên Ngoại Ngữ ĐHQG (9 điểm Toán), Chuyên Toán - THPT chuyên Lê Hồng Phong NĐ (10 điểm Toán),\n- Giải Nhì hùng biện tiếng Anh cấp tỉnh lớp 11,\n- Giải thưởng Hoa Trạng Nguyên 2015 dành cho những thí sinh xuất sắc của kì thi THPT Quốc gia.	- Hơn 9 năm trực tiếp đứng lớp, giảng dạy ngoài giờ tại nhà môn Toán (ôn thi cấp III & luyện thi ĐH) cho các nhóm 5-10-20 học sinh. Nhiều học sinh đỗ vào các trường THPT chuyên & công lập danh tiếng, nhiều học sinh yếu kém tiến bộ lên rõ rệt, thi đạt điểm khá giỏi chỉ sau một học kì. Lối truyền đạt hóm hỉnh, giàu hình ảnh, sáng tạo, dễ hiểu của mình khiến nhiều học sinh hứng thú học, nhiều phụ huynh tín nhiệm.\n- Trong năm học 2019-2020 này, mình đang trực tiếp đứng lớp dạy thêm tại nhà các nhóm Toán 9 (15hs), Toán 10 (10hs), Toán 11 (15hs), Toán 12 (15hs),\n- Có một số Clip dạy online trên Youtube nhận hàng chục ngàn lượt xem, được nhiều học sinh đón nhận hưởng ứng, có tài khoản Facebook riêng để quản lý nhóm học & trao đổi công việc học tập với học sinh.	\N	Beginner	Software engineer	Tôi nhận ra Tiếng Anh là đam mê, khiến tôi hết mình về nó. Nhờ có một nền tảng ngữ pháp chắc chắn và sự chủ động, luôn cố gắng cải thiện ngoại ngữ bằng nhiều cách, tôi giờ có thể tự tin giao tiếp, phát âm tiếng anh chuẩn với một vốn từ tiếng anh phong phú và kiến thức bên lề về văn hóa thế giới.	t	2021-06-17 22:26:41.576+07	2021-06-18 02:31:41.828+07
+6e0dc67b-1dc9-44d9-9d22-3db18325a2ca	8aa24fdf-f527-46d8-8523-c21f477c9edf	https://api.livetutor.live/video/8aa24fdf-f527-46d8-8523-c21f477c9edfvideo1623867145123.com - For Milo AWARD WINNING 1 Minute Short film 2020.mp4	Du học sinh đã tốt nghiệp loại giỏi ngành Mechanical Engineering trường University College London (UCL) tại Anh Quốc. Nhận dạy toán tiếng Anh và các môn tự nhiên bằng tiếng Anh từ trình độ căn bản tới IGCSE, AS Level, A-Level, IB và SAT. Dạy nhạc lý, piano và guitar bằng tiếng Anh.	{"vietnamese,english,hong kong"}	{"it,hc,ds,bs"}	\N	IGCSE: Maths, Combined or Co-ordinated Science, Physics, Chemistry, Biology\nA-Level: Maths, Further Maths, Physics\nIB: Maths, Physics\nSAT: Maths	- Giải vàng cuộc thi toán học UK Senior Mathematical Challenge\n- Giải Merit (Top 100) cuộc thi British Physics Olympiad A2 Challenge (cuộc thi Vật Lý toàn nước Anh)	\N	Intermediate	Senior Programmer	Quan điểm của tôi là không có học sinh dốt , chỉ có học sinh lười và cũng chỉ có thầy cô không đủ giỏi mà thôi. Một giáo viên tốt phải là ngườ	t	2021-06-17 01:12:27.754+07	2021-06-18 02:31:46.998+07
+981037f9-e9f1-41d4-98cc-5959cce7a3fc	a57371e1-07d7-403f-bd71-fa2f14c7c537	https://api.livetutor.live/video/a57371e1-07d7-403f-bd71-fa2f14c7c537video1623954887833.mp4	Từng là học sinh chuyên Sinh học - trường THPT chuyên Vĩnh Phúc , Vĩnh Phúc, và có điểm thi đầu vào cao nhất chuyên Sinh khóa 2012-2015. Hiện nay đang là sinh viên trường đại học Y Hà Nội , hệ Bác sĩ đa khoa .	{"vietnamese,english"}	{"mt,bs,ds,it"}	\N	Studies International hospitality management at British University Vietnam	+ Tôi đã gia sư cho em Thảo - lớp 11 chuyên Sinh ĐH Khoa học tự nhiên. Từ một học sinh không có cảm hứng về học sinh giỏi sinh học, qua quá trình học tập với tôi, vừa qua em đã đạt giải Nhì HSG Quốc gia năm 2017 và tiếp tục vào vòng 2 ôn luyện thi chọn đội tuyển Olympic quốc tế.\nVừa qua, kết quả là em Thảo đã lọt vào 4 học sinh đội tuyển dự thi Olympic Sinh học quốc tế 2017 tại Vương quốc Anh. Đó là sự nỗ lực không ngừng nghỉ của tôi và bản thân Thảo, hy vọng Thảo sẽ đoạt được kết quả cao nhất trong chuyến đi xuất ngoại đầu tiên.\n+ Tôi đã kèm kiến thức và truyền cảm hứng môn Sinh học cho em Nhi (nhà ở Royal City) và em Tâm Anh (nhà ở Ciputra - Hà Nội) đều bắt đầu học từ cuối năm lớp 9. Hai em đều có quyết tâm cao và cố gắng học hỏi từ thầy cô và tôi trong suốt quá trình giảng dạy.\nKết quả:	\N	Intermediate	none	Với niềm đam mê và nhiệt huyết với môn Sinh học, tôi có thể truyền dạy kinh nghiệm học tập , thi cử cho học sinh , đặc biệt luyện học sinh tham dự đội tuyển thi học sinh giỏi các cấp ,và học sinh lớp 9 luyện thi vào các trường THPT Chuyên.\nNgoài ra hiện nay, tôi có thể bổ sung kiến thức cho các em học sinh có kế hoạch hoặc chuẩn bị du học tùy theo chương mình mà các em sẽ theo học. Sự chuẩn bị kiến thức ở Việt Nam sẽ là một trong những hành trang giúp các em tự tin khi bước sang môi trường học tập mới.	t	2021-06-18 01:34:49.363+07	2021-06-18 02:31:48.582+07
+9aef4ca2-24bb-4600-a6f5-fb10814f1e31	02ed45b7-b427-4f24-8705-d182b7199e1a	https://api.livetutor.live/video/02ed45b7-b427-4f24-8705-d182b7199e1avideo1623955891592.mp4	Mình tên là Ngọc Chi. Hiện tại đã tốt nghiệp loại Giỏi trường ĐH Ngoại Thương HN . Trong suốt 12 năm liền mình đều là học sinh khá giỏi . Từ bé đến lớn , mình đã rất yêu thích và đam mê học tiếng anh và tìm tòi các phương pháp học sao cho hiệu quả nhất.	{"vietnamese,english,south korea"}	{"ds,bs,hc,it"}	\N	Graduate in University of Technology and Information	none	\N	Intermediate	Student	Hiện tại thì bên cạnh việc dạy các bạn học sinh theo các khối lớp thì mình cũng mở rộng lứa tuổi của các đối tượng hơn và đa dạng môn học hơn : Có thể là các bạn sinh viên, người đi làm có mong muốn cải thiện khả năng tiếng anh, luyện tiếng anh giao tiếp, luyện ôn thi các chứng chỉ tiếng anh Toeic, Ielts, hay công chức. Mình đã đạt chứng chỉ 6.5 Ielts và có thể nhận dạy các bạn bắt đầu tiếp cận với Ielts.	t	2021-06-18 01:51:34.121+07	2021-06-18 02:31:27.518+07
+b3be0106-189a-4fba-9c36-2cee0442ce28	08d34ffc-e19c-40d3-8265-55044d5ed68e	https://api.livetutor.live/video/08d34ffc-e19c-40d3-8265-55044d5ed68evideo1623942938219.com - What Happens In One Minute.mp4	Xin chào, mình là Thư, mình đang là sinh viên năm 3 chuyên ngành Kiến Trúc trường Đại học Kiến Trúc Thành phố Hồ Chí Minh.	{"vietnamese,france,taiwan"}	{"of,bs,ds,fl"}	\N	- Chứng chỉ TOEIC 875/990 (Đọc 485/495)	none	\N	Intermediate	none	Mình thích đọc sách, đi du lịch, tìm hiểu về tính cách con người, chạy bộ, và yêu ngôn ngữ. Mình tin các môn năng khiếu ( vẽ, viết, chụp ảnh,...) là thứ không thể thiếu để sống trong cuộc sống trọn vẹn và màu sắc. Mình luôn nổ lực ứng dụng nghệ thuật vào trong cuộc sống, đặc biệt là trong tập và làm việc.\nMình kiên nhẫn, thoải mái trong buổi học và luôn nổ lực để có được buổi học đầy niềm vui.	t	2021-06-17 22:15:38.39+07	2021-06-18 02:31:34.188+07
+b6d32be6-d8c8-48e4-b1d3-fd5f3f24797c	0d7d4348-cf7e-4b6a-9a01-1d88f283e910	https://api.livetutor.live/video/0d7d4348-cf7e-4b6a-9a01-1d88f283e910video1623865846484.com - For Milo AWARD WINNING 1 Minute Short film 2020.mp4	Mình xin tự giới thiệu, mình là Nguyễn Ngọc Nguyên biệt danh là Hoài Bảo, sinh viên năm 4 ĐH Ngoại thương.	{"united states,hong kong,vietnamese,united kingdom,english"}	{"ds,bs,of,it"}	\N	Project Management Certifications	Gần 2 năm đầu đại học mình đã làm trợ giảng, tuy công việc chính là quản lý nhưng mình vẫn thường xuyên dạy các em ở nhiều lứa tuổi khác nhau. Bên cạnh đó, mình là thành viên của 1 CLB dẫn tour cho khách nước ngoài, giúp mình có cơ hội tiếp xúc với người bản xứ thường xuyên, nâng cao kĩ năng nghe-nói.\nKỳ thi THPT 2018 vừa rồi, mình có dạy 1 em lớp 12. Em này bỏ hóa để học tiếng Anh trước lúc thi chỉ hơn 1 tháng. Do chỉ còn 1 tháng, mình chỉ có thể tập trung vào các phương pháp và cách làm bài, nhưng cũng phần nào đã giúp em ấy tăng từ 5-5,5 điểm lên thành 7.4 điểm, một điểm số khá khi đề năm nay khá khó.	\N	Intermediate	none	Trong quá trình dạy, mình hướng người học làm trung tâm, xem mình chỉ là người đồng hành, mỗi buổi học mình sẽ giúp người học hiểu rõ bản chất của một vấn đề, sau đó mở rộng ra các vấn đề có liên quan. Ví dụ như cách học từ vựng, không nên chỉ biết nghĩa của từ đó mà nên học đúng cách phát âm, các từ liên quan (danh từ, động từ, tính từ...), các ví dụ, ngữ cảnh thích hợp. Theo mình đây là một trong những cách học toàn diện, phát triển kĩ năng nghe-nói-đọc-viết.	t	2021-06-17 00:50:48.969+07	2021-06-18 02:31:45.599+07
 \.
 
 
 --
--- TOC entry 3466 (class 0 OID 155202)
--- Dependencies: 217
+-- TOC entry 3202 (class 0 OID 41851)
+-- Dependencies: 218
 -- Data for Name: Types; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
 
 COPY public."Types" (id, title, "createdAt", "updatedAt") FROM stdin;
 128a2815-e6ab-468f-bf03-0cf2dac33dbf	languages	2021-06-10 21:41:32.609363+07	2021-06-10 21:41:32.609363+07
 e49cbe3d-2892-4816-b81d-bccf5bbe77e1	specialties	2021-06-10 21:41:32.609363+07	2021-06-10 21:41:32.609363+07
+f68b5af3-60ca-430e-b595-f9de8641547c	languages	2021-06-25 03:59:06.760414+07	2021-06-25 03:59:06.760414+07
+babdb4f8-6f1f-4563-9d2f-97272a1b1eac	specialties	2021-06-25 03:59:06.760414+07	2021-06-25 03:59:06.760414+07
 \.
 
 
 --
--- TOC entry 3467 (class 0 OID 155207)
--- Dependencies: 218
+-- TOC entry 3203 (class 0 OID 41856)
+-- Dependencies: 219
 -- Data for Name: UserRoles; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
 
@@ -1835,8 +1932,8 @@ ed6fd0c2-ed38-430a-ae55-a9e6a460b239	6f24a66a-421f-4165-bb41-e0e3603a2460	2021-0
 
 
 --
--- TOC entry 3468 (class 0 OID 155212)
--- Dependencies: 219
+-- TOC entry 3204 (class 0 OID 41861)
+-- Dependencies: 220
 -- Data for Name: Users; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
 
@@ -1872,8 +1969,8 @@ fbf670b6-6a3d-45b1-9711-08de91ac7181	ltstudent5@yopmail.com	\N	\N	$2a$12$3o3rEUR
 
 
 --
--- TOC entry 3469 (class 0 OID 155222)
--- Dependencies: 220
+-- TOC entry 3205 (class 0 OID 41871)
+-- Dependencies: 221
 -- Data for Name: Wallets; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
 
@@ -1909,7 +2006,7 @@ a2b70b3d-481e-4c73-b0a0-f05c1479323d	0712174d-c389-4286-af91-8a6b1beb9077	320000
 
 
 --
--- TOC entry 3255 (class 2606 OID 155230)
+-- TOC entry 2990 (class 2606 OID 41879)
 -- Name: Bookings Bookings_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -1918,7 +2015,7 @@ ALTER TABLE ONLY public."Bookings"
 
 
 --
--- TOC entry 3257 (class 2606 OID 155232)
+-- TOC entry 2992 (class 2606 OID 41881)
 -- Name: CallSessions CallSessions_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -1927,7 +2024,7 @@ ALTER TABLE ONLY public."CallSessions"
 
 
 --
--- TOC entry 3259 (class 2606 OID 155234)
+-- TOC entry 2994 (class 2606 OID 41883)
 -- Name: Categories Categories_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -1936,7 +2033,7 @@ ALTER TABLE ONLY public."Categories"
 
 
 --
--- TOC entry 3261 (class 2606 OID 155236)
+-- TOC entry 2996 (class 2606 OID 41885)
 -- Name: Courses Courses_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -1945,7 +2042,7 @@ ALTER TABLE ONLY public."Courses"
 
 
 --
--- TOC entry 3263 (class 2606 OID 155238)
+-- TOC entry 2998 (class 2606 OID 41887)
 -- Name: FavoriteTutors FavoriteTutors_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -1954,7 +2051,7 @@ ALTER TABLE ONLY public."FavoriteTutors"
 
 
 --
--- TOC entry 3265 (class 2606 OID 155240)
+-- TOC entry 3000 (class 2606 OID 41889)
 -- Name: Fees Fees_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -1963,7 +2060,7 @@ ALTER TABLE ONLY public."Fees"
 
 
 --
--- TOC entry 3267 (class 2606 OID 155242)
+-- TOC entry 3002 (class 2606 OID 41891)
 -- Name: Majors Majors_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -1972,7 +2069,7 @@ ALTER TABLE ONLY public."Majors"
 
 
 --
--- TOC entry 3269 (class 2606 OID 155244)
+-- TOC entry 3004 (class 2606 OID 41893)
 -- Name: Messages Messages_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -1981,7 +2078,7 @@ ALTER TABLE ONLY public."Messages"
 
 
 --
--- TOC entry 3297 (class 2606 OID 155382)
+-- TOC entry 3006 (class 2606 OID 41895)
 -- Name: RefreshTokens RefreshTokens_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -1990,7 +2087,7 @@ ALTER TABLE ONLY public."RefreshTokens"
 
 
 --
--- TOC entry 3271 (class 2606 OID 155246)
+-- TOC entry 3008 (class 2606 OID 41897)
 -- Name: Roles Roles_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -1999,7 +2096,7 @@ ALTER TABLE ONLY public."Roles"
 
 
 --
--- TOC entry 3273 (class 2606 OID 155248)
+-- TOC entry 3010 (class 2606 OID 41899)
 -- Name: ScheduleDetails ScheduleDetails_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2008,7 +2105,7 @@ ALTER TABLE ONLY public."ScheduleDetails"
 
 
 --
--- TOC entry 3275 (class 2606 OID 155250)
+-- TOC entry 3012 (class 2606 OID 41901)
 -- Name: Schedules Schedules_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2017,7 +2114,7 @@ ALTER TABLE ONLY public."Schedules"
 
 
 --
--- TOC entry 3277 (class 2606 OID 155252)
+-- TOC entry 3014 (class 2606 OID 41903)
 -- Name: SequelizeMeta SequelizeMeta_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2026,7 +2123,7 @@ ALTER TABLE ONLY public."SequelizeMeta"
 
 
 --
--- TOC entry 3279 (class 2606 OID 155254)
+-- TOC entry 3016 (class 2606 OID 41905)
 -- Name: SubMajors SubMajors_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2035,7 +2132,7 @@ ALTER TABLE ONLY public."SubMajors"
 
 
 --
--- TOC entry 3281 (class 2606 OID 155256)
+-- TOC entry 3018 (class 2606 OID 41907)
 -- Name: Topics Topics_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2044,7 +2141,7 @@ ALTER TABLE ONLY public."Topics"
 
 
 --
--- TOC entry 3283 (class 2606 OID 155258)
+-- TOC entry 3020 (class 2606 OID 41909)
 -- Name: Transactions Transactions_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2053,7 +2150,7 @@ ALTER TABLE ONLY public."Transactions"
 
 
 --
--- TOC entry 3285 (class 2606 OID 155260)
+-- TOC entry 3022 (class 2606 OID 41911)
 -- Name: TutorFeedbacks TutorFeedbacks_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2062,7 +2159,7 @@ ALTER TABLE ONLY public."TutorFeedbacks"
 
 
 --
--- TOC entry 3287 (class 2606 OID 155262)
+-- TOC entry 3024 (class 2606 OID 41913)
 -- Name: Tutors Tutors_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2071,7 +2168,7 @@ ALTER TABLE ONLY public."Tutors"
 
 
 --
--- TOC entry 3289 (class 2606 OID 155264)
+-- TOC entry 3026 (class 2606 OID 41915)
 -- Name: Types Types_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2080,7 +2177,7 @@ ALTER TABLE ONLY public."Types"
 
 
 --
--- TOC entry 3291 (class 2606 OID 155266)
+-- TOC entry 3028 (class 2606 OID 41917)
 -- Name: UserRoles UserRoles_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2089,7 +2186,7 @@ ALTER TABLE ONLY public."UserRoles"
 
 
 --
--- TOC entry 3293 (class 2606 OID 155268)
+-- TOC entry 3030 (class 2606 OID 41919)
 -- Name: Users Users_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2098,7 +2195,7 @@ ALTER TABLE ONLY public."Users"
 
 
 --
--- TOC entry 3295 (class 2606 OID 155270)
+-- TOC entry 3032 (class 2606 OID 41921)
 -- Name: Wallets Wallets_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2107,7 +2204,7 @@ ALTER TABLE ONLY public."Wallets"
 
 
 --
--- TOC entry 3298 (class 2606 OID 155271)
+-- TOC entry 3033 (class 2606 OID 41922)
 -- Name: Bookings Bookings_scheduleDetailId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2116,7 +2213,7 @@ ALTER TABLE ONLY public."Bookings"
 
 
 --
--- TOC entry 3299 (class 2606 OID 155276)
+-- TOC entry 3034 (class 2606 OID 41927)
 -- Name: Bookings Bookings_userId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2125,7 +2222,7 @@ ALTER TABLE ONLY public."Bookings"
 
 
 --
--- TOC entry 3300 (class 2606 OID 155281)
+-- TOC entry 3035 (class 2606 OID 41932)
 -- Name: CallSessions CallSessions_studentId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2134,7 +2231,7 @@ ALTER TABLE ONLY public."CallSessions"
 
 
 --
--- TOC entry 3301 (class 2606 OID 155286)
+-- TOC entry 3036 (class 2606 OID 41937)
 -- Name: CallSessions CallSessions_tutorId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2143,7 +2240,7 @@ ALTER TABLE ONLY public."CallSessions"
 
 
 --
--- TOC entry 3302 (class 2606 OID 155291)
+-- TOC entry 3037 (class 2606 OID 41942)
 -- Name: Courses Courses_tutorId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2152,7 +2249,7 @@ ALTER TABLE ONLY public."Courses"
 
 
 --
--- TOC entry 3303 (class 2606 OID 155296)
+-- TOC entry 3038 (class 2606 OID 41947)
 -- Name: Messages Messages_fromId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2161,7 +2258,7 @@ ALTER TABLE ONLY public."Messages"
 
 
 --
--- TOC entry 3304 (class 2606 OID 155301)
+-- TOC entry 3039 (class 2606 OID 41952)
 -- Name: Messages Messages_toId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2170,7 +2267,7 @@ ALTER TABLE ONLY public."Messages"
 
 
 --
--- TOC entry 3318 (class 2606 OID 155383)
+-- TOC entry 3040 (class 2606 OID 41957)
 -- Name: RefreshTokens RefreshTokens_userId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2179,7 +2276,7 @@ ALTER TABLE ONLY public."RefreshTokens"
 
 
 --
--- TOC entry 3305 (class 2606 OID 155306)
+-- TOC entry 3041 (class 2606 OID 41962)
 -- Name: ScheduleDetails ScheduleDetails_scheduleId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2188,7 +2285,7 @@ ALTER TABLE ONLY public."ScheduleDetails"
 
 
 --
--- TOC entry 3306 (class 2606 OID 155311)
+-- TOC entry 3042 (class 2606 OID 41967)
 -- Name: Schedules Schedules_tutorId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2197,7 +2294,7 @@ ALTER TABLE ONLY public."Schedules"
 
 
 --
--- TOC entry 3307 (class 2606 OID 155316)
+-- TOC entry 3043 (class 2606 OID 41972)
 -- Name: SubMajors SubMajors_majorId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2206,7 +2303,7 @@ ALTER TABLE ONLY public."SubMajors"
 
 
 --
--- TOC entry 3308 (class 2606 OID 155321)
+-- TOC entry 3044 (class 2606 OID 41977)
 -- Name: Topics Topics_courseId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2215,7 +2312,7 @@ ALTER TABLE ONLY public."Topics"
 
 
 --
--- TOC entry 3309 (class 2606 OID 155326)
+-- TOC entry 3045 (class 2606 OID 41982)
 -- Name: Transactions Transactions_bookingId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2224,7 +2321,7 @@ ALTER TABLE ONLY public."Transactions"
 
 
 --
--- TOC entry 3310 (class 2606 OID 155331)
+-- TOC entry 3046 (class 2606 OID 41987)
 -- Name: Transactions Transactions_walletId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2233,7 +2330,7 @@ ALTER TABLE ONLY public."Transactions"
 
 
 --
--- TOC entry 3311 (class 2606 OID 155336)
+-- TOC entry 3047 (class 2606 OID 41992)
 -- Name: TutorFeedbacks TutorFeedbacks_firstId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2242,7 +2339,7 @@ ALTER TABLE ONLY public."TutorFeedbacks"
 
 
 --
--- TOC entry 3312 (class 2606 OID 155341)
+-- TOC entry 3048 (class 2606 OID 41997)
 -- Name: TutorFeedbacks TutorFeedbacks_secondId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2251,7 +2348,7 @@ ALTER TABLE ONLY public."TutorFeedbacks"
 
 
 --
--- TOC entry 3313 (class 2606 OID 155346)
+-- TOC entry 3049 (class 2606 OID 42002)
 -- Name: TutorFeedbacks TutorFeedbacks_sessionId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2260,7 +2357,7 @@ ALTER TABLE ONLY public."TutorFeedbacks"
 
 
 --
--- TOC entry 3314 (class 2606 OID 155351)
+-- TOC entry 3050 (class 2606 OID 42007)
 -- Name: Tutors Tutors_userId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2269,7 +2366,7 @@ ALTER TABLE ONLY public."Tutors"
 
 
 --
--- TOC entry 3315 (class 2606 OID 155356)
+-- TOC entry 3051 (class 2606 OID 42012)
 -- Name: UserRoles UserRoles_roleId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2278,7 +2375,7 @@ ALTER TABLE ONLY public."UserRoles"
 
 
 --
--- TOC entry 3316 (class 2606 OID 155361)
+-- TOC entry 3052 (class 2606 OID 42017)
 -- Name: UserRoles UserRoles_userId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2287,7 +2384,7 @@ ALTER TABLE ONLY public."UserRoles"
 
 
 --
--- TOC entry 3317 (class 2606 OID 155366)
+-- TOC entry 3053 (class 2606 OID 42022)
 -- Name: Wallets Wallets_userId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2295,7 +2392,7 @@ ALTER TABLE ONLY public."Wallets"
     ADD CONSTRAINT "Wallets_userId_fkey" FOREIGN KEY ("userId") REFERENCES public."Users"(id);
 
 
--- Completed on 2021-06-21 10:32:20 +07
+-- Completed on 2021-06-25 17:25:30
 
 --
 -- PostgreSQL database dump complete
