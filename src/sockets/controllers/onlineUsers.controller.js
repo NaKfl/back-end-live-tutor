@@ -46,6 +46,18 @@ class OnlineUsers {
     );
   }
 
+  async setStatusCalling(userId, status) {
+    const users = JSON.parse(await redis.getAsync(ONLINE_USERS));
+    const tutor = users[userId] ?? {};
+    const updatedTutor = {
+      ...tutor,
+      isCalling: status,
+    };
+    users[userId] = updatedTutor;
+    await redis.setAsync(ONLINE_USERS, JSON.stringify(users));
+    return users;
+  }
+
   async add(user, socketId) {
     const users = JSON.parse(await redis.getAsync(ONLINE_USERS));
     const { id } = user;

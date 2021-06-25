@@ -5,20 +5,38 @@ import { v4 as uuidv4 } from 'uuid';
 
 const callHandler = (io, socket) => {
   socket.on('call:callVideo', async ({ userId }) => {
-    const socketIds = await onlineUsers.getSocketIdsByUserId(userId);
     const userCallInfo = await onlineUsers.getUserBySocketId(socket.id);
-    let userCall = userCallInfo;
-    if (!userCallInfo.name) {
-      userCall = {
-        ...userCallInfo,
-        name: 'Someone',
-      };
-    }
-    socketIds.forEach((socketId) =>
-      io.to(socketId).emit('call:notifyCall', {
-        userCall,
-      }),
+    const userBeCalled = await onlineUsers.getUserById(userId);
+    const socketIdsBeCalled = await onlineUsers.getSocketIdsByUserId(userId);
+    const socketIdsUserCall = await onlineUsers.getSocketIdsByUserId(
+      userCallInfo.id,
     );
+    if (userBeCalled.isCalling) {
+      socketIdsUserCall.forEach((socketId) =>
+        io.to(socketId).emit('call:canNotCallTutor', {
+          userBeCalled,
+        }),
+      );
+    } else {
+      let userCall = userCallInfo;
+      if (!userCallInfo.name) {
+        userCall = {
+          ...userCallInfo,
+          name: 'Someone',
+        };
+      }
+      await onlineUsers.setStatusCalling(userBeCalled.id, true);
+      socketIdsBeCalled.forEach((socketId) =>
+        io.to(socketId).emit('call:notifyCall', {
+          userCall,
+        }),
+      );
+      socketIdsUserCall.forEach((socketId) =>
+        io.to(socketId).emit('call:canCallTutor', {
+          userBeCalled,
+        }),
+      );
+    }
   });
   socket.on('call:acceptCall', async ({ userId, startTime }) => {
     const userBeCalled = await onlineUsers.getUserBySocketId(socket.id);
@@ -42,6 +60,7 @@ const callHandler = (io, socket) => {
     const userBeCalled = await onlineUsers.getUserBySocketId(socket.id);
     const userCall = await onlineUsers.getUserById(userId);
     const socketIds = [...(await onlineUsers.getSocketIdsByUserId(userId))];
+    await onlineUsers.setStatusCalling(userBeCalled.id, false);
     socketIds.forEach((socketId) =>
       io.to(socketId).emit('call:cancelCalled', {
         userCall,
@@ -52,6 +71,7 @@ const callHandler = (io, socket) => {
 
   socket.on('call:selfCancelCall', async ({ userId }) => {
     const socketIds = [...(await onlineUsers.getSocketIdsByUserId(userId))];
+    await onlineUsers.setStatusCalling(userId, false);
     socketIds.forEach((socketId) =>
       io.to(socketId).emit('call:selfCancelCalled'),
     );
@@ -71,6 +91,7 @@ const callHandler = (io, socket) => {
           startTime,
           endTime,
         });
+        await onlineUsers.setStatusCalling(userBeCalled.id, false);
         socketIds.forEach((socketId) =>
           io.to(socketId).emit('call:endedCall', {
             userCall,
