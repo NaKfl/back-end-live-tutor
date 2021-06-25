@@ -8,7 +8,7 @@ export const getIncomeOutCome = (history) => {
   if (!history || !history.length) {
     return { total: 0, income: 0, outcome: 0 };
   }
-  return history.reduce(
+  const result = history.reduce(
     (acc, curr) => {
       const total = acc.total + +curr.price;
       if (+curr.price < 0)
@@ -18,8 +18,6 @@ export const getIncomeOutCome = (history) => {
             ...acc.statistics,
             {
               total,
-              income: 0,
-              outcome: -curr.price,
               time: moment(curr.createdAt).format(
                 DATE_TIME_FORMAT_YY_MM_HH_MM_SS,
               ),
@@ -42,8 +40,6 @@ export const getIncomeOutCome = (history) => {
             ...acc.statistics,
             {
               total,
-              income: +curr.price,
-              outcome: 0,
               time: moment(curr.createdAt).format(
                 DATE_TIME_FORMAT_YY_MM_HH_MM_SS,
               ),
@@ -68,11 +64,19 @@ export const getIncomeOutCome = (history) => {
       statistics: [
         {
           total: 0,
-          income: 0,
-          outcome: 0,
           time: '',
         },
       ],
     },
   );
+
+  result.statistics = result.statistics.reduce((acc, curr, idx, arr) => {
+    if (curr?.time === arr[idx + 1]?.time) {
+      return acc;
+    }
+    acc.push(curr);
+    return acc;
+  }, []);
+
+  return result;
 };
