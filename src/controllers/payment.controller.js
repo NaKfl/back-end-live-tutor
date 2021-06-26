@@ -43,14 +43,19 @@ paymentController.getBanks = catchAsync(async (req, res) => {
 paymentController.deposit = catchAsync(async (req, res) => {
   const {
     user: { id },
-    body: { price },
+    body: { token },
   } = req;
-  const data = await paymentService.deposit(id, price);
+  const data = await paymentService.deposit(id, token);
   return res.json({ message: 'Deposit successfully', data });
 });
 
 paymentController.getPriceOfOneSession = catchAsync(async (req, res) => {
   const data = await paymentService.getPriceOfEachSession();
+  res.json(data);
+});
+
+paymentController.getPriceOfOneDollar = catchAsync(async (req, res) => {
+  const data = await paymentService.getPriceOfOneDollar();
   res.json(data);
 });
 export default paymentController;

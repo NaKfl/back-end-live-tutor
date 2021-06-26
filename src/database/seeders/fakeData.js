@@ -365,6 +365,13 @@ const fees = [
     createdAt: new Date(),
     updatedAt: new Date(),
   },
+  {
+    id: faker.random.uuid(),
+    key: 'pricePerDollar',
+    price: 23500,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
 ];
 
 module.exports = {

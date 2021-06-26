@@ -12,6 +12,7 @@ export const ROLES = {
 export const MINUTES_PER_SESSION = 30;
 
 export const PRICE_PER_SESSION_KEY = 'pricePerSession';
+export const PRICE_PER_DOLLAR = 'pricePerDollar';
 
 export const TRANSACTION_TYPES = {
   BUY: 'buy',
@@ -110,5 +111,13 @@ export const ERROR_CODE = {
   INVALID_REFRESH_TOKEN: {
     code: 21,
     message: 'Invalid refresh token',
+  },
+  INVALID_TOKEN: {
+    code: 22,
+    message: 'Invalid token',
+  },
+  DEPOSIT_REJECTED: {
+    code: 23,
+    message: 'Deposit was rejected',
   },
 };

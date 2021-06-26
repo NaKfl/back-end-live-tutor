@@ -16,10 +16,12 @@ import {
   PRICE_PER_SESSION_KEY,
   TRANSACTION_TYPES,
   ERROR_CODE,
+  PRICE_PER_DOLLAR,
 } from 'utils/constants';
-import { SERVER_URL } from 'configs/vars';
+import { SERVER_URL, jwt as jwtVars } from 'configs/vars';
 import get from 'lodash/fp/get';
 import { getIncomeOutCome } from 'utils/helpers';
+import jwt from 'jsonwebtoken';
 
 const paymentService = {};
 
@@ -208,7 +210,7 @@ paymentService.refund = async (
   };
 };
 
-paymentService.deposit = async (userId, price) => {
+paymentService.deposit = async (userId, token) => {
   const result = await sequelize.transaction(async (transaction) => {
     const wallet = await Wallet.findOne({
       where: {
@@ -216,6 +218,21 @@ paymentService.deposit = async (userId, price) => {
         isBlocked: false,
       },
     });
+
+    const decoded = (() => {
+      try {
+        const decoded = jwt.verify(token, jwtVars.secret);
+        return decoded;
+      } catch (err) {
+        throw new ApiError(
+          ERROR_CODE.INVALID_TOKEN.code,
+          ERROR_CODE.INVALID_TOKEN.message,
+        );
+      }
+    })();
+
+    const price = decoded?.price;
+    const id = decoded?.id;
 
     if (!wallet)
       throw new ApiError(
@@ -236,7 +253,17 @@ paymentService.deposit = async (userId, price) => {
       },
     );
 
+    const existedTransaction = await Transaction.findByPk(id);
+
+    if (existedTransaction) {
+      throw new ApiError(
+        ERROR_CODE.DEPOSIT_REJECTED.code,
+        ERROR_CODE.DEPOSIT_REJECTED.message,
+      );
+    }
+
     await Transaction.create({
+      id,
       walletId: wallet.id,
       price: price,
       status: 'success',
@@ -397,6 +424,14 @@ paymentService.getPriceOfEachSession = async () => {
   return await Fee.findOne({
     where: {
       key: PRICE_PER_SESSION_KEY,
+    },
+  });
+};
+
+paymentService.getPriceOfOneDollar = async () => {
+  return await Fee.findOne({
+    where: {
+      key: PRICE_PER_DOLLAR,
     },
   });
 };
