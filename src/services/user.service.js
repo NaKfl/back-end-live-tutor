@@ -7,6 +7,7 @@ import jwt from 'jsonwebtoken';
 import { jwt as jwtVar } from 'configs/vars';
 import { sendMailActivateAccount } from 'configs/nodemailer';
 import { paymentService } from 'services';
+import { paginate } from 'utils/sequelize';
 
 const userService = {};
 
@@ -234,6 +235,12 @@ userService.resetPassword = async (token, password) => {
       ERROR_CODE.USER_NOT_REQUEST_CHANGEPW.message,
     );
   return await user.update({ password, requestPassword: false });
+};
+
+userService.getAll = async ({ page = 1, perPage = 10 }) => {
+  return await User.findAndCountAll({
+    ...paginate({ page, perPage }),
+  });
 };
 
 export default userService;

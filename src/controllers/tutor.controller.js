@@ -5,10 +5,9 @@ import { ROLES } from 'utils/constants';
 const tutorController = {};
 
 tutorController.getMany = catchAsync(async (req, res) => {
-  const { query, user } = req;
+  const { query } = req;
   const tutors = await tutorService.getMany(query);
-  const favoriteTutor = await favoriteService.getListFavoriteTutorById(user.id);
-  res.json({ tutors, favoriteTutor });
+  res.json({ tutors });
 });
 
 tutorController.getMore = catchAsync(async (req, res) => {

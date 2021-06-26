@@ -35,7 +35,11 @@ categoryService.getAllByType = async (types) => {
       },
     },
     include: [
-      { model: Category, as: 'categories', attributes: ['id', 'description'] },
+      {
+        model: Category,
+        as: 'categories',
+        attributes: ['id', 'description', 'key'],
+      },
     ],
     attributes: ['id', 'title'],
   });

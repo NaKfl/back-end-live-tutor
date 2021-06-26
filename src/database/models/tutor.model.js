@@ -36,8 +36,8 @@ module.exports = (sequelize, DataTypes) => {
       accent: DataTypes.STRING,
       targetStudent: DataTypes.STRING,
       interests: DataTypes.TEXT,
-      languages: DataTypes.ARRAY(DataTypes.STRING),
-      specialties: DataTypes.ARRAY(DataTypes.STRING),
+      languages: DataTypes.STRING,
+      specialties: DataTypes.STRING,
       resume: DataTypes.TEXT,
       isActivated: {
         type: DataTypes.BOOLEAN,

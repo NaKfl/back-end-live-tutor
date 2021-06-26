@@ -16,15 +16,7 @@ import { sendMailAcceptedTutor } from 'configs/nodemailer';
 const tutorService = {};
 
 tutorService.getMany = async (query) => {
-  const { page, perPage, search } = query;
-  let where = {};
-  if (search) {
-    where = {
-      name: {
-        [Op.iLike]: `%${search}%`,
-      },
-    };
-  }
+  const { page, perPage } = query;
   const tutors = await Tutor.findAndCountAll({
     where: {
       isActivated: true,
@@ -35,22 +27,6 @@ tutorService.getMany = async (query) => {
         attributes: {
           exclude: ['id', 'password'],
         },
-        include: [
-          {
-            model: TutorFeedback,
-            as: 'feedbacks',
-            include: [
-              {
-                model: User,
-                as: 'firstInfo',
-                attributes: {
-                  exclude: ['id', 'password'],
-                },
-              },
-            ],
-          },
-        ],
-        where,
       },
     ],
     ...paginate({ page, perPage }),
@@ -59,7 +35,6 @@ tutorService.getMany = async (query) => {
   const promises = tutors.rows.map(async (tutor) => {
     const user = tutor.User;
     const groupUser = { ...user.dataValues, ...tutor.dataValues };
-    groupUser.isOnline = await onlineUsers.isUserOnline(tutor.userId);
     delete groupUser.User;
     return groupUser;
   });
@@ -272,11 +247,11 @@ tutorService.createWithUserId = async (fields, userId, avatar, video) => {
         },
       },
     );
-    const { languages, specialties, ...textValues } = othersInfo;
+    // const { languages, specialties, ...textValues } = othersInfo;
+
     return await Tutor.create({
-      ...textValues,
-      languages: languages.split(', '),
-      specialties: specialties.split(', '),
+      // ...textValues,
+      ...othersInfo,
       video,
       userId,
     });
@@ -338,20 +313,15 @@ tutorService.searchWithFilter = async ({
   filters = {},
 }) => {
   const { accents, ...filter } = filters;
-  // let accent = accents
-  //   ? {
-  //       accent: {
-  //         [Op.in]: accents,
-  //       },
-  //     }
-  //   : {};
 
   const where = Object.keys(filter).reduce(
     (pre, now) => {
       return {
         ...pre,
         [now]: {
-          [Op.contains]: filter[now],
+          [Op.and]: [
+            ...filter[now].map((value) => ({ [Op.like]: `%${value}%` })),
+          ],
         },
       };
     },

@@ -1,6 +1,6 @@
 const faker = require('faker');
 const moment = require('moment');
-const { languages, specialties } = require('./categoryData');
+const { LANGUAGES, specialties } = require('./categoryData');
 
 // Default password: 123132
 const defaultPassword =
@@ -15,25 +15,43 @@ const roleIds = {
 
 const types = [
   {
-    id: faker.random.uuid(),
+    id: 'babdb4f8-6f1f-4563-9d2f-97272a1b1eac',
     title: 'languages',
   },
   {
-    id: faker.random.uuid(),
+    id: 'f68b5af3-60ca-430e-b595-f9de8641547c',
     title: 'specialties',
   },
 ];
 
-const languageCategory = languages.map((language) => ({
+const MAJOR_NAMES = {
+  fl: { englishName: 'Foreign Languages', vietnameseName: 'Ngoại ngữ' },
+  mt: { englishName: 'Marketing', vietnameseName: 'Marketing' },
+  of: {
+    englishName: 'Office Information',
+    vietnameseName: 'Tin học văn phòng',
+  },
+  ds: { englishName: 'Design', vietnameseName: 'Thiết kế' },
+  bs: { englishName: 'Business', vietnameseName: 'Kinh doanh' },
+  hc: { englishName: 'Health Care', vietnameseName: 'Chăm sóc sức khỏe' },
+  it: {
+    englishName: 'Information Technology',
+    vietnameseName: 'Công nghệ thông tin',
+  },
+};
+
+const languageCategory = Object.keys(LANGUAGES).map((keyLanguage) => ({
   id: faker.random.uuid(),
   typeId: types[0].id,
-  description: language,
+  key: keyLanguage,
+  description: LANGUAGES[keyLanguage],
 }));
 
-const specialtieCategory = specialties.map((specialtie) => ({
+const specialtieCategory = Object.keys(MAJOR_NAMES).map((majorKey) => ({
   id: faker.random.uuid(),
   typeId: types[1].id,
-  description: specialtie,
+  key: majorKey,
+  description: MAJOR_NAMES[majorKey].englishName,
 }));
 
 // Fake 50 tutors
@@ -291,22 +309,6 @@ const topics = courses.reduce((pre, now) => {
   }));
   return [...pre, ...topic];
 }, []);
-
-const MAJOR_NAMES = {
-  fl: { englishName: 'Foreign Languages', vietnameseName: 'Ngoại ngữ' },
-  mt: { englishName: 'Marketing', vietnameseName: 'Marketing' },
-  of: {
-    englishName: 'Office Information',
-    vietnameseName: 'Tin học văn phòng',
-  },
-  ds: { englishName: 'Design', vietnameseName: 'Thiết kế' },
-  bs: { englishName: 'Business', vietnameseName: 'Kinh doanh' },
-  hc: { englishName: 'Health Care', vietnameseName: 'Chăm sóc sức khỏe' },
-  it: {
-    englishName: 'Information Technology',
-    vietnameseName: 'Công nghệ thông tin',
-  },
-};
 
 const majors = Object.entries(MAJOR_NAMES).map(
   ([key, { englishName, vietnameseName }]) => ({
