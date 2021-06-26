@@ -26,7 +26,7 @@ paymentValidation.getStatistics = {
 
 paymentValidation.deposit = {
   body: Joi.object({
-    price: Joi.number().min(1).required(),
+    token: Joi.string().required(),
   }),
   params: Joi.object({}),
   query: Joi.object({}),

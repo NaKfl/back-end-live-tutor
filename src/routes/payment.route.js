@@ -38,4 +38,6 @@ router.post(
 
 router.get('/price-of-session', paymentController.getPriceOfOneSession);
 
+router.get('/price-of-dollar', paymentController.getPriceOfOneDollar);
+
 export default router;
