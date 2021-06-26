@@ -4,7 +4,7 @@ module.exports = {
       name: 'live-tutor-server',
       script: './build/index.js',
       watch: false,
-      instances: 3,
+      instances: 'max',
       exec_mode: 'cluster',
       autorestart: true,
       env: {
