@@ -10,6 +10,7 @@ import { forgotPassword } from './templates/forgotPassword';
 import jwt from 'jsonwebtoken';
 import acceptedTutor from './templates/acceptedTutor';
 import logger from 'configs/logger';
+import moment from 'moment';
 
 const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
@@ -26,26 +27,39 @@ const transporter = nodemailer.createTransport({
 
 export const confirmBookingNewSchedule = async ({ origin, ...bookingInfo }) => {
   try {
-    const userInfo = {
-      displayName: bookingInfo?.student?.name,
-      email: bookingInfo?.student?.email,
+    const user = {
+      name: bookingInfo?.isSendTutor
+        ? bookingInfo.tutor.name
+        : bookingInfo.student.name,
+      email: bookingInfo?.isSendTutor
+        ? bookingInfo.tutor.email
+        : bookingInfo.student.email,
     };
     const listDates = bookingInfo.dates.map((date) => {
       const day = date[0].date;
       const startPeriod = date[0].start;
       const endPeriod = date[date.length - 1].end;
-      const token = jwt.sign(
-        {
-          participantId: bookingInfo?.tutor?.id,
-          roomName: bookingInfo?.roomName,
-          userInfo,
-          userCall: bookingInfo?.student,
-          userBeCalled: bookingInfo?.tutor,
-          isTutor: bookingConfirm?.isSendTutor,
-          startTime: bookingInfo?.startTime,
+      const startTime = moment(`${day} ${startPeriod}`);
+      const obj = {
+        context: {
+          user: {
+            email: user?.email,
+            name: user?.name,
+          },
         },
-        jwtVar.secret,
-      );
+        room: bookingInfo?.roomName,
+        roomName: bookingInfo?.roomName,
+        userCall: bookingInfo?.student,
+        userBeCalled: bookingInfo?.tutor,
+        isTutor: bookingInfo?.isSendTutor,
+        startTime,
+      };
+      const token = jwt.sign(obj, jwtVar.secret, {
+        issuer: 'livetutor',
+        subject: 'https://meet.livetutor.live',
+        expiresIn: '2h',
+        audience: 'livetutor',
+      });
       const link = `${origin}/call/?token=${token}`;
       return {
         date: day,
