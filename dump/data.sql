@@ -2398,3 +2398,4 @@ ALTER TABLE ONLY public."Wallets"
 -- PostgreSQL database dump complete
 --
 
+"Users"

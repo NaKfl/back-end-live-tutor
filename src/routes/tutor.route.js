@@ -7,7 +7,7 @@ import upload from 'middlewares/multer';
 const router = express.Router();
 
 router.get(
-  '/',
+  '/all',
   auth(),
   validate(tutorValidation.getMany),
   tutorController.getMany,

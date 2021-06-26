@@ -8,6 +8,7 @@ import courseRoutes from './course.route';
 import callRoutes from './call.route';
 import paymentRoutes from './payment.route';
 import categoryRoutes from './category.route';
+import majorRoutes from './major.route';
 
 const router = express.Router();
 
@@ -26,5 +27,6 @@ router.use('/course', courseRoutes);
 router.use('/call', callRoutes);
 router.use('/payment', paymentRoutes);
 router.use('/category', categoryRoutes);
+router.use('/major', majorRoutes);
 
 export default router;

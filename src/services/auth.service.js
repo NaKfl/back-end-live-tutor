@@ -1,6 +1,5 @@
 import ApiError from 'utils/ApiError';
 import userService from './user.service';
-import httpStatus from 'http-status';
 import { ERROR_CODE } from 'utils/constants';
 
 const authService = {};
