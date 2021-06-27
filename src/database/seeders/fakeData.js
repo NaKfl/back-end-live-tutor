@@ -248,6 +248,8 @@ const bookings = [...Array(300)].map(() => ({
         max: 49,
       })
     ].id,
+  tutorMeetingLink: 'https://meet.livetutor.live',
+  studentMeetingLink: 'https://meet.livetutor.live',
   createdAt: new Date(),
   updatedAt: new Date(),
 }));

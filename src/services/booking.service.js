@@ -6,6 +6,7 @@ import {
   Schedule,
   Transaction,
 } from 'database/models';
+import { Op } from 'Sequelize';
 import ApiError from 'utils/ApiError';
 import { confirmBookingNewSchedule } from 'configs/nodemailer';
 import { paginate } from 'utils/sequelize';
@@ -13,6 +14,7 @@ import { v4 as uuidv4 } from 'uuid';
 import moment from 'moment';
 import { paymentService } from 'services';
 import { TRANSACTION_TYPES, ERROR_CODE } from 'utils/constants';
+import { orderBy } from 'lodash';
 
 const bookingService = {};
 
@@ -117,43 +119,45 @@ bookingService.book = async (userId, scheduleDetailIds, origin) => {
   if (result) {
     //Mailing
     if (student && tutor) {
-      const dates = scheduleDetails
-        .map((item) => {
-          const { scheduleInfo, startPeriod, endPeriod } = item;
-          const date = moment(scheduleInfo.date, 'YYYY-MM-DD').format(
-            'YYYY-MM-DD',
-          );
-          const start = moment(startPeriod, 'HH:mm').format('HH:mm');
-          const end = moment(endPeriod, 'HH:mm').format('HH:mm');
-          return {
-            date,
-            start,
-            end,
-          };
-        })
-        .reverse();
-      let result = [];
+      let dates = scheduleDetails.map((item, index) => {
+        const { scheduleInfo, startPeriod, endPeriod } = item;
+        const date = moment(scheduleInfo.date, 'YYYY-MM-DD').format(
+          'YYYY-MM-DD',
+        );
+        const start = moment(startPeriod, 'HH:mm').format('HH:mm');
+        const end = moment(endPeriod, 'HH:mm').format('HH:mm');
+        return {
+          date,
+          start,
+          end,
+          bookingId: result[index].id,
+        };
+      });
+      dates = orderBy(dates, ['date', 'start'], ['asc', 'asc']);
+
+      let resultDates = [];
       let tmp = [dates[0]];
       if (dates.length !== 1) {
         for (let i = 1; i < dates.length; i++) {
           if (dates[i].start === tmp[tmp.length - 1].end) {
             tmp.push(dates[i]);
           } else {
-            result.push(tmp);
+            resultDates.push(tmp);
             tmp = [dates[i]];
           }
-          if (i === dates.length - 1) result.push(tmp);
+          if (i === dates.length - 1) resultDates.push(tmp);
         }
       } else {
-        result.push(tmp);
+        resultDates.push(tmp);
       }
 
+      console.log('resultDates', resultDates);
       const roomName = uuidv4();
       const startTime = moment();
       confirmBookingNewSchedule({
         student: student.dataValues,
         tutor: tutor.dataValues,
-        dates: result,
+        dates: resultDates,
         roomName,
         startTime,
         isSendTutor: true,
@@ -162,7 +166,7 @@ bookingService.book = async (userId, scheduleDetailIds, origin) => {
       confirmBookingNewSchedule({
         student: student.dataValues,
         tutor: tutor.dataValues,
-        dates: result,
+        dates: resultDates,
         roomName,
         startTime,
         isSendTutor: false,
@@ -172,6 +176,35 @@ bookingService.book = async (userId, scheduleDetailIds, origin) => {
   }
 
   return result;
+};
+
+bookingService.updateLink = async (bookingIds, isUpdateTutor, link) => {
+  if (isUpdateTutor)
+    return await Booking.update(
+      {
+        tutorMeetingLink: link,
+      },
+      {
+        where: {
+          id: {
+            [Op.in]: bookingIds,
+          },
+        },
+      },
+    );
+  else
+    return await Booking.update(
+      {
+        studentMeetingLink: link,
+      },
+      {
+        where: {
+          id: {
+            [Op.in]: bookingIds,
+          },
+        },
+      },
+    );
 };
 
 bookingService.cancelBooking = async (userId, scheduleDetailIds) => {
@@ -304,7 +337,11 @@ bookingService.cancelBooking = async (userId, scheduleDetailIds) => {
   return result;
 };
 
-bookingService.getList = async ({ userId, page = 1, perPage = 10 }) => {
+bookingService.getBookingListForStudent = async ({
+  userId,
+  page = 1,
+  perPage = 10,
+}) => {
   const bookingList = await Booking.findAll({
     include: [
       {
@@ -332,6 +369,40 @@ bookingService.getList = async ({ userId, page = 1, perPage = 10 }) => {
     order: [['createdAt', 'DESC']],
   });
   return bookingList;
+};
+
+bookingService.getBookingListForTutor = async ({
+  tutorId,
+  page = 1,
+  perPage = 10,
+}) => {
+  const bookedSchedule = await ScheduleDetail.findAll({
+    include: [
+      {
+        model: Schedule,
+        as: 'scheduleInfo',
+        where: {
+          tutorId,
+        },
+      },
+      {
+        model: Booking,
+        as: 'bookingInfo',
+        where: {
+          isDeleted: false,
+        },
+        include: [
+          {
+            model: User,
+            as: 'userInfo',
+          },
+        ],
+      },
+    ],
+    ...paginate({ page, perPage }),
+    order: [['createdAt', 'DESC']],
+  });
+  return bookedSchedule;
 };
 
 export default bookingService;

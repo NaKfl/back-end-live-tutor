@@ -24,6 +24,12 @@ module.exports = {
           key: 'id',
         },
       },
+      tutorMeetingLink: {
+        type: Sequelize.TEXT,
+      },
+      studentMeetingLink: {
+        type: Sequelize.TEXT,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

@@ -20,6 +20,8 @@ router.delete(
   bookingController.cancelBooking,
 );
 
-router.get('/', auth(), bookingController.getListBooking);
+router.get('/list/student', auth(), bookingController.getBookingListForStudent);
+
+router.get('/list/tutor', auth(), bookingController.getBookingListForTutor);
 
 export default router;

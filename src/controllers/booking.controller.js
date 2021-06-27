@@ -20,14 +20,23 @@ bookingController.cancelBooking = catchAsync(async (req, res) => {
   return res.json({ message: 'Cancel booking successful' });
 });
 
-bookingController.getListBooking = catchAsync(async (req, res) => {
+bookingController.getBookingListForStudent = catchAsync(async (req, res) => {
   const { user, query } = req;
-  const data = await bookingService.getList({
+  const data = await bookingService.getBookingListForStudent({
     userId: user?.id,
     ...query,
   });
 
-  return res.json({ message: 'Get history successful', data });
+  return res.json({ message: 'Get booking list for student successful', data });
+});
+
+bookingController.getBookingListForTutor = catchAsync(async (req, res) => {
+  const { user, query } = req;
+  const data = await bookingService.getBookingListForTutor({
+    tutorId: user?.id,
+    ...query,
+  });
+  return res.json({ message: 'Get booking list for tutor successful', data });
 });
 
 export default bookingController;
