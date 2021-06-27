@@ -11,6 +11,10 @@ import { paginate } from 'utils/sequelize';
 
 const userService = {};
 
+function jsUcfirst(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 userService.getUserByEmail = async (email) => {
   const user = await User.findOne({
     where: {
@@ -80,7 +84,12 @@ userService.createUser = async (userBody, origin) => {
       ERROR_CODE.EMAIL_EXIST.message,
     );
   }
-  const user = await User.create(userBody);
+  const name = jsUcfirst((userBody?.email.split('@'))[0]);
+  const userCreated = {
+    ...userBody,
+    name,
+  };
+  const user = await User.create(userCreated);
 
   // Create role
   const roleId = await Role.findRoleIdByName(ROLES.STUDENT);

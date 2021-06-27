@@ -207,12 +207,17 @@ bookingService.cancelBooking = async (userId, scheduleDetailIds) => {
         ERROR_CODE.BOOKING_NOT_EXIST.message,
       );
 
-    const scheduleBookingInfo =
-      existsBookings?.[0]?.scheduleDetailInfo?.scheduleInfo;
-    const dateBooking = scheduleBookingInfo.date;
-    const timeBooking = scheduleBookingInfo.startTime;
-    const canCancelBook =
-      moment(dateBooking + ' ' + timeBooking).diff(moment(), 'days') >= 1;
+    const scheduleBookingInfo = existsBookings?.[0]?.scheduleDetailInfo;
+    const dateBooking = scheduleBookingInfo.scheduleInfo.date;
+    const timeBooking = scheduleBookingInfo.startPeriod;
+
+    let duration = moment.duration(
+      moment(`${dateBooking} ${timeBooking}`, 'YYYY-MM-DD HH:mm').diff(
+        moment(),
+      ),
+    );
+    let hours = duration.asHours();
+    const canCancelBook = hours >= 24;
     if (!canCancelBook) {
       throw new ApiError(
         ERROR_CODE.BOOKING_CANCEL_BEFORE_1DAY.code,
