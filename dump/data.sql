@@ -200,7 +200,7 @@ CREATE TABLE public."Reports" (
 );
 
 
-ALTER TABLE public."Reports" OWNER TO postgres;
+ALTER TABLE public."Reports" OWNER TO livetutor;
 
 --
 -- TOC entry 209 (class 1259 OID 162805)
@@ -899,7 +899,7 @@ b265eb74-af18-439c-a7f8-30dd21de7b74	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdW
 --
 -- TOC entry 3484 (class 0 OID 163049)
 -- Dependencies: 222
--- Data for Name: Reports; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: Reports; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
 
 COPY public."Reports" (id, "userId", "tutorId", content, "createdAt", "updatedAt") FROM stdin;
@@ -2227,7 +2227,7 @@ ALTER TABLE ONLY public."RefreshTokens"
 
 --
 -- TOC entry 3308 (class 2606 OID 163058)
--- Name: Reports Reports_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: Reports Reports_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
 ALTER TABLE ONLY public."Reports"
@@ -2425,7 +2425,7 @@ ALTER TABLE ONLY public."RefreshTokens"
 
 --
 -- TOC entry 3331 (class 2606 OID 163064)
--- Name: Reports Reports_tutorId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: Reports Reports_tutorId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
 ALTER TABLE ONLY public."Reports"
@@ -2434,7 +2434,7 @@ ALTER TABLE ONLY public."Reports"
 
 --
 -- TOC entry 3330 (class 2606 OID 163059)
--- Name: Reports Reports_userId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: Reports Reports_userId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
 ALTER TABLE ONLY public."Reports"
