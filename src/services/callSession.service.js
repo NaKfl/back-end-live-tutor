@@ -40,6 +40,9 @@ callSessionService.getSessionByStudentId = async ({
       include: {
         model: User,
         as: 'studentInfo',
+        attributes: {
+          exclude: ['password'],
+        },
         include: [
           {
             model: TutorFeedback,
@@ -65,6 +68,9 @@ callSessionService.getSessionByStudentId = async ({
       include: {
         model: User,
         as: 'tutorInfo',
+        attributes: {
+          exclude: ['password'],
+        },
         include: [
           {
             model: TutorFeedback,

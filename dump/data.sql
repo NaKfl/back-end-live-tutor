@@ -5,7 +5,7 @@
 -- Dumped from database version 13.3
 -- Dumped by pg_dump version 13.1
 
--- Started on 2021-06-28 00:22:53 +07
+-- Started on 2021-06-28 05:10:06 +07
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -23,7 +23,7 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- TOC entry 200 (class 1259 OID 161460)
+-- TOC entry 200 (class 1259 OID 162743)
 -- Name: Bookings; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -42,7 +42,7 @@ CREATE TABLE public."Bookings" (
 ALTER TABLE public."Bookings" OWNER TO livetutor;
 
 --
--- TOC entry 201 (class 1259 OID 161466)
+-- TOC entry 201 (class 1259 OID 162752)
 -- Name: CallSessions; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -62,7 +62,7 @@ CREATE TABLE public."CallSessions" (
 ALTER TABLE public."CallSessions" OWNER TO livetutor;
 
 --
--- TOC entry 202 (class 1259 OID 161471)
+-- TOC entry 202 (class 1259 OID 162757)
 -- Name: Categories; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -79,7 +79,7 @@ CREATE TABLE public."Categories" (
 ALTER TABLE public."Categories" OWNER TO livetutor;
 
 --
--- TOC entry 203 (class 1259 OID 161479)
+-- TOC entry 203 (class 1259 OID 162765)
 -- Name: Courses; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -101,7 +101,7 @@ CREATE TABLE public."Courses" (
 ALTER TABLE public."Courses" OWNER TO livetutor;
 
 --
--- TOC entry 204 (class 1259 OID 161487)
+-- TOC entry 204 (class 1259 OID 162773)
 -- Name: FavoriteTutors; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -117,7 +117,7 @@ CREATE TABLE public."FavoriteTutors" (
 ALTER TABLE public."FavoriteTutors" OWNER TO livetutor;
 
 --
--- TOC entry 205 (class 1259 OID 161490)
+-- TOC entry 205 (class 1259 OID 162776)
 -- Name: Fees; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -133,7 +133,7 @@ CREATE TABLE public."Fees" (
 ALTER TABLE public."Fees" OWNER TO livetutor;
 
 --
--- TOC entry 206 (class 1259 OID 161495)
+-- TOC entry 206 (class 1259 OID 162781)
 -- Name: Majors; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -150,7 +150,7 @@ CREATE TABLE public."Majors" (
 ALTER TABLE public."Majors" OWNER TO livetutor;
 
 --
--- TOC entry 207 (class 1259 OID 161503)
+-- TOC entry 207 (class 1259 OID 162789)
 -- Name: Messages; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -168,7 +168,7 @@ CREATE TABLE public."Messages" (
 ALTER TABLE public."Messages" OWNER TO livetutor;
 
 --
--- TOC entry 208 (class 1259 OID 161511)
+-- TOC entry 208 (class 1259 OID 162797)
 -- Name: RefreshTokens; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -186,7 +186,24 @@ CREATE TABLE public."RefreshTokens" (
 ALTER TABLE public."RefreshTokens" OWNER TO livetutor;
 
 --
--- TOC entry 209 (class 1259 OID 161519)
+-- TOC entry 222 (class 1259 OID 163049)
+-- Name: Reports; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Reports" (
+    id uuid NOT NULL,
+    "userId" uuid NOT NULL,
+    "tutorId" uuid NOT NULL,
+    content text NOT NULL,
+    "createdAt" timestamp with time zone DEFAULT now() NOT NULL,
+    "updatedAt" timestamp with time zone DEFAULT now() NOT NULL
+);
+
+
+ALTER TABLE public."Reports" OWNER TO postgres;
+
+--
+-- TOC entry 209 (class 1259 OID 162805)
 -- Name: Roles; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -201,7 +218,7 @@ CREATE TABLE public."Roles" (
 ALTER TABLE public."Roles" OWNER TO livetutor;
 
 --
--- TOC entry 210 (class 1259 OID 161524)
+-- TOC entry 210 (class 1259 OID 162810)
 -- Name: ScheduleDetails; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -218,7 +235,7 @@ CREATE TABLE public."ScheduleDetails" (
 ALTER TABLE public."ScheduleDetails" OWNER TO livetutor;
 
 --
--- TOC entry 211 (class 1259 OID 161532)
+-- TOC entry 211 (class 1259 OID 162818)
 -- Name: Schedules; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -236,7 +253,7 @@ CREATE TABLE public."Schedules" (
 ALTER TABLE public."Schedules" OWNER TO livetutor;
 
 --
--- TOC entry 212 (class 1259 OID 161540)
+-- TOC entry 212 (class 1259 OID 162826)
 -- Name: SequelizeMeta; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -248,7 +265,7 @@ CREATE TABLE public."SequelizeMeta" (
 ALTER TABLE public."SequelizeMeta" OWNER TO livetutor;
 
 --
--- TOC entry 213 (class 1259 OID 161543)
+-- TOC entry 213 (class 1259 OID 162829)
 -- Name: SubMajors; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -266,7 +283,7 @@ CREATE TABLE public."SubMajors" (
 ALTER TABLE public."SubMajors" OWNER TO livetutor;
 
 --
--- TOC entry 214 (class 1259 OID 161551)
+-- TOC entry 214 (class 1259 OID 162837)
 -- Name: Topics; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -285,7 +302,7 @@ CREATE TABLE public."Topics" (
 ALTER TABLE public."Topics" OWNER TO livetutor;
 
 --
--- TOC entry 215 (class 1259 OID 161559)
+-- TOC entry 215 (class 1259 OID 162845)
 -- Name: Transactions; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -304,7 +321,7 @@ CREATE TABLE public."Transactions" (
 ALTER TABLE public."Transactions" OWNER TO livetutor;
 
 --
--- TOC entry 216 (class 1259 OID 161567)
+-- TOC entry 216 (class 1259 OID 162853)
 -- Name: TutorFeedbacks; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -323,7 +340,7 @@ CREATE TABLE public."TutorFeedbacks" (
 ALTER TABLE public."TutorFeedbacks" OWNER TO livetutor;
 
 --
--- TOC entry 217 (class 1259 OID 161575)
+-- TOC entry 217 (class 1259 OID 162861)
 -- Name: Tutors; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -350,7 +367,7 @@ CREATE TABLE public."Tutors" (
 ALTER TABLE public."Tutors" OWNER TO livetutor;
 
 --
--- TOC entry 218 (class 1259 OID 161583)
+-- TOC entry 218 (class 1259 OID 162869)
 -- Name: Types; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -365,7 +382,7 @@ CREATE TABLE public."Types" (
 ALTER TABLE public."Types" OWNER TO livetutor;
 
 --
--- TOC entry 219 (class 1259 OID 161588)
+-- TOC entry 219 (class 1259 OID 162874)
 -- Name: UserRoles; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -380,7 +397,7 @@ CREATE TABLE public."UserRoles" (
 ALTER TABLE public."UserRoles" OWNER TO livetutor;
 
 --
--- TOC entry 220 (class 1259 OID 161593)
+-- TOC entry 220 (class 1259 OID 162879)
 -- Name: Users; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -407,7 +424,7 @@ CREATE TABLE public."Users" (
 ALTER TABLE public."Users" OWNER TO livetutor;
 
 --
--- TOC entry 221 (class 1259 OID 161603)
+-- TOC entry 221 (class 1259 OID 162889)
 -- Name: Wallets; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -424,7 +441,7 @@ CREATE TABLE public."Wallets" (
 ALTER TABLE public."Wallets" OWNER TO livetutor;
 
 --
--- TOC entry 3451 (class 0 OID 161460)
+-- TOC entry 3462 (class 0 OID 162743)
 -- Dependencies: 200
 -- Data for Name: Bookings; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
@@ -500,7 +517,7 @@ fc141146-23ee-4c73-b0ff-13127ceaf4e9	fbf670b6-6a3d-45b1-9711-08de91ac7181	6364e5
 
 
 --
--- TOC entry 3452 (class 0 OID 161466)
+-- TOC entry 3463 (class 0 OID 162752)
 -- Dependencies: 201
 -- Data for Name: CallSessions; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
@@ -527,7 +544,7 @@ d9011256-57ea-4560-b7ec-d67b4d42ab9b	846710e2-e0f4-4f11-b6aa-54efe4fbe455	c6e0dd
 
 
 --
--- TOC entry 3453 (class 0 OID 161471)
+-- TOC entry 3464 (class 0 OID 162757)
 -- Dependencies: 202
 -- Data for Name: Categories; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
@@ -728,7 +745,7 @@ b4b85335-b3dc-46db-898b-19c66bbcf97b	e49cbe3d-2892-4816-b81d-bccf5bbe77e1	Busine
 
 
 --
--- TOC entry 3454 (class 0 OID 161479)
+-- TOC entry 3465 (class 0 OID 162765)
 -- Dependencies: 203
 -- Data for Name: Courses; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
@@ -738,7 +755,7 @@ COPY public."Courses" (id, "tutorId", name, description, level, other_details, "
 
 
 --
--- TOC entry 3455 (class 0 OID 161487)
+-- TOC entry 3466 (class 0 OID 162773)
 -- Dependencies: 204
 -- Data for Name: FavoriteTutors; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
@@ -753,7 +770,7 @@ fcbd0c88-cc9a-4412-a7bd-a628fa0d7132	0712174d-c389-4286-af91-8a6b1beb9077	42c2a8
 
 
 --
--- TOC entry 3456 (class 0 OID 161490)
+-- TOC entry 3467 (class 0 OID 162776)
 -- Dependencies: 205
 -- Data for Name: Fees; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
@@ -765,7 +782,7 @@ bcbd2aff-f20e-4c44-9ac3-ac514f943f3e	pricePerDollar	23500	2021-06-10 21:53:56.03
 
 
 --
--- TOC entry 3457 (class 0 OID 161495)
+-- TOC entry 3468 (class 0 OID 162781)
 -- Dependencies: 206
 -- Data for Name: Majors; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
@@ -796,7 +813,7 @@ f124ee0b-07fb-47c0-b9dc-2a40b8a5b46a	of	Office Information	Tin học văn phòng
 
 
 --
--- TOC entry 3458 (class 0 OID 161503)
+-- TOC entry 3469 (class 0 OID 162789)
 -- Dependencies: 207
 -- Data for Name: Messages; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
@@ -850,7 +867,7 @@ de70953b-137d-4e02-a1cf-7739e471fe74	Dịch dủm chán lắm	0728421c-15d0-4a81
 
 
 --
--- TOC entry 3459 (class 0 OID 161511)
+-- TOC entry 3470 (class 0 OID 162797)
 -- Dependencies: 208
 -- Data for Name: RefreshTokens; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
@@ -880,7 +897,17 @@ b265eb74-af18-439c-a7f8-30dd21de7b74	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdW
 
 
 --
--- TOC entry 3460 (class 0 OID 161519)
+-- TOC entry 3484 (class 0 OID 163049)
+-- Dependencies: 222
+-- Data for Name: Reports; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Reports" (id, "userId", "tutorId", content, "createdAt", "updatedAt") FROM stdin;
+\.
+
+
+--
+-- TOC entry 3471 (class 0 OID 162805)
 -- Dependencies: 209
 -- Data for Name: Roles; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
@@ -893,7 +920,7 @@ a31e0f43-d0f5-4046-8eb9-837e001b62b6	admin	2021-06-10 21:51:58.012+07	2021-06-10
 
 
 --
--- TOC entry 3461 (class 0 OID 161524)
+-- TOC entry 3472 (class 0 OID 162810)
 -- Dependencies: 210
 -- Data for Name: ScheduleDetails; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
@@ -1561,7 +1588,7 @@ efea8c02-13fb-4d83-af09-540dd0a45d10	14:00	14:30	9de5c53f-dbe0-42a3-bca4-09cd23e
 
 
 --
--- TOC entry 3462 (class 0 OID 161532)
+-- TOC entry 3473 (class 0 OID 162818)
 -- Dependencies: 211
 -- Data for Name: Schedules; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
@@ -1740,7 +1767,7 @@ c975b40f-73a0-441e-98e9-c6f263a30864	2021-06-22	14:00	15:00	42c2a84a-163b-44d7-9
 
 
 --
--- TOC entry 3463 (class 0 OID 161540)
+-- TOC entry 3474 (class 0 OID 162826)
 -- Dependencies: 212
 -- Data for Name: SequelizeMeta; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
@@ -1768,11 +1795,12 @@ COPY public."SequelizeMeta" (name) FROM stdin;
 20210203133339-category.js
 20201219073159-refresh-token.js
 20210203133340-booking-link.js
+20210203133341-report.js
 \.
 
 
 --
--- TOC entry 3464 (class 0 OID 161543)
+-- TOC entry 3475 (class 0 OID 162829)
 -- Dependencies: 213
 -- Data for Name: SubMajors; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
@@ -1782,7 +1810,7 @@ COPY public."SubMajors" (id, "majorId", key, "englishName", "vietnameseName", "c
 
 
 --
--- TOC entry 3465 (class 0 OID 161551)
+-- TOC entry 3476 (class 0 OID 162837)
 -- Dependencies: 214
 -- Data for Name: Topics; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
@@ -1792,7 +1820,7 @@ COPY public."Topics" (id, "courseId", name, description, "orderCourse", "videoUr
 
 
 --
--- TOC entry 3466 (class 0 OID 161559)
+-- TOC entry 3477 (class 0 OID 162845)
 -- Dependencies: 215
 -- Data for Name: Transactions; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
@@ -1942,7 +1970,7 @@ d666954a-7116-418a-a33d-26bb55422535	80f2de40-8038-4396-b329-82e20fea9ab1	331724
 
 
 --
--- TOC entry 3467 (class 0 OID 161567)
+-- TOC entry 3478 (class 0 OID 162853)
 -- Dependencies: 216
 -- Data for Name: TutorFeedbacks; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
@@ -1962,7 +1990,7 @@ e846eda6-7202-4ab7-80fc-6f161d2dc4ab	8b1ccf34-4fba-452f-8ddd-8ed2b5d6d719	74655b
 
 
 --
--- TOC entry 3468 (class 0 OID 161575)
+-- TOC entry 3479 (class 0 OID 162861)
 -- Dependencies: 217
 -- Data for Name: Tutors; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
@@ -1983,7 +2011,7 @@ b6d32be6-d8c8-48e4-b1d3-fd5f3f24797c	0d7d4348-cf7e-4b6a-9a01-1d88f283e910	https:
 
 
 --
--- TOC entry 3469 (class 0 OID 161583)
+-- TOC entry 3480 (class 0 OID 162869)
 -- Dependencies: 218
 -- Data for Name: Types; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
@@ -1995,7 +2023,7 @@ e49cbe3d-2892-4816-b81d-bccf5bbe77e1	specialties	2021-06-10 21:41:32.609363+07	2
 
 
 --
--- TOC entry 3470 (class 0 OID 161588)
+-- TOC entry 3481 (class 0 OID 162874)
 -- Dependencies: 219
 -- Data for Name: UserRoles; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
@@ -2043,7 +2071,7 @@ ed6fd0c2-ed38-430a-ae55-a9e6a460b239	6f24a66a-421f-4165-bb41-e0e3603a2460	2021-0
 
 
 --
--- TOC entry 3471 (class 0 OID 161593)
+-- TOC entry 3482 (class 0 OID 162879)
 -- Dependencies: 220
 -- Data for Name: Users; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
@@ -2080,7 +2108,7 @@ fbf670b6-6a3d-45b1-9711-08de91ac7181	ltstudent5@yopmail.com	\N	\N	$2a$12$3o3rEUR
 
 
 --
--- TOC entry 3472 (class 0 OID 161603)
+-- TOC entry 3483 (class 0 OID 162889)
 -- Dependencies: 221
 -- Data for Name: Wallets; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
@@ -2117,7 +2145,7 @@ a2b70b3d-481e-4c73-b0a0-f05c1479323d	0712174d-c389-4286-af91-8a6b1beb9077	320000
 
 
 --
--- TOC entry 3257 (class 2606 OID 161613)
+-- TOC entry 3264 (class 2606 OID 162899)
 -- Name: Bookings Bookings_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2126,7 +2154,7 @@ ALTER TABLE ONLY public."Bookings"
 
 
 --
--- TOC entry 3259 (class 2606 OID 161615)
+-- TOC entry 3266 (class 2606 OID 162901)
 -- Name: CallSessions CallSessions_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2135,7 +2163,7 @@ ALTER TABLE ONLY public."CallSessions"
 
 
 --
--- TOC entry 3261 (class 2606 OID 161617)
+-- TOC entry 3268 (class 2606 OID 162903)
 -- Name: Categories Categories_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2144,7 +2172,7 @@ ALTER TABLE ONLY public."Categories"
 
 
 --
--- TOC entry 3263 (class 2606 OID 161619)
+-- TOC entry 3270 (class 2606 OID 162905)
 -- Name: Courses Courses_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2153,7 +2181,7 @@ ALTER TABLE ONLY public."Courses"
 
 
 --
--- TOC entry 3265 (class 2606 OID 161621)
+-- TOC entry 3272 (class 2606 OID 162907)
 -- Name: FavoriteTutors FavoriteTutors_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2162,7 +2190,7 @@ ALTER TABLE ONLY public."FavoriteTutors"
 
 
 --
--- TOC entry 3267 (class 2606 OID 161623)
+-- TOC entry 3274 (class 2606 OID 162909)
 -- Name: Fees Fees_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2171,7 +2199,7 @@ ALTER TABLE ONLY public."Fees"
 
 
 --
--- TOC entry 3269 (class 2606 OID 161625)
+-- TOC entry 3276 (class 2606 OID 162911)
 -- Name: Majors Majors_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2180,7 +2208,7 @@ ALTER TABLE ONLY public."Majors"
 
 
 --
--- TOC entry 3271 (class 2606 OID 161627)
+-- TOC entry 3278 (class 2606 OID 162913)
 -- Name: Messages Messages_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2189,7 +2217,7 @@ ALTER TABLE ONLY public."Messages"
 
 
 --
--- TOC entry 3273 (class 2606 OID 161629)
+-- TOC entry 3280 (class 2606 OID 162915)
 -- Name: RefreshTokens RefreshTokens_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2198,7 +2226,16 @@ ALTER TABLE ONLY public."RefreshTokens"
 
 
 --
--- TOC entry 3275 (class 2606 OID 161631)
+-- TOC entry 3308 (class 2606 OID 163058)
+-- Name: Reports Reports_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Reports"
+    ADD CONSTRAINT "Reports_pkey" PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3282 (class 2606 OID 162917)
 -- Name: Roles Roles_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2207,7 +2244,7 @@ ALTER TABLE ONLY public."Roles"
 
 
 --
--- TOC entry 3277 (class 2606 OID 161633)
+-- TOC entry 3284 (class 2606 OID 162919)
 -- Name: ScheduleDetails ScheduleDetails_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2216,7 +2253,7 @@ ALTER TABLE ONLY public."ScheduleDetails"
 
 
 --
--- TOC entry 3279 (class 2606 OID 161635)
+-- TOC entry 3286 (class 2606 OID 162921)
 -- Name: Schedules Schedules_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2225,7 +2262,7 @@ ALTER TABLE ONLY public."Schedules"
 
 
 --
--- TOC entry 3281 (class 2606 OID 161637)
+-- TOC entry 3288 (class 2606 OID 162923)
 -- Name: SequelizeMeta SequelizeMeta_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2234,7 +2271,7 @@ ALTER TABLE ONLY public."SequelizeMeta"
 
 
 --
--- TOC entry 3283 (class 2606 OID 161639)
+-- TOC entry 3290 (class 2606 OID 162925)
 -- Name: SubMajors SubMajors_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2243,7 +2280,7 @@ ALTER TABLE ONLY public."SubMajors"
 
 
 --
--- TOC entry 3285 (class 2606 OID 161641)
+-- TOC entry 3292 (class 2606 OID 162927)
 -- Name: Topics Topics_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2252,7 +2289,7 @@ ALTER TABLE ONLY public."Topics"
 
 
 --
--- TOC entry 3287 (class 2606 OID 161643)
+-- TOC entry 3294 (class 2606 OID 162929)
 -- Name: Transactions Transactions_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2261,7 +2298,7 @@ ALTER TABLE ONLY public."Transactions"
 
 
 --
--- TOC entry 3289 (class 2606 OID 161645)
+-- TOC entry 3296 (class 2606 OID 162931)
 -- Name: TutorFeedbacks TutorFeedbacks_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2270,7 +2307,7 @@ ALTER TABLE ONLY public."TutorFeedbacks"
 
 
 --
--- TOC entry 3291 (class 2606 OID 161647)
+-- TOC entry 3298 (class 2606 OID 162933)
 -- Name: Tutors Tutors_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2279,7 +2316,7 @@ ALTER TABLE ONLY public."Tutors"
 
 
 --
--- TOC entry 3293 (class 2606 OID 161649)
+-- TOC entry 3300 (class 2606 OID 162935)
 -- Name: Types Types_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2288,7 +2325,7 @@ ALTER TABLE ONLY public."Types"
 
 
 --
--- TOC entry 3295 (class 2606 OID 161651)
+-- TOC entry 3302 (class 2606 OID 162937)
 -- Name: UserRoles UserRoles_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2297,7 +2334,7 @@ ALTER TABLE ONLY public."UserRoles"
 
 
 --
--- TOC entry 3297 (class 2606 OID 161653)
+-- TOC entry 3304 (class 2606 OID 162939)
 -- Name: Users Users_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2306,7 +2343,7 @@ ALTER TABLE ONLY public."Users"
 
 
 --
--- TOC entry 3299 (class 2606 OID 161655)
+-- TOC entry 3306 (class 2606 OID 162941)
 -- Name: Wallets Wallets_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2315,7 +2352,7 @@ ALTER TABLE ONLY public."Wallets"
 
 
 --
--- TOC entry 3300 (class 2606 OID 161656)
+-- TOC entry 3309 (class 2606 OID 162942)
 -- Name: Bookings Bookings_scheduleDetailId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2324,7 +2361,7 @@ ALTER TABLE ONLY public."Bookings"
 
 
 --
--- TOC entry 3301 (class 2606 OID 161661)
+-- TOC entry 3310 (class 2606 OID 162947)
 -- Name: Bookings Bookings_userId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2333,7 +2370,7 @@ ALTER TABLE ONLY public."Bookings"
 
 
 --
--- TOC entry 3302 (class 2606 OID 161666)
+-- TOC entry 3311 (class 2606 OID 162952)
 -- Name: CallSessions CallSessions_studentId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2342,7 +2379,7 @@ ALTER TABLE ONLY public."CallSessions"
 
 
 --
--- TOC entry 3303 (class 2606 OID 161671)
+-- TOC entry 3312 (class 2606 OID 162957)
 -- Name: CallSessions CallSessions_tutorId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2351,7 +2388,7 @@ ALTER TABLE ONLY public."CallSessions"
 
 
 --
--- TOC entry 3304 (class 2606 OID 161676)
+-- TOC entry 3313 (class 2606 OID 162962)
 -- Name: Courses Courses_tutorId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2360,7 +2397,7 @@ ALTER TABLE ONLY public."Courses"
 
 
 --
--- TOC entry 3305 (class 2606 OID 161681)
+-- TOC entry 3314 (class 2606 OID 162967)
 -- Name: Messages Messages_fromId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2369,7 +2406,7 @@ ALTER TABLE ONLY public."Messages"
 
 
 --
--- TOC entry 3306 (class 2606 OID 161686)
+-- TOC entry 3315 (class 2606 OID 162972)
 -- Name: Messages Messages_toId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2378,7 +2415,7 @@ ALTER TABLE ONLY public."Messages"
 
 
 --
--- TOC entry 3307 (class 2606 OID 161691)
+-- TOC entry 3316 (class 2606 OID 162977)
 -- Name: RefreshTokens RefreshTokens_userId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2387,7 +2424,25 @@ ALTER TABLE ONLY public."RefreshTokens"
 
 
 --
--- TOC entry 3308 (class 2606 OID 161696)
+-- TOC entry 3331 (class 2606 OID 163064)
+-- Name: Reports Reports_tutorId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Reports"
+    ADD CONSTRAINT "Reports_tutorId_fkey" FOREIGN KEY ("tutorId") REFERENCES public."Users"(id);
+
+
+--
+-- TOC entry 3330 (class 2606 OID 163059)
+-- Name: Reports Reports_userId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Reports"
+    ADD CONSTRAINT "Reports_userId_fkey" FOREIGN KEY ("userId") REFERENCES public."Users"(id);
+
+
+--
+-- TOC entry 3317 (class 2606 OID 162982)
 -- Name: ScheduleDetails ScheduleDetails_scheduleId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2396,7 +2451,7 @@ ALTER TABLE ONLY public."ScheduleDetails"
 
 
 --
--- TOC entry 3309 (class 2606 OID 161701)
+-- TOC entry 3318 (class 2606 OID 162987)
 -- Name: Schedules Schedules_tutorId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2405,7 +2460,7 @@ ALTER TABLE ONLY public."Schedules"
 
 
 --
--- TOC entry 3310 (class 2606 OID 161706)
+-- TOC entry 3319 (class 2606 OID 162992)
 -- Name: SubMajors SubMajors_majorId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2414,7 +2469,7 @@ ALTER TABLE ONLY public."SubMajors"
 
 
 --
--- TOC entry 3311 (class 2606 OID 161711)
+-- TOC entry 3320 (class 2606 OID 162997)
 -- Name: Topics Topics_courseId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2423,7 +2478,7 @@ ALTER TABLE ONLY public."Topics"
 
 
 --
--- TOC entry 3312 (class 2606 OID 161716)
+-- TOC entry 3321 (class 2606 OID 163002)
 -- Name: Transactions Transactions_bookingId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2432,7 +2487,7 @@ ALTER TABLE ONLY public."Transactions"
 
 
 --
--- TOC entry 3313 (class 2606 OID 161721)
+-- TOC entry 3322 (class 2606 OID 163007)
 -- Name: Transactions Transactions_walletId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2441,7 +2496,7 @@ ALTER TABLE ONLY public."Transactions"
 
 
 --
--- TOC entry 3314 (class 2606 OID 161726)
+-- TOC entry 3323 (class 2606 OID 163012)
 -- Name: TutorFeedbacks TutorFeedbacks_firstId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2450,7 +2505,7 @@ ALTER TABLE ONLY public."TutorFeedbacks"
 
 
 --
--- TOC entry 3315 (class 2606 OID 161731)
+-- TOC entry 3324 (class 2606 OID 163017)
 -- Name: TutorFeedbacks TutorFeedbacks_secondId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2459,7 +2514,7 @@ ALTER TABLE ONLY public."TutorFeedbacks"
 
 
 --
--- TOC entry 3316 (class 2606 OID 161736)
+-- TOC entry 3325 (class 2606 OID 163022)
 -- Name: TutorFeedbacks TutorFeedbacks_sessionId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2468,7 +2523,7 @@ ALTER TABLE ONLY public."TutorFeedbacks"
 
 
 --
--- TOC entry 3317 (class 2606 OID 161741)
+-- TOC entry 3326 (class 2606 OID 163027)
 -- Name: Tutors Tutors_userId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2477,7 +2532,7 @@ ALTER TABLE ONLY public."Tutors"
 
 
 --
--- TOC entry 3318 (class 2606 OID 161746)
+-- TOC entry 3327 (class 2606 OID 163032)
 -- Name: UserRoles UserRoles_roleId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2486,7 +2541,7 @@ ALTER TABLE ONLY public."UserRoles"
 
 
 --
--- TOC entry 3319 (class 2606 OID 161751)
+-- TOC entry 3328 (class 2606 OID 163037)
 -- Name: UserRoles UserRoles_userId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2495,7 +2550,7 @@ ALTER TABLE ONLY public."UserRoles"
 
 
 --
--- TOC entry 3320 (class 2606 OID 161756)
+-- TOC entry 3329 (class 2606 OID 163042)
 -- Name: Wallets Wallets_userId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2503,7 +2558,7 @@ ALTER TABLE ONLY public."Wallets"
     ADD CONSTRAINT "Wallets_userId_fkey" FOREIGN KEY ("userId") REFERENCES public."Users"(id);
 
 
--- Completed on 2021-06-28 00:22:53 +07
+-- Completed on 2021-06-28 05:10:06 +07
 
 --
 -- PostgreSQL database dump complete

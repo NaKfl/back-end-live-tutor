@@ -153,7 +153,7 @@ tutorService.getOne = async (userId) => {
       {
         model: User,
         attributes: {
-          exclude: ['id', 'password'],
+          exclude: ['password'],
         },
         include: [
           {
@@ -164,7 +164,7 @@ tutorService.getOne = async (userId) => {
                 model: User,
                 as: 'firstInfo',
                 attributes: {
-                  exclude: ['id', 'password'],
+                  exclude: ['password'],
                 },
               },
             ],

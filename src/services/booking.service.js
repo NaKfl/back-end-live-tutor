@@ -33,6 +33,9 @@ bookingService.book = async (userId, scheduleDetailIds, origin) => {
           {
             model: User,
             as: 'tutorInfo',
+            attributes: {
+              exclude: ['password'],
+            },
           },
         ],
       },
@@ -218,6 +221,9 @@ bookingService.cancelBooking = async (userId, scheduleDetailIds) => {
         {
           model: User,
           as: 'userInfo',
+          attributes: {
+            exclude: ['password'],
+          },
         },
         {
           model: ScheduleDetail,
@@ -228,6 +234,9 @@ bookingService.cancelBooking = async (userId, scheduleDetailIds) => {
             include: {
               model: User,
               as: 'tutorInfo',
+              attributes: {
+                exclude: ['password'],
+              },
             },
           },
         },
@@ -355,6 +364,9 @@ bookingService.getBookingListForStudent = async ({
               {
                 model: User,
                 as: 'tutorInfo',
+                attributes: {
+                  exclude: ['password'],
+                },
               },
             ],
           },
@@ -395,6 +407,9 @@ bookingService.getBookingListForTutor = async ({
           {
             model: User,
             as: 'userInfo',
+            attributes: {
+              exclude: ['password'],
+            },
           },
         ],
       },
