@@ -12,6 +12,7 @@ import courseService from './course.service';
 import callService from './callSession.service';
 import paymentService from './payment.service';
 import refreshTokenService from './refreshToken.service';
+import reportService from './report.service';
 
 export {
   callService,
@@ -28,4 +29,5 @@ export {
   courseService,
   paymentService,
   refreshTokenService,
+  reportService,
 };

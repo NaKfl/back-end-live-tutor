@@ -44,4 +44,5 @@ categoryService.getAllByType = async (types) => {
     attributes: ['id', 'title'],
   });
 };
+
 export default categoryService;

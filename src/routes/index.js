@@ -9,10 +9,11 @@ import callRoutes from './call.route';
 import paymentRoutes from './payment.route';
 import categoryRoutes from './category.route';
 import majorRoutes from './major.route';
+import reportRoutes from './report.route';
 
 const router = express.Router();
 
-router.get('/status', (req, res) =>
+router.get('/status', (_, res) =>
   res.json({
     message: 'Everything looks good',
   }),
@@ -28,5 +29,6 @@ router.use('/call', callRoutes);
 router.use('/payment', paymentRoutes);
 router.use('/category', categoryRoutes);
 router.use('/major', majorRoutes);
+router.use('/report', reportRoutes);
 
 export default router;
