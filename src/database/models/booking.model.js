@@ -35,6 +35,12 @@ module.exports = (sequelize, DataTypes) => {
           key: 'id',
         },
       },
+      tutorMeetingLink: {
+        type: DataTypes.TEXT,
+      },
+      studentMeetingLink: {
+        type: DataTypes.TEXT,
+      },
       createdAt: DataTypes.DATE,
       updatedAt: DataTypes.DATE,
       isDeleted: { type: DataTypes.BOOLEAN, defaultValue: false },

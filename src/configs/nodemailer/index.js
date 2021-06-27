@@ -11,6 +11,7 @@ import jwt from 'jsonwebtoken';
 import acceptedTutor from './templates/acceptedTutor';
 import logger from 'configs/logger';
 import moment from 'moment';
+import { bookingService } from 'services';
 
 const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
@@ -36,6 +37,7 @@ export const confirmBookingNewSchedule = async ({ origin, ...bookingInfo }) => {
         : bookingInfo.student.email,
     };
     const listDates = bookingInfo.dates.map((date) => {
+      const bookingIds = date.map((item) => item.bookingId);
       const day = date[0].date;
       const startPeriod = date[0].start;
       const endPeriod = date[date.length - 1].end;
@@ -60,7 +62,13 @@ export const confirmBookingNewSchedule = async ({ origin, ...bookingInfo }) => {
         expiresIn: '2h',
         audience: 'livetutor',
       });
+      const linkWithoutOrigin = `/call/?token=${token}`;
       const link = `${origin}/call/?token=${token}`;
+      bookingService.updateLink(
+        bookingIds,
+        bookingInfo?.isSendTutor,
+        linkWithoutOrigin,
+      );
       return {
         date: day,
         start: startPeriod,
@@ -68,6 +76,7 @@ export const confirmBookingNewSchedule = async ({ origin, ...bookingInfo }) => {
         link,
       };
     });
+
     bookingInfo.listDates = listDates;
     await transporter.sendMail({
       from: `"Live tutor" peterpans2030@gmail.com`,
