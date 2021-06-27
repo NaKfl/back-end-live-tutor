@@ -1,6 +1,6 @@
 const faker = require('faker');
 const moment = require('moment');
-const { LANGUAGES, specialties } = require('./categoryData');
+const { LANGUAGES } = require('./categoryData');
 
 // Default password: 123132
 const defaultPassword =
@@ -126,11 +126,13 @@ const tutorInfo = tutors
           max: 4,
         }),
       ),
-    ].map(
-      () =>
-        languageCategory[faker.random.number(languageCategory.length - 1)]
-          .description,
-    ),
+    ]
+      .map(
+        () =>
+          languageCategory[faker.random.number(languageCategory.length - 1)]
+            .key,
+      )
+      .join(','),
     specialties: [
       ...Array(
         faker.random.number({
@@ -138,11 +140,13 @@ const tutorInfo = tutors
           max: 5,
         }),
       ),
-    ].map(
-      () =>
-        specialtieCategory[faker.random.number(specialtieCategory.length - 1)]
-          .description,
-    ),
+    ]
+      .map(
+        () =>
+          specialtieCategory[faker.random.number(specialtieCategory.length - 1)]
+            .key,
+      )
+      .join(','),
     resume: faker.lorem.paragraph(),
     education: faker.lorem.paragraph(),
     experience: faker.lorem.paragraph(),
