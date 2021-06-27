@@ -46,4 +46,7 @@ router.post(
 
 router.post('/resetpassword', userController.resetPassword);
 
+router.get('/all', userController.getAll);
+router.post('/manageActivated', userController.manageActivated);
+
 export default router;

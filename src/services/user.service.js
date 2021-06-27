@@ -246,10 +246,23 @@ userService.resetPassword = async (token, password) => {
   return await user.update({ password, requestPassword: false });
 };
 
-userService.getAll = async ({ page = 1, perPage = 10 }) => {
+userService.getAll = async ({ page = 1, perPage = 15 }) => {
   return await User.findAndCountAll({
+    include: [
+      {
+        model: Role,
+        attributes: ['name'],
+      },
+    ],
     ...paginate({ page, perPage }),
+    order: [['createdAt', 'DESC']],
   });
+};
+
+userService.manageActivated = async ({ id, isActivated }) => {
+  const a = await User.update({ isActivated: !isActivated }, { where: { id } });
+  console.log(a);
+  return a;
 };
 
 export default userService;

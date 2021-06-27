@@ -23,11 +23,11 @@ module.exports = {
             'Minus dolores quasi perspiciatis eveniet ut. Necessitatibus quia excepturi. Corporis consequatur eos nihil temporibus eum aspernatur esse expedita nesciunt. Debitis modi accusamus et enim exercitationem.',
           interests:
             'Quasi nulla porro rem nam delectus blanditiis laboriosam laudantium. Sapiente quibusdam et autem iste minima illum illum cupiditate. Debitis debitis voluptatem inventore eos pariatur. Sit deleniti nihil aut porro quos veritatis. Possimus eum dicta dolores repellendus voluptatem. Ut ut fugiat et ut officia.',
-          languages: ['est', 'non', 'odit'],
+          languages: 'est,non,odit',
           profession: 'quaerat sunt architecto',
           resume:
             'Eos alias nisi repudiandae sit molestias. Ab totam aut voluptas quia ut. Ex doloremque dolor nisi repudiandae voluptatem rem in explicabo. Dignissimos architecto ut aliquam ipsum eius. Iste qui enim.',
-          specialties: ['in', 'tenetur'],
+          specialties: 'in, tenetur',
           targetStudent: 'nisi sed modi',
           video: 'https://alexandrine.net',
           createdAt: new Date(),
