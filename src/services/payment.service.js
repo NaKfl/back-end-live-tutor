@@ -17,6 +17,7 @@ import {
   TRANSACTION_TYPES,
   ERROR_CODE,
   PRICE_PER_DOLLAR,
+  DEFAULT_PRICE_PER_DOLLAR,
 } from 'utils/constants';
 import { SERVER_URL, jwt as jwtVars } from 'configs/vars';
 import get from 'lodash/fp/get';
@@ -429,11 +430,12 @@ paymentService.getPriceOfEachSession = async () => {
 };
 
 paymentService.getPriceOfOneDollar = async () => {
-  return await Fee.findOne({
+  const perPriceDollar = await Fee.findOne({
     where: {
       key: PRICE_PER_DOLLAR,
     },
   });
+  return perPriceDollar || DEFAULT_PRICE_PER_DOLLAR;
 };
 
 paymentService.getBanks = () => {
