@@ -2,10 +2,10 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 13.1
+-- Dumped from database version 13.3
 -- Dumped by pg_dump version 13.1
 
--- Started on 2021-06-27 05:27:02
+-- Started on 2021-06-28 00:22:53 +07
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -23,7 +23,7 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- TOC entry 200 (class 1259 OID 44102)
+-- TOC entry 200 (class 1259 OID 161460)
 -- Name: Bookings; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -33,14 +33,16 @@ CREATE TABLE public."Bookings" (
     "scheduleDetailId" uuid NOT NULL,
     "createdAt" timestamp with time zone DEFAULT now() NOT NULL,
     "updatedAt" timestamp with time zone DEFAULT now() NOT NULL,
-    "isDeleted" boolean DEFAULT false
+    "isDeleted" boolean DEFAULT false,
+    "tutorMeetingLink" text,
+    "studentMeetingLink" text
 );
 
 
 ALTER TABLE public."Bookings" OWNER TO livetutor;
 
 --
--- TOC entry 201 (class 1259 OID 44108)
+-- TOC entry 201 (class 1259 OID 161466)
 -- Name: CallSessions; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -60,7 +62,7 @@ CREATE TABLE public."CallSessions" (
 ALTER TABLE public."CallSessions" OWNER TO livetutor;
 
 --
--- TOC entry 202 (class 1259 OID 44113)
+-- TOC entry 202 (class 1259 OID 161471)
 -- Name: Categories; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -77,7 +79,7 @@ CREATE TABLE public."Categories" (
 ALTER TABLE public."Categories" OWNER TO livetutor;
 
 --
--- TOC entry 203 (class 1259 OID 44121)
+-- TOC entry 203 (class 1259 OID 161479)
 -- Name: Courses; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -99,7 +101,7 @@ CREATE TABLE public."Courses" (
 ALTER TABLE public."Courses" OWNER TO livetutor;
 
 --
--- TOC entry 204 (class 1259 OID 44129)
+-- TOC entry 204 (class 1259 OID 161487)
 -- Name: FavoriteTutors; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -115,7 +117,7 @@ CREATE TABLE public."FavoriteTutors" (
 ALTER TABLE public."FavoriteTutors" OWNER TO livetutor;
 
 --
--- TOC entry 205 (class 1259 OID 44132)
+-- TOC entry 205 (class 1259 OID 161490)
 -- Name: Fees; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -131,7 +133,7 @@ CREATE TABLE public."Fees" (
 ALTER TABLE public."Fees" OWNER TO livetutor;
 
 --
--- TOC entry 206 (class 1259 OID 44137)
+-- TOC entry 206 (class 1259 OID 161495)
 -- Name: Majors; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -148,7 +150,7 @@ CREATE TABLE public."Majors" (
 ALTER TABLE public."Majors" OWNER TO livetutor;
 
 --
--- TOC entry 207 (class 1259 OID 44145)
+-- TOC entry 207 (class 1259 OID 161503)
 -- Name: Messages; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -166,7 +168,7 @@ CREATE TABLE public."Messages" (
 ALTER TABLE public."Messages" OWNER TO livetutor;
 
 --
--- TOC entry 208 (class 1259 OID 44153)
+-- TOC entry 208 (class 1259 OID 161511)
 -- Name: RefreshTokens; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -184,7 +186,7 @@ CREATE TABLE public."RefreshTokens" (
 ALTER TABLE public."RefreshTokens" OWNER TO livetutor;
 
 --
--- TOC entry 209 (class 1259 OID 44161)
+-- TOC entry 209 (class 1259 OID 161519)
 -- Name: Roles; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -199,7 +201,7 @@ CREATE TABLE public."Roles" (
 ALTER TABLE public."Roles" OWNER TO livetutor;
 
 --
--- TOC entry 210 (class 1259 OID 44166)
+-- TOC entry 210 (class 1259 OID 161524)
 -- Name: ScheduleDetails; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -216,7 +218,7 @@ CREATE TABLE public."ScheduleDetails" (
 ALTER TABLE public."ScheduleDetails" OWNER TO livetutor;
 
 --
--- TOC entry 211 (class 1259 OID 44174)
+-- TOC entry 211 (class 1259 OID 161532)
 -- Name: Schedules; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -234,7 +236,7 @@ CREATE TABLE public."Schedules" (
 ALTER TABLE public."Schedules" OWNER TO livetutor;
 
 --
--- TOC entry 212 (class 1259 OID 44182)
+-- TOC entry 212 (class 1259 OID 161540)
 -- Name: SequelizeMeta; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -246,7 +248,7 @@ CREATE TABLE public."SequelizeMeta" (
 ALTER TABLE public."SequelizeMeta" OWNER TO livetutor;
 
 --
--- TOC entry 213 (class 1259 OID 44185)
+-- TOC entry 213 (class 1259 OID 161543)
 -- Name: SubMajors; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -264,7 +266,7 @@ CREATE TABLE public."SubMajors" (
 ALTER TABLE public."SubMajors" OWNER TO livetutor;
 
 --
--- TOC entry 214 (class 1259 OID 44193)
+-- TOC entry 214 (class 1259 OID 161551)
 -- Name: Topics; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -283,7 +285,7 @@ CREATE TABLE public."Topics" (
 ALTER TABLE public."Topics" OWNER TO livetutor;
 
 --
--- TOC entry 215 (class 1259 OID 44201)
+-- TOC entry 215 (class 1259 OID 161559)
 -- Name: Transactions; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -302,7 +304,7 @@ CREATE TABLE public."Transactions" (
 ALTER TABLE public."Transactions" OWNER TO livetutor;
 
 --
--- TOC entry 216 (class 1259 OID 44209)
+-- TOC entry 216 (class 1259 OID 161567)
 -- Name: TutorFeedbacks; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -321,7 +323,7 @@ CREATE TABLE public."TutorFeedbacks" (
 ALTER TABLE public."TutorFeedbacks" OWNER TO livetutor;
 
 --
--- TOC entry 217 (class 1259 OID 44217)
+-- TOC entry 217 (class 1259 OID 161575)
 -- Name: Tutors; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -348,7 +350,7 @@ CREATE TABLE public."Tutors" (
 ALTER TABLE public."Tutors" OWNER TO livetutor;
 
 --
--- TOC entry 218 (class 1259 OID 44225)
+-- TOC entry 218 (class 1259 OID 161583)
 -- Name: Types; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -363,7 +365,7 @@ CREATE TABLE public."Types" (
 ALTER TABLE public."Types" OWNER TO livetutor;
 
 --
--- TOC entry 219 (class 1259 OID 44230)
+-- TOC entry 219 (class 1259 OID 161588)
 -- Name: UserRoles; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -378,7 +380,7 @@ CREATE TABLE public."UserRoles" (
 ALTER TABLE public."UserRoles" OWNER TO livetutor;
 
 --
--- TOC entry 220 (class 1259 OID 44235)
+-- TOC entry 220 (class 1259 OID 161593)
 -- Name: Users; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -405,7 +407,7 @@ CREATE TABLE public."Users" (
 ALTER TABLE public."Users" OWNER TO livetutor;
 
 --
--- TOC entry 221 (class 1259 OID 44245)
+-- TOC entry 221 (class 1259 OID 161603)
 -- Name: Wallets; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -422,83 +424,83 @@ CREATE TABLE public."Wallets" (
 ALTER TABLE public."Wallets" OWNER TO livetutor;
 
 --
--- TOC entry 3185 (class 0 OID 44102)
+-- TOC entry 3451 (class 0 OID 161460)
 -- Dependencies: 200
 -- Data for Name: Bookings; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
 
-COPY public."Bookings" (id, "userId", "scheduleDetailId", "createdAt", "updatedAt", "isDeleted") FROM stdin;
-c3f3a968-4e74-4964-b14b-2dd5da707ffd	5df1c8dd-1939-4fdd-b01d-d03d28ad67eb	2997e125-4a58-444b-afc3-10d7c6cbce3f	2021-06-18 04:18:10.508+07	2021-06-18 04:18:10.508+07	f
-64912c66-68d7-4928-8dc5-b06975f90371	5df1c8dd-1939-4fdd-b01d-d03d28ad67eb	ff503141-612c-407d-a078-a4591ffd7492	2021-06-18 04:18:23.872+07	2021-06-18 04:18:23.872+07	f
-b92d9839-2be8-43ca-8c8c-01a9c6a69d63	5df1c8dd-1939-4fdd-b01d-d03d28ad67eb	aca203c1-fc4d-4dab-9a3e-596559e01c2a	2021-06-18 04:21:21.566+07	2021-06-18 04:21:21.566+07	f
-e33b12c8-cbc3-4d48-b809-769f80dccb84	5df1c8dd-1939-4fdd-b01d-d03d28ad67eb	6249e9f6-96b7-4d4b-a50c-8434f5850f55	2021-06-18 04:21:21.566+07	2021-06-18 04:21:21.566+07	f
-8c53465e-cb8b-4be5-997c-9b3cedd922ec	5df1c8dd-1939-4fdd-b01d-d03d28ad67eb	32de13e1-77d6-406c-9c46-a6a857ea6385	2021-06-18 04:21:21.566+07	2021-06-18 04:21:21.566+07	f
-cec9d19e-42ba-4904-851a-6fa6fd39b88f	5df1c8dd-1939-4fdd-b01d-d03d28ad67eb	813a8f2f-b86e-4f16-bc06-d480c8db843b	2021-06-18 04:22:10.638+07	2021-06-18 04:22:10.638+07	f
-00fe334c-4b8c-4b92-80f3-27df75b3d9b7	5df1c8dd-1939-4fdd-b01d-d03d28ad67eb	d83e29be-a0c0-4a56-9d53-df91561fe858	2021-06-18 04:22:10.638+07	2021-06-18 04:22:10.638+07	f
-49e0fc82-d577-4bc4-a71d-dc5f18ca40d8	5df1c8dd-1939-4fdd-b01d-d03d28ad67eb	b24430d1-8695-456e-b48a-8d37b107a70e	2021-06-18 04:45:57.591+07	2021-06-18 04:45:57.591+07	f
-43f1659e-ce33-42f6-9e77-0f1b189c1c5f	5df1c8dd-1939-4fdd-b01d-d03d28ad67eb	1b4bc78f-3738-4b2f-8bd1-06fe141f32bc	2021-06-18 04:45:57.592+07	2021-06-18 04:45:57.592+07	f
-2f19c5de-9d79-4c5a-8a3e-8a397d05692a	5df1c8dd-1939-4fdd-b01d-d03d28ad67eb	7d4fbe1c-69cd-4daf-b0eb-2865d67e05dd	2021-06-18 04:48:30.199+07	2021-06-18 04:48:30.199+07	f
-75189681-8ff2-4fee-93a6-89ec7ffed4f0	5df1c8dd-1939-4fdd-b01d-d03d28ad67eb	5251eb2f-21e4-4478-83af-5b7f26e95248	2021-06-18 04:48:44.161+07	2021-06-18 04:48:44.161+07	f
-ee0f75d6-80a7-4c05-ab94-637dcbb6f269	5df1c8dd-1939-4fdd-b01d-d03d28ad67eb	7232c2f4-21c0-496f-a8bf-31a38a152840	2021-06-18 04:48:53.722+07	2021-06-18 04:48:53.722+07	f
-b084a097-aa8a-4ee5-8dc5-1bf9b4f8b92b	846710e2-e0f4-4f11-b6aa-54efe4fbe455	d2e32ccf-347a-4db4-b516-e96905ca329a	2021-06-18 04:52:31.664+07	2021-06-18 04:52:31.664+07	f
-f1c21c05-3a5f-49ba-8319-9757ee282b68	846710e2-e0f4-4f11-b6aa-54efe4fbe455	dc411056-e01b-4bd7-ad79-a1e905a27d4a	2021-06-18 04:52:31.664+07	2021-06-18 04:52:31.664+07	f
-ca73fa3d-a030-4eaf-a5eb-1f7b9fdcc035	846710e2-e0f4-4f11-b6aa-54efe4fbe455	da343862-52cd-4f62-b3c4-474fb18e7277	2021-06-18 04:52:43.382+07	2021-06-18 04:52:43.382+07	f
-e542a757-740c-48da-8f4c-ef291fe65882	846710e2-e0f4-4f11-b6aa-54efe4fbe455	cbc3ce89-ee6e-4460-837d-df8051842523	2021-06-18 04:52:57.848+07	2021-06-18 04:52:57.848+07	f
-9cf17360-2eb9-4cdd-a7bb-374104a9c344	846710e2-e0f4-4f11-b6aa-54efe4fbe455	28471dc8-f8cb-40a0-b7da-16e83929b463	2021-06-18 04:53:09.966+07	2021-06-18 04:53:09.966+07	f
-f81fc486-ad04-41a8-9a9c-a5b73447ce2a	846710e2-e0f4-4f11-b6aa-54efe4fbe455	67e4df62-6f91-41eb-8d27-c6f1e773a6a8	2021-06-18 04:53:32.517+07	2021-06-18 04:53:32.517+07	f
-6c66ba74-5e8e-4497-a237-c94cec9c449f	846710e2-e0f4-4f11-b6aa-54efe4fbe455	d147f3c0-488c-461a-84ae-07666f0a50ad	2021-06-18 04:53:32.517+07	2021-06-18 04:53:32.517+07	f
-1a11e57c-db2a-4994-a39e-49b0e8f767e0	846710e2-e0f4-4f11-b6aa-54efe4fbe455	4da4d703-3b52-4f3e-89f8-a73cabb7f3cc	2021-06-18 04:53:58.879+07	2021-06-18 04:53:58.879+07	f
-a0a439ae-ec23-4a49-8dab-afb16ff7dfaf	846710e2-e0f4-4f11-b6aa-54efe4fbe455	52187acb-27ce-47f1-a402-fc5c452098ed	2021-06-18 04:53:58.879+07	2021-06-18 04:53:58.879+07	f
-5e5d03e0-2648-4575-9e4f-2155ba3d1673	846710e2-e0f4-4f11-b6aa-54efe4fbe455	fc15d0f6-d457-4ef2-b432-d2e361fb4a59	2021-06-18 04:54:26.146+07	2021-06-18 04:54:26.146+07	f
-f791a6fb-f69c-4e61-af99-1b0a295be445	846710e2-e0f4-4f11-b6aa-54efe4fbe455	6e74c503-8648-4d2b-b73e-7a97d96634cf	2021-06-18 04:57:34.371+07	2021-06-18 04:57:34.371+07	f
-3619e3ee-82a4-4129-975a-41d63fa83949	846710e2-e0f4-4f11-b6aa-54efe4fbe455	77c426bc-02b0-44d5-b6df-7cce61314181	2021-06-18 04:57:34.371+07	2021-06-18 04:57:34.371+07	f
-77d59126-afc3-487f-b075-66949923c1b4	846710e2-e0f4-4f11-b6aa-54efe4fbe455	734459be-9fc4-48e7-b6dd-dec35fa96d8a	2021-06-18 04:57:39.769+07	2021-06-18 04:57:39.769+07	f
-50b3dca3-8575-45cd-b922-94f54a175613	846710e2-e0f4-4f11-b6aa-54efe4fbe455	f1a915be-fa2e-4185-b914-be2a769b4b71	2021-06-18 04:57:56.628+07	2021-06-18 04:57:56.628+07	f
-b44bf4cb-a18c-4972-81a6-c6a2914c891a	846710e2-e0f4-4f11-b6aa-54efe4fbe455	819af493-3957-4db6-be46-457046a6400e	2021-06-18 04:57:56.628+07	2021-06-18 04:57:56.628+07	f
-43b6484f-f9f4-453f-9b1e-818d8a668857	846710e2-e0f4-4f11-b6aa-54efe4fbe455	a6545b8b-4309-4ea9-8e13-79eb8de27e3d	2021-06-18 04:58:06.025+07	2021-06-18 04:58:06.025+07	f
-e4b9618e-107b-4fae-8c5f-27ac0c527224	846710e2-e0f4-4f11-b6aa-54efe4fbe455	6a8053d3-b7e9-475a-9087-b168fb90e5a4	2021-06-18 04:58:06.025+07	2021-06-18 04:58:06.025+07	f
-2577f1ab-b546-4c82-b891-d0abe16f9fa4	846710e2-e0f4-4f11-b6aa-54efe4fbe455	8e118f58-0b07-43b9-ad14-355195337d0b	2021-06-18 05:00:25.725+07	2021-06-18 05:00:25.725+07	f
-bf38180b-175c-4759-8c07-289e96530dfe	846710e2-e0f4-4f11-b6aa-54efe4fbe455	b57fd044-ebc9-40fd-83a4-5f8557ad0d46	2021-06-18 05:00:25.726+07	2021-06-18 05:00:25.726+07	f
-474144ad-d3c9-4c96-90c9-493781d598d8	846710e2-e0f4-4f11-b6aa-54efe4fbe455	f53b98bb-fc36-4b0a-99ec-5bf1211f2bfa	2021-06-18 05:00:43.101+07	2021-06-18 05:00:43.101+07	f
-d49f52f6-07f8-440a-84fc-dbc21cf87d48	846710e2-e0f4-4f11-b6aa-54efe4fbe455	2f07267c-b66a-4f99-9a19-fdd085556419	2021-06-18 05:00:53.179+07	2021-06-18 05:00:53.179+07	f
-820ef9c6-2e82-4ea0-af6a-2663fda7a456	846710e2-e0f4-4f11-b6aa-54efe4fbe455	3353018f-fdd0-400e-ac14-8bf334a35cec	2021-06-18 05:00:53.179+07	2021-06-18 05:00:53.179+07	f
-febd772f-3e3b-4cf9-89b0-c2acaae74913	846710e2-e0f4-4f11-b6aa-54efe4fbe455	2a175327-7874-40da-97e2-453cb2621412	2021-06-18 05:03:15.448+07	2021-06-18 05:03:15.448+07	f
-a95a470e-8a13-41ad-afb2-705a82449216	846710e2-e0f4-4f11-b6aa-54efe4fbe455	96ab224c-e727-455a-a2d9-de6382bdbc5d	2021-06-18 05:03:15.449+07	2021-06-18 05:03:15.449+07	f
-4a2b2fa0-5065-484a-b637-2101ca2acc66	846710e2-e0f4-4f11-b6aa-54efe4fbe455	1cf097d0-e5fc-4d7e-90f8-bb7577b9d5ac	2021-06-18 05:03:28.818+07	2021-06-18 05:03:28.818+07	f
-725ca5cd-6786-435a-97e1-101cc68b9a3e	846710e2-e0f4-4f11-b6aa-54efe4fbe455	06d3b74d-5590-4496-9b82-211a715f3aaa	2021-06-18 05:03:28.818+07	2021-06-18 05:03:28.818+07	f
-ffbbe8cd-a851-44d5-be1c-b413d8c6e513	846710e2-e0f4-4f11-b6aa-54efe4fbe455	c52d0783-955b-4d30-be64-d0d939acb1df	2021-06-18 05:03:44.921+07	2021-06-18 05:03:44.921+07	f
-56c4e787-bbf4-4eea-9d0e-38f566a76abd	846710e2-e0f4-4f11-b6aa-54efe4fbe455	ea2fcac6-eab2-42fb-8c01-1f839fb7abfc	2021-06-18 05:03:44.922+07	2021-06-18 05:03:44.922+07	f
-607439ca-dde4-4814-bd20-55a11033a9a5	34e95981-3426-4103-9bfd-df43464723d0	2131b6ce-3181-43a4-a323-191de8d898f1	2021-06-18 05:05:40.766+07	2021-06-18 05:05:40.766+07	f
-e8607d12-3281-4307-a1af-24254bb8b92e	34e95981-3426-4103-9bfd-df43464723d0	fbe8a7ec-9149-44ae-a74a-a2722908250b	2021-06-18 05:05:40.766+07	2021-06-18 05:05:40.766+07	f
-cffca1e0-8898-4354-b1ab-d0a2637cd963	34e95981-3426-4103-9bfd-df43464723d0	a41e8813-79af-42b4-996d-e4067809ff92	2021-06-18 05:05:52.679+07	2021-06-18 05:05:52.679+07	f
-372f2ff7-fdba-4496-b827-33be72be1ae0	34e95981-3426-4103-9bfd-df43464723d0	c0cc4441-0742-4a6f-bea9-b2f6bd526eb4	2021-06-18 05:05:52.68+07	2021-06-18 05:05:52.68+07	f
-94ba38c1-fcad-4bd8-9995-be34fb869342	34e95981-3426-4103-9bfd-df43464723d0	3f9d9ad1-f650-4823-91af-aac824dad294	2021-06-18 05:06:02.686+07	2021-06-18 05:06:02.686+07	f
-2d7aa9c4-6e03-4208-be44-fbe4d10df2f6	34e95981-3426-4103-9bfd-df43464723d0	f35ac18d-58cc-4aeb-b995-e9c0d2b2745b	2021-06-18 05:06:02.686+07	2021-06-18 05:06:02.686+07	f
-5971c1a0-6855-49d7-aebd-caa7880557d8	34e95981-3426-4103-9bfd-df43464723d0	a12abfc0-7fdf-4e71-9565-dee032bd096a	2021-06-18 05:07:35.747+07	2021-06-18 05:07:35.747+07	f
-3170b699-c716-46fe-9c1c-bc051d3549c7	34e95981-3426-4103-9bfd-df43464723d0	509e3312-2ccd-4ba5-881b-ae5bc4019194	2021-06-18 05:07:35.747+07	2021-06-18 05:07:35.747+07	f
-8ad560cd-d230-4b81-8d39-7c39968f9e27	34e95981-3426-4103-9bfd-df43464723d0	819ed493-5d59-491a-ae9e-18e87deb478d	2021-06-18 05:07:48.189+07	2021-06-18 05:07:48.189+07	f
-b985361e-0512-4795-aeac-da9c4a6e4af6	34e95981-3426-4103-9bfd-df43464723d0	d3f83eb8-cd5d-4d01-85a9-8ce588cffa80	2021-06-18 05:07:48.189+07	2021-06-18 05:07:48.189+07	f
-4621ea87-2cf1-4169-a073-cba987d87f24	34e95981-3426-4103-9bfd-df43464723d0	7a0d5ff6-9902-49d0-92c1-8971e0377c8c	2021-06-18 05:07:56.299+07	2021-06-18 05:07:56.299+07	f
-2e0efeba-60ef-4033-bdbb-1a66bac5d67d	34e95981-3426-4103-9bfd-df43464723d0	4576af2c-7ec4-4c51-9c36-76bc574456b5	2021-06-18 05:07:56.299+07	2021-06-18 05:07:56.299+07	f
-9f40abfd-3e98-4a54-b71c-35047f284a86	74655b72-3b14-463e-98b6-a2f64a459aa9	a401e434-8997-49c2-b4b3-47edc2fd0336	2021-06-18 05:09:52.517+07	2021-06-18 05:09:52.517+07	f
-2d9530c7-d255-4111-a986-9601cae32c9c	74655b72-3b14-463e-98b6-a2f64a459aa9	733c36af-0458-4eda-8995-a75045a1759d	2021-06-18 05:09:52.517+07	2021-06-18 05:09:52.517+07	f
-e6ec280d-5216-4f03-9d17-6584bc7208aa	74655b72-3b14-463e-98b6-a2f64a459aa9	6a97b589-ea97-4921-ab70-223b8a336689	2021-06-18 05:09:58.898+07	2021-06-18 05:09:58.898+07	f
-04a9ebce-6879-467f-9338-a86734fc26d1	74655b72-3b14-463e-98b6-a2f64a459aa9	19ec79aa-f5c6-42d4-8d92-dee08cd8867f	2021-06-18 05:09:58.899+07	2021-06-18 05:09:58.899+07	f
-41f41727-b586-49ef-ac0a-358421c5776d	74655b72-3b14-463e-98b6-a2f64a459aa9	611fb799-a996-4a6c-a296-fa7b954c1c77	2021-06-18 05:10:12.617+07	2021-06-18 05:10:12.617+07	f
-1da5e622-601b-465d-9411-ac87ee529374	74655b72-3b14-463e-98b6-a2f64a459aa9	e6144f90-8452-4b47-886c-2497b0479542	2021-06-18 05:10:12.617+07	2021-06-18 05:10:12.617+07	f
-5caa49a0-1815-4feb-ad70-7f96da60253d	fbf670b6-6a3d-45b1-9711-08de91ac7181	959724e4-bbe8-489d-89f8-199bc0600568	2021-06-18 05:15:26.646+07	2021-06-18 05:15:26.646+07	f
-627e6da7-4fed-48c0-996a-335c267e4974	fbf670b6-6a3d-45b1-9711-08de91ac7181	f2eda4ac-6a40-4616-b1af-f218ccb03a7e	2021-06-18 05:15:26.646+07	2021-06-18 05:15:26.646+07	f
-8eac286a-41f4-4898-93d4-3070b52ad439	fbf670b6-6a3d-45b1-9711-08de91ac7181	a1dce5a8-688f-40be-a67f-3e95df96282d	2021-06-18 05:15:39.927+07	2021-06-18 05:15:39.927+07	f
-d2608c66-56dc-4a31-a71f-4089544d42e1	fbf670b6-6a3d-45b1-9711-08de91ac7181	9788f012-87c0-41fa-bd26-fe51e7bdaf88	2021-06-18 05:15:39.927+07	2021-06-18 05:15:39.927+07	f
-7e92e4c2-810a-4da5-918a-901f2d3f805c	fbf670b6-6a3d-45b1-9711-08de91ac7181	d6f3ca3c-4e9f-4abb-a623-dfdcb955b86b	2021-06-18 05:15:58.057+07	2021-06-18 05:15:58.057+07	f
-fc141146-23ee-4c73-b0ff-13127ceaf4e9	fbf670b6-6a3d-45b1-9711-08de91ac7181	6364e53a-ee3e-4a1d-8529-0f9f6d2b270a	2021-06-18 05:15:58.057+07	2021-06-18 05:15:58.057+07	f
-3317243a-08b3-45a5-9327-ece17d04edd1	fbf670b6-6a3d-45b1-9711-08de91ac7181	3ab57d7d-3ffe-4dc5-91fa-b57dcee8440c	2021-06-18 05:16:06.446+07	2021-06-18 05:16:06.446+07	f
-585348e4-cf14-455f-a0ee-9ec0853ab4e9	fbf670b6-6a3d-45b1-9711-08de91ac7181	fce4720b-34a0-45d4-8276-26368e1332bf	2021-06-18 05:16:06.446+07	2021-06-18 05:16:06.446+07	f
+COPY public."Bookings" (id, "userId", "scheduleDetailId", "createdAt", "updatedAt", "isDeleted", "tutorMeetingLink", "studentMeetingLink") FROM stdin;
+c3f3a968-4e74-4964-b14b-2dd5da707ffd	5df1c8dd-1939-4fdd-b01d-d03d28ad67eb	2997e125-4a58-444b-afc3-10d7c6cbce3f	2021-06-18 04:18:10.508+07	2021-06-18 04:18:10.508+07	f	\N	\N
+64912c66-68d7-4928-8dc5-b06975f90371	5df1c8dd-1939-4fdd-b01d-d03d28ad67eb	ff503141-612c-407d-a078-a4591ffd7492	2021-06-18 04:18:23.872+07	2021-06-18 04:18:23.872+07	f	\N	\N
+b92d9839-2be8-43ca-8c8c-01a9c6a69d63	5df1c8dd-1939-4fdd-b01d-d03d28ad67eb	aca203c1-fc4d-4dab-9a3e-596559e01c2a	2021-06-18 04:21:21.566+07	2021-06-18 04:21:21.566+07	f	\N	\N
+e33b12c8-cbc3-4d48-b809-769f80dccb84	5df1c8dd-1939-4fdd-b01d-d03d28ad67eb	6249e9f6-96b7-4d4b-a50c-8434f5850f55	2021-06-18 04:21:21.566+07	2021-06-18 04:21:21.566+07	f	\N	\N
+8c53465e-cb8b-4be5-997c-9b3cedd922ec	5df1c8dd-1939-4fdd-b01d-d03d28ad67eb	32de13e1-77d6-406c-9c46-a6a857ea6385	2021-06-18 04:21:21.566+07	2021-06-18 04:21:21.566+07	f	\N	\N
+cec9d19e-42ba-4904-851a-6fa6fd39b88f	5df1c8dd-1939-4fdd-b01d-d03d28ad67eb	813a8f2f-b86e-4f16-bc06-d480c8db843b	2021-06-18 04:22:10.638+07	2021-06-18 04:22:10.638+07	f	\N	\N
+00fe334c-4b8c-4b92-80f3-27df75b3d9b7	5df1c8dd-1939-4fdd-b01d-d03d28ad67eb	d83e29be-a0c0-4a56-9d53-df91561fe858	2021-06-18 04:22:10.638+07	2021-06-18 04:22:10.638+07	f	\N	\N
+49e0fc82-d577-4bc4-a71d-dc5f18ca40d8	5df1c8dd-1939-4fdd-b01d-d03d28ad67eb	b24430d1-8695-456e-b48a-8d37b107a70e	2021-06-18 04:45:57.591+07	2021-06-18 04:45:57.591+07	f	\N	\N
+43f1659e-ce33-42f6-9e77-0f1b189c1c5f	5df1c8dd-1939-4fdd-b01d-d03d28ad67eb	1b4bc78f-3738-4b2f-8bd1-06fe141f32bc	2021-06-18 04:45:57.592+07	2021-06-18 04:45:57.592+07	f	\N	\N
+2f19c5de-9d79-4c5a-8a3e-8a397d05692a	5df1c8dd-1939-4fdd-b01d-d03d28ad67eb	7d4fbe1c-69cd-4daf-b0eb-2865d67e05dd	2021-06-18 04:48:30.199+07	2021-06-18 04:48:30.199+07	f	\N	\N
+75189681-8ff2-4fee-93a6-89ec7ffed4f0	5df1c8dd-1939-4fdd-b01d-d03d28ad67eb	5251eb2f-21e4-4478-83af-5b7f26e95248	2021-06-18 04:48:44.161+07	2021-06-18 04:48:44.161+07	f	\N	\N
+ee0f75d6-80a7-4c05-ab94-637dcbb6f269	5df1c8dd-1939-4fdd-b01d-d03d28ad67eb	7232c2f4-21c0-496f-a8bf-31a38a152840	2021-06-18 04:48:53.722+07	2021-06-18 04:48:53.722+07	f	\N	\N
+b084a097-aa8a-4ee5-8dc5-1bf9b4f8b92b	846710e2-e0f4-4f11-b6aa-54efe4fbe455	d2e32ccf-347a-4db4-b516-e96905ca329a	2021-06-18 04:52:31.664+07	2021-06-18 04:52:31.664+07	f	\N	\N
+f1c21c05-3a5f-49ba-8319-9757ee282b68	846710e2-e0f4-4f11-b6aa-54efe4fbe455	dc411056-e01b-4bd7-ad79-a1e905a27d4a	2021-06-18 04:52:31.664+07	2021-06-18 04:52:31.664+07	f	\N	\N
+ca73fa3d-a030-4eaf-a5eb-1f7b9fdcc035	846710e2-e0f4-4f11-b6aa-54efe4fbe455	da343862-52cd-4f62-b3c4-474fb18e7277	2021-06-18 04:52:43.382+07	2021-06-18 04:52:43.382+07	f	\N	\N
+e542a757-740c-48da-8f4c-ef291fe65882	846710e2-e0f4-4f11-b6aa-54efe4fbe455	cbc3ce89-ee6e-4460-837d-df8051842523	2021-06-18 04:52:57.848+07	2021-06-18 04:52:57.848+07	f	\N	\N
+9cf17360-2eb9-4cdd-a7bb-374104a9c344	846710e2-e0f4-4f11-b6aa-54efe4fbe455	28471dc8-f8cb-40a0-b7da-16e83929b463	2021-06-18 04:53:09.966+07	2021-06-18 04:53:09.966+07	f	\N	\N
+f81fc486-ad04-41a8-9a9c-a5b73447ce2a	846710e2-e0f4-4f11-b6aa-54efe4fbe455	67e4df62-6f91-41eb-8d27-c6f1e773a6a8	2021-06-18 04:53:32.517+07	2021-06-18 04:53:32.517+07	f	\N	\N
+6c66ba74-5e8e-4497-a237-c94cec9c449f	846710e2-e0f4-4f11-b6aa-54efe4fbe455	d147f3c0-488c-461a-84ae-07666f0a50ad	2021-06-18 04:53:32.517+07	2021-06-18 04:53:32.517+07	f	\N	\N
+1a11e57c-db2a-4994-a39e-49b0e8f767e0	846710e2-e0f4-4f11-b6aa-54efe4fbe455	4da4d703-3b52-4f3e-89f8-a73cabb7f3cc	2021-06-18 04:53:58.879+07	2021-06-18 04:53:58.879+07	f	\N	\N
+a0a439ae-ec23-4a49-8dab-afb16ff7dfaf	846710e2-e0f4-4f11-b6aa-54efe4fbe455	52187acb-27ce-47f1-a402-fc5c452098ed	2021-06-18 04:53:58.879+07	2021-06-18 04:53:58.879+07	f	\N	\N
+5e5d03e0-2648-4575-9e4f-2155ba3d1673	846710e2-e0f4-4f11-b6aa-54efe4fbe455	fc15d0f6-d457-4ef2-b432-d2e361fb4a59	2021-06-18 04:54:26.146+07	2021-06-18 04:54:26.146+07	f	\N	\N
+f791a6fb-f69c-4e61-af99-1b0a295be445	846710e2-e0f4-4f11-b6aa-54efe4fbe455	6e74c503-8648-4d2b-b73e-7a97d96634cf	2021-06-18 04:57:34.371+07	2021-06-18 04:57:34.371+07	f	\N	\N
+3619e3ee-82a4-4129-975a-41d63fa83949	846710e2-e0f4-4f11-b6aa-54efe4fbe455	77c426bc-02b0-44d5-b6df-7cce61314181	2021-06-18 04:57:34.371+07	2021-06-18 04:57:34.371+07	f	\N	\N
+77d59126-afc3-487f-b075-66949923c1b4	846710e2-e0f4-4f11-b6aa-54efe4fbe455	734459be-9fc4-48e7-b6dd-dec35fa96d8a	2021-06-18 04:57:39.769+07	2021-06-18 04:57:39.769+07	f	\N	\N
+50b3dca3-8575-45cd-b922-94f54a175613	846710e2-e0f4-4f11-b6aa-54efe4fbe455	f1a915be-fa2e-4185-b914-be2a769b4b71	2021-06-18 04:57:56.628+07	2021-06-18 04:57:56.628+07	f	\N	\N
+b44bf4cb-a18c-4972-81a6-c6a2914c891a	846710e2-e0f4-4f11-b6aa-54efe4fbe455	819af493-3957-4db6-be46-457046a6400e	2021-06-18 04:57:56.628+07	2021-06-18 04:57:56.628+07	f	\N	\N
+43b6484f-f9f4-453f-9b1e-818d8a668857	846710e2-e0f4-4f11-b6aa-54efe4fbe455	a6545b8b-4309-4ea9-8e13-79eb8de27e3d	2021-06-18 04:58:06.025+07	2021-06-18 04:58:06.025+07	f	\N	\N
+e4b9618e-107b-4fae-8c5f-27ac0c527224	846710e2-e0f4-4f11-b6aa-54efe4fbe455	6a8053d3-b7e9-475a-9087-b168fb90e5a4	2021-06-18 04:58:06.025+07	2021-06-18 04:58:06.025+07	f	\N	\N
+2577f1ab-b546-4c82-b891-d0abe16f9fa4	846710e2-e0f4-4f11-b6aa-54efe4fbe455	8e118f58-0b07-43b9-ad14-355195337d0b	2021-06-18 05:00:25.725+07	2021-06-18 05:00:25.725+07	f	\N	\N
+bf38180b-175c-4759-8c07-289e96530dfe	846710e2-e0f4-4f11-b6aa-54efe4fbe455	b57fd044-ebc9-40fd-83a4-5f8557ad0d46	2021-06-18 05:00:25.726+07	2021-06-18 05:00:25.726+07	f	\N	\N
+474144ad-d3c9-4c96-90c9-493781d598d8	846710e2-e0f4-4f11-b6aa-54efe4fbe455	f53b98bb-fc36-4b0a-99ec-5bf1211f2bfa	2021-06-18 05:00:43.101+07	2021-06-18 05:00:43.101+07	f	\N	\N
+d49f52f6-07f8-440a-84fc-dbc21cf87d48	846710e2-e0f4-4f11-b6aa-54efe4fbe455	2f07267c-b66a-4f99-9a19-fdd085556419	2021-06-18 05:00:53.179+07	2021-06-18 05:00:53.179+07	f	\N	\N
+820ef9c6-2e82-4ea0-af6a-2663fda7a456	846710e2-e0f4-4f11-b6aa-54efe4fbe455	3353018f-fdd0-400e-ac14-8bf334a35cec	2021-06-18 05:00:53.179+07	2021-06-18 05:00:53.179+07	f	\N	\N
+febd772f-3e3b-4cf9-89b0-c2acaae74913	846710e2-e0f4-4f11-b6aa-54efe4fbe455	2a175327-7874-40da-97e2-453cb2621412	2021-06-18 05:03:15.448+07	2021-06-18 05:03:15.448+07	f	\N	\N
+a95a470e-8a13-41ad-afb2-705a82449216	846710e2-e0f4-4f11-b6aa-54efe4fbe455	96ab224c-e727-455a-a2d9-de6382bdbc5d	2021-06-18 05:03:15.449+07	2021-06-18 05:03:15.449+07	f	\N	\N
+4a2b2fa0-5065-484a-b637-2101ca2acc66	846710e2-e0f4-4f11-b6aa-54efe4fbe455	1cf097d0-e5fc-4d7e-90f8-bb7577b9d5ac	2021-06-18 05:03:28.818+07	2021-06-18 05:03:28.818+07	f	\N	\N
+725ca5cd-6786-435a-97e1-101cc68b9a3e	846710e2-e0f4-4f11-b6aa-54efe4fbe455	06d3b74d-5590-4496-9b82-211a715f3aaa	2021-06-18 05:03:28.818+07	2021-06-18 05:03:28.818+07	f	\N	\N
+ffbbe8cd-a851-44d5-be1c-b413d8c6e513	846710e2-e0f4-4f11-b6aa-54efe4fbe455	c52d0783-955b-4d30-be64-d0d939acb1df	2021-06-18 05:03:44.921+07	2021-06-18 05:03:44.921+07	f	\N	\N
+56c4e787-bbf4-4eea-9d0e-38f566a76abd	846710e2-e0f4-4f11-b6aa-54efe4fbe455	ea2fcac6-eab2-42fb-8c01-1f839fb7abfc	2021-06-18 05:03:44.922+07	2021-06-18 05:03:44.922+07	f	\N	\N
+607439ca-dde4-4814-bd20-55a11033a9a5	34e95981-3426-4103-9bfd-df43464723d0	2131b6ce-3181-43a4-a323-191de8d898f1	2021-06-18 05:05:40.766+07	2021-06-18 05:05:40.766+07	f	\N	\N
+e8607d12-3281-4307-a1af-24254bb8b92e	34e95981-3426-4103-9bfd-df43464723d0	fbe8a7ec-9149-44ae-a74a-a2722908250b	2021-06-18 05:05:40.766+07	2021-06-18 05:05:40.766+07	f	\N	\N
+cffca1e0-8898-4354-b1ab-d0a2637cd963	34e95981-3426-4103-9bfd-df43464723d0	a41e8813-79af-42b4-996d-e4067809ff92	2021-06-18 05:05:52.679+07	2021-06-18 05:05:52.679+07	f	\N	\N
+372f2ff7-fdba-4496-b827-33be72be1ae0	34e95981-3426-4103-9bfd-df43464723d0	c0cc4441-0742-4a6f-bea9-b2f6bd526eb4	2021-06-18 05:05:52.68+07	2021-06-18 05:05:52.68+07	f	\N	\N
+94ba38c1-fcad-4bd8-9995-be34fb869342	34e95981-3426-4103-9bfd-df43464723d0	3f9d9ad1-f650-4823-91af-aac824dad294	2021-06-18 05:06:02.686+07	2021-06-18 05:06:02.686+07	f	\N	\N
+2d7aa9c4-6e03-4208-be44-fbe4d10df2f6	34e95981-3426-4103-9bfd-df43464723d0	f35ac18d-58cc-4aeb-b995-e9c0d2b2745b	2021-06-18 05:06:02.686+07	2021-06-18 05:06:02.686+07	f	\N	\N
+5971c1a0-6855-49d7-aebd-caa7880557d8	34e95981-3426-4103-9bfd-df43464723d0	a12abfc0-7fdf-4e71-9565-dee032bd096a	2021-06-18 05:07:35.747+07	2021-06-18 05:07:35.747+07	f	\N	\N
+3170b699-c716-46fe-9c1c-bc051d3549c7	34e95981-3426-4103-9bfd-df43464723d0	509e3312-2ccd-4ba5-881b-ae5bc4019194	2021-06-18 05:07:35.747+07	2021-06-18 05:07:35.747+07	f	\N	\N
+8ad560cd-d230-4b81-8d39-7c39968f9e27	34e95981-3426-4103-9bfd-df43464723d0	819ed493-5d59-491a-ae9e-18e87deb478d	2021-06-18 05:07:48.189+07	2021-06-18 05:07:48.189+07	f	\N	\N
+b985361e-0512-4795-aeac-da9c4a6e4af6	34e95981-3426-4103-9bfd-df43464723d0	d3f83eb8-cd5d-4d01-85a9-8ce588cffa80	2021-06-18 05:07:48.189+07	2021-06-18 05:07:48.189+07	f	\N	\N
+4621ea87-2cf1-4169-a073-cba987d87f24	34e95981-3426-4103-9bfd-df43464723d0	7a0d5ff6-9902-49d0-92c1-8971e0377c8c	2021-06-18 05:07:56.299+07	2021-06-18 05:07:56.299+07	f	\N	\N
+2e0efeba-60ef-4033-bdbb-1a66bac5d67d	34e95981-3426-4103-9bfd-df43464723d0	4576af2c-7ec4-4c51-9c36-76bc574456b5	2021-06-18 05:07:56.299+07	2021-06-18 05:07:56.299+07	f	\N	\N
+9f40abfd-3e98-4a54-b71c-35047f284a86	74655b72-3b14-463e-98b6-a2f64a459aa9	a401e434-8997-49c2-b4b3-47edc2fd0336	2021-06-18 05:09:52.517+07	2021-06-18 05:09:52.517+07	f	\N	\N
+2d9530c7-d255-4111-a986-9601cae32c9c	74655b72-3b14-463e-98b6-a2f64a459aa9	733c36af-0458-4eda-8995-a75045a1759d	2021-06-18 05:09:52.517+07	2021-06-18 05:09:52.517+07	f	\N	\N
+e6ec280d-5216-4f03-9d17-6584bc7208aa	74655b72-3b14-463e-98b6-a2f64a459aa9	6a97b589-ea97-4921-ab70-223b8a336689	2021-06-18 05:09:58.898+07	2021-06-18 05:09:58.898+07	f	\N	\N
+04a9ebce-6879-467f-9338-a86734fc26d1	74655b72-3b14-463e-98b6-a2f64a459aa9	19ec79aa-f5c6-42d4-8d92-dee08cd8867f	2021-06-18 05:09:58.899+07	2021-06-18 05:09:58.899+07	f	\N	\N
+41f41727-b586-49ef-ac0a-358421c5776d	74655b72-3b14-463e-98b6-a2f64a459aa9	611fb799-a996-4a6c-a296-fa7b954c1c77	2021-06-18 05:10:12.617+07	2021-06-18 05:10:12.617+07	f	\N	\N
+1da5e622-601b-465d-9411-ac87ee529374	74655b72-3b14-463e-98b6-a2f64a459aa9	e6144f90-8452-4b47-886c-2497b0479542	2021-06-18 05:10:12.617+07	2021-06-18 05:10:12.617+07	f	\N	\N
+5caa49a0-1815-4feb-ad70-7f96da60253d	fbf670b6-6a3d-45b1-9711-08de91ac7181	959724e4-bbe8-489d-89f8-199bc0600568	2021-06-18 05:15:26.646+07	2021-06-18 05:15:26.646+07	f	\N	\N
+627e6da7-4fed-48c0-996a-335c267e4974	fbf670b6-6a3d-45b1-9711-08de91ac7181	f2eda4ac-6a40-4616-b1af-f218ccb03a7e	2021-06-18 05:15:26.646+07	2021-06-18 05:15:26.646+07	f	\N	\N
+8eac286a-41f4-4898-93d4-3070b52ad439	fbf670b6-6a3d-45b1-9711-08de91ac7181	a1dce5a8-688f-40be-a67f-3e95df96282d	2021-06-18 05:15:39.927+07	2021-06-18 05:15:39.927+07	f	\N	\N
+d2608c66-56dc-4a31-a71f-4089544d42e1	fbf670b6-6a3d-45b1-9711-08de91ac7181	9788f012-87c0-41fa-bd26-fe51e7bdaf88	2021-06-18 05:15:39.927+07	2021-06-18 05:15:39.927+07	f	\N	\N
+7e92e4c2-810a-4da5-918a-901f2d3f805c	fbf670b6-6a3d-45b1-9711-08de91ac7181	d6f3ca3c-4e9f-4abb-a623-dfdcb955b86b	2021-06-18 05:15:58.057+07	2021-06-18 05:15:58.057+07	f	\N	\N
+fc141146-23ee-4c73-b0ff-13127ceaf4e9	fbf670b6-6a3d-45b1-9711-08de91ac7181	6364e53a-ee3e-4a1d-8529-0f9f6d2b270a	2021-06-18 05:15:58.057+07	2021-06-18 05:15:58.057+07	f	\N	\N
+3317243a-08b3-45a5-9327-ece17d04edd1	fbf670b6-6a3d-45b1-9711-08de91ac7181	3ab57d7d-3ffe-4dc5-91fa-b57dcee8440c	2021-06-18 05:16:06.446+07	2021-06-18 05:16:06.446+07	f	\N	\N
+585348e4-cf14-455f-a0ee-9ec0853ab4e9	fbf670b6-6a3d-45b1-9711-08de91ac7181	fce4720b-34a0-45d4-8276-26368e1332bf	2021-06-18 05:16:06.446+07	2021-06-18 05:16:06.446+07	f	\N	\N
 \.
 
 
 --
--- TOC entry 3186 (class 0 OID 44108)
+-- TOC entry 3452 (class 0 OID 161466)
 -- Dependencies: 201
 -- Data for Name: CallSessions; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
@@ -525,7 +527,7 @@ d9011256-57ea-4560-b7ec-d67b4d42ab9b	846710e2-e0f4-4f11-b6aa-54efe4fbe455	c6e0dd
 
 
 --
--- TOC entry 3187 (class 0 OID 44113)
+-- TOC entry 3453 (class 0 OID 161471)
 -- Dependencies: 202
 -- Data for Name: Categories; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
@@ -726,7 +728,7 @@ b4b85335-b3dc-46db-898b-19c66bbcf97b	e49cbe3d-2892-4816-b81d-bccf5bbe77e1	Busine
 
 
 --
--- TOC entry 3188 (class 0 OID 44121)
+-- TOC entry 3454 (class 0 OID 161479)
 -- Dependencies: 203
 -- Data for Name: Courses; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
@@ -736,7 +738,7 @@ COPY public."Courses" (id, "tutorId", name, description, level, other_details, "
 
 
 --
--- TOC entry 3189 (class 0 OID 44129)
+-- TOC entry 3455 (class 0 OID 161487)
 -- Dependencies: 204
 -- Data for Name: FavoriteTutors; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
@@ -751,18 +753,19 @@ fcbd0c88-cc9a-4412-a7bd-a628fa0d7132	0712174d-c389-4286-af91-8a6b1beb9077	42c2a8
 
 
 --
--- TOC entry 3190 (class 0 OID 44132)
+-- TOC entry 3456 (class 0 OID 161490)
 -- Dependencies: 205
 -- Data for Name: Fees; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
 
 COPY public."Fees" (id, key, price, "createdAt", "updatedAt") FROM stdin;
 0e5574d5-922f-4809-8af1-a06ed3205188	pricePerSession	100000	2021-06-10 21:53:56.032+07	2021-06-10 21:53:56.032+07
+bcbd2aff-f20e-4c44-9ac3-ac514f943f3e	pricePerDollar	23500	2021-06-10 21:53:56.032+07	2021-06-10 21:53:56.032+07
 \.
 
 
 --
--- TOC entry 3191 (class 0 OID 44137)
+-- TOC entry 3457 (class 0 OID 161495)
 -- Dependencies: 206
 -- Data for Name: Majors; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
@@ -793,7 +796,7 @@ f124ee0b-07fb-47c0-b9dc-2a40b8a5b46a	of	Office Information	Tin học văn phòng
 
 
 --
--- TOC entry 3192 (class 0 OID 44145)
+-- TOC entry 3458 (class 0 OID 161503)
 -- Dependencies: 207
 -- Data for Name: Messages; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
@@ -847,7 +850,7 @@ de70953b-137d-4e02-a1cf-7739e471fe74	Dịch dủm chán lắm	0728421c-15d0-4a81
 
 
 --
--- TOC entry 3193 (class 0 OID 44153)
+-- TOC entry 3459 (class 0 OID 161511)
 -- Dependencies: 208
 -- Data for Name: RefreshTokens; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
@@ -877,7 +880,7 @@ b265eb74-af18-439c-a7f8-30dd21de7b74	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdW
 
 
 --
--- TOC entry 3194 (class 0 OID 44161)
+-- TOC entry 3460 (class 0 OID 161519)
 -- Dependencies: 209
 -- Data for Name: Roles; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
@@ -890,7 +893,7 @@ a31e0f43-d0f5-4046-8eb9-837e001b62b6	admin	2021-06-10 21:51:58.012+07	2021-06-10
 
 
 --
--- TOC entry 3195 (class 0 OID 44166)
+-- TOC entry 3461 (class 0 OID 161524)
 -- Dependencies: 210
 -- Data for Name: ScheduleDetails; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
@@ -1558,7 +1561,7 @@ efea8c02-13fb-4d83-af09-540dd0a45d10	14:00	14:30	9de5c53f-dbe0-42a3-bca4-09cd23e
 
 
 --
--- TOC entry 3196 (class 0 OID 44174)
+-- TOC entry 3462 (class 0 OID 161532)
 -- Dependencies: 211
 -- Data for Name: Schedules; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
@@ -1737,7 +1740,7 @@ c975b40f-73a0-441e-98e9-c6f263a30864	2021-06-22	14:00	15:00	42c2a84a-163b-44d7-9
 
 
 --
--- TOC entry 3197 (class 0 OID 44182)
+-- TOC entry 3463 (class 0 OID 161540)
 -- Dependencies: 212
 -- Data for Name: SequelizeMeta; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
@@ -1764,11 +1767,12 @@ COPY public."SequelizeMeta" (name) FROM stdin;
 20210203133338-type.js
 20210203133339-category.js
 20201219073159-refresh-token.js
+20210203133340-booking-link.js
 \.
 
 
 --
--- TOC entry 3198 (class 0 OID 44185)
+-- TOC entry 3464 (class 0 OID 161543)
 -- Dependencies: 213
 -- Data for Name: SubMajors; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
@@ -1778,7 +1782,7 @@ COPY public."SubMajors" (id, "majorId", key, "englishName", "vietnameseName", "c
 
 
 --
--- TOC entry 3199 (class 0 OID 44193)
+-- TOC entry 3465 (class 0 OID 161551)
 -- Dependencies: 214
 -- Data for Name: Topics; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
@@ -1788,7 +1792,7 @@ COPY public."Topics" (id, "courseId", name, description, "orderCourse", "videoUr
 
 
 --
--- TOC entry 3200 (class 0 OID 44201)
+-- TOC entry 3466 (class 0 OID 161559)
 -- Dependencies: 215
 -- Data for Name: Transactions; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
@@ -1938,7 +1942,7 @@ d666954a-7116-418a-a33d-26bb55422535	80f2de40-8038-4396-b329-82e20fea9ab1	331724
 
 
 --
--- TOC entry 3201 (class 0 OID 44209)
+-- TOC entry 3467 (class 0 OID 161567)
 -- Dependencies: 216
 -- Data for Name: TutorFeedbacks; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
@@ -1958,7 +1962,7 @@ e846eda6-7202-4ab7-80fc-6f161d2dc4ab	8b1ccf34-4fba-452f-8ddd-8ed2b5d6d719	74655b
 
 
 --
--- TOC entry 3202 (class 0 OID 44217)
+-- TOC entry 3468 (class 0 OID 161575)
 -- Dependencies: 217
 -- Data for Name: Tutors; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
@@ -1979,7 +1983,7 @@ b6d32be6-d8c8-48e4-b1d3-fd5f3f24797c	0d7d4348-cf7e-4b6a-9a01-1d88f283e910	https:
 
 
 --
--- TOC entry 3203 (class 0 OID 44225)
+-- TOC entry 3469 (class 0 OID 161583)
 -- Dependencies: 218
 -- Data for Name: Types; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
@@ -1991,7 +1995,7 @@ e49cbe3d-2892-4816-b81d-bccf5bbe77e1	specialties	2021-06-10 21:41:32.609363+07	2
 
 
 --
--- TOC entry 3204 (class 0 OID 44230)
+-- TOC entry 3470 (class 0 OID 161588)
 -- Dependencies: 219
 -- Data for Name: UserRoles; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
@@ -2039,7 +2043,7 @@ ed6fd0c2-ed38-430a-ae55-a9e6a460b239	6f24a66a-421f-4165-bb41-e0e3603a2460	2021-0
 
 
 --
--- TOC entry 3205 (class 0 OID 44235)
+-- TOC entry 3471 (class 0 OID 161593)
 -- Dependencies: 220
 -- Data for Name: Users; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
@@ -2076,7 +2080,7 @@ fbf670b6-6a3d-45b1-9711-08de91ac7181	ltstudent5@yopmail.com	\N	\N	$2a$12$3o3rEUR
 
 
 --
--- TOC entry 3206 (class 0 OID 44245)
+-- TOC entry 3472 (class 0 OID 161603)
 -- Dependencies: 221
 -- Data for Name: Wallets; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
@@ -2113,7 +2117,7 @@ a2b70b3d-481e-4c73-b0a0-f05c1479323d	0712174d-c389-4286-af91-8a6b1beb9077	320000
 
 
 --
--- TOC entry 2991 (class 2606 OID 44255)
+-- TOC entry 3257 (class 2606 OID 161613)
 -- Name: Bookings Bookings_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2122,7 +2126,7 @@ ALTER TABLE ONLY public."Bookings"
 
 
 --
--- TOC entry 2993 (class 2606 OID 44257)
+-- TOC entry 3259 (class 2606 OID 161615)
 -- Name: CallSessions CallSessions_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2131,7 +2135,7 @@ ALTER TABLE ONLY public."CallSessions"
 
 
 --
--- TOC entry 2995 (class 2606 OID 44259)
+-- TOC entry 3261 (class 2606 OID 161617)
 -- Name: Categories Categories_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2140,7 +2144,7 @@ ALTER TABLE ONLY public."Categories"
 
 
 --
--- TOC entry 2997 (class 2606 OID 44261)
+-- TOC entry 3263 (class 2606 OID 161619)
 -- Name: Courses Courses_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2149,7 +2153,7 @@ ALTER TABLE ONLY public."Courses"
 
 
 --
--- TOC entry 2999 (class 2606 OID 44263)
+-- TOC entry 3265 (class 2606 OID 161621)
 -- Name: FavoriteTutors FavoriteTutors_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2158,7 +2162,7 @@ ALTER TABLE ONLY public."FavoriteTutors"
 
 
 --
--- TOC entry 3001 (class 2606 OID 44265)
+-- TOC entry 3267 (class 2606 OID 161623)
 -- Name: Fees Fees_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2167,7 +2171,7 @@ ALTER TABLE ONLY public."Fees"
 
 
 --
--- TOC entry 3003 (class 2606 OID 44267)
+-- TOC entry 3269 (class 2606 OID 161625)
 -- Name: Majors Majors_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2176,7 +2180,7 @@ ALTER TABLE ONLY public."Majors"
 
 
 --
--- TOC entry 3005 (class 2606 OID 44269)
+-- TOC entry 3271 (class 2606 OID 161627)
 -- Name: Messages Messages_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2185,7 +2189,7 @@ ALTER TABLE ONLY public."Messages"
 
 
 --
--- TOC entry 3007 (class 2606 OID 44271)
+-- TOC entry 3273 (class 2606 OID 161629)
 -- Name: RefreshTokens RefreshTokens_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2194,7 +2198,7 @@ ALTER TABLE ONLY public."RefreshTokens"
 
 
 --
--- TOC entry 3009 (class 2606 OID 44273)
+-- TOC entry 3275 (class 2606 OID 161631)
 -- Name: Roles Roles_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2203,7 +2207,7 @@ ALTER TABLE ONLY public."Roles"
 
 
 --
--- TOC entry 3011 (class 2606 OID 44275)
+-- TOC entry 3277 (class 2606 OID 161633)
 -- Name: ScheduleDetails ScheduleDetails_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2212,7 +2216,7 @@ ALTER TABLE ONLY public."ScheduleDetails"
 
 
 --
--- TOC entry 3013 (class 2606 OID 44277)
+-- TOC entry 3279 (class 2606 OID 161635)
 -- Name: Schedules Schedules_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2221,7 +2225,7 @@ ALTER TABLE ONLY public."Schedules"
 
 
 --
--- TOC entry 3015 (class 2606 OID 44279)
+-- TOC entry 3281 (class 2606 OID 161637)
 -- Name: SequelizeMeta SequelizeMeta_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2230,7 +2234,7 @@ ALTER TABLE ONLY public."SequelizeMeta"
 
 
 --
--- TOC entry 3017 (class 2606 OID 44281)
+-- TOC entry 3283 (class 2606 OID 161639)
 -- Name: SubMajors SubMajors_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2239,7 +2243,7 @@ ALTER TABLE ONLY public."SubMajors"
 
 
 --
--- TOC entry 3019 (class 2606 OID 44283)
+-- TOC entry 3285 (class 2606 OID 161641)
 -- Name: Topics Topics_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2248,7 +2252,7 @@ ALTER TABLE ONLY public."Topics"
 
 
 --
--- TOC entry 3021 (class 2606 OID 44285)
+-- TOC entry 3287 (class 2606 OID 161643)
 -- Name: Transactions Transactions_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2257,7 +2261,7 @@ ALTER TABLE ONLY public."Transactions"
 
 
 --
--- TOC entry 3023 (class 2606 OID 44287)
+-- TOC entry 3289 (class 2606 OID 161645)
 -- Name: TutorFeedbacks TutorFeedbacks_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2266,7 +2270,7 @@ ALTER TABLE ONLY public."TutorFeedbacks"
 
 
 --
--- TOC entry 3025 (class 2606 OID 44289)
+-- TOC entry 3291 (class 2606 OID 161647)
 -- Name: Tutors Tutors_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2275,7 +2279,7 @@ ALTER TABLE ONLY public."Tutors"
 
 
 --
--- TOC entry 3027 (class 2606 OID 44291)
+-- TOC entry 3293 (class 2606 OID 161649)
 -- Name: Types Types_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2284,7 +2288,7 @@ ALTER TABLE ONLY public."Types"
 
 
 --
--- TOC entry 3029 (class 2606 OID 44293)
+-- TOC entry 3295 (class 2606 OID 161651)
 -- Name: UserRoles UserRoles_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2293,7 +2297,7 @@ ALTER TABLE ONLY public."UserRoles"
 
 
 --
--- TOC entry 3031 (class 2606 OID 44295)
+-- TOC entry 3297 (class 2606 OID 161653)
 -- Name: Users Users_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2302,7 +2306,7 @@ ALTER TABLE ONLY public."Users"
 
 
 --
--- TOC entry 3033 (class 2606 OID 44297)
+-- TOC entry 3299 (class 2606 OID 161655)
 -- Name: Wallets Wallets_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2311,7 +2315,7 @@ ALTER TABLE ONLY public."Wallets"
 
 
 --
--- TOC entry 3034 (class 2606 OID 44298)
+-- TOC entry 3300 (class 2606 OID 161656)
 -- Name: Bookings Bookings_scheduleDetailId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2320,7 +2324,7 @@ ALTER TABLE ONLY public."Bookings"
 
 
 --
--- TOC entry 3035 (class 2606 OID 44303)
+-- TOC entry 3301 (class 2606 OID 161661)
 -- Name: Bookings Bookings_userId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2329,7 +2333,7 @@ ALTER TABLE ONLY public."Bookings"
 
 
 --
--- TOC entry 3036 (class 2606 OID 44308)
+-- TOC entry 3302 (class 2606 OID 161666)
 -- Name: CallSessions CallSessions_studentId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2338,7 +2342,7 @@ ALTER TABLE ONLY public."CallSessions"
 
 
 --
--- TOC entry 3037 (class 2606 OID 44313)
+-- TOC entry 3303 (class 2606 OID 161671)
 -- Name: CallSessions CallSessions_tutorId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2347,7 +2351,7 @@ ALTER TABLE ONLY public."CallSessions"
 
 
 --
--- TOC entry 3038 (class 2606 OID 44318)
+-- TOC entry 3304 (class 2606 OID 161676)
 -- Name: Courses Courses_tutorId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2356,7 +2360,7 @@ ALTER TABLE ONLY public."Courses"
 
 
 --
--- TOC entry 3039 (class 2606 OID 44323)
+-- TOC entry 3305 (class 2606 OID 161681)
 -- Name: Messages Messages_fromId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2365,7 +2369,7 @@ ALTER TABLE ONLY public."Messages"
 
 
 --
--- TOC entry 3040 (class 2606 OID 44328)
+-- TOC entry 3306 (class 2606 OID 161686)
 -- Name: Messages Messages_toId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2374,7 +2378,7 @@ ALTER TABLE ONLY public."Messages"
 
 
 --
--- TOC entry 3041 (class 2606 OID 44333)
+-- TOC entry 3307 (class 2606 OID 161691)
 -- Name: RefreshTokens RefreshTokens_userId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2383,7 +2387,7 @@ ALTER TABLE ONLY public."RefreshTokens"
 
 
 --
--- TOC entry 3042 (class 2606 OID 44338)
+-- TOC entry 3308 (class 2606 OID 161696)
 -- Name: ScheduleDetails ScheduleDetails_scheduleId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2392,7 +2396,7 @@ ALTER TABLE ONLY public."ScheduleDetails"
 
 
 --
--- TOC entry 3043 (class 2606 OID 44343)
+-- TOC entry 3309 (class 2606 OID 161701)
 -- Name: Schedules Schedules_tutorId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2401,7 +2405,7 @@ ALTER TABLE ONLY public."Schedules"
 
 
 --
--- TOC entry 3044 (class 2606 OID 44348)
+-- TOC entry 3310 (class 2606 OID 161706)
 -- Name: SubMajors SubMajors_majorId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2410,7 +2414,7 @@ ALTER TABLE ONLY public."SubMajors"
 
 
 --
--- TOC entry 3045 (class 2606 OID 44353)
+-- TOC entry 3311 (class 2606 OID 161711)
 -- Name: Topics Topics_courseId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2419,7 +2423,7 @@ ALTER TABLE ONLY public."Topics"
 
 
 --
--- TOC entry 3046 (class 2606 OID 44358)
+-- TOC entry 3312 (class 2606 OID 161716)
 -- Name: Transactions Transactions_bookingId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2428,7 +2432,7 @@ ALTER TABLE ONLY public."Transactions"
 
 
 --
--- TOC entry 3047 (class 2606 OID 44363)
+-- TOC entry 3313 (class 2606 OID 161721)
 -- Name: Transactions Transactions_walletId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2437,7 +2441,7 @@ ALTER TABLE ONLY public."Transactions"
 
 
 --
--- TOC entry 3048 (class 2606 OID 44368)
+-- TOC entry 3314 (class 2606 OID 161726)
 -- Name: TutorFeedbacks TutorFeedbacks_firstId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2446,7 +2450,7 @@ ALTER TABLE ONLY public."TutorFeedbacks"
 
 
 --
--- TOC entry 3049 (class 2606 OID 44373)
+-- TOC entry 3315 (class 2606 OID 161731)
 -- Name: TutorFeedbacks TutorFeedbacks_secondId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2455,7 +2459,7 @@ ALTER TABLE ONLY public."TutorFeedbacks"
 
 
 --
--- TOC entry 3050 (class 2606 OID 44378)
+-- TOC entry 3316 (class 2606 OID 161736)
 -- Name: TutorFeedbacks TutorFeedbacks_sessionId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2464,7 +2468,7 @@ ALTER TABLE ONLY public."TutorFeedbacks"
 
 
 --
--- TOC entry 3051 (class 2606 OID 44383)
+-- TOC entry 3317 (class 2606 OID 161741)
 -- Name: Tutors Tutors_userId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2473,7 +2477,7 @@ ALTER TABLE ONLY public."Tutors"
 
 
 --
--- TOC entry 3052 (class 2606 OID 44388)
+-- TOC entry 3318 (class 2606 OID 161746)
 -- Name: UserRoles UserRoles_roleId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2482,7 +2486,7 @@ ALTER TABLE ONLY public."UserRoles"
 
 
 --
--- TOC entry 3053 (class 2606 OID 44393)
+-- TOC entry 3319 (class 2606 OID 161751)
 -- Name: UserRoles UserRoles_userId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2491,7 +2495,7 @@ ALTER TABLE ONLY public."UserRoles"
 
 
 --
--- TOC entry 3054 (class 2606 OID 44398)
+-- TOC entry 3320 (class 2606 OID 161756)
 -- Name: Wallets Wallets_userId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2499,7 +2503,7 @@ ALTER TABLE ONLY public."Wallets"
     ADD CONSTRAINT "Wallets_userId_fkey" FOREIGN KEY ("userId") REFERENCES public."Users"(id);
 
 
--- Completed on 2021-06-27 05:27:05
+-- Completed on 2021-06-28 00:22:53 +07
 
 --
 -- PostgreSQL database dump complete
