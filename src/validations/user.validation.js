@@ -1,12 +1,14 @@
 import Joi from 'joi';
-import { nameRegex } from 'utils/regex';
 
 const userValidation = {};
 
 userValidation.updateInfo = {
   body: Joi.object({
     email: Joi.string().email(),
-    name: Joi.string(),
+    name: Joi.string()
+      .regex(/^([a-zA-Z]|[à-ú]|[À-Ú]+\s)*[a-zA-Z]|[à-ú]|[À-Ú]+$/)
+      .min(1)
+      .max(50),
     avatar: Joi.string().allow(null, ''),
     country: Joi.string().allow(null, ''),
     phone: Joi.string().allow(null, ''),
