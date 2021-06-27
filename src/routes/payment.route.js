@@ -40,4 +40,5 @@ router.get('/price-of-session', paymentController.getPriceOfOneSession);
 
 router.get('/price-of-dollar', paymentController.getPriceOfOneDollar);
 
+router.get('/all', paymentController.getAll);
 export default router;

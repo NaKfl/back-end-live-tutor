@@ -27,6 +27,21 @@ tutorService.getMany = async (query) => {
         attributes: {
           exclude: ['id', 'password'],
         },
+        include: [
+          {
+            model: TutorFeedback,
+            as: 'feedbacks',
+            include: [
+              {
+                model: User,
+                as: 'firstInfo',
+                attributes: {
+                  exclude: ['id', 'password'],
+                },
+              },
+            ],
+          },
+        ],
       },
     ],
     ...paginate({ page, perPage }),
@@ -44,7 +59,7 @@ tutorService.getMany = async (query) => {
 };
 
 tutorService.getMore = async (query, user) => {
-  const { page, perPage } = query;
+  const { page, perPage, searchKey } = query;
   const tutors = await Tutor.findAndCountAll({
     where: {
       isActivated: true,

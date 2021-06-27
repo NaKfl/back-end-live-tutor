@@ -108,4 +108,16 @@ userController.resetPassword = catchAsync(async (req, res) => {
   res.send(user);
 });
 
+userController.getAll = catchAsync(async (req, res) => {
+  const { query } = req;
+  const { page, perPage } = query;
+  const result = await userService.getAll({ page, perPage });
+  res.send(result);
+});
+
+userController.manageActivated = catchAsync(async (req, res) => {
+  const { id, isActivated } = req.body;
+  const result = await userService.manageActivated({ id, isActivated });
+  res.send(result);
+});
 export default userController;

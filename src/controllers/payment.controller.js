@@ -58,4 +58,9 @@ paymentController.getPriceOfOneDollar = catchAsync(async (req, res) => {
   const data = await paymentService.getPriceOfOneDollar();
   res.json(data);
 });
+
+paymentController.getAll = catchAsync(async (req, res) => {
+  const data = await paymentService.getHistoryTransaction();
+  res.send(data);
+});
 export default paymentController;

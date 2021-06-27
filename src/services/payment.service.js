@@ -587,4 +587,46 @@ paymentService.getBanks = () => {
   ];
 };
 
+paymentService.getHistoryTransaction = async () => {
+  return await Transaction.findAndCountAll({
+    include: [
+      {
+        model: Booking,
+        as: 'bookingInfo',
+        attributes: {
+          exclude: ['userId', 'updatedAt'],
+        },
+        include: [
+          {
+            model: User,
+            as: 'userInfo',
+            attributes: ['id', 'name', 'email', 'avatar'],
+          },
+          {
+            model: ScheduleDetail,
+            as: 'scheduleDetailInfo',
+            attributes: {
+              exclude: ['scheduleId', 'createdAt', 'updatedAt'],
+            },
+            include: [
+              {
+                model: Schedule,
+                as: 'scheduleInfo',
+                include: [
+                  {
+                    model: User,
+                    as: 'tutorInfo',
+                    attributes: ['id', 'name', 'email', 'avatar'],
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+    ...paginate({ page: 1, perPage: 15 }),
+  });
+};
+
 export default paymentService;
