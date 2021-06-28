@@ -53,8 +53,10 @@ class OnlineUsers {
       ...tutor,
       isCalling: status,
     };
-    users[userId] = updatedTutor;
-    await redis.setAsync(ONLINE_USERS, JSON.stringify(users));
+    if (users[userId]) {
+      users[userId] = updatedTutor;
+      await redis.setAsync(ONLINE_USERS, JSON.stringify(users));
+    }
     return users;
   }
 

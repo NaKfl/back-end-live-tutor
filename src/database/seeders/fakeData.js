@@ -264,17 +264,12 @@ const imageURLs = [
 const levels = ['Beginner', 'Intermediate', 'Advanced'];
 
 // Fake 50 course
-const courses = [...Array(50)].map(() => ({
+const courses = [...Array(10)].map(() => ({
   id: faker.random.uuid(),
-  tutorId:
-    tutorInfo[
-      faker.random.number({
-        min: 0,
-        max: 49,
-      })
-    ].userId,
   name: faker.lorem.sentence(),
   description: faker.lorem.paragraph(),
+  reason: faker.lorem.paragraph(),
+  purpose: faker.lorem.paragraph(),
   level:
     levels[
       faker.random.number({
@@ -303,7 +298,7 @@ const courses = [...Array(50)].map(() => ({
 }));
 
 const topics = courses.reduce((pre, now) => {
-  const topic = [...Array(10)].map((_, index) => ({
+  const topic = [...Array(5)].map((_, index) => ({
     id: faker.random.uuid(),
     courseId: now.id,
     orderCourse: index,
