@@ -59,7 +59,6 @@ export const confirmBookingNewSchedule = async ({ origin, ...bookingInfo }) => {
       const token = jwt.sign(obj, jwtVar.secret, {
         issuer: 'livetutor',
         subject: 'https://meet.livetutor.live',
-        expiresIn: '2h',
         audience: 'livetutor',
       });
       const linkWithoutOrigin = `/call/?token=${token}`;
