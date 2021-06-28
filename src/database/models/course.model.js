@@ -5,10 +5,6 @@ const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Course extends Model {
     static associate(models) {
-      this.belongsTo(models.User, {
-        foreignKey: 'tutorId',
-        as: 'tutorUser',
-      });
       this.hasMany(models.Topic, {
         foreignKey: 'courseId',
         as: 'topics',
@@ -25,18 +21,12 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: DataTypes.UUIDV4,
         autoIncrement: false,
       },
-      tutorId: {
-        type: DataTypes.UUID,
-        allowNull: false,
-        references: {
-          model: 'User',
-          key: 'id',
-        },
-      },
       name: DataTypes.TEXT,
       description: DataTypes.TEXT,
       imageUrl: DataTypes.TEXT,
       level: DataTypes.TEXT,
+      reason: DataTypes.TEXT,
+      purpose: DataTypes.TEXT,
       other_details: DataTypes.TEXT,
       default_price: DataTypes.FLOAT,
       course_price: DataTypes.FLOAT,

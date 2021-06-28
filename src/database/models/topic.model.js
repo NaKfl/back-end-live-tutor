@@ -28,6 +28,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       orderCourse: DataTypes.INTEGER,
       name: DataTypes.TEXT,
+      nameFile: DataTypes.TEXT,
       description: DataTypes.TEXT,
       videoUrl: DataTypes.TEXT,
     },

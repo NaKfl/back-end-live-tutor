@@ -10,7 +10,14 @@ courseController.getCourses = catchAsync(async (req, res) => {
 
 courseController.getDetailCourse = catchAsync(async (req, res) => {
   const { id: courseId } = req.params;
-  const data = await courseService.getDetailCourse(courseId);
+  const result = await courseService.getDetailCourse(courseId);
+  const reponse = result.toJSON();
+  const { topics } = reponse;
+  const sortTopics = topics.sort((a, b) => a.orderCourse - b.orderCourse);
+  const data = {
+    ...reponse,
+    topics: sortTopics,
+  };
   res.json({ message: 'Success', data });
 });
 

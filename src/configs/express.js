@@ -50,6 +50,7 @@ passport.use('google', googleStrategy);
 
 app.use('/apidoc', express.static('src/apidoc/dist'));
 app.use('/banks', express.static('src/public/banks'));
+app.use('/pdf', express.static('src/public/pdf'));
 app.use('/avatar', express.static(path.join(__dirname, '/../uploads/avatar')));
 app.use('/video', express.static(path.join(__dirname, '/../uploads/video')));
 
