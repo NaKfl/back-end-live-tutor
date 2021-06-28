@@ -154,7 +154,6 @@ bookingService.book = async (userId, scheduleDetailIds, origin) => {
         resultDates.push(tmp);
       }
 
-      console.log('resultDates', resultDates);
       const roomName = uuidv4();
       const startTime = moment();
       confirmBookingNewSchedule({

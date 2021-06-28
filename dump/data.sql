@@ -5,7 +5,7 @@
 -- Dumped from database version 13.3
 -- Dumped by pg_dump version 13.1
 
--- Started on 2021-06-28 05:10:06 +07
+-- Started on 2021-06-28 23:47:42 +07
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -23,7 +23,7 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- TOC entry 200 (class 1259 OID 162743)
+-- TOC entry 200 (class 1259 OID 163082)
 -- Name: Bookings; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -42,7 +42,7 @@ CREATE TABLE public."Bookings" (
 ALTER TABLE public."Bookings" OWNER TO livetutor;
 
 --
--- TOC entry 201 (class 1259 OID 162752)
+-- TOC entry 201 (class 1259 OID 163091)
 -- Name: CallSessions; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -62,7 +62,7 @@ CREATE TABLE public."CallSessions" (
 ALTER TABLE public."CallSessions" OWNER TO livetutor;
 
 --
--- TOC entry 202 (class 1259 OID 162757)
+-- TOC entry 202 (class 1259 OID 163096)
 -- Name: Categories; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -79,13 +79,12 @@ CREATE TABLE public."Categories" (
 ALTER TABLE public."Categories" OWNER TO livetutor;
 
 --
--- TOC entry 203 (class 1259 OID 162765)
+-- TOC entry 203 (class 1259 OID 163104)
 -- Name: Courses; Type: TABLE; Schema: public; Owner: livetutor
 --
 
 CREATE TABLE public."Courses" (
     id uuid NOT NULL,
-    "tutorId" uuid NOT NULL,
     name text,
     description text,
     level text,
@@ -94,14 +93,16 @@ CREATE TABLE public."Courses" (
     default_price double precision,
     course_price double precision,
     "createdAt" timestamp with time zone DEFAULT now() NOT NULL,
-    "updatedAt" timestamp with time zone DEFAULT now() NOT NULL
+    "updatedAt" timestamp with time zone DEFAULT now() NOT NULL,
+    reason text,
+    purpose text
 );
 
 
 ALTER TABLE public."Courses" OWNER TO livetutor;
 
 --
--- TOC entry 204 (class 1259 OID 162773)
+-- TOC entry 204 (class 1259 OID 163112)
 -- Name: FavoriteTutors; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -117,7 +118,7 @@ CREATE TABLE public."FavoriteTutors" (
 ALTER TABLE public."FavoriteTutors" OWNER TO livetutor;
 
 --
--- TOC entry 205 (class 1259 OID 162776)
+-- TOC entry 205 (class 1259 OID 163115)
 -- Name: Fees; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -133,7 +134,7 @@ CREATE TABLE public."Fees" (
 ALTER TABLE public."Fees" OWNER TO livetutor;
 
 --
--- TOC entry 206 (class 1259 OID 162781)
+-- TOC entry 206 (class 1259 OID 163120)
 -- Name: Majors; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -150,7 +151,7 @@ CREATE TABLE public."Majors" (
 ALTER TABLE public."Majors" OWNER TO livetutor;
 
 --
--- TOC entry 207 (class 1259 OID 162789)
+-- TOC entry 207 (class 1259 OID 163128)
 -- Name: Messages; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -168,7 +169,7 @@ CREATE TABLE public."Messages" (
 ALTER TABLE public."Messages" OWNER TO livetutor;
 
 --
--- TOC entry 208 (class 1259 OID 162797)
+-- TOC entry 208 (class 1259 OID 163136)
 -- Name: RefreshTokens; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -186,8 +187,8 @@ CREATE TABLE public."RefreshTokens" (
 ALTER TABLE public."RefreshTokens" OWNER TO livetutor;
 
 --
--- TOC entry 222 (class 1259 OID 163049)
--- Name: Reports; Type: TABLE; Schema: public; Owner: postgres
+-- TOC entry 209 (class 1259 OID 163144)
+-- Name: Reports; Type: TABLE; Schema: public; Owner: livetutor
 --
 
 CREATE TABLE public."Reports" (
@@ -203,7 +204,7 @@ CREATE TABLE public."Reports" (
 ALTER TABLE public."Reports" OWNER TO livetutor;
 
 --
--- TOC entry 209 (class 1259 OID 162805)
+-- TOC entry 210 (class 1259 OID 163152)
 -- Name: Roles; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -218,7 +219,7 @@ CREATE TABLE public."Roles" (
 ALTER TABLE public."Roles" OWNER TO livetutor;
 
 --
--- TOC entry 210 (class 1259 OID 162810)
+-- TOC entry 211 (class 1259 OID 163157)
 -- Name: ScheduleDetails; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -235,7 +236,7 @@ CREATE TABLE public."ScheduleDetails" (
 ALTER TABLE public."ScheduleDetails" OWNER TO livetutor;
 
 --
--- TOC entry 211 (class 1259 OID 162818)
+-- TOC entry 212 (class 1259 OID 163165)
 -- Name: Schedules; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -253,7 +254,7 @@ CREATE TABLE public."Schedules" (
 ALTER TABLE public."Schedules" OWNER TO livetutor;
 
 --
--- TOC entry 212 (class 1259 OID 162826)
+-- TOC entry 213 (class 1259 OID 163173)
 -- Name: SequelizeMeta; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -265,7 +266,7 @@ CREATE TABLE public."SequelizeMeta" (
 ALTER TABLE public."SequelizeMeta" OWNER TO livetutor;
 
 --
--- TOC entry 213 (class 1259 OID 162829)
+-- TOC entry 214 (class 1259 OID 163176)
 -- Name: SubMajors; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -283,7 +284,7 @@ CREATE TABLE public."SubMajors" (
 ALTER TABLE public."SubMajors" OWNER TO livetutor;
 
 --
--- TOC entry 214 (class 1259 OID 162837)
+-- TOC entry 215 (class 1259 OID 163184)
 -- Name: Topics; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -295,14 +296,15 @@ CREATE TABLE public."Topics" (
     "orderCourse" integer,
     "videoUrl" text,
     "createdAt" timestamp with time zone DEFAULT now() NOT NULL,
-    "updatedAt" timestamp with time zone DEFAULT now() NOT NULL
+    "updatedAt" timestamp with time zone DEFAULT now() NOT NULL,
+    "nameFile" text
 );
 
 
 ALTER TABLE public."Topics" OWNER TO livetutor;
 
 --
--- TOC entry 215 (class 1259 OID 162845)
+-- TOC entry 216 (class 1259 OID 163192)
 -- Name: Transactions; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -321,7 +323,7 @@ CREATE TABLE public."Transactions" (
 ALTER TABLE public."Transactions" OWNER TO livetutor;
 
 --
--- TOC entry 216 (class 1259 OID 162853)
+-- TOC entry 217 (class 1259 OID 163200)
 -- Name: TutorFeedbacks; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -340,7 +342,7 @@ CREATE TABLE public."TutorFeedbacks" (
 ALTER TABLE public."TutorFeedbacks" OWNER TO livetutor;
 
 --
--- TOC entry 217 (class 1259 OID 162861)
+-- TOC entry 218 (class 1259 OID 163208)
 -- Name: Tutors; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -367,7 +369,7 @@ CREATE TABLE public."Tutors" (
 ALTER TABLE public."Tutors" OWNER TO livetutor;
 
 --
--- TOC entry 218 (class 1259 OID 162869)
+-- TOC entry 219 (class 1259 OID 163216)
 -- Name: Types; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -382,7 +384,7 @@ CREATE TABLE public."Types" (
 ALTER TABLE public."Types" OWNER TO livetutor;
 
 --
--- TOC entry 219 (class 1259 OID 162874)
+-- TOC entry 220 (class 1259 OID 163221)
 -- Name: UserRoles; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -397,7 +399,7 @@ CREATE TABLE public."UserRoles" (
 ALTER TABLE public."UserRoles" OWNER TO livetutor;
 
 --
--- TOC entry 220 (class 1259 OID 162879)
+-- TOC entry 221 (class 1259 OID 163226)
 -- Name: Users; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -424,7 +426,7 @@ CREATE TABLE public."Users" (
 ALTER TABLE public."Users" OWNER TO livetutor;
 
 --
--- TOC entry 221 (class 1259 OID 162889)
+-- TOC entry 222 (class 1259 OID 163236)
 -- Name: Wallets; Type: TABLE; Schema: public; Owner: livetutor
 --
 
@@ -441,7 +443,7 @@ CREATE TABLE public."Wallets" (
 ALTER TABLE public."Wallets" OWNER TO livetutor;
 
 --
--- TOC entry 3462 (class 0 OID 162743)
+-- TOC entry 3461 (class 0 OID 163082)
 -- Dependencies: 200
 -- Data for Name: Bookings; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
@@ -517,7 +519,7 @@ fc141146-23ee-4c73-b0ff-13127ceaf4e9	fbf670b6-6a3d-45b1-9711-08de91ac7181	6364e5
 
 
 --
--- TOC entry 3463 (class 0 OID 162752)
+-- TOC entry 3462 (class 0 OID 163091)
 -- Dependencies: 201
 -- Data for Name: CallSessions; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
@@ -544,7 +546,7 @@ d9011256-57ea-4560-b7ec-d67b4d42ab9b	846710e2-e0f4-4f11-b6aa-54efe4fbe455	c6e0dd
 
 
 --
--- TOC entry 3464 (class 0 OID 162757)
+-- TOC entry 3463 (class 0 OID 163096)
 -- Dependencies: 202
 -- Data for Name: Categories; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
@@ -745,17 +747,25 @@ b4b85335-b3dc-46db-898b-19c66bbcf97b	e49cbe3d-2892-4816-b81d-bccf5bbe77e1	Busine
 
 
 --
--- TOC entry 3465 (class 0 OID 162765)
+-- TOC entry 3464 (class 0 OID 163104)
 -- Dependencies: 203
 -- Data for Name: Courses; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
 
-COPY public."Courses" (id, "tutorId", name, description, level, other_details, "imageUrl", default_price, course_price, "createdAt", "updatedAt") FROM stdin;
+COPY public."Courses" (id, name, description, level, other_details, "imageUrl", default_price, course_price, "createdAt", "updatedAt", reason, purpose) FROM stdin;
+056f9cf3-9fe2-4e21-99ce-7a8902ee7646	Kế toán tài chính	Kế toán là một lĩnh vực không còn quá mới và đóng vai trò quan trọng trong bộ máy quản lý của các công ty, doanh nghiệp. Tuy nhiên, không phải ai cũng nắm được trọn bộ “bí kíp” kế toán “đỉnh cao” để hoàn thành công việc tốt nhất. 	Mọi người	Quae qui voluptas ipsum omnis ducimus blanditiis consequatur consequatur.	https://ketoandongnama.vn/wp-content/uploads/2018/11/ke-toan-tai-chinh-la-gi.jpg	195	374	2021-06-28 17:45:40.461+07	2021-06-28 17:45:40.461+07	Bạn muốn hiểu sâu hơn về kế toán cũng như nghiệp vụ kế toán trong doanh nghiệp. Người mới đi làm nhưng chưa có kinh nghiệm và nghiệp vụ kế toán, cần một lộ trình cung cấp đầy đủ kiến thức về kế toán và bổ sung thêm kinh nghiệm làm việc thực tế từ những chuyên gia đi trước	Nắm bắt được nền tảng nguyên lý cơ bản là cốt lõi để làm kế toán. Nắm vững quy định của pháp luật về thuế giá trị gia tăng. Nắm vững quy định về luật bảo hiểm, kinh phí công đoàn, quy định về các loại hợp đồng. Các giải pháp bảo vệ chi phí tiền lương khi tính thuế TNDN.
+57c19f6f-fe2f-4b2c-836b-4233e2e60251	Pháp luật kinh doanh quốc tế	Nắm vững các nguyên tắc cơ bản trong nghề toán Doanh Nghiệp - Có thể hạch toán và xác định nghiệp vụ phát sinh là đúng hay sai.	Mọi người	Sequi voluptatem velit.	https://jobsgo.vn/blog/wp-content/uploads/2020/05/N%C3%AAn-H%E1%BB%8Dc-Kinh-Doanh-Qu%E1%BB%91c-T%E1%BA%BF-Hay-Kinh-T%E1%BA%BF-%C4%90%E1%BB%91i-Ngo%E1%BA%A1i.jpeg	363	457	2021-06-28 17:45:40.461+07	2021-06-28 17:45:40.461+07	Khóa học giúp cho các bạn có nhu cầu tìm hiểu về pháp luật kế toán có được cái nhìn tổng quan và chi tiết nhất về công việc của một kế toán viên chuyên nghiệp, những nguyên tắc cơ bản trong nghề, quy trình và định hướng công việc trong tương lai cho doanh nghiệp.	Nắm vững các nguyên tắc cơ bản trong nghề toán Doanh Nghiệp. Biết làm thực tế khi điều hành hoặc khai báo sổ sách kế toán cho Doanh Nghiệp. Có kế hoạch dự trù ngân sách cho tiền thuế sẽ nộp trong năm.
+08d688e1-837f-4ea5-b4c0-e8038580eec9	Quản trị nhân lực	Chúng ta sẽ tìm hiểu cách thức để đảm bảo cho doanh nghiệp có đủ nguồn lực về nhân sự và tài chính, và cách thức để tăng trưởng được những nguồn lực này, mà từ đó tăng được quy mô của công ty	Mọi người	Voluptate libero autem.	https://info-imgs.vgcloud.vn/2020/08/28/15/tat-tan-tat-thong-tin-ve-nganh-hoc-quan-tri-nhan-luc.jpg	398	321	2021-06-28 17:45:40.461+07	2021-06-28 17:45:40.461+07	Khóa học này  sẽ giúp các bạn hiểu được công thức để tư duy, để ngay khi gặp các vấn đề trong quá trình kinh doanh hoặc trên con đường thăng tiến, các bạn sẽ có cách nghĩ để đưa ra giải pháp giải quyết các vấn đề đó.	Tư duy đúng về bản chất và nhiệm vụ thực sự của 2 phòng hỗ trợ về nguồn lực là nhân sự và chiến lược. Hiểu rõ từng bước trọng tâm trong quy trình của mỗi phòng ban. Hiểu rõ quy trình tuyển dụng, tuyển nhân lực, nhân sự và đào tạo nhân lực.
+378cd6c2-d13c-4156-a2ca-3b65782aa1c9	Kỹ năng mềm	Khóa học trang bị các kỹ năng mềm cần thiết trong cuộc sống và trong công việc của bạn.	Mọi người	A consequatur sed est vel distinctio.	https://cdn.123job.vn/123job//uploads/images/Phan-biet-su-khac-nhau-giua-ky-nang-mem-va-ky-nang-cung%20(1).png	473	324	2021-06-28 17:45:40.461+07	2021-06-28 17:45:40.461+07	Kỹ năng mềm (Soft skills) là một thuật ngữ xã hội học chỉ những kỹ năng có liên quan đến việc sử dụng ngôn ngữ, khả năng hòa nhập xã hội, thái độ và hành vi ứng xử áp dụng vào việc giao tiếp giữa người với người. Chúng quyết định bạn là ai, làm việc thế nào, là thước đo hiệu quả cao trong công việc.	Bạn sẽ được học các kỹ năng cần thiết và phù hợp với bản thân cũng như định hướng nghề nghiệp của mình, bao gồm các kỹ năng như: Đàm phán, Giao tiếp, Phỏng vấn xin việc, Nghiệp vụ hành chính văn phòng, ...
+04fafc36-a74b-4ee2-859a-d8b8e07a999f	Nhập môn chứng khoán	Khóa học chứng khoán online giúp bạn nắm bắt được kiến thức đầu tư chứng khoán đầy đủ, bài bản và chi tiết nhất dành cho người mới bắt đầu tham gia. Bí quyết để nhanh chóng có được nguồn lợi nhuận khổng lồ từ thị trường chứng khoán.	Mọi người	Fugiat suscipit neque sit ratione repellat quae ut.	https://www.kienthucviet.vn/wp-content/uploads/2021/03/4769-video_cover_image_url-1600317028.crop-730x436-1.jpg	302	457	2021-06-28 17:45:40.461+07	2021-06-28 17:45:40.461+07	Thị trường chứng khoán Việt Nam đang ngày càng phát triển và trở thành lĩnh vực đầu tư vô cùng hấp dẫn, nhất là đối với những người trẻ và người có thu nhập khá trở lên. Tiềm năng thị trường vô cùng lớn hứa hẹn những khoản lợi nhuận khổng lồ mà nhưng cũng tiềm ẩn không ít rủi ro nếu như không biết cách đánh giá và đầu tư chính xác, khách quan. Nhận thấy tiềm năng phát triển đầy hứa hẹn nên rất nhiều người kéo nhau đi học kinh doanh chứng khoán cơ bản xây dựng nền tảng cá nhân vững chắc. 	Kiến thức cơ bản nhất về thị trường chứng khoán, về đầu tư chứng khoán và tiềm năng lợi. Nắm được những công cụ để đánh giá, phân tích và đầu tư chứng khoán sớm có lời lãi nhất. Có được tư duy đúng trong đầu tư cổ phiếu hiệu quả, thông minh
+66372147-0cd7-4c47-9ed1-620a4b6f46c1	Kỹ năng giao tiếp	Khóa học sẽ đem đến cái nhìn tổng quan về nền tảng giao tiếp hiệu quả, hướng dẫn các kĩ năng cần có trong quá trình giao tiếp, đặc biệt là tầm quan trọng của kĩ năng giao tiếp ứng xử.	Mọi người	Optio minus minima enim molestiae nihil.	https://www.mindalife.vn/wp-content/uploads/2020/05/ky-nang-giao-tiep-co-ban-1.png	372	482	2021-06-28 17:45:40.461+07	2021-06-28 17:45:40.461+07	Giao tiếp là một kỹ năng mà bạn không thể thiếu trong cuộc sống cũng như trong công việc hiện nay. Kỹ năng giao tiếp là mắt xích quan trọng trong các kỹ năng chúng ta cần học hỏi và hoàn thiện để đạt hiệu tương tác với các đối tác khác nhau, thúc đẩy kỹ năng làm việc nhóm- kỹ năng mà hầu hết các ngành nghề mà mọi doanh nghiệp đều cần. \n\nTuy nhiên, cũng giống như các kỹ năng khác, để có thể giao tiếp hiệu quả và đạt được thành công như mong đợi, bạn cần phải trải qua một quá trình luyện tập lâu dài. 	Định nghĩa giao tiếp là gì, vai trò của giao tiếp trong đời sống & trong kinh doanh. Biết sử dụng kỹ năng lắng nghe trong giao tiếp và phát triển các kỹ năng giao tiếp với khách. Hiểu các phương tiện trong giao tiếp và các nguyên tắc trong giao tiếp. Bổ sung các kỹ năng và phong cách giao tiếp hiệu quả.
+0ec1605c-d9fb-4657-9537-1ce15a46d0ab	Marketing Căn Bản	Khóa học trang bị những kiến thức căn bản nhất về marketing, hình thành tư duy về marketing tổng thể. Từ đó hiểu rõ các hoạt động thực thi marketing có thể triển khai, cách thức xây dựng các hoạt động marketing cho tổ chức của mình.	Mọi người	Illo sequi quo consequatur delectus odio architecto enim sint unde.	https://aokieudep.com/wp-content/uploads/2019/11/MKTCB.jpg	389	267	2021-06-28 17:45:40.461+07	2021-06-28 17:45:40.461+07	Đây không chỉ là những kiến thức trong sách, dựa trên kinh nghiệm làm nghề và tư vấn cho các đơn vị cùng với việc minh họa các tình huống thực tế ( case study), khóa học sẽ giúp các bạn tập trung vào những vấn đề cơ bản nhất của marketing. Bạn chắc chẵn sẽ hình thành được một tư duy cơ bản nhất về marketing, từ đó có thể chủ động hơn trong việc thực hiện các hoạt động marketing cho bản thân tổ chức hay công việc của bạn.	Hình thành tư duy marketing cơ bản để có thể linh hoạt thích nghi với sự thay đổi của môi trường. Hiểu được những nền tảng cốt lõi của marketing từ việc nghiên cứu thị trường, xây dựng chiến lược. Hỗ trợ cho việc phát triển công việc, sự nghiệp và doanh nghiệp của bạn. Hỗ trợ định hướng việc phát triển công việc marketing đối với các bạn làm trái ngành.
+6833a095-d8a6-420f-80a2-1d3662e8068a	Bảo hiểm trong kinh doanh	Có cái nhìn chân thực nhất về lao động, tiền lương, bảo hiểm xã hội và thuế TNCN, xây dựng hệ thống thang bảng lương phù hợp, áp dụng đúng chính sách hiện hành.	Mọi người	Optio suscipit error.	https://cdn.vietnambiz.vn/2019/8/20/insurancem3-w800-16-9-1566308052994365951153.jpg	429	360	2021-06-28 17:45:40.461+07	2021-06-28 17:45:40.461+07	Sau khi hoàn thành khóa học các nhà quản lý, nhà tuyển dụng của doanh nghiệp sẽ hiểu một cách chi tiết chính xác nhất về mối quan hệ giữa Bảo hiểm - Tiền lương - Thuế TNCN, từ đó có được cách xây dựng thang bảng lương phù hợp với người lao động, các bản hợp đồng lao động cho từng trường hợp như hợp đồng CTV, hợp đồng giao khoán, cách tính thuế thu nhập cá nhân của từng lao động...	Có kiến thức tổng quát về quản lý lao động, tiền lương, bảo hiểm xã hội, và thuế TNCN. Nắm chắc được các nội dung trên hợp đồng lao động để soạn thảo phù hợp với luật Bảo hiểm. Có khả năng xây dựng Hệ thống thang bảng lương phù hợp với tình hình hoạt động sản xuất
 \.
 
 
 --
--- TOC entry 3466 (class 0 OID 162773)
+-- TOC entry 3465 (class 0 OID 163112)
 -- Dependencies: 204
 -- Data for Name: FavoriteTutors; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
@@ -770,7 +780,7 @@ fcbd0c88-cc9a-4412-a7bd-a628fa0d7132	0712174d-c389-4286-af91-8a6b1beb9077	42c2a8
 
 
 --
--- TOC entry 3467 (class 0 OID 162776)
+-- TOC entry 3466 (class 0 OID 163115)
 -- Dependencies: 205
 -- Data for Name: Fees; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
@@ -782,7 +792,7 @@ bcbd2aff-f20e-4c44-9ac3-ac514f943f3e	pricePerDollar	23500	2021-06-10 21:53:56.03
 
 
 --
--- TOC entry 3468 (class 0 OID 162781)
+-- TOC entry 3467 (class 0 OID 163120)
 -- Dependencies: 206
 -- Data for Name: Majors; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
@@ -813,7 +823,7 @@ f124ee0b-07fb-47c0-b9dc-2a40b8a5b46a	of	Office Information	Tin học văn phòng
 
 
 --
--- TOC entry 3469 (class 0 OID 162789)
+-- TOC entry 3468 (class 0 OID 163128)
 -- Dependencies: 207
 -- Data for Name: Messages; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
@@ -867,7 +877,7 @@ de70953b-137d-4e02-a1cf-7739e471fe74	Dịch dủm chán lắm	0728421c-15d0-4a81
 
 
 --
--- TOC entry 3470 (class 0 OID 162797)
+-- TOC entry 3469 (class 0 OID 163136)
 -- Dependencies: 208
 -- Data for Name: RefreshTokens; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
@@ -897,8 +907,8 @@ b265eb74-af18-439c-a7f8-30dd21de7b74	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdW
 
 
 --
--- TOC entry 3484 (class 0 OID 163049)
--- Dependencies: 222
+-- TOC entry 3470 (class 0 OID 163144)
+-- Dependencies: 209
 -- Data for Name: Reports; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
 
@@ -907,8 +917,8 @@ COPY public."Reports" (id, "userId", "tutorId", content, "createdAt", "updatedAt
 
 
 --
--- TOC entry 3471 (class 0 OID 162805)
--- Dependencies: 209
+-- TOC entry 3471 (class 0 OID 163152)
+-- Dependencies: 210
 -- Data for Name: Roles; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
 
@@ -920,8 +930,8 @@ a31e0f43-d0f5-4046-8eb9-837e001b62b6	admin	2021-06-10 21:51:58.012+07	2021-06-10
 
 
 --
--- TOC entry 3472 (class 0 OID 162810)
--- Dependencies: 210
+-- TOC entry 3472 (class 0 OID 163157)
+-- Dependencies: 211
 -- Data for Name: ScheduleDetails; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
 
@@ -1588,8 +1598,8 @@ efea8c02-13fb-4d83-af09-540dd0a45d10	14:00	14:30	9de5c53f-dbe0-42a3-bca4-09cd23e
 
 
 --
--- TOC entry 3473 (class 0 OID 162818)
--- Dependencies: 211
+-- TOC entry 3473 (class 0 OID 163165)
+-- Dependencies: 212
 -- Data for Name: Schedules; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
 
@@ -1767,8 +1777,8 @@ c975b40f-73a0-441e-98e9-c6f263a30864	2021-06-22	14:00	15:00	42c2a84a-163b-44d7-9
 
 
 --
--- TOC entry 3474 (class 0 OID 162826)
--- Dependencies: 212
+-- TOC entry 3474 (class 0 OID 163173)
+-- Dependencies: 213
 -- Data for Name: SequelizeMeta; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
 
@@ -1796,12 +1806,14 @@ COPY public."SequelizeMeta" (name) FROM stdin;
 20201219073159-refresh-token.js
 20210203133340-booking-link.js
 20210203133341-report.js
+20210203133342-course-explore.js
+20210203133342-topic-explore.js
 \.
 
 
 --
--- TOC entry 3475 (class 0 OID 162829)
--- Dependencies: 213
+-- TOC entry 3475 (class 0 OID 163176)
+-- Dependencies: 214
 -- Data for Name: SubMajors; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
 
@@ -1810,18 +1822,58 @@ COPY public."SubMajors" (id, "majorId", key, "englishName", "vietnameseName", "c
 
 
 --
--- TOC entry 3476 (class 0 OID 162837)
--- Dependencies: 214
+-- TOC entry 3476 (class 0 OID 163184)
+-- Dependencies: 215
 -- Data for Name: Topics; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
 
-COPY public."Topics" (id, "courseId", name, description, "orderCourse", "videoUrl", "createdAt", "updatedAt") FROM stdin;
+COPY public."Topics" (id, "courseId", name, description, "orderCourse", "videoUrl", "createdAt", "updatedAt", "nameFile") FROM stdin;
+9d2c97b4-5cbd-40c3-a4d0-72a0171c9ae0	04fafc36-a74b-4ee2-859a-d8b8e07a999f	Giá trị thời gian tiền tệ	Laudantium ut atque ratione nam tenetur aliquid. Esse quae est adipisci debitis quas aut. Aspernatur omnis error consequatur aperiam reprehenderit natus et sit.	1	Et vel molestiae omnis qui beatae.	2021-06-28 17:45:40.461+07	2021-06-28 17:45:40.461+07	chungkhoan_2
+587a5a01-ff56-4aa1-94e0-6d3be6bb19cd	04fafc36-a74b-4ee2-859a-d8b8e07a999f	Cổ phiếu và định giá	Aut minus dolorum quo iusto praesentium in consequatur. Voluptas ipsum labore. Voluptates vel nam iusto iure.	2	Laboriosam quos hic ab quidem sed fugiat.	2021-06-28 17:45:40.461+07	2021-06-28 17:45:40.461+07	chungkhoan_3
+1100327e-9fa9-469d-8a01-0cc324074bfe	056f9cf3-9fe2-4e21-99ce-7a8902ee7646	Tổng quan kế toán tài chính	Omnis nulla libero debitis repudiandae dolores autem. Laborum sunt non sunt dolore. Est explicabo laudantium dolore. Cum quia aut id tempore cumque odit. Et id et quisquam sit accusamus omnis laudantium adipisci saepe.	0	Atque ut consequatur quis earum veritatis omnis non blanditiis nobis.	2021-06-28 17:45:40.462+07	2021-06-28 17:45:40.462+07	ketoan_1
+d0252648-df1b-4989-82ad-eadfba0030f2	056f9cf3-9fe2-4e21-99ce-7a8902ee7646	Kế toán tiền & các khoản thu	Delectus voluptas beatae. Recusandae iste excepturi illum. Libero aut saepe commodi debitis non qui repudiandae quo.	1	Et velit sint esse enim ad molestias voluptatem.	2021-06-28 17:45:40.462+07	2021-06-28 17:45:40.462+07	ketoan_2
+69b15c51-a66c-4790-bbc5-9c0d978af2d7	08d688e1-837f-4ea5-b4c0-e8038580eec9	Quản trị nguồn nhân lực	Vitae est officiis est sit est distinctio. Quis sint rerum dolorem ut rem fugiat. In voluptas quo vel quia unde voluptas. Qui aut accusantium tenetur sit.	0	Deserunt excepturi deleniti eos fuga nobis voluptatem doloremque et.	2021-06-28 17:45:40.462+07	2021-06-28 17:45:40.462+07	nhanluc_1
+3c8d5613-cb57-4593-a078-026b61c91492	57c19f6f-fe2f-4b2c-836b-4233e2e60251	Hợp đồng kinh doanh quốc tế	Sed vero natus temporibus excepturi totam. Saepe labore et quidem ratione doloribus eveniet voluptatem et. Corporis rerum dignissimos et.	1	Blanditiis qui accusamus quis dolor voluptatem qui et.	2021-06-28 17:45:40.461+07	2021-06-28 17:45:40.461+07	phapluat_2
+43d621b1-91cc-4c71-af8f-1602ffdbe502	57c19f6f-fe2f-4b2c-836b-4233e2e60251	Hợp đồng mua bán hàng hóa	Et reprehenderit aut optio est. Voluptatem error at recusandae. Voluptatem doloribus dolor quod sed quia error ipsa. Aut necessitatibus enim et.	2	Aperiam temporibus ut laudantium harum cupiditate corrupti quasi et.	2021-06-28 17:45:40.461+07	2021-06-28 17:45:40.461+07	phapluat_3
+d635dc5d-219d-490b-ba33-e76e5458ec03	57c19f6f-fe2f-4b2c-836b-4233e2e60251	Hợp đồng cung ứng dịch vụ	Accusantium ab tenetur error sint dolorem ipsam molestiae possimus. Rerum deleniti impedit voluptatibus consectetur quis ex accusantium ipsam est. Quaerat deserunt sit odit quasi laboriosam.	3	Consequuntur repudiandae et eius omnis ut cumque tempora.	2021-06-28 17:45:40.461+07	2021-06-28 17:45:40.461+07	phapluat_4
+a0d526cb-5d7c-465f-912e-d9b78624e465	08d688e1-837f-4ea5-b4c0-e8038580eec9	Chiến lực và hoạch định	Aut ipsa aliquam qui incidunt ratione hic aliquam nulla nihil. Nihil aspernatur modi et aut voluptatem aut numquam. Quasi saepe veritatis quam nihil.	1	Cumque ut at.	2021-06-28 17:45:40.462+07	2021-06-28 17:45:40.462+07	nhanluc_2
+f1bb44a8-20c9-4bd4-b7c1-5ac9fe94960d	08d688e1-837f-4ea5-b4c0-e8038580eec9	Phân tích công việc	Nam sit laborum velit rem enim inventore officia consequuntur totam. Dolores et voluptatem ut. Odio rem magnam eaque eaque.	2	Dolores neque sit quod.	2021-06-28 17:45:40.462+07	2021-06-28 17:45:40.462+07	nhanluc_3
+8e3b5016-077b-48b3-8fc7-057aa6423ec7	57c19f6f-fe2f-4b2c-836b-4233e2e60251	Khái quát chung	Ducimus pariatur aut voluptas esse. Quis aut reiciendis voluptas ut modi non itaque. Dicta explicabo voluptatem.	0	Et tempora quo amet explicabo ea non.	2021-06-28 17:45:40.461+07	2021-06-28 17:45:40.461+07	phapluat_1
+fb4a5c05-e295-4430-b49a-b2a57b7ae063	57c19f6f-fe2f-4b2c-836b-4233e2e60251	Một số hợp đồng phổ biến	Ut tempore alias voluptates qui reiciendis temporibus fugit. Eum consequuntur expedita commodi doloremque accusantium ipsa dolorum et. Esse rerum ipsa magnam voluptatibus quasi autem sunt officia minus. Aut et consequatur adipisci nihil. Tempore ut autem quis voluptas qui.	4	Maiores libero esse temporibus est sapiente qui et rerum quia.	2021-06-28 17:45:40.461+07	2021-06-28 17:45:40.461+07	phapluat_5
+47cb0a9b-e978-47b5-84b8-1b209ee18a69	378cd6c2-d13c-4156-a2ca-3b65782aa1c9	Kỹ năng tư duy	Et fugit rerum laboriosam qui. Excepturi libero quae dolores itaque in ab aut autem. Deleniti quis laborum et possimus eveniet voluptas consequatur provident qui. Deserunt et architecto eos aut. Voluptas quibusdam sit iure minus odit saepe odit. Consequatur perspiciatis perspiciatis aperiam.	0	Similique recusandae dicta recusandae dignissimos porro non nihil nostrum.	2021-06-28 17:45:40.462+07	2021-06-28 17:45:40.462+07	kynangmem_1
+7a0a7336-3a02-4ea7-b216-ad8252790d29	378cd6c2-d13c-4156-a2ca-3b65782aa1c9	Kỹ năng trình bày	Cum mollitia suscipit cumque id quam culpa est. Sit neque fugiat sunt commodi ipsum. Vel perspiciatis ut asperiores sit quod nulla eos voluptatum.	1	Cupiditate ut beatae dolorem.	2021-06-28 17:45:40.462+07	2021-06-28 17:45:40.462+07	kynangmem_2
+ec1442c8-6f8e-4ab0-9414-972ddc1c7329	378cd6c2-d13c-4156-a2ca-3b65782aa1c9	Kỹ năng làm việc nhóm	Harum eos ipsum rem necessitatibus. Facilis cum minima. Voluptatem suscipit ullam.	2	Id ab architecto qui quibusdam ea id voluptatem qui.	2021-06-28 17:45:40.462+07	2021-06-28 17:45:40.462+07	kynangmem_3
+bf0a39c5-01ee-4533-9282-db0a528318f2	66372147-0cd7-4c47-9ed1-620a4b6f46c1	Kỹ năng giao tiếp văn bản	A et enim rerum pariatur veritatis et odio aliquid. Non dolore nobis sint voluptatum velit. Odio fuga sit voluptas.	0	Error officiis porro doloribus.	2021-06-28 17:45:40.462+07	2021-06-28 17:45:40.462+07	giaotiep_1
+1818e976-bfc5-4be7-9463-2621e44cc0e2	66372147-0cd7-4c47-9ed1-620a4b6f46c1	Kỹ năng phản hồi	Officiis dolorum excepturi. Nam nostrum culpa. Iste beatae atque itaque hic nihil doloremque.	1	Repellat distinctio doloribus iste sit ullam praesentium perspiciatis quibusdam.	2021-06-28 17:45:40.462+07	2021-06-28 17:45:40.462+07	giaotiep_2
+1374afc8-c13c-4cfd-8f56-363c74667d44	66372147-0cd7-4c47-9ed1-620a4b6f46c1	Kỹ năng thuyết trình	Ut sed consequatur distinctio debitis numquam sit. Ab beatae inventore quia praesentium est deleniti illum nam hic. Voluptas sed debitis qui ratione ut sed ab. Vero porro rerum aut et qui fugiat. Amet et veritatis corporis facilis. Omnis omnis voluptates natus sint praesentium.	2	Provident omnis dolore cupiditate.	2021-06-28 17:45:40.462+07	2021-06-28 17:45:40.462+07	giaotiep_3
+91705942-dc72-46d1-8ad2-f51b9046adee	6833a095-d8a6-420f-80a2-1d3662e8068a	Khái quát chung về bảo hiểm	Reprehenderit a fugit. Quod voluptas dolorem. Et aut recusandae. Nulla debitis hic dolor possimus et dolorum laboriosam. Dolor quam eum cum sit odio praesentium laboriosam.	0	Et vel voluptas dolorum consequatur.	2021-06-28 17:45:40.462+07	2021-06-28 17:45:40.462+07	baohiem_1
+d08f6981-70b0-4192-9b2c-5bfda3bd87c7	6833a095-d8a6-420f-80a2-1d3662e8068a	Bảo hiểm hàng hải	Possimus ut ut accusantium. Nihil totam et fuga neque incidunt error. Eum delectus non ut nisi tempore ad ipsa doloremque dolores. Est nemo minus vitae dolore.	1	Earum incidunt qui et voluptatum.	2021-06-28 17:45:40.462+07	2021-06-28 17:45:40.462+07	baohiem_2
+d637a6a6-4e09-407f-b580-f1a4d8ed1675	6833a095-d8a6-420f-80a2-1d3662e8068a	Bảo hiểm hàng không	Sed sit similique asperiores minus sint. Cupiditate et dignissimos qui qui qui consequuntur alias cupiditate quia. Ipsum vel omnis quo accusamus consectetur velit nam consequatur.	2	Excepturi est doloribus nobis.	2021-06-28 17:45:40.462+07	2021-06-28 17:45:40.462+07	baohiem_3
+59613353-c47d-4112-b949-c673bff208e2	6833a095-d8a6-420f-80a2-1d3662e8068a	Bảo hiểm hỏa hoạn và rủi ro	Illo voluptates ipsa ducimus libero molestias ut officiis eos. Non quia ea nemo soluta. Id in excepturi fuga amet nesciunt. Sint ipsum omnis mollitia perspiciatis eum voluptatem provident dolorem. Repellendus laboriosam recusandae deleniti eaque quaerat voluptas repellendus sint. Quam quibusdam sit assumenda voluptatem consectetur voluptatem molestiae.	3	Officiis dolor natus est provident.	2021-06-28 17:45:40.462+07	2021-06-28 17:45:40.462+07	baohiem_4
+0acaa29a-baac-4776-a0f7-6f9d72110d9f	6833a095-d8a6-420f-80a2-1d3662e8068a	Bảo hiểm xây dựng và lắp đặt	Rerum officiis modi itaque ratione. Molestiae aut beatae dolorem nobis nemo. Et ut saepe itaque. Voluptas qui qui quae sed. Voluptatem veritatis dolores error voluptatibus. Vel inventore ea molestiae in natus.	4	Dolorem sed sint explicabo dicta doloribus optio.	2021-06-28 17:45:40.462+07	2021-06-28 17:45:40.462+07	baohiem_5
+84687f36-8321-4b0f-b361-cb916c23629b	04fafc36-a74b-4ee2-859a-d8b8e07a999f	Thị trường chứng khoán	Molestiae quasi tenetur nam earum. Sed qui et tempore et et. Doloribus iusto aut nam eum reprehenderit ad possimus rem. Animi dignissimos sed atque consequatur deleniti.	0	Ducimus aspernatur necessitatibus.	2021-06-28 17:45:40.461+07	2021-06-28 17:45:40.461+07	chungkhoan_1
+bf8ca14d-24f7-429b-8c8e-10b9e81a116d	04fafc36-a74b-4ee2-859a-d8b8e07a999f	Trái phiếu và định giá	Inventore libero aut repudiandae ut enim. Quisquam asperiores tempora aliquid ea incidunt voluptatem ea minima accusamus. Atque autem doloribus sed quo alias aut aliquid nisi. Eos consequatur itaque. Pariatur laborum nostrum numquam voluptatum sequi voluptatem incidunt quia.	3	Deleniti vel in.	2021-06-28 17:45:40.461+07	2021-06-28 17:45:40.461+07	chungkhoan_4
+d7b28be8-9de6-447c-a85f-101bc4c767ec	04fafc36-a74b-4ee2-859a-d8b8e07a999f	Lợi suất và rủi ro	Consequuntur dolore ipsam earum error aliquam aut magni eos. Possimus vel dignissimos illo. Reiciendis sit voluptates dolorem veniam. Consequatur quasi sunt sint et soluta a. Iusto provident debitis adipisci quia sequi mollitia error. Incidunt rem commodi.	4	Quis minus sit velit.	2021-06-28 17:45:40.461+07	2021-06-28 17:45:40.461+07	chungkhoan_5
+7c4130b4-0a4e-4ea8-914a-f55355b0cf53	056f9cf3-9fe2-4e21-99ce-7a8902ee7646	Kế toán hàng tồn kho	Quia natus dolore qui amet accusamus dolor reprehenderit laboriosam. Quis assumenda ducimus qui nostrum. Qui itaque ratione cumque distinctio nam quis libero voluptates. Recusandae sit optio dolore architecto nesciunt. Aliquid et qui aut est quia corporis autem. Dolorum expedita repellat nihil eos odio voluptate non sequi.	2	Temporibus inventore laboriosam rem et quasi ratione aut ut tempore.	2021-06-28 17:45:40.462+07	2021-06-28 17:45:40.462+07	ketoan_3
+477b1b11-dfcd-4b7c-ab11-91a7b9f13c14	056f9cf3-9fe2-4e21-99ce-7a8902ee7646	Kế toán tài sản cố định	Nostrum est iste ut eligendi. Et rerum voluptate natus eos velit non. Ipsum officia dolorem et porro est adipisci culpa illum. Debitis impedit quidem qui veniam eos quod.	3	Quisquam autem ea quidem odio explicabo harum facere.	2021-06-28 17:45:40.462+07	2021-06-28 17:45:40.462+07	ketoan_4
+3baf059c-febd-4e51-bbcc-53c388aa61ce	056f9cf3-9fe2-4e21-99ce-7a8902ee7646	Câu hỏi ôn tập	Aut consequatur dicta labore velit quaerat aut nam. Quod ea et esse dolores illo ut voluptatem nulla. Harum qui dolorem molestias similique.	4	Voluptatem quasi consequatur nam ut.	2021-06-28 17:45:40.462+07	2021-06-28 17:45:40.462+07	ketoan_5
+5df7209b-27d2-457f-af29-fdb6b855cd78	08d688e1-837f-4ea5-b4c0-e8038580eec9	Tuyển dụng nhân sự	Molestiae qui consequatur et consequuntur mollitia. Mollitia nesciunt et est dolorum. Est consequatur dolorum sint dicta modi et. Delectus consequatur et sint aut sit id natus. Et beatae corrupti laudantium dolor et nesciunt aut.	3	Molestiae hic voluptates rerum sunt.	2021-06-28 17:45:40.462+07	2021-06-28 17:45:40.462+07	nhanluc_4
+e3f7501e-2088-4cc8-90a6-606d4f4e1a3c	08d688e1-837f-4ea5-b4c0-e8038580eec9	Đào tạo và phát triển nhân viên	Debitis ullam ea id quaerat. Sint ut aut consectetur quos. Vel ducimus et unde assumenda debitis eum dolorem a.	4	Qui qui veritatis tenetur sed dolorem aliquid.	2021-06-28 17:45:40.462+07	2021-06-28 17:45:40.462+07	nhanluc_5
+7c260f38-e842-407a-b586-e8eabafc2568	0ec1605c-d9fb-4657-9537-1ce15a46d0ab	Marketing căn bản	Consequatur omnis cumque quasi aut et ut beatae consectetur. Corporis ipsum eum iste aut omnis minima qui aspernatur illum. Ipsa sit similique ut amet et.	0	Alias voluptate at sit.	2021-06-28 17:45:40.462+07	2021-06-28 17:45:40.462+07	marketing_1
+70b404fb-2661-49d5-ad57-7c7eea835972	0ec1605c-d9fb-4657-9537-1ce15a46d0ab	Môi trường Marketing	Dicta sint culpa voluptate laudantium dolores quis et deleniti id. Voluptatibus aut qui enim. Architecto quas officiis qui omnis ipsum. Esse doloremque fugiat eos aut. Autem dolore tenetur quibusdam. Dolor rerum dolorem aperiam.	1	Rerum quibusdam aspernatur pariatur quidem exercitationem similique maxime a.	2021-06-28 17:45:40.462+07	2021-06-28 17:45:40.462+07	marketing_2
+152b49cf-8054-464a-9f1b-f5d2680cc67f	0ec1605c-d9fb-4657-9537-1ce15a46d0ab	Khách hàng và nghiên cứu thị trường	Sequi nam rerum officiis cum. Culpa facilis consectetur dolore quo voluptate facilis et maiores. Est officia voluptatibus. Et non cum ab.	2	Modi qui consequatur aperiam sint eos dolores.	2021-06-28 17:45:40.462+07	2021-06-28 17:45:40.462+07	marketing_3
+bf0b3217-f0d9-45c2-8053-46b8d0a2ced5	0ec1605c-d9fb-4657-9537-1ce15a46d0ab	Chiến lược và xây dựng chiến lược	Voluptatem id et voluptatem molestiae. Est sunt nesciunt quidem ea. Perspiciatis repudiandae voluptates corporis ut iure ratione.	3	Architecto eos rerum ea.	2021-06-28 17:45:40.462+07	2021-06-28 17:45:40.462+07	marketing_4
+c0a0117d-261b-4770-9958-12c10ae3936d	0ec1605c-d9fb-4657-9537-1ce15a46d0ab	Chính sách sản phẩm	Nihil ea eaque eaque. Voluptatibus quam est et inventore soluta aliquid id. Amet explicabo quasi quis.	4	Facilis optio vero.	2021-06-28 17:45:40.462+07	2021-06-28 17:45:40.462+07	marketing_5
+bfdcbbbb-6ae7-4fdc-af88-861eca2a9592	378cd6c2-d13c-4156-a2ca-3b65782aa1c9	Kỹ năng giao tiếp	Provident voluptatem natus eius. Aut voluptatibus nihil eligendi ab aut aut non et exercitationem. Quos recusandae facere molestias rerum quos. Dolorem commodi asperiores expedita recusandae repellat sunt vero et.	3	Totam autem qui in et reiciendis voluptatibus ut.	2021-06-28 17:45:40.462+07	2021-06-28 17:45:40.462+07	kynangmem_4
+206aa9f9-d182-4892-82eb-2681eb6e2936	378cd6c2-d13c-4156-a2ca-3b65782aa1c9	Kỹ năng quản lý thời gian	Impedit qui dolores dignissimos et deserunt accusamus. Mollitia qui in ut quaerat atque cupiditate commodi quos. Quia sit omnis sequi modi. Illum consectetur dignissimos qui exercitationem reiciendis. Eos quaerat laboriosam labore.	4	Laboriosam provident fugiat temporibus qui aut itaque.	2021-06-28 17:45:40.462+07	2021-06-28 17:45:40.462+07	kynangmem_5
+b9c78863-d386-4fc5-a13c-ac5cd900a469	66372147-0cd7-4c47-9ed1-620a4b6f46c1	Kỹ năng lắng nghe	Distinctio in iusto. Veniam et minus iure nihil est at et culpa. Voluptates vel ex suscipit repellendus voluptas minima quam. Officia est qui vel iure et placeat repellendus quia animi.	3	Iusto dolores maiores suscipit assumenda officiis.	2021-06-28 17:45:40.462+07	2021-06-28 17:45:40.462+07	giaotiep_4
+6b13c87a-170d-4af0-b3a2-16b8861cc9e3	66372147-0cd7-4c47-9ed1-620a4b6f46c1	Kỹ năng tạo ấn tượng	Dolorem cum libero veniam eos sed rerum eos enim sequi. Velit quidem deleniti. Nihil aliquid quidem est atque aut ut. Et optio quasi ea assumenda et eos. Nemo assumenda odit possimus incidunt.	4	Dolor quia recusandae a consequatur sit molestiae.	2021-06-28 17:45:40.462+07	2021-06-28 17:45:40.462+07	giaotiep_5
 \.
 
 
 --
--- TOC entry 3477 (class 0 OID 162845)
--- Dependencies: 215
+-- TOC entry 3477 (class 0 OID 163192)
+-- Dependencies: 216
 -- Data for Name: Transactions; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
 
@@ -1970,8 +2022,8 @@ d666954a-7116-418a-a33d-26bb55422535	80f2de40-8038-4396-b329-82e20fea9ab1	331724
 
 
 --
--- TOC entry 3478 (class 0 OID 162853)
--- Dependencies: 216
+-- TOC entry 3478 (class 0 OID 163200)
+-- Dependencies: 217
 -- Data for Name: TutorFeedbacks; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
 
@@ -1990,8 +2042,8 @@ e846eda6-7202-4ab7-80fc-6f161d2dc4ab	8b1ccf34-4fba-452f-8ddd-8ed2b5d6d719	74655b
 
 
 --
--- TOC entry 3479 (class 0 OID 162861)
--- Dependencies: 217
+-- TOC entry 3479 (class 0 OID 163208)
+-- Dependencies: 218
 -- Data for Name: Tutors; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
 
@@ -2011,8 +2063,8 @@ b6d32be6-d8c8-48e4-b1d3-fd5f3f24797c	0d7d4348-cf7e-4b6a-9a01-1d88f283e910	https:
 
 
 --
--- TOC entry 3480 (class 0 OID 162869)
--- Dependencies: 218
+-- TOC entry 3480 (class 0 OID 163216)
+-- Dependencies: 219
 -- Data for Name: Types; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
 
@@ -2023,8 +2075,8 @@ e49cbe3d-2892-4816-b81d-bccf5bbe77e1	specialties	2021-06-10 21:41:32.609363+07	2
 
 
 --
--- TOC entry 3481 (class 0 OID 162874)
--- Dependencies: 219
+-- TOC entry 3481 (class 0 OID 163221)
+-- Dependencies: 220
 -- Data for Name: UserRoles; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
 
@@ -2071,8 +2123,8 @@ ed6fd0c2-ed38-430a-ae55-a9e6a460b239	6f24a66a-421f-4165-bb41-e0e3603a2460	2021-0
 
 
 --
--- TOC entry 3482 (class 0 OID 162879)
--- Dependencies: 220
+-- TOC entry 3482 (class 0 OID 163226)
+-- Dependencies: 221
 -- Data for Name: Users; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
 
@@ -2108,8 +2160,8 @@ fbf670b6-6a3d-45b1-9711-08de91ac7181	ltstudent5@yopmail.com	\N	\N	$2a$12$3o3rEUR
 
 
 --
--- TOC entry 3483 (class 0 OID 162889)
--- Dependencies: 221
+-- TOC entry 3483 (class 0 OID 163236)
+-- Dependencies: 222
 -- Data for Name: Wallets; Type: TABLE DATA; Schema: public; Owner: livetutor
 --
 
@@ -2145,7 +2197,7 @@ a2b70b3d-481e-4c73-b0a0-f05c1479323d	0712174d-c389-4286-af91-8a6b1beb9077	320000
 
 
 --
--- TOC entry 3264 (class 2606 OID 162899)
+-- TOC entry 3264 (class 2606 OID 163246)
 -- Name: Bookings Bookings_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2154,7 +2206,7 @@ ALTER TABLE ONLY public."Bookings"
 
 
 --
--- TOC entry 3266 (class 2606 OID 162901)
+-- TOC entry 3266 (class 2606 OID 163248)
 -- Name: CallSessions CallSessions_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2163,7 +2215,7 @@ ALTER TABLE ONLY public."CallSessions"
 
 
 --
--- TOC entry 3268 (class 2606 OID 162903)
+-- TOC entry 3268 (class 2606 OID 163250)
 -- Name: Categories Categories_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2172,7 +2224,7 @@ ALTER TABLE ONLY public."Categories"
 
 
 --
--- TOC entry 3270 (class 2606 OID 162905)
+-- TOC entry 3270 (class 2606 OID 163252)
 -- Name: Courses Courses_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2181,7 +2233,7 @@ ALTER TABLE ONLY public."Courses"
 
 
 --
--- TOC entry 3272 (class 2606 OID 162907)
+-- TOC entry 3272 (class 2606 OID 163254)
 -- Name: FavoriteTutors FavoriteTutors_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2190,7 +2242,7 @@ ALTER TABLE ONLY public."FavoriteTutors"
 
 
 --
--- TOC entry 3274 (class 2606 OID 162909)
+-- TOC entry 3274 (class 2606 OID 163256)
 -- Name: Fees Fees_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2199,7 +2251,7 @@ ALTER TABLE ONLY public."Fees"
 
 
 --
--- TOC entry 3276 (class 2606 OID 162911)
+-- TOC entry 3276 (class 2606 OID 163258)
 -- Name: Majors Majors_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2208,7 +2260,7 @@ ALTER TABLE ONLY public."Majors"
 
 
 --
--- TOC entry 3278 (class 2606 OID 162913)
+-- TOC entry 3278 (class 2606 OID 163260)
 -- Name: Messages Messages_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2217,7 +2269,7 @@ ALTER TABLE ONLY public."Messages"
 
 
 --
--- TOC entry 3280 (class 2606 OID 162915)
+-- TOC entry 3280 (class 2606 OID 163262)
 -- Name: RefreshTokens RefreshTokens_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2226,7 +2278,7 @@ ALTER TABLE ONLY public."RefreshTokens"
 
 
 --
--- TOC entry 3308 (class 2606 OID 163058)
+-- TOC entry 3282 (class 2606 OID 163264)
 -- Name: Reports Reports_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2235,7 +2287,7 @@ ALTER TABLE ONLY public."Reports"
 
 
 --
--- TOC entry 3282 (class 2606 OID 162917)
+-- TOC entry 3284 (class 2606 OID 163266)
 -- Name: Roles Roles_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2244,7 +2296,7 @@ ALTER TABLE ONLY public."Roles"
 
 
 --
--- TOC entry 3284 (class 2606 OID 162919)
+-- TOC entry 3286 (class 2606 OID 163268)
 -- Name: ScheduleDetails ScheduleDetails_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2253,7 +2305,7 @@ ALTER TABLE ONLY public."ScheduleDetails"
 
 
 --
--- TOC entry 3286 (class 2606 OID 162921)
+-- TOC entry 3288 (class 2606 OID 163270)
 -- Name: Schedules Schedules_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2262,7 +2314,7 @@ ALTER TABLE ONLY public."Schedules"
 
 
 --
--- TOC entry 3288 (class 2606 OID 162923)
+-- TOC entry 3290 (class 2606 OID 163272)
 -- Name: SequelizeMeta SequelizeMeta_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2271,7 +2323,7 @@ ALTER TABLE ONLY public."SequelizeMeta"
 
 
 --
--- TOC entry 3290 (class 2606 OID 162925)
+-- TOC entry 3292 (class 2606 OID 163274)
 -- Name: SubMajors SubMajors_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2280,7 +2332,7 @@ ALTER TABLE ONLY public."SubMajors"
 
 
 --
--- TOC entry 3292 (class 2606 OID 162927)
+-- TOC entry 3294 (class 2606 OID 163276)
 -- Name: Topics Topics_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2289,7 +2341,7 @@ ALTER TABLE ONLY public."Topics"
 
 
 --
--- TOC entry 3294 (class 2606 OID 162929)
+-- TOC entry 3296 (class 2606 OID 163278)
 -- Name: Transactions Transactions_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2298,7 +2350,7 @@ ALTER TABLE ONLY public."Transactions"
 
 
 --
--- TOC entry 3296 (class 2606 OID 162931)
+-- TOC entry 3298 (class 2606 OID 163280)
 -- Name: TutorFeedbacks TutorFeedbacks_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2307,7 +2359,7 @@ ALTER TABLE ONLY public."TutorFeedbacks"
 
 
 --
--- TOC entry 3298 (class 2606 OID 162933)
+-- TOC entry 3300 (class 2606 OID 163282)
 -- Name: Tutors Tutors_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2316,7 +2368,7 @@ ALTER TABLE ONLY public."Tutors"
 
 
 --
--- TOC entry 3300 (class 2606 OID 162935)
+-- TOC entry 3302 (class 2606 OID 163284)
 -- Name: Types Types_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2325,7 +2377,7 @@ ALTER TABLE ONLY public."Types"
 
 
 --
--- TOC entry 3302 (class 2606 OID 162937)
+-- TOC entry 3304 (class 2606 OID 163286)
 -- Name: UserRoles UserRoles_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2334,7 +2386,7 @@ ALTER TABLE ONLY public."UserRoles"
 
 
 --
--- TOC entry 3304 (class 2606 OID 162939)
+-- TOC entry 3306 (class 2606 OID 163288)
 -- Name: Users Users_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2343,7 +2395,7 @@ ALTER TABLE ONLY public."Users"
 
 
 --
--- TOC entry 3306 (class 2606 OID 162941)
+-- TOC entry 3308 (class 2606 OID 163290)
 -- Name: Wallets Wallets_pkey; Type: CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2352,7 +2404,7 @@ ALTER TABLE ONLY public."Wallets"
 
 
 --
--- TOC entry 3309 (class 2606 OID 162942)
+-- TOC entry 3309 (class 2606 OID 163291)
 -- Name: Bookings Bookings_scheduleDetailId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2361,7 +2413,7 @@ ALTER TABLE ONLY public."Bookings"
 
 
 --
--- TOC entry 3310 (class 2606 OID 162947)
+-- TOC entry 3310 (class 2606 OID 163296)
 -- Name: Bookings Bookings_userId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2370,7 +2422,7 @@ ALTER TABLE ONLY public."Bookings"
 
 
 --
--- TOC entry 3311 (class 2606 OID 162952)
+-- TOC entry 3311 (class 2606 OID 163301)
 -- Name: CallSessions CallSessions_studentId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2379,7 +2431,7 @@ ALTER TABLE ONLY public."CallSessions"
 
 
 --
--- TOC entry 3312 (class 2606 OID 162957)
+-- TOC entry 3312 (class 2606 OID 163306)
 -- Name: CallSessions CallSessions_tutorId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2388,16 +2440,7 @@ ALTER TABLE ONLY public."CallSessions"
 
 
 --
--- TOC entry 3313 (class 2606 OID 162962)
--- Name: Courses Courses_tutorId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
---
-
-ALTER TABLE ONLY public."Courses"
-    ADD CONSTRAINT "Courses_tutorId_fkey" FOREIGN KEY ("tutorId") REFERENCES public."Users"(id);
-
-
---
--- TOC entry 3314 (class 2606 OID 162967)
+-- TOC entry 3313 (class 2606 OID 163316)
 -- Name: Messages Messages_fromId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2406,7 +2449,7 @@ ALTER TABLE ONLY public."Messages"
 
 
 --
--- TOC entry 3315 (class 2606 OID 162972)
+-- TOC entry 3314 (class 2606 OID 163321)
 -- Name: Messages Messages_toId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2415,7 +2458,7 @@ ALTER TABLE ONLY public."Messages"
 
 
 --
--- TOC entry 3316 (class 2606 OID 162977)
+-- TOC entry 3315 (class 2606 OID 163326)
 -- Name: RefreshTokens RefreshTokens_userId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2424,7 +2467,7 @@ ALTER TABLE ONLY public."RefreshTokens"
 
 
 --
--- TOC entry 3331 (class 2606 OID 163064)
+-- TOC entry 3316 (class 2606 OID 163331)
 -- Name: Reports Reports_tutorId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2433,7 +2476,7 @@ ALTER TABLE ONLY public."Reports"
 
 
 --
--- TOC entry 3330 (class 2606 OID 163059)
+-- TOC entry 3317 (class 2606 OID 163336)
 -- Name: Reports Reports_userId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2442,7 +2485,7 @@ ALTER TABLE ONLY public."Reports"
 
 
 --
--- TOC entry 3317 (class 2606 OID 162982)
+-- TOC entry 3318 (class 2606 OID 163341)
 -- Name: ScheduleDetails ScheduleDetails_scheduleId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2451,7 +2494,7 @@ ALTER TABLE ONLY public."ScheduleDetails"
 
 
 --
--- TOC entry 3318 (class 2606 OID 162987)
+-- TOC entry 3319 (class 2606 OID 163346)
 -- Name: Schedules Schedules_tutorId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2460,7 +2503,7 @@ ALTER TABLE ONLY public."Schedules"
 
 
 --
--- TOC entry 3319 (class 2606 OID 162992)
+-- TOC entry 3320 (class 2606 OID 163351)
 -- Name: SubMajors SubMajors_majorId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2469,7 +2512,7 @@ ALTER TABLE ONLY public."SubMajors"
 
 
 --
--- TOC entry 3320 (class 2606 OID 162997)
+-- TOC entry 3321 (class 2606 OID 163356)
 -- Name: Topics Topics_courseId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2478,7 +2521,7 @@ ALTER TABLE ONLY public."Topics"
 
 
 --
--- TOC entry 3321 (class 2606 OID 163002)
+-- TOC entry 3322 (class 2606 OID 163361)
 -- Name: Transactions Transactions_bookingId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2487,7 +2530,7 @@ ALTER TABLE ONLY public."Transactions"
 
 
 --
--- TOC entry 3322 (class 2606 OID 163007)
+-- TOC entry 3323 (class 2606 OID 163366)
 -- Name: Transactions Transactions_walletId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2496,7 +2539,7 @@ ALTER TABLE ONLY public."Transactions"
 
 
 --
--- TOC entry 3323 (class 2606 OID 163012)
+-- TOC entry 3324 (class 2606 OID 163371)
 -- Name: TutorFeedbacks TutorFeedbacks_firstId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2505,7 +2548,7 @@ ALTER TABLE ONLY public."TutorFeedbacks"
 
 
 --
--- TOC entry 3324 (class 2606 OID 163017)
+-- TOC entry 3325 (class 2606 OID 163376)
 -- Name: TutorFeedbacks TutorFeedbacks_secondId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2514,7 +2557,7 @@ ALTER TABLE ONLY public."TutorFeedbacks"
 
 
 --
--- TOC entry 3325 (class 2606 OID 163022)
+-- TOC entry 3326 (class 2606 OID 163381)
 -- Name: TutorFeedbacks TutorFeedbacks_sessionId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2523,7 +2566,7 @@ ALTER TABLE ONLY public."TutorFeedbacks"
 
 
 --
--- TOC entry 3326 (class 2606 OID 163027)
+-- TOC entry 3327 (class 2606 OID 163386)
 -- Name: Tutors Tutors_userId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2532,7 +2575,7 @@ ALTER TABLE ONLY public."Tutors"
 
 
 --
--- TOC entry 3327 (class 2606 OID 163032)
+-- TOC entry 3328 (class 2606 OID 163391)
 -- Name: UserRoles UserRoles_roleId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2541,7 +2584,7 @@ ALTER TABLE ONLY public."UserRoles"
 
 
 --
--- TOC entry 3328 (class 2606 OID 163037)
+-- TOC entry 3329 (class 2606 OID 163396)
 -- Name: UserRoles UserRoles_userId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2550,7 +2593,7 @@ ALTER TABLE ONLY public."UserRoles"
 
 
 --
--- TOC entry 3329 (class 2606 OID 163042)
+-- TOC entry 3330 (class 2606 OID 163401)
 -- Name: Wallets Wallets_userId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: livetutor
 --
 
@@ -2558,7 +2601,7 @@ ALTER TABLE ONLY public."Wallets"
     ADD CONSTRAINT "Wallets_userId_fkey" FOREIGN KEY ("userId") REFERENCES public."Users"(id);
 
 
--- Completed on 2021-06-28 05:10:06 +07
+-- Completed on 2021-06-28 23:47:42 +07
 
 --
 -- PostgreSQL database dump complete

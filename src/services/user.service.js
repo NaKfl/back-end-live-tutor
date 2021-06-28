@@ -261,7 +261,6 @@ userService.getAll = async ({ page = 1, perPage = 15 }) => {
 
 userService.manageActivated = async ({ id, isActivated }) => {
   const a = await User.update({ isActivated: !isActivated }, { where: { id } });
-  console.log(a);
   return a;
 };
 
