@@ -41,10 +41,7 @@ export const confirmBookingNewSchedule = async ({ origin, ...bookingInfo }) => {
       const day = date[0].date;
       const startPeriod = date[0].start;
       const endPeriod = date[date.length - 1].end;
-      const startTime = moment(
-        `${day} ${startPeriod}`,
-        'YYYY-MM-DD HH:mm',
-      ).format();
+      const startTime = `${day}T${startPeriod}:00+07:00`;
       const obj = {
         context: {
           user: {
