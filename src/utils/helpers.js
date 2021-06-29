@@ -1,6 +1,6 @@
 import moment from 'moment';
 import {
-  DATE_TIME_FORMAT_YY_MM_HH_MM_SS,
+  DATE_TIME_FORMAT_YY_MM_DD_HH_MM_SS,
   TRANSACTION_TYPES,
 } from 'utils/constants';
 
@@ -19,7 +19,7 @@ export const getIncomeOutCome = (history) => {
             {
               total,
               time: moment(curr.createdAt).format(
-                DATE_TIME_FORMAT_YY_MM_HH_MM_SS,
+                DATE_TIME_FORMAT_YY_MM_DD_HH_MM_SS,
               ),
             },
           ],
@@ -41,7 +41,7 @@ export const getIncomeOutCome = (history) => {
             {
               total,
               time: moment(curr.createdAt).format(
-                DATE_TIME_FORMAT_YY_MM_HH_MM_SS,
+                DATE_TIME_FORMAT_YY_MM_DD_HH_MM_SS,
               ),
             },
           ],

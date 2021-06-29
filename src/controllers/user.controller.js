@@ -42,8 +42,7 @@ userController.manageFavoriteTutor = catchAsync(async (req, res) => {
 
 userController.updateAvatar = catchAsync(async (req, res) => {
   const file = req.file;
-  const url =
-    'http://' + req.headers.host + `/${file.fieldname}/` + file.filename;
+  const url = req.headers?.origin + `/${file.fieldname}/` + file.filename;
   const result = await userService.uploadAvatar({
     id: req.user.id,
     locationFile: url,

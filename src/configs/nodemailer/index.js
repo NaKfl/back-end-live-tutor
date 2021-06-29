@@ -12,6 +12,7 @@ import acceptedTutor from './templates/acceptedTutor';
 import logger from 'configs/logger';
 import moment from 'moment';
 import { bookingService } from 'services';
+import { DATE_TIME_FORMAT } from 'utils/constants';
 
 const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
@@ -41,7 +42,10 @@ export const confirmBookingNewSchedule = async ({ origin, ...bookingInfo }) => {
       const day = date[0].date;
       const startPeriod = date[0].start;
       const endPeriod = date[date.length - 1].end;
-      const startTime = `${day}T${startPeriod}:00+07:00`;
+      const startTime = moment(
+        `${day} ${startPeriod}`,
+        DATE_TIME_FORMAT,
+      ).format();
       const obj = {
         context: {
           user: {

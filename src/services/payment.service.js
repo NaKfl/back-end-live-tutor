@@ -241,7 +241,7 @@ paymentService.deposit = async (userId, token) => {
         ERROR_CODE.WALLET_BLOCKED.message,
       );
 
-    const newAmount = +wallet.amount + price;
+    const newAmount = +wallet.amount + +price;
 
     const newWallet = await Wallet.update(
       { amount: newAmount },
