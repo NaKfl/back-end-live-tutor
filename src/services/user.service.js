@@ -253,6 +253,11 @@ userService.getAll = async ({ page = 1, perPage = 15 }) => {
         model: Role,
         attributes: ['name'],
       },
+      {
+        model: Wallet,
+        as: 'walletInfo',
+        attributes: ['amount'],
+      },
     ],
     ...paginate({ page, perPage }),
     order: [['createdAt', 'DESC']],
