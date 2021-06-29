@@ -1,4 +1,6 @@
 export const paginate = ({ page = 1, perPage = 20 }) => {
+  console.log({ perPage });
+  console.log({ page });
   const order = [['updatedAt', 'DESC']];
   const offset = perPage * (page - 1);
   const limit = perPage;

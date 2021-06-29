@@ -13,4 +13,6 @@ router.post(
   reportController.createReport,
 );
 
+router.get('/all', reportController.getAll);
+
 export default router;

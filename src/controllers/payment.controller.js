@@ -60,7 +60,19 @@ paymentController.getPriceOfOneDollar = catchAsync(async (req, res) => {
 });
 
 paymentController.getAll = catchAsync(async (req, res) => {
-  const data = await paymentService.getHistoryTransaction();
+  const { query } = req;
+  const data = await paymentService.getHistoryTransaction(query);
+  res.send(data);
+});
+
+paymentController.getAllFee = catchAsync(async (req, res) => {
+  const data = await paymentService.getFee();
+  res.send(data);
+});
+
+paymentController.updateFee = catchAsync(async (req, res) => {
+  const { price, id } = req.body;
+  const data = await paymentService.updateFee({ price, id });
   res.send(data);
 });
 export default paymentController;
