@@ -25,6 +25,21 @@ callSessionService.add = async ({ studentId, tutorId, startTime, endTime }) => {
   return session;
 };
 
+callSessionService.getOne = async ({ studentId, tutorId, startTime }) => {
+  const existedSession = await CallSession.findOne({
+    where: {
+      studentId,
+      tutorId,
+      startTime,
+    },
+  });
+  if (existedSession) {
+    return existedSession;
+  } else {
+    return null;
+  }
+};
+
 callSessionService.getSessionByStudentId = async ({
   id,
   page = 1,

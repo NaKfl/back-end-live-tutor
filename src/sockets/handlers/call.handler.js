@@ -89,20 +89,27 @@ const callHandler = (io, socket) => {
           ...(await onlineUsers.getSocketIdsByUserId(userCall.id)),
         ];
         const tutor = await tutorService.getOne(userBeCalled.id);
-        const session = await callSessionService.add({
+        const existedSession = await callSessionService.getOne({
           studentId: userCall.id,
           tutorId: userBeCalled.id,
           startTime,
-          endTime,
         });
-        await onlineUsers.setStatusCalling(userBeCalled.id, false);
-        socketIds.forEach((socketId) =>
-          io.to(socketId).emit('call:endedCall', {
-            userCall,
-            tutor,
-            session,
-          }),
-        );
+        if (!existedSession) {
+          const session = await callSessionService.add({
+            studentId: userCall.id,
+            tutorId: userBeCalled.id,
+            startTime,
+            endTime,
+          });
+          await onlineUsers.setStatusCalling(userBeCalled.id, false);
+          socketIds.forEach((socketId) =>
+            io.to(socketId).emit('call:endedCall', {
+              userCall,
+              tutor,
+              session,
+            }),
+          );
+        }
       }, 3000);
     },
   );
