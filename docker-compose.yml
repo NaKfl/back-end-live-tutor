@@ -7,6 +7,7 @@ services:
       - database
       - redis
     environment:
+      TZ: Asia/Ho_Chi_Minh
       NODE_ENV: production
       DATABASE_URL: postgres://livetutor:anhem1nha@database:5432/live-tutor
       DATABASE_DIALECT: postgres

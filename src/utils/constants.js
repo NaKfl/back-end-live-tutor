@@ -24,7 +24,12 @@ export const TRANSACTION_TYPES = {
 
 export const DEFAULT_PRICE_PER_DOLLAR = 23500;
 
-export const DATE_TIME_FORMAT_YY_MM_HH_MM_SS = 'YY/MM/DD HH:mm:ss';
+export const TIME_FORMAT = 'HH:mm';
+
+export const DATE_TIME_FORMAT = 'YYYY-MM-DD HH:mm';
+
+export const DATE_TIME_FORMAT_YY_MM_DD_HH_MM_SS = 'YY-MM-DD HH:mm:ss';
+
 export const ERROR_CODE = {
   INVALID_TOKEN_TYPE: {
     code: 0,

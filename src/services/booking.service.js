@@ -13,7 +13,11 @@ import { paginate } from 'utils/sequelize';
 import { v4 as uuidv4 } from 'uuid';
 import moment from 'moment';
 import { paymentService } from 'services';
-import { TRANSACTION_TYPES, ERROR_CODE } from 'utils/constants';
+import {
+  TRANSACTION_TYPES,
+  ERROR_CODE,
+  DATE_TIME_FORMAT,
+} from 'utils/constants';
 import { orderBy } from 'lodash';
 
 const bookingService = {};
@@ -124,18 +128,14 @@ bookingService.book = async (userId, scheduleDetailIds, origin) => {
     if (student && tutor) {
       let dates = scheduleDetails.map((item, index) => {
         const { scheduleInfo, startPeriod, endPeriod } = item;
-        const date = moment(scheduleInfo.date, 'YYYY-MM-DD').format(
-          'YYYY-MM-DD',
-        );
-        const start = moment(startPeriod, 'HH:mm').format('HH:mm');
-        const end = moment(endPeriod, 'HH:mm').format('HH:mm');
         return {
-          date,
-          start,
-          end,
+          date: scheduleInfo.date,
+          start: startPeriod,
+          end: endPeriod,
           bookingId: result[index].id,
         };
       });
+
       dates = orderBy(dates, ['date', 'start'], ['asc', 'asc']);
 
       let resultDates = [];
@@ -155,13 +155,11 @@ bookingService.book = async (userId, scheduleDetailIds, origin) => {
       }
 
       const roomName = uuidv4();
-      const startTime = moment();
       confirmBookingNewSchedule({
         student: student.dataValues,
         tutor: tutor.dataValues,
         dates: resultDates,
         roomName,
-        startTime,
         isSendTutor: true,
         origin,
       });
@@ -170,7 +168,6 @@ bookingService.book = async (userId, scheduleDetailIds, origin) => {
         tutor: tutor.dataValues,
         dates: resultDates,
         roomName,
-        startTime,
         isSendTutor: false,
         origin,
       });
@@ -253,9 +250,7 @@ bookingService.cancelBooking = async (userId, scheduleDetailIds) => {
     const timeBooking = scheduleBookingInfo.startPeriod;
 
     let duration = moment.duration(
-      moment(`${dateBooking} ${timeBooking}`, 'YYYY-MM-DD HH:mm').diff(
-        moment(),
-      ),
+      moment(`${dateBooking} ${timeBooking}`, DATE_TIME_FORMAT).diff(moment()),
     );
     let hours = duration.asHours();
     const canCancelBook = hours >= 24;
