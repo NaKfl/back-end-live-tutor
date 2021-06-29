@@ -47,66 +47,71 @@ callSessionService.getSessionByStudentId = async ({
   isTutor = false,
 }) => {
   let query = {};
+  page = +page;
+  perPage = +perPage;
   if (isTutor === 'true') {
     query = {
       where: {
         tutorId: id,
       },
-      include: {
-        model: User,
-        as: 'studentInfo',
-        attributes: {
-          exclude: ['password'],
-        },
-        include: [
-          {
-            model: TutorFeedback,
-            as: 'feedbacks',
-            include: [
-              {
-                model: User,
-                as: 'firstInfo',
-                attributes: {
-                  exclude: ['id', 'password'],
+      include: [
+        {
+          model: User,
+          as: 'studentInfo',
+          include: [
+            {
+              model: TutorFeedback,
+              as: 'feedbacks',
+              include: [
+                {
+                  model: User,
+                  as: 'firstInfo',
+                  attributes: {
+                    exclude: ['id', 'password'],
+                  },
                 },
-              },
-            ],
-          },
-        ],
-      },
+              ],
+            },
+          ],
+        },
+      ],
     };
   } else {
     query = {
       where: {
         studentId: id,
       },
-      include: {
-        model: User,
-        as: 'tutorInfo',
-        attributes: {
-          exclude: ['password'],
-        },
-        include: [
-          {
-            model: TutorFeedback,
-            as: 'feedbacks',
-            include: [
-              {
-                model: User,
-                as: 'secondInfo',
-                attributes: {
-                  exclude: ['id', 'password'],
-                },
-              },
-            ],
+      include: [
+        {
+          model: User,
+          as: 'tutorInfo',
+          attributes: {
+            exclude: ['password'],
           },
-        ],
-      },
+          include: [
+            {
+              model: TutorFeedback,
+              as: 'feedbacks',
+              include: [
+                {
+                  model: User,
+                  as: 'secondInfo',
+                  attributes: {
+                    exclude: ['id', 'password'],
+                  },
+                },
+              ],
+            },
+          ],
+        },
+      ],
     };
   }
+
   return CallSession.findAndCountAll({
     ...query,
     ...paginate({ page, perPage }),
+    distinct: true,
     order: [['createdAt', 'DESC']],
   });
 };

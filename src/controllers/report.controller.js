@@ -12,4 +12,11 @@ paymentController.createReport = catchAsync(async (req, res) => {
   return res.json({ message: 'Report successfully', data });
 });
 
+paymentController.getAll = catchAsync(async (req, res) => {
+  const { query } = req;
+  const { page, perPage } = query;
+  const result = await reportService.getAll({ page, perPage });
+  return res.send(result);
+});
+
 export default paymentController;

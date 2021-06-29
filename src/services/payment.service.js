@@ -587,7 +587,8 @@ paymentService.getBanks = () => {
   ];
 };
 
-paymentService.getHistoryTransaction = async () => {
+paymentService.getHistoryTransaction = async (query) => {
+  const { page, perPage } = query;
   return await Transaction.findAndCountAll({
     include: [
       {
@@ -625,8 +626,22 @@ paymentService.getHistoryTransaction = async () => {
         ],
       },
     ],
-    ...paginate({ page: 1, perPage: 15 }),
+    ...paginate({ page, perPage }),
   });
 };
 
+paymentService.getFee = async () => {
+  return await Fee.findAndCountAll();
+};
+
+paymentService.updateFee = async ({ price, id }) => {
+  return await Fee.update(
+    { price },
+    {
+      where: {
+        id,
+      },
+    },
+  );
+};
 export default paymentService;
