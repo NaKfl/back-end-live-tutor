@@ -1,4 +1,5 @@
-import { TutorFeedback, CallSession } from 'database/models';
+import { CallSession, sequelize, TutorFeedback, User } from 'database/models';
+
 const feedbackService = {};
 
 feedbackService.feedbackTutor = async ({
@@ -51,6 +52,91 @@ feedbackService.feedbackTutor = async ({
   }
 
   return review;
+};
+
+feedbackService.getAllFeedbacks = async (userId) => {
+  const feedback = await TutorFeedback.findOne({
+    separate: true,
+    attributes: [[sequelize.fn('AVG', sequelize.col('rating')), 'avgRating']],
+    where: {
+      secondId: userId,
+    },
+  });
+  const userInfo = await User.findOne({
+    where: {
+      id: userId,
+    },
+    attributes: {
+      exclude: ['password'],
+    },
+    include: [
+      {
+        model: TutorFeedback,
+        as: 'feedbacks',
+        include: [
+          {
+            model: User,
+            as: 'firstInfo',
+            attributes: {
+              exclude: ['password'],
+            },
+          },
+          {
+            model: User,
+            as: 'secondInfo',
+            attributes: {
+              exclude: ['password'],
+            },
+          },
+        ],
+      },
+    ],
+  });
+  return { userInfo, avgRating: feedback.dataValues.avgRating };
+};
+
+feedbackService.getSessionFeedback = async (userId, sessionId) => {
+  const feedback = await TutorFeedback.findOne({
+    separate: true,
+    attributes: [[sequelize.fn('AVG', sequelize.col('rating')), 'avgRating']],
+    where: {
+      sessionId,
+    },
+  });
+  const userInfo = await User.findOne({
+    where: {
+      id: userId,
+    },
+    attributes: {
+      exclude: ['password'],
+    },
+    include: [
+      {
+        model: TutorFeedback,
+        as: 'feedbacks',
+        where: {
+          sessionId,
+        },
+        include: [
+          {
+            model: User,
+            as: 'firstInfo',
+            attributes: {
+              exclude: ['password'],
+            },
+          },
+          {
+            model: User,
+            as: 'secondInfo',
+            attributes: {
+              exclude: ['password'],
+            },
+          },
+        ],
+      },
+    ],
+  });
+  return { userInfo, avgRating: feedback.dataValues.avgRating };
 };
 
 export default feedbackService;
