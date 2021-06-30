@@ -10,6 +10,7 @@ import paymentRoutes from './payment.route';
 import categoryRoutes from './category.route';
 import majorRoutes from './major.route';
 import reportRoutes from './report.route';
+import feedbackRoutes from './feedback.route';
 
 const router = express.Router();
 
@@ -30,5 +31,6 @@ router.use('/payment', paymentRoutes);
 router.use('/category', categoryRoutes);
 router.use('/major', majorRoutes);
 router.use('/report', reportRoutes);
+router.use('/feedback', feedbackRoutes);
 
 export default router;
