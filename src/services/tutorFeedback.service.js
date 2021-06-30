@@ -95,48 +95,29 @@ feedbackService.getAllFeedbacks = async (userId) => {
   return { userInfo, avgRating: feedback.dataValues.avgRating };
 };
 
-feedbackService.getSessionFeedback = async (userId, sessionId) => {
-  const feedback = await TutorFeedback.findOne({
-    separate: true,
-    attributes: [[sequelize.fn('AVG', sequelize.col('rating')), 'avgRating']],
+feedbackService.getSessionFeedback = async (sessionId) => {
+  const feedbacks = await TutorFeedback.findAll({
     where: {
       sessionId,
     },
-  });
-  const userInfo = await User.findOne({
-    where: {
-      id: userId,
-    },
-    attributes: {
-      exclude: ['password'],
-    },
     include: [
       {
-        model: TutorFeedback,
-        as: 'feedbacks',
-        where: {
-          sessionId,
+        model: User,
+        as: 'firstInfo',
+        attributes: {
+          exclude: ['password'],
         },
-        include: [
-          {
-            model: User,
-            as: 'firstInfo',
-            attributes: {
-              exclude: ['password'],
-            },
-          },
-          {
-            model: User,
-            as: 'secondInfo',
-            attributes: {
-              exclude: ['password'],
-            },
-          },
-        ],
+      },
+      {
+        model: User,
+        as: 'secondInfo',
+        attributes: {
+          exclude: ['password'],
+        },
       },
     ],
   });
-  return { userInfo, avgRating: feedback.dataValues.avgRating };
+  return feedbacks;
 };
 
 export default feedbackService;

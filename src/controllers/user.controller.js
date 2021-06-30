@@ -134,17 +134,12 @@ userController.getAllFeedbacks = catchAsync(async (req, res) => {
 });
 
 userController.getSessionFeedback = catchAsync(async (req, res) => {
-  const { user } = req;
   const { id: sessionId } = req.params;
-  let data = {};
-  const { userInfo, avgRating } = await feedbackService.getSessionFeedback(
-    user.id,
-    sessionId,
-  );
-  if (user) {
-    data = userInfo.toJSON();
-    data.avgRating = avgRating ? avgRating : 0;
-  }
-  res.json({ message: 'Success', data });
+  const feedbacks = await feedbackService.getSessionFeedback(sessionId);
+
+  res.json({
+    message: 'Success',
+    data: feedbacks,
+  });
 });
 export default userController;
