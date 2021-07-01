@@ -13,6 +13,7 @@ import callService from './callSession.service';
 import paymentService from './payment.service';
 import refreshTokenService from './refreshToken.service';
 import reportService from './report.service';
+import notificationService from './notification.service';
 
 export {
   callService,
@@ -30,4 +31,5 @@ export {
   paymentService,
   refreshTokenService,
   reportService,
+  notificationService,
 };

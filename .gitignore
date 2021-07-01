@@ -56,3 +56,5 @@ dist
 src/uploads/*
 
 build
+
+**/firebase-credentials.json

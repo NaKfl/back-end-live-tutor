@@ -11,6 +11,7 @@ import categoryRoutes from './category.route';
 import majorRoutes from './major.route';
 import reportRoutes from './report.route';
 import feedbackRoutes from './feedback.route';
+import notificationRoutes from './notification.route';
 
 const router = express.Router();
 
@@ -32,5 +33,6 @@ router.use('/category', categoryRoutes);
 router.use('/major', majorRoutes);
 router.use('/report', reportRoutes);
 router.use('/feedback', feedbackRoutes);
+router.use('/notification', notificationRoutes);
 
 export default router;
