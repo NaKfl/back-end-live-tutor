@@ -1,4 +1,12 @@
-import { Role, User, UserRole, Tutor, Wallet } from 'database/models';
+import {
+  Role,
+  User,
+  UserRole,
+  Tutor,
+  Wallet,
+  TutorFeedback,
+  sequelize,
+} from 'database/models';
 import ApiError from 'utils/ApiError';
 import { Op } from 'sequelize';
 import { v4 as uuidv4 } from 'uuid';
@@ -54,7 +62,15 @@ userService.getUserById = async (id) => {
 };
 
 userService.getInfoById = async (id) => {
-  return await User.findOne({
+  const feedback = await TutorFeedback.findOne({
+    separate: true,
+    attributes: [[sequelize.fn('AVG', sequelize.col('rating')), 'avgRating']],
+    where: {
+      secondId: id,
+    },
+  });
+
+  const userInfo = await User.findOne({
     attributes: {
       exclude: ['password'],
     },
@@ -65,8 +81,32 @@ userService.getInfoById = async (id) => {
       { model: Role },
       { model: Wallet, as: 'walletInfo' },
       { model: Tutor, as: 'tutorInfo' },
+      {
+        model: TutorFeedback,
+        as: 'feedbacks',
+        include: [
+          {
+            model: User,
+            as: 'firstInfo',
+            attributes: {
+              exclude: ['password'],
+            },
+          },
+          {
+            model: User,
+            as: 'secondInfo',
+            attributes: {
+              exclude: ['password'],
+            },
+          },
+        ],
+      },
     ],
   });
+  return {
+    userInfo,
+    avgRating: feedback.dataValues.avgRating,
+  };
 };
 
 userService.updateUserById = async (fields, id) => {

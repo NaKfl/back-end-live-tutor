@@ -8,48 +8,27 @@ feedbackService.feedbackTutor = async ({
   secondId,
   content,
   rating,
+  isTutor,
 }) => {
-  const existReview = await TutorFeedback.findOne({
-    where: {
-      sessionId,
-      firstId,
-      secondId,
-    },
+  const review = await TutorFeedback.create({
+    sessionId,
+    firstId,
+    secondId,
+    content,
+    rating,
   });
-  let review;
-  if (existReview) {
-    review = await TutorFeedback.update(
-      {
-        content,
-        rating,
+  const needUpdate = isTutor ? { isTutorReviewed: true } : { isReviewed: true };
+
+  await CallSession.update(
+    {
+      ...needUpdate,
+    },
+    {
+      where: {
+        id: sessionId,
       },
-      {
-        where: {
-          sessionId,
-          firstId,
-          secondId,
-        },
-      },
-    );
-  } else {
-    review = await TutorFeedback.create({
-      sessionId,
-      firstId,
-      secondId,
-      content,
-      rating,
-    });
-    await CallSession.update(
-      {
-        isReviewed: true,
-      },
-      {
-        where: {
-          id: sessionId,
-        },
-      },
-    );
-  }
+    },
+  );
 
   return review;
 };
@@ -95,10 +74,11 @@ feedbackService.getAllFeedbacks = async (userId) => {
   return { userInfo, avgRating: feedback.dataValues.avgRating };
 };
 
-feedbackService.getSessionFeedback = async (sessionId) => {
+feedbackService.getSessionFeedback = async (sessionId, userId) => {
   const feedbacks = await TutorFeedback.findAll({
     where: {
       sessionId,
+      firstId: userId,
     },
     include: [
       {

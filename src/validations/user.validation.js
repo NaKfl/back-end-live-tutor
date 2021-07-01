@@ -26,9 +26,10 @@ userValidation.manageFavoriteTutor = {
 userValidation.feedbackTutor = {
   body: Joi.object({
     sessionId: Joi.string().required(),
-    tutorId: Joi.string().required(),
+    userId: Joi.string().required(),
     rating: Joi.number().required(),
     content: Joi.string().allow(null, ''),
+    isTutor: Joi.boolean(),
   }),
 };
 

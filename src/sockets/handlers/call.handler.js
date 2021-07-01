@@ -1,4 +1,3 @@
-import { tutorService } from 'services';
 import callSessionService from 'services/callSession.service';
 import { onlineUsers } from '../controllers';
 import { v4 as uuidv4 } from 'uuid';
@@ -85,10 +84,12 @@ const callHandler = (io, socket) => {
     'call:endCall',
     async ({ userCall, userBeCalled, startTime, endTime }) => {
       setTimeout(async () => {
-        const socketIds = [
+        const socketIdsUserCall = [
           ...(await onlineUsers.getSocketIdsByUserId(userCall.id)),
         ];
-        const tutor = await tutorService.getOne(userBeCalled.id);
+        const socketIdsUserBeCalled = [
+          ...(await onlineUsers.getSocketIdsByUserId(userBeCalled.id)),
+        ];
         const existedSession = await callSessionService.getOne({
           studentId: userCall.id,
           tutorId: userBeCalled.id,
@@ -102,10 +103,17 @@ const callHandler = (io, socket) => {
             endTime,
           });
           await onlineUsers.setStatusCalling(userBeCalled.id, false);
-          socketIds.forEach((socketId) =>
+          socketIdsUserCall.forEach((socketId) =>
             io.to(socketId).emit('call:endedCall', {
               userCall,
-              tutor,
+              userBeCalled,
+              session,
+            }),
+          );
+          socketIdsUserBeCalled.forEach((socketId) =>
+            io.to(socketId).emit('call:endedCallTutor', {
+              userCall,
+              userBeCalled,
               session,
             }),
           );
