@@ -1,6 +1,8 @@
 import catchAsync from 'utils/catchAsync';
 import { tutorService, favoriteService, userService } from 'services';
-import { ROLES } from 'utils/constants';
+import { ERROR_CODE, ROLES } from 'utils/constants';
+import { getFullPathUrl, isOverThanLimitSize, unLinkPath } from 'utils/common';
+import ApiError from 'utils/ApiError';
 
 const tutorController = {};
 
@@ -18,25 +20,47 @@ tutorController.getMore = catchAsync(async (req, res) => {
 });
 
 tutorController.register = catchAsync(async (req, res) => {
-  const file = req.files;
+  const files = req.files;
+  let error = {};
+  Object.keys(files).forEach((key) => {
+    const file = files[key][0];
+    if (isOverThanLimitSize(file)) {
+      error[key] = true;
+      unLinkPath(file.path);
+    }
+  });
+  Object.keys(error).forEach((key) => {
+    if (error[key] === true) {
+      if (key === 'avatar') {
+        throw new ApiError(
+          ERROR_CODE.FILE_SIZE_OVER_LIMIT_AVATAR.code,
+          ERROR_CODE.FILE_SIZE_OVER_LIMIT_AVATAR.message,
+        );
+      } else {
+        throw new ApiError(
+          ERROR_CODE.FILE_SIZE_OVER_LIMIT_VIDEO.code,
+          ERROR_CODE.FILE_SIZE_OVER_LIMIT_VIDEO.message,
+        );
+      }
+    }
+  });
+
   const avatar =
-    'http://' +
-    req.headers.host +
-    `/${file?.avatar[0]?.fieldname}/` +
-    file?.avatar[0]?.filename;
+    getFullPathUrl(req) +
+    `/${files?.avatar[0]?.fieldname}/` +
+    files?.avatar[0]?.filename;
   const video =
-    'http://' +
-    req.headers.host +
-    `/${file?.video[0]?.fieldname}/` +
-    file?.video[0]?.filename;
-  const result = await tutorService.createWithUserId(
-    { ...req.body },
-    req?.user?.id,
-    avatar,
-    video,
-  );
-  await userService.createRole(req?.user?.id, ROLES.TUTOR);
-  res.send(result);
+    getFullPathUrl(req) +
+    `/${files?.video[0]?.fieldname}/` +
+    files?.video[0]?.filename;
+  // const result = await tutorService.createWithUserId(
+  //   { ...req.body },
+  //   req?.user?.id,
+  //   avatar,
+  //   video,
+  // );
+  // await userService.createRole(req?.user?.id, ROLES.TUTOR);
+  // res.send(result);
 });
 
 tutorController.getOne = catchAsync(async (req, res) => {

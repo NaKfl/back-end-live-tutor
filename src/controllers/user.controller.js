@@ -7,7 +7,9 @@ import {
 } from 'services';
 import moment from 'moment';
 import { sendForgotPasswordEmail } from 'configs/nodemailer';
-import { stringDate } from 'utils/common';
+import { getFullPathUrl, stringDate, unLinkPath } from 'utils/common';
+import { ERROR_CODE, MAX_AVATAR_SIZE } from 'utils/constants';
+import ApiError from 'utils/ApiError';
 
 const userController = {};
 
@@ -51,7 +53,14 @@ userController.manageFavoriteTutor = catchAsync(async (req, res) => {
 
 userController.updateAvatar = catchAsync(async (req, res) => {
   const file = req.file;
-  const url = req.headers?.origin + `/${file.fieldname}/` + file.filename;
+  if (file.size >= MAX_AVATAR_SIZE) {
+    unLinkPath(file.path);
+    throw new ApiError(
+      ERROR_CODE.FILE_SIZE_OVER_LIMIT_AVATAR.code,
+      ERROR_CODE.FILE_SIZE_OVER_LIMIT_AVATAR.message,
+    );
+  }
+  const url = getFullPathUrl(req) + `/${file.fieldname}/` + file.filename;
   const result = await userService.uploadAvatar({
     id: req.user.id,
     locationFile: url,

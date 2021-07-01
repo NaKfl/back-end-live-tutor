@@ -1,4 +1,6 @@
 import moment from 'moment';
+import fs from 'fs';
+import { MAX_AVATAR_SIZE, MAX_VIDEO_SIZE } from './constants';
 
 export const pick = (object, keys) => {
   if (!keys) return object;
@@ -75,4 +77,21 @@ export const stringDate = (miliseconds) => {
     strDates = strDates + seconds + ' seconds ';
   }
   return strDates;
+};
+
+export const unLinkPath = (path) => {
+  fs.unlinkSync(path);
+};
+
+export const getFullPathUrl = (req) => {
+  return req.protocol + '://' + req.get('host');
+};
+
+export const isOverThanLimitSize = (file) => {
+  if (file.fieldname === 'avatar') {
+    if (file?.size <= MAX_AVATAR_SIZE) return false;
+  } else if (file.fieldname === 'video') {
+    if (file?.size <= MAX_VIDEO_SIZE) return false;
+  }
+  return true;
 };

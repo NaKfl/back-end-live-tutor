@@ -127,4 +127,16 @@ export const ERROR_CODE = {
     code: 23,
     message: 'Deposit was rejected',
   },
+  FILE_SIZE_OVER_LIMIT_AVATAR: {
+    code: 24,
+    message: 'Avatar file size is over limit',
+  },
+  FILE_SIZE_OVER_LIMIT_VIDEO: {
+    code: 25,
+    message: 'Video size is over limit',
+  },
 };
+
+export const MAX_AVATAR_SIZE = 5 * 1024 * 1024;
+
+export const MAX_VIDEO_SIZE = 50 * 1024 * 1024;
