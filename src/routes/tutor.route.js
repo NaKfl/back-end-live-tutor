@@ -22,7 +22,7 @@ router.get(
 
 const cpUpload = upload.fields([
   { name: 'avatar', maxCount: 1 },
-  { name: 'video', maxCount: 8 },
+  { name: 'video', maxCount: 1 },
 ]);
 router.post('/register', auth(), cpUpload, tutorController.register);
 

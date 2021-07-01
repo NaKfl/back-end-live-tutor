@@ -92,6 +92,7 @@ const upload = multer({
       ),
     );
   },
+  limits: 1024 * 1024 * 3,
 });
 
 export default upload;

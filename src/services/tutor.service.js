@@ -334,7 +334,7 @@ tutorService.searchWithFilter = async ({
       return {
         ...pre,
         [now]: {
-          [Op.and]: [
+          [Op.or]: [
             ...filter[now].map((value) => ({ [Op.like]: `%${value}%` })),
           ],
         },
