@@ -353,21 +353,21 @@ tutorService.searchWithFilter = async ({
     where: {
       [Op.and]: [
         ...andFilter,
-        {
-          [Op.or]: searchHelp({
-            Op,
-            keys: [
-              'education',
-              'bio',
-              'experience',
-              'profession',
-              'accent',
-              'interests',
-              'resume',
-            ],
-            searchKey: search,
-          }),
-        },
+        // {
+        //   [Op.or]: searchHelp({
+        //     Op,
+        //     keys: [
+        //       'education',
+        //       'bio',
+        //       'experience',
+        //       'profession',
+        //       'accent',
+        //       'interests',
+        //       'resume',
+        //     ],
+        //     searchKey: search,
+        //   }),
+        // },
       ],
     },
     include: [
