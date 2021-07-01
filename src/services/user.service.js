@@ -19,7 +19,7 @@ import { paginate } from 'utils/sequelize';
 
 const userService = {};
 
-function jsUcfirst(string) {
+function jsUcfirst(string = 'Anonymous') {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
