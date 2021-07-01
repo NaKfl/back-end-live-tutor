@@ -345,7 +345,7 @@ bookingService.getBookingListForStudent = async ({
   page = 1,
   perPage = 10,
 }) => {
-  const bookingList = await Booking.findAll({
+  const bookingList = await Booking.findAndCountAll({
     include: [
       {
         model: ScheduleDetail,
@@ -382,7 +382,7 @@ bookingService.getBookingListForTutor = async ({
   page = 1,
   perPage = 10,
 }) => {
-  const bookedSchedule = await ScheduleDetail.findAll({
+  const bookedSchedule = await ScheduleDetail.findAndCountAll({
     include: [
       {
         model: Schedule,
