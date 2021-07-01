@@ -26,6 +26,7 @@ services:
       CLIENT_URL: https://livetutor.live
       SERVER_URL: https://api.livetutor.live
       ADMIN_URL: https://admin.livetutor.live
+      FIREBASE_CREDENTIALS: ../../firebase-credentials.json
 
     command: sh -c "./wait-for-it.sh database:5432 && pm2-runtime ecosystem.config.js"
     ports:

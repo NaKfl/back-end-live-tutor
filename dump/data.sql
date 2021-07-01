@@ -1,11 +1,11 @@
 --
--- PostgreSQL database dump
+-- livetutorQL database dump
 --
 
 -- Dumped from database version 13.3
 -- Dumped by pg_dump version 13.1
 
--- Started on 2021-07-01 22:51:03 +07
+-- Started on 2021-07-02 00:11:31 +07
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -2637,9 +2637,9 @@ ALTER TABLE ONLY public."Wallets"
     ADD CONSTRAINT "Wallets_userId_fkey" FOREIGN KEY ("userId") REFERENCES public."Users"(id);
 
 
--- Completed on 2021-07-01 22:51:04 +07
+-- Completed on 2021-07-02 00:11:31 +07
 
 --
--- PostgreSQL database dump complete
+-- livetutorQL database dump complete
 --
 
