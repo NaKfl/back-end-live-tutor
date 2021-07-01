@@ -13,8 +13,17 @@ const userController = {};
 
 userController.getInfo = catchAsync(async (req, res) => {
   const { id } = req.user;
-  const user = await userService.getInfoById(id);
-  res.json({ user: user.transform() });
+  const { userId } = req.params;
+  let idUser = id;
+  if (userId) {
+    idUser = userId;
+  }
+  const { userInfo, avgRating } = await userService.getInfoById(idUser);
+  const user = {
+    ...userInfo.transform(),
+    avgRating: avgRating ?? 0,
+  };
+  res.json({ user });
 });
 
 userController.updateInfo = catchAsync(async (req, res) => {
@@ -52,13 +61,14 @@ userController.updateAvatar = catchAsync(async (req, res) => {
 
 userController.feedbackTutor = catchAsync(async (req, res) => {
   const { user, body } = req;
-  const { sessionId, tutorId, rating, content } = body;
+  const { sessionId, userId, rating, content, isTutor } = body;
   const data = await feedbackService.feedbackTutor({
     sessionId,
     firstId: user.id,
-    secondId: tutorId,
+    secondId: userId,
     rating,
     content,
+    isTutor,
   });
   res.json({ message: 'Feedback success', data });
 });
@@ -134,8 +144,12 @@ userController.getAllFeedbacks = catchAsync(async (req, res) => {
 });
 
 userController.getSessionFeedback = catchAsync(async (req, res) => {
+  const { user } = req;
   const { id: sessionId } = req.params;
-  const feedbacks = await feedbackService.getSessionFeedback(sessionId);
+  const feedbacks = await feedbackService.getSessionFeedback(
+    sessionId,
+    user.id,
+  );
 
   res.json({
     message: 'Success',

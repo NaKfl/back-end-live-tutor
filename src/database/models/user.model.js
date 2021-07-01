@@ -105,6 +105,8 @@ module.exports = (sequelize, DataTypes) => {
       'isActivated',
       'tutorInfo',
       'walletInfo',
+      'feedbacks',
+      'avgRating',
     ];
     return pick(this, fields);
   };
