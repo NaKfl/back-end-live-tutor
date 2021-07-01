@@ -25,4 +25,5 @@ export const googleCredential = {
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
   refreshToken: process.env.GOOGLE_REFRESH_TOKEN,
   accessToken: process.env.GOOGLE_ACCESS_TOKEN,
+  firebase: process.env.FIREBASE_CREDENTIALS,
 };
