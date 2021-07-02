@@ -137,6 +137,6 @@ export const ERROR_CODE = {
   },
 };
 
-export const MAX_AVATAR_SIZE = 5 * 1024 * 1024;
+export const MAX_AVATAR_SIZE = 10 * 1024 * 1024;
 
-export const MAX_VIDEO_SIZE = 50 * 1024 * 1024;
+export const MAX_VIDEO_SIZE = 100 * 1024 * 1024;

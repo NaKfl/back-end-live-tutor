@@ -53,14 +53,14 @@ tutorController.register = catchAsync(async (req, res) => {
     getFullPathUrl(req) +
     `/${files?.video[0]?.fieldname}/` +
     files?.video[0]?.filename;
-  // const result = await tutorService.createWithUserId(
-  //   { ...req.body },
-  //   req?.user?.id,
-  //   avatar,
-  //   video,
-  // );
-  // await userService.createRole(req?.user?.id, ROLES.TUTOR);
-  // res.send(result);
+  const result = await tutorService.createWithUserId(
+    { ...req.body },
+    req?.user?.id,
+    avatar,
+    video,
+  );
+  await userService.createRole(req?.user?.id, ROLES.TUTOR);
+  res.send(result);
 });
 
 tutorController.getOne = catchAsync(async (req, res) => {
