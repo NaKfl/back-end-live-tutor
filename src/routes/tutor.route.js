@@ -28,6 +28,8 @@ router.post('/register', auth(), cpUpload, tutorController.register);
 
 router.get('/:id', auth(), tutorController.getOne);
 
+router.post('/', auth(), cpUpload, tutorController.updateOne);
+
 router.get('/rank/:num', auth(), tutorController.getListRankTutor);
 
 router.get(
