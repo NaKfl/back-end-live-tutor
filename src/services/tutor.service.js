@@ -168,7 +168,7 @@ tutorService.getAllOnlineTutors = async () => {
       item.rating = +(rating / item.feedbacks.length).toFixed(1);
     }
     item.isOnline = true;
-    return { ...item.User, ...item, price: item.price.price };
+    return { ...item.User, ...item, price: item?.price?.price || 0 };
   });
   return ratedTutors;
 };
