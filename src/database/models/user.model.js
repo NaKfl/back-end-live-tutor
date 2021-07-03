@@ -28,6 +28,11 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'secondId',
         as: 'feedbacks',
       });
+
+      this.hasOne(models.FeeTutor, {
+        foreignKey: 'tutorId',
+        as: 'price',
+      });
     }
   }
 

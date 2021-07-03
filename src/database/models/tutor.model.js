@@ -8,6 +8,11 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsTo(models.User, {
         foreignKey: 'userId',
       });
+      this.hasOne(models.FeeTutor, {
+        foreignKey: 'tutorId',
+        as: 'price',
+        sourceKey: 'userId',
+      });
     }
   }
 

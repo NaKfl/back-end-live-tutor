@@ -396,6 +396,16 @@ const reports = [...Array(200)].map(() => ({
   updatedAt: new Date(),
 }));
 
+const feeTutor = tutors.map((tutor) => {
+  return {
+    id: faker.random.uuid(),
+    tutorId: tutor.id,
+    price: (Math.floor(Math.random() * 10) + 1) * 50 * 1000,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  };
+});
+
 module.exports = {
   tutors,
   students,
@@ -419,6 +429,7 @@ module.exports = {
   languageCategory,
   specialtieCategory,
   reports,
+  feeTutor,
   up: () => Promise.resolve(),
   down: () => Promise.resolve(),
 };

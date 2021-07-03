@@ -21,16 +21,16 @@ tutorController.getMore = catchAsync(async (req, res) => {
 
 tutorController.register = catchAsync(async (req, res) => {
   const files = req.files;
-  let error = {};
+  let errorSizeLimit = {};
   Object.keys(files).forEach((key) => {
     const file = files[key][0];
     if (isOverThanLimitSize(file)) {
-      error[key] = true;
+      errorSizeLimit[key] = true;
       unLinkPath(file.path);
     }
   });
-  Object.keys(error).forEach((key) => {
-    if (error[key] === true) {
+  Object.keys(errorSizeLimit).forEach((key) => {
+    if (errorSizeLimit[key] === true) {
       if (key === 'avatar') {
         throw new ApiError(
           ERROR_CODE.FILE_SIZE_OVER_LIMIT_AVATAR.code,
@@ -67,7 +67,7 @@ tutorController.getOne = catchAsync(async (req, res) => {
   const { user } = req;
   const { id: tutorUserId } = req.params;
   let responseData = {};
-  const { tutor, avgRating } = await tutorService.getOne(tutorUserId);
+  const { tutor, avgRating, price } = await tutorService.getOne(tutorUserId);
   if (tutor) {
     responseData = tutor.toJSON();
     const isFavorite = await tutorService.checkIsFavoriteTutorByUserId(
@@ -76,6 +76,7 @@ tutorController.getOne = catchAsync(async (req, res) => {
     );
     responseData.isFavorite = isFavorite;
     responseData.avgRating = avgRating ? avgRating : 0;
+    responseData.price = price;
   }
   res.send(responseData);
 });
@@ -159,4 +160,8 @@ tutorController.searchTutor = catchAsync(async (req, res) => {
   res.send(result);
 });
 
+tutorController.accountingPerHour = catchAsync(async (req, res) => {
+  const result = await tutorService.test(req.user.id);
+  res.send(result);
+});
 export default tutorController;
