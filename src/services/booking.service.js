@@ -6,7 +6,6 @@ import {
   Schedule,
   Transaction,
 } from 'database/models';
-import { Op } from 'sequelize';
 import ApiError from 'utils/ApiError';
 import { confirmBookingNewSchedule } from 'configs/nodemailer';
 import { paginate } from 'utils/sequelize';
