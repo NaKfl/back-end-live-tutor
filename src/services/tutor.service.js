@@ -3,6 +3,7 @@ import {
   User,
   TutorFeedback,
   FavoriteTutor,
+  FeeTutor,
   sequelize,
 } from 'database/models';
 import { paginate, searchHelp, SetById } from 'utils/sequelize';
@@ -10,7 +11,7 @@ import { Op } from 'sequelize';
 import { onlineUsers } from 'sockets/controllers';
 import ApiError from 'utils/ApiError';
 import { ERROR_CODE } from 'utils/constants';
-import { userService } from 'services';
+import { userService, feeTutorService } from 'services';
 import { sendMailAcceptedTutor } from 'configs/nodemailer';
 
 const tutorService = {};
@@ -41,6 +42,10 @@ tutorService.getMany = async (query) => {
               },
             ],
           },
+          {
+            model: FeeTutor,
+            as: 'price',
+          },
         ],
       },
     ],
@@ -49,7 +54,11 @@ tutorService.getMany = async (query) => {
 
   const promises = tutors.rows.map(async (tutor) => {
     const user = tutor.User;
-    const groupUser = { ...user.dataValues, ...tutor.dataValues };
+    const groupUser = {
+      ...user.dataValues,
+      ...tutor.dataValues,
+      price: +tutor?.price?.price || 0,
+    };
     delete groupUser.User;
     return groupUser;
   });
@@ -89,13 +98,21 @@ tutorService.getMore = async (query, user) => {
           },
         ],
       },
+      {
+        model: FeeTutor,
+        as: 'price',
+      },
     ],
     ...paginate({ page, perPage }),
   });
 
   const promises = tutors.rows.map(async (tutor) => {
     const user = tutor.User;
-    const groupUser = { ...user.dataValues, ...tutor.dataValues };
+    const groupUser = {
+      ...user.dataValues,
+      ...tutor.dataValues,
+      price: +tutor?.price?.price || 0,
+    };
     groupUser.isOnline = await onlineUsers.isUserOnline(tutor.userId);
     delete groupUser.User;
     return groupUser;
@@ -136,6 +153,10 @@ tutorService.getAllOnlineTutors = async () => {
           },
         ],
       },
+      {
+        model: FeeTutor,
+        as: 'price',
+      },
     ],
   });
 
@@ -147,7 +168,7 @@ tutorService.getAllOnlineTutors = async () => {
       item.rating = +(rating / item.feedbacks.length).toFixed(1);
     }
     item.isOnline = true;
-    return { ...item.User, ...item };
+    return { ...item.User, ...item, price: item.price.price };
   });
   return ratedTutors;
 };
@@ -162,6 +183,7 @@ tutorService.getOne = async (userId) => {
   });
 
   // TODO: Add include price
+  const price = await feeTutorService.getFeeOfTutor(userId);
 
   const tutor = await Tutor.findOne({
     where: {
@@ -191,7 +213,11 @@ tutorService.getOne = async (userId) => {
       },
     ],
   });
-  return { tutor, avgRating: feedback.dataValues.avgRating };
+  return {
+    tutor,
+    avgRating: feedback.dataValues.avgRating,
+    price: +price.price,
+  };
 };
 
 tutorService.checkIsFavoriteTutorByUserId = async (firstId, secondId) => {
@@ -266,31 +292,44 @@ tutorService.createWithUserId = async (fields, userId, avatar, video) => {
       },
     );
 
-    // TODO: Handle price per tutor here
-    // console.log('Price: ', price);
+    const initPrice = await feeTutorService.createFeeOfTutor(userId, price);
 
-    return await Tutor.create({
+    const initTutor = await Tutor.create({
       ...othersInfo,
       video,
       userId,
     });
+    return {
+      ...initTutor.dataValues,
+      price: initPrice.price,
+    };
   }
 };
 
 tutorService.updateOne = async (id, { price, ...data }) => {
-  const tutor = await Tutor.update(data, {
+  const setPrice = await feeTutorService.setFeeOfTutor(id, price);
+
+  if (Object.keys(data).length > 0) {
+    const tutor = await Tutor.update(data, {
+      where: {
+        userId: id,
+      },
+      returning: true,
+    });
+    return {
+      price: setPrice.price,
+      ...tutor[1][0].dataValues,
+    };
+  }
+  const tutor = await Tutor.findOne({
     where: {
       userId: id,
     },
-    returning: true,
   });
-
-  // TODO: Handle price per tutor here
-  // console.log('Price: ', price);
-
-  // TODO: Query tutor with price before returning
-
-  return tutor[1][0];
+  return {
+    ...tutor.dataValues,
+    price: setPrice.price,
+  };
 };
 
 tutorService.getListRankTutor = async (num) => {
@@ -412,6 +451,10 @@ tutorService.searchWithFilter = async ({
           },
         ],
       },
+      {
+        model: FeeTutor,
+        as: 'price',
+      },
     ],
   });
 
@@ -449,6 +492,10 @@ tutorService.searchWithFilter = async ({
             },
           ],
         },
+        {
+          model: FeeTutor,
+          as: 'price',
+        },
       ],
     });
     matchTutor = SetById([...tutorsFilter.rows, ...tutorsByName.rows]);
@@ -457,7 +504,11 @@ tutorService.searchWithFilter = async ({
   const promises = matchTutor
     .map((tutor) => {
       const user = tutor.User;
-      const groupUser = { ...user.dataValues, ...tutor.dataValues };
+      const groupUser = {
+        ...user.dataValues,
+        ...tutor.dataValues,
+        price: +tutor?.price?.price || 0,
+      };
       delete groupUser.User;
       return groupUser;
     })
