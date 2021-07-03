@@ -12,7 +12,7 @@ import acceptedTutor from './templates/acceptedTutor';
 import logger from 'configs/logger';
 import moment from 'moment';
 import { bookingService } from 'services';
-import { DATE_TIME_FORMAT } from 'utils/constants';
+import { DATE_TIME_FORMAT, TIME_IN_ROOM } from 'utils/constants';
 
 const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
@@ -38,10 +38,10 @@ export const confirmBookingNewSchedule = async ({ origin, ...bookingInfo }) => {
         : bookingInfo.student.email,
     };
     const listDates = bookingInfo.dates.map((date) => {
-      const bookingIds = date.map((item) => item.bookingId);
-      const day = date[0].date;
-      const startPeriod = date[0].start;
-      const endPeriod = date[date.length - 1].end;
+      const bookingId = date?.bookingId;
+      const day = date?.date;
+      const startPeriod = date?.start;
+      const endPeriod = date?.end;
       const startTime = moment(
         `${day} ${startPeriod}`,
         DATE_TIME_FORMAT,
@@ -59,16 +59,20 @@ export const confirmBookingNewSchedule = async ({ origin, ...bookingInfo }) => {
         userBeCalled: bookingInfo?.tutor,
         isTutor: bookingInfo?.isSendTutor,
         startTime,
+        timeInRoom: TIME_IN_ROOM,
       };
+      let duration = moment.duration(startTime.diff(moment()));
+      let durationExpired = duration.asSeconds();
       const token = jwt.sign(obj, jwtVar.secret, {
         issuer: 'livetutor',
         subject: 'https://meet.livetutor.live',
         audience: 'livetutor',
+        expiresIn: `${durationExpired}s`,
       });
       const linkWithoutOrigin = `/call/?token=${token}`;
       const link = `${origin}/call/?token=${token}`;
       bookingService.updateLink(
-        bookingIds,
+        bookingId,
         bookingInfo?.isSendTutor,
         linkWithoutOrigin,
       );
