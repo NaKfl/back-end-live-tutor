@@ -80,6 +80,51 @@ tutorController.getOne = catchAsync(async (req, res) => {
   res.send(responseData);
 });
 
+tutorController.updateOne = catchAsync(async (req, res) => {
+  const files = req.files;
+  let error = {};
+  Object.keys(files).forEach((key) => {
+    const file = files[key][0];
+    if (isOverThanLimitSize(file)) {
+      error[key] = true;
+      unLinkPath(file.path);
+    }
+  });
+  Object.keys(error).forEach((key) => {
+    if (error[key] === true) {
+      if (key === 'avatar') {
+        throw new ApiError(
+          ERROR_CODE.FILE_SIZE_OVER_LIMIT_AVATAR.code,
+          ERROR_CODE.FILE_SIZE_OVER_LIMIT_AVATAR.message,
+        );
+      } else {
+        throw new ApiError(
+          ERROR_CODE.FILE_SIZE_OVER_LIMIT_VIDEO.code,
+          ERROR_CODE.FILE_SIZE_OVER_LIMIT_VIDEO.message,
+        );
+      }
+    }
+  });
+
+  const updatedData = { ...req.body };
+
+  if (files?.avatar)
+    updatedData.avatar =
+      getFullPathUrl(req) +
+      `/${files?.avatar[0]?.fieldname}/` +
+      files?.avatar[0]?.filename;
+
+  if (files?.video)
+    updatedData.video =
+      getFullPathUrl(req) +
+      `/${files?.video[0]?.fieldname}/` +
+      files?.video[0]?.filename;
+
+  const data = await tutorService.updateOne(req?.user?.id, updatedData);
+
+  res.json({ message: 'Update tutor info successfully', data });
+});
+
 tutorController.getWaitingList = catchAsync(async (req, res) => {
   const data = await tutorService.getWaitingList();
   res.json({ message: 'Success', data });

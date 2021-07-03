@@ -160,6 +160,9 @@ tutorService.getOne = async (userId) => {
       secondId: userId,
     },
   });
+
+  // TODO: Add include price
+
   const tutor = await Tutor.findOne({
     where: {
       userId,
@@ -253,7 +256,7 @@ tutorService.createWithUserId = async (fields, userId, avatar, video) => {
       ERROR_CODE.HAVE_BEEN_TUTOR.message,
     );
   } else {
-    const { name, country, birthday, ...othersInfo } = fields;
+    const { name, country, birthday, price, ...othersInfo } = fields;
     await User.update(
       { name, country, birthday, avatar },
       {
@@ -262,15 +265,32 @@ tutorService.createWithUserId = async (fields, userId, avatar, video) => {
         },
       },
     );
-    // const { languages, specialties, ...textValues } = othersInfo;
+
+    // TODO: Handle price per tutor here
+    // console.log('Price: ', price);
 
     return await Tutor.create({
-      // ...textValues,
       ...othersInfo,
       video,
       userId,
     });
   }
+};
+
+tutorService.updateOne = async (id, { price, ...data }) => {
+  const tutor = await Tutor.update(data, {
+    where: {
+      userId: id,
+    },
+    returning: true,
+  });
+
+  // TODO: Handle price per tutor here
+  // console.log('Price: ', price);
+
+  // TODO: Query tutor with price before returning
+
+  return tutor[1][0];
 };
 
 tutorService.getListRankTutor = async (num) => {
