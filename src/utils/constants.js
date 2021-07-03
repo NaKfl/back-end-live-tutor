@@ -28,6 +28,8 @@ export const TIME_FORMAT = 'HH:mm';
 
 export const DATE_TIME_FORMAT = 'YYYY-MM-DD HH:mm';
 
+export const TIME_IN_ROOM = 30 * 60; // 30 phut
+
 export const DATE_TIME_FORMAT_YY_MM_DD_HH_MM_SS = 'YY-MM-DD HH:mm:ss';
 
 export const ERROR_CODE = {

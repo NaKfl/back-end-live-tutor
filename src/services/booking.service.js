@@ -125,40 +125,29 @@ bookingService.book = async (userId, scheduleDetailIds, origin) => {
 
   if (result) {
     //Mailing
+
     if (student && tutor) {
-      let dates = scheduleDetails.map((item, index) => {
+      let dates = scheduleDetails.map((item) => {
         const { scheduleInfo, startPeriod, endPeriod } = item;
+        const bookingId = result.find(
+          (book) => book.scheduleDetailId === item.id,
+        );
+
         return {
           date: scheduleInfo.date,
           start: startPeriod,
           end: endPeriod,
-          bookingId: result[index].id,
+          bookingId: bookingId.id,
         };
       });
 
       dates = orderBy(dates, ['date', 'start'], ['asc', 'asc']);
 
-      let resultDates = [];
-      let tmp = [dates[0]];
-      if (dates.length !== 1) {
-        for (let i = 1; i < dates.length; i++) {
-          if (dates[i].start === tmp[tmp.length - 1].end) {
-            tmp.push(dates[i]);
-          } else {
-            resultDates.push(tmp);
-            tmp = [dates[i]];
-          }
-          if (i === dates.length - 1) resultDates.push(tmp);
-        }
-      } else {
-        resultDates.push(tmp);
-      }
-
       const roomName = uuidv4();
       confirmBookingNewSchedule({
         student: student.dataValues,
         tutor: tutor.dataValues,
-        dates: resultDates,
+        dates,
         roomName,
         isSendTutor: true,
         origin,
@@ -166,7 +155,7 @@ bookingService.book = async (userId, scheduleDetailIds, origin) => {
       confirmBookingNewSchedule({
         student: student.dataValues,
         tutor: tutor.dataValues,
-        dates: resultDates,
+        dates,
         roomName,
         isSendTutor: false,
         origin,
@@ -177,7 +166,7 @@ bookingService.book = async (userId, scheduleDetailIds, origin) => {
   return result;
 };
 
-bookingService.updateLink = async (bookingIds, isUpdateTutor, link) => {
+bookingService.updateLink = async (bookingId, isUpdateTutor, link) => {
   if (isUpdateTutor)
     return await Booking.update(
       {
@@ -185,9 +174,7 @@ bookingService.updateLink = async (bookingIds, isUpdateTutor, link) => {
       },
       {
         where: {
-          id: {
-            [Op.in]: bookingIds,
-          },
+          id: bookingId,
         },
       },
     );
@@ -198,9 +185,7 @@ bookingService.updateLink = async (bookingIds, isUpdateTutor, link) => {
       },
       {
         where: {
-          id: {
-            [Op.in]: bookingIds,
-          },
+          id: bookingId,
         },
       },
     );
