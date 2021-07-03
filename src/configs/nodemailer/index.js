@@ -46,6 +46,10 @@ export const confirmBookingNewSchedule = async ({ origin, ...bookingInfo }) => {
         `${day} ${startPeriod}`,
         DATE_TIME_FORMAT,
       ).format();
+      const endSession = moment(
+        `${day} ${endPeriod}`,
+        DATE_TIME_FORMAT,
+      ).format();
       const obj = {
         context: {
           user: {
@@ -59,10 +63,12 @@ export const confirmBookingNewSchedule = async ({ origin, ...bookingInfo }) => {
         userBeCalled: bookingInfo?.tutor,
         isTutor: bookingInfo?.isSendTutor,
         startTime,
+        endSession,
         timeInRoom: TIME_IN_ROOM,
       };
-      let duration = moment.duration(startTime.diff(moment()));
+      let duration = moment.duration(moment(endSession).diff(moment()));
       let durationExpired = duration.asSeconds();
+
       const token = jwt.sign(obj, jwtVar.secret, {
         issuer: 'livetutor',
         subject: 'https://meet.livetutor.live',
@@ -71,6 +77,7 @@ export const confirmBookingNewSchedule = async ({ origin, ...bookingInfo }) => {
       });
       const linkWithoutOrigin = `/call/?token=${token}`;
       const link = `${origin}/call/?token=${token}`;
+
       bookingService.updateLink(
         bookingId,
         bookingInfo?.isSendTutor,
