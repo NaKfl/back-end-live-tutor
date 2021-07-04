@@ -5,12 +5,14 @@ import {
   FavoriteTutor,
   FeeTutor,
   sequelize,
+  Role,
+  UserRole,
 } from 'database/models';
 import { paginate, searchHelp, SetById } from 'utils/sequelize';
 import { Op } from 'sequelize';
 import { onlineUsers } from 'sockets/controllers';
 import ApiError from 'utils/ApiError';
-import { ERROR_CODE } from 'utils/constants';
+import { ERROR_CODE, ROLES } from 'utils/constants';
 import { userService, feeTutorService } from 'services';
 import { sendMailAcceptedTutor } from 'configs/nodemailer';
 
@@ -303,6 +305,13 @@ tutorService.acceptedTutor = async (fields) => {
       },
     });
   else {
+    const roleId = await Role.findRoleIdByName(ROLES.TUTOR);
+    await UserRole.destroy({
+      where: {
+        userId,
+        roleId,
+      },
+    });
     await feeTutorService.deleteOne(userId);
     await Tutor.destroy({
       where: { userId },
