@@ -3,6 +3,7 @@ import { tutorService } from 'services';
 
 const disconnectionHandler = (io, socket) => {
   socket.on('disconnect', async () => {
+    socket.broadcast.emit('chat:joinOrLeave');
     const user = await onlineUsers.getUserBySocketId(socket.id);
     if (user) await onlineUsers.remove(user, socket.id);
 

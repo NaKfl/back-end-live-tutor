@@ -4,6 +4,7 @@ import { tutorService } from 'services';
 
 const connectionHandler = (io, socket) => {
   socket.on('connection:login', async ({ user }) => {
+    socket.broadcast.emit('chat:joinOrLeave');
     socket.user = user;
     const newUser = new User(user);
     await onlineUsers.add(newUser, socket.id);
