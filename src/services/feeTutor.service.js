@@ -52,4 +52,14 @@ feeTutorService.createFeeOfTutor = async (id, initPrice) => {
   return { price: +price || 0 };
 };
 
+feeTutorService.deleteOne = async (id) => {
+  const result = await FeeTutor.destroy({
+    where: {
+      tutorId: id,
+    },
+  });
+  if (result) return true;
+  return false;
+};
+
 export default feeTutorService;

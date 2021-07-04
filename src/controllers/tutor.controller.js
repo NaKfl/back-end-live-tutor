@@ -164,4 +164,21 @@ tutorController.accountingPerHour = catchAsync(async (req, res) => {
   const result = await tutorService.test(req.user.id);
   res.send(result);
 });
+
+tutorController.getDetailInAdmin = catchAsync(async (req, res) => {
+  const { params } = req;
+  const { id } = params;
+  if (!id) {
+    throw new Error('Must be contain id passed');
+  }
+  const result = await tutorService.getOneInAdmin(id);
+  res.send(result);
+});
+
+tutorController.block = catchAsync(async (req, res) => {
+  const { body } = req;
+  const { id } = body;
+  const result = await tutorService.block(id);
+  res.send(result);
+});
 export default tutorController;

@@ -19,9 +19,6 @@ const tutorService = {};
 tutorService.getMany = async (query) => {
   const { page, perPage } = query;
   const tutors = await Tutor.findAndCountAll({
-    where: {
-      isActivated: true,
-    },
     include: [
       {
         model: User,
@@ -42,11 +39,11 @@ tutorService.getMany = async (query) => {
               },
             ],
           },
-          {
-            model: FeeTutor,
-            as: 'price',
-          },
         ],
+      },
+      {
+        model: FeeTutor,
+        as: 'price',
       },
     ],
     ...paginate({ page, perPage }),
@@ -182,7 +179,52 @@ tutorService.getOne = async (userId) => {
     },
   });
 
-  // TODO: Add include price
+  const price = await feeTutorService.getFeeOfTutor(userId);
+
+  const tutor = await Tutor.findOne({
+    where: {
+      userId,
+    },
+    include: [
+      {
+        model: User,
+        attributes: {
+          exclude: ['password'],
+        },
+        include: [
+          {
+            model: TutorFeedback,
+            as: 'feedbacks',
+            include: [
+              {
+                model: User,
+                as: 'firstInfo',
+                attributes: {
+                  exclude: ['password'],
+                },
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  });
+
+  return {
+    tutor,
+    avgRating: feedback.dataValues.avgRating,
+    price: +price.price,
+  };
+};
+
+tutorService.getOneInAdmin = async (userId) => {
+  const feedback = await TutorFeedback.findOne({
+    separate: true,
+    attributes: [[sequelize.fn('AVG', sequelize.col('rating')), 'avgRating']],
+    where: {
+      secondId: userId,
+    },
+  });
   const price = await feeTutorService.getFeeOfTutor(userId);
 
   const tutor = await Tutor.findOne({
@@ -215,7 +257,7 @@ tutorService.getOne = async (userId) => {
   });
   return {
     tutor,
-    avgRating: feedback.dataValues.avgRating,
+    avgRating: feedback?.dataValues?.avgRating || 0,
     price: +price.price,
   };
 };
@@ -261,6 +303,7 @@ tutorService.acceptedTutor = async (fields) => {
       },
     });
   else {
+    await feeTutorService.deleteOne(userId);
     await Tutor.destroy({
       where: { userId },
     });
@@ -268,6 +311,17 @@ tutorService.acceptedTutor = async (fields) => {
   const user = await userService.getUserById(userId);
   sendMailAcceptedTutor(user, isActivated);
   return user;
+};
+
+tutorService.block = async (id) => {
+  const tutor = await Tutor.findOne({
+    where: {
+      userId: id,
+    },
+  });
+  tutor.isActivated = true;
+  await tutor.save();
+  return tutor;
 };
 
 tutorService.createWithUserId = async (fields, userId, avatar, video) => {
@@ -387,6 +441,7 @@ tutorService.searchWithFilter = async ({
   filters = {},
 }) => {
   const { accents, ...filter } = filters;
+  console.log({ search, page });
 
   const where = Object.keys(filter).reduce(
     (pre, now) => {
@@ -412,21 +467,21 @@ tutorService.searchWithFilter = async ({
     where: {
       [Op.and]: [
         ...andFilter,
-        // {
-        //   [Op.or]: searchHelp({
-        //     Op,
-        //     keys: [
-        //       'education',
-        //       'bio',
-        //       'experience',
-        //       'profession',
-        //       'accent',
-        //       'interests',
-        //       'resume',
-        //     ],
-        //     searchKey: search,
-        //   }),
-        // },
+        //   // {
+        //   //   [Op.or]: searchHelp({
+        //   //     Op,
+        //   //     keys: [
+        //   //       'education',
+        //   //       'bio',
+        //   //       'experience',
+        //   //       'profession',
+        //   //       'accent',
+        //   //       'interests',
+        //   //       'resume',
+        //   //     ],
+        //   //     searchKey: search,
+        //   //   }),
+        //   // },
       ],
     },
     include: [
@@ -434,6 +489,11 @@ tutorService.searchWithFilter = async ({
         model: User,
         attributes: {
           exclude: ['id', 'password'],
+        },
+        where: {
+          name: {
+            [Op.iLike]: `%${search}%`,
+          },
         },
         include: [
           {
@@ -458,48 +518,49 @@ tutorService.searchWithFilter = async ({
     ],
   });
 
+  console.log(tutorsFilter);
   let matchTutor = tutorsFilter?.rows;
-  if (search) {
-    const tutorsByName = await Tutor.findAndCountAll({
-      where: {
-        isActivated: true,
-        ...where,
-      },
-      include: [
-        {
-          model: User,
-          attributes: {
-            exclude: ['id', 'password'],
-          },
-          where: {
-            name: {
-              [Op.iLike]: `%${search}%`,
-            },
-          },
-          include: [
-            {
-              model: TutorFeedback,
-              as: 'feedbacks',
-              include: [
-                {
-                  model: User,
-                  as: 'firstInfo',
-                  attributes: {
-                    exclude: ['id', 'password'],
-                  },
-                },
-              ],
-            },
-          ],
-        },
-        {
-          model: FeeTutor,
-          as: 'price',
-        },
-      ],
-    });
-    matchTutor = SetById([...tutorsFilter.rows, ...tutorsByName.rows]);
-  }
+  // if (search) {
+  //   const tutorsByName = await Tutor.findAndCountAll({
+  //     where: {
+  //       isActivated: true,
+  //       ...where,
+  //     },
+  //     include: [
+  //       {
+  //         model: User,
+  //         attributes: {
+  //           exclude: ['id', 'password'],
+  //         },
+  //         where: {
+  //           name: {
+  //             [Op.iLike]: `%${search}%`,
+  //           },
+  //         },
+  //         include: [
+  //           {
+  //             model: TutorFeedback,
+  //             as: 'feedbacks',
+  //             include: [
+  //               {
+  //                 model: User,
+  //                 as: 'firstInfo',
+  //                 attributes: {
+  //                   exclude: ['id', 'password'],
+  //                 },
+  //               },
+  //             ],
+  //           },
+  //         ],
+  //       },
+  //       {
+  //         model: FeeTutor,
+  //         as: 'price',
+  //       },
+  //     ],
+  //   });
+  //   matchTutor = SetById([...tutorsFilter.rows, ...tutorsByName.rows]);
+  // }
 
   const promises = matchTutor
     .map((tutor) => {
