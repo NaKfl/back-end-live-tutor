@@ -51,7 +51,10 @@ authController.refresh = catchAsync(async (req, res) => {
     email,
     refreshToken,
   );
-  if (!existedRefreshToken || moment(existedRefreshToken.expires).isBefore()) {
+  if (
+    !existedRefreshToken ||
+    moment(existedRefreshToken.expires).isBefore(moment())
+  ) {
     throw new ApiError(
       ERROR_CODE.INVALID_REFRESH_TOKEN.code,
       ERROR_CODE.INVALID_REFRESH_TOKEN.message,
