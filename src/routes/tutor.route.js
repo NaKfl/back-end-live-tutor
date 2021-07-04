@@ -26,6 +26,8 @@ const cpUpload = upload.fields([
 ]);
 router.post('/register', auth(), cpUpload, tutorController.register);
 
+router.get('/detail/:id', tutorController.getDetailInAdmin);
+
 router.get('/:id', auth(), tutorController.getOne);
 
 router.post('/', auth(), cpUpload, tutorController.updateOne);
@@ -47,4 +49,5 @@ router.put(
 );
 
 router.post('/search', auth(), tutorController.searchTutor);
+router.post('/tutor', tutorController.block);
 export default router;
