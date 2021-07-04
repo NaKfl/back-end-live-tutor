@@ -71,14 +71,6 @@ const chatHandler = (io, socket) => {
       toId,
     });
   });
-
-  socket.on('connection:login', () => {
-    socket.broadcast.emit('chat:joinOrLeave');
-  });
-
-  socket.on('disconnect', () => {
-    socket.broadcast.emit('chat:joinOrLeave');
-  });
 };
 
 export default chatHandler;
