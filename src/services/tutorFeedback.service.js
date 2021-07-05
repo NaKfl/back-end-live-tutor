@@ -68,6 +68,7 @@ feedbackService.getAllFeedbacks = async (userId) => {
             },
           },
         ],
+        order: [['createdAt', 'DESC']],
       },
     ],
   });
@@ -96,6 +97,7 @@ feedbackService.getSessionFeedback = async (sessionId, userId) => {
         },
       },
     ],
+    order: [['createdAt', 'DESC']],
   });
   return feedbacks;
 };

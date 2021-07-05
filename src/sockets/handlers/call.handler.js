@@ -76,8 +76,8 @@ const callHandler = (io, socket) => {
     );
   });
 
-  socket.on('call:setStatusCalling', async ({ userId }) => {
-    await onlineUsers.setStatusCalling(userId, true);
+  socket.on('call:setStatusCalling', async ({ userId, status }) => {
+    await onlineUsers.setStatusCalling(userId, status);
   });
 
   socket.on(
