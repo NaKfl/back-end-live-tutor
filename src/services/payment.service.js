@@ -23,6 +23,7 @@ import { SERVER_URL, jwt as jwtVars } from 'configs/vars';
 import get from 'lodash/fp/get';
 import { getIncomeOutCome } from 'utils/helpers';
 import jwt from 'jsonwebtoken';
+import feeTutorService from './feeTutor.service';
 
 const paymentService = {};
 
@@ -82,11 +83,7 @@ paymentService.purchase = async (
     transaction,
   });
 
-  const currentPricePerSession = await Fee.findOne({
-    where: {
-      key: PRICE_PER_SESSION_KEY,
-    },
-  });
+  const currentPricePerSession = await feeTutorService.getFeeOfTutor(sellerId);
 
   const currentBuyerAmount = +buyerWallet.amount;
   const newBuyerAmount =
@@ -158,11 +155,7 @@ paymentService.refund = async (
     transaction,
   });
 
-  const currentPricePerSession = await Fee.findOne({
-    where: {
-      key: PRICE_PER_SESSION_KEY,
-    },
-  });
+  const currentPricePerSession = await feeTutorService.getFeeOfTutor(sellerId);
 
   const currentBuyerAmount = +buyerWallet.amount;
   const newBuyerAmount =
