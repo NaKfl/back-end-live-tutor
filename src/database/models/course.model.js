@@ -9,6 +9,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'courseId',
         as: 'topics',
       });
+      this.belongsToMany(models.User, {
+        through: models.TutorCourse,
+        as: 'userInfo',
+      });
     }
   }
 

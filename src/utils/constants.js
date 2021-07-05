@@ -137,6 +137,14 @@ export const ERROR_CODE = {
     code: 25,
     message: 'Video size is over limit',
   },
+  TUTOR_ALREADY_REGISTERED_COURSE: {
+    code: 26,
+    message: 'Tutor has already added course',
+  },
+  TUTOR_NOT_ALREADY_REGISTERED_COURSE: {
+    code: 27,
+    message: 'Tutor has not already added course',
+  },
 };
 
 export const MAX_AVATAR_SIZE = 10 * 1024 * 1024;

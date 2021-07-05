@@ -33,6 +33,11 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'tutorId',
         as: 'price',
       });
+
+      this.belongsToMany(models.Course, {
+        through: models.TutorCourse,
+        as: 'courses',
+      });
     }
   }
 
@@ -112,6 +117,7 @@ module.exports = (sequelize, DataTypes) => {
       'walletInfo',
       'feedbacks',
       'avgRating',
+      'courses',
     ];
     return pick(this, fields);
   };
