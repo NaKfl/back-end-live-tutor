@@ -48,9 +48,9 @@ tutorService.getMany = async (query) => {
         as: 'price',
       },
     ],
+    distinct: true,
     ...paginate({ page, perPage }),
   });
-
   const promises = tutors.rows.map(async (tutor) => {
     const user = tutor.User;
     const groupUser = {
@@ -102,6 +102,7 @@ tutorService.getMore = async (query, user) => {
         as: 'price',
       },
     ],
+    distinct: true,
     ...paginate({ page, perPage }),
   });
 

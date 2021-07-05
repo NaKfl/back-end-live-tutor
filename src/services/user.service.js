@@ -299,6 +299,7 @@ userService.getAll = async ({ page = 1, perPage = 15 }) => {
         attributes: ['amount'],
       },
     ],
+    distinct: true,
     ...paginate({ page, perPage }),
     order: [['createdAt', 'DESC']],
   });
