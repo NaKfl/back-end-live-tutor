@@ -443,14 +443,11 @@ tutorService.getListRankTutor = async (num) => {
   return listTutorIds;
 };
 
-tutorService.searchWithFilter = async ({
-  search = '',
-  page = 1,
-  perPage = 20,
-  filters = {},
-}) => {
+tutorService.searchWithFilter = async (
+  { search = '', page = 1, perPage = 20, filters = {} },
+  { user } = {},
+) => {
   const { accents, ...filter } = filters;
-  console.log({ search, page });
 
   const where = Object.keys(filter).reduce(
     (pre, now) => {
@@ -503,6 +500,9 @@ tutorService.searchWithFilter = async ({
           name: {
             [Op.iLike]: `%${search}%`,
           },
+          id: {
+            [Op.not]: user?.id,
+          },
         },
         include: [
           {
@@ -527,7 +527,6 @@ tutorService.searchWithFilter = async ({
     ],
   });
 
-  console.log(tutorsFilter);
   let matchTutor = tutorsFilter?.rows;
   // if (search) {
   //   const tutorsByName = await Tutor.findAndCountAll({
