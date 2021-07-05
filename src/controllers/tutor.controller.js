@@ -151,12 +151,16 @@ tutorController.getListRankTutor = catchAsync(async (req, res) => {
 
 tutorController.searchTutor = catchAsync(async (req, res) => {
   const { filters, search, page, perPage } = req.body;
-  const result = await tutorService.searchWithFilter({
-    filters,
-    search,
-    page,
-    perPage,
-  });
+  const { user } = req;
+  const result = await tutorService.searchWithFilter(
+    {
+      filters,
+      search,
+      page,
+      perPage,
+    },
+    { user },
+  );
   res.send(result);
 });
 
