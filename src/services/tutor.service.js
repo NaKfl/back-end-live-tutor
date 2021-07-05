@@ -7,6 +7,7 @@ import {
   sequelize,
   Role,
   UserRole,
+  Course,
 } from 'database/models';
 import { paginate, searchHelp, SetById } from 'utils/sequelize';
 import { Op } from 'sequelize';
@@ -207,6 +208,10 @@ tutorService.getOne = async (userId) => {
                 },
               },
             ],
+          },
+          {
+            model: Course,
+            as: 'courses',
           },
         ],
       },

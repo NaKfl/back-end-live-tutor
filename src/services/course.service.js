@@ -1,4 +1,6 @@
-import { Course, Topic, sequelize } from 'database/models';
+import { Course, Topic, User } from 'database/models';
+import ApiError from 'utils/ApiError';
+import { ERROR_CODE } from 'utils/constants';
 import { paginate } from 'utils/sequelize';
 const courseService = {};
 
@@ -30,6 +32,33 @@ courseService.getDetailCourse = async (id) => {
     },
   });
   return courses;
+};
+
+courseService.tutorAdd = async (userId, courseId) => {
+  const user = await User.findByPk(userId);
+  const course = await Course.findByPk(courseId);
+
+  if (await user.hasCourse(course))
+    throw new ApiError(
+      ERROR_CODE.TUTOR_ALREADY_REGISTERED_COURSE.code,
+      ERROR_CODE.TUTOR_ALREADY_REGISTERED_COURSE.message,
+    );
+
+  return await user.addCourse(course);
+};
+
+courseService.tutorRemove = async (userId, courseId) => {
+  const user = await User.findByPk(userId);
+  const course = await Course.findByPk(courseId);
+
+  if (!(await user.hasCourse(course))) {
+    throw new ApiError(
+      ERROR_CODE.TUTOR_NOT_ALREADY_REGISTERED_COURSE.code,
+      ERROR_CODE.TUTOR_NOT_ALREADY_REGISTERED_COURSE.message,
+    );
+  }
+
+  return await user.removeCourse(course);
 };
 
 export default courseService;

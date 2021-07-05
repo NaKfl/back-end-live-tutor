@@ -21,4 +21,18 @@ courseController.getDetailCourse = catchAsync(async (req, res) => {
   res.json({ message: 'Success', data });
 });
 
+courseController.tutorAdd = catchAsync(async (req, res) => {
+  const { id: courseId } = req.params;
+  const { id: userId } = req.user;
+  await courseService.tutorAdd(userId, courseId);
+  res.json({ message: 'Tutor add course successfully' });
+});
+
+courseController.tutorRemove = catchAsync(async (req, res) => {
+  const { id: courseId } = req.params;
+  const { id: userId } = req.user;
+  await courseService.tutorRemove(userId, courseId);
+  res.json({ message: 'Tutor remove course successfully' });
+});
+
 export default courseController;

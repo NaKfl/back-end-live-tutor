@@ -6,6 +6,7 @@ import {
   Wallet,
   TutorFeedback,
   sequelize,
+  Course,
 } from 'database/models';
 import ApiError from 'utils/ApiError';
 import { Op } from 'sequelize';
@@ -36,6 +37,10 @@ userService.getUserByEmail = async (email) => {
         model: Wallet,
         as: 'walletInfo',
       },
+      {
+        model: Course,
+        as: 'courses',
+      },
     ],
   });
   return user;
@@ -56,6 +61,10 @@ userService.getUserById = async (id) => {
       {
         model: Wallet,
         as: 'walletInfo',
+      },
+      {
+        model: Course,
+        as: 'courses',
       },
     ],
   });
@@ -78,6 +87,10 @@ userService.getInfoById = async (id) => {
       id,
     },
     include: [
+      {
+        model: Course,
+        as: 'courses',
+      },
       { model: Role },
       { model: Wallet, as: 'walletInfo' },
       { model: Tutor, as: 'tutorInfo' },
