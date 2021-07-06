@@ -26,6 +26,10 @@ courseService.getDetailCourse = async (id) => {
         model: Topic,
         as: 'topics',
       },
+      {
+        model: User,
+        as: 'users',
+      },
     ],
     where: {
       id,

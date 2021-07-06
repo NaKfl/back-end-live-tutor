@@ -1,6 +1,7 @@
 import moment from 'moment';
 import fs from 'fs';
 import { MAX_AVATAR_SIZE, MAX_VIDEO_SIZE } from './constants';
+import { SERVER_URL } from 'configs/vars';
 
 export const pick = (object, keys) => {
   if (!keys) return object;
@@ -83,8 +84,8 @@ export const unLinkPath = (path) => {
   fs.unlinkSync(path);
 };
 
-export const getFullPathUrl = (req) => {
-  return req.protocol + '://' + req.get('host');
+export const getFullPathUrl = () => {
+  return SERVER_URL;
 };
 
 export const isOverThanLimitSize = (file) => {

@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       });
       this.belongsToMany(models.User, {
         through: models.TutorCourse,
-        as: 'userInfo',
+        as: 'users',
       });
     }
   }
