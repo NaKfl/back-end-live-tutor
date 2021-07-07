@@ -60,7 +60,7 @@ const storage = multer.diskStorage({
   filename: function (req, file, cb) {
     const user = req.user?.id;
     if (file.fieldname === 'avatar' || file.fieldname === 'video') {
-      const typeImage = file.originalname.split('.')[1];
+      const typeImage = file.originalname.split('.')[1].replace(/\s/g, '');
       const uniqueSuffix = '.' + typeImage;
       cb(null, user + file.fieldname + new Date().getTime() + uniqueSuffix);
     } else {
